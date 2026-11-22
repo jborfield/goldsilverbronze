@@ -174,7 +174,6 @@
 
 <!-- =======================================================================
      BEGIN SITE NAVIGATION // WHERE BUCKETS REIGN ARCHIVE
-     Drop directly after <body> on any page in the archive.
      ======================================================================= -->
 <nav id="siteNav" aria-label="Primary Archive Navigation" class="bg-[#111214] text-[#FAF9F6] border-b-2 border-[#111111] print:hidden">
   <div class="max-w-[1840px] mx-auto flex items-stretch justify-between border-x border-[#2A2D33]">
@@ -201,7 +200,10 @@
         <span class="text-[#F2A900] text-[9.5px]">02</span>
         <span>EXTRA PERIOD PANTHEON</span>
       </a>
-      <!-- FUTURE EXHIBIT SLOT: Duplicate the <a> block above as 03, 04, etc. -->
+      <a href="cards.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">03</span>
+        <span>CARD MINT</span>
+      </a>
     </div>
 
     <!-- Right Archive Status & Mobile Toggle -->
@@ -210,6 +212,8 @@
         <span>43 SEASONS</span>
         <span class="text-[#2A2D33]">|</span>
         <span>53 SCORERS</span>
+        <span class="text-[#2A2D33]">|</span>
+        <span class="text-[#F2A900]">636 CARDS</span>
       </div>
       <button type="button" onclick="document.getElementById('mobileSiteNav').classList.toggle('hidden')"
               aria-label="Toggle Navigation Menu"
@@ -221,15 +225,10 @@
 
   <!-- Mobile Dropdown Drawer -->
   <div id="mobileSiteNav" class="hidden md:hidden border-t border-[#2A2D33] bg-[#16181C]">
-    <a href="index.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">
-      00 // OVERVIEW
-    </a>
-    <a href="posters.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#F2A900] bg-[#1C1F24]">
-      01 // SEASON POSTERS (1983&ndash;84 TO 2025&ndash;26)
-    </a>
-    <a href="pantheon.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] text-[#E8E3D5]">
-      02 // THE EXTRA PERIOD PANTHEON
-    </a>
+    <a href="index.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">00 // OVERVIEW</a>
+    <a href="posters.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#F2A900] bg-[#1C1F24]">01 // SEASON POSTERS (1983&ndash;84 TO 2025&ndash;26)</a>
+    <a href="pantheon.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">02 // THE EXTRA PERIOD PANTHEON</a>
+    <a href="cards.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] text-[#E8E3D5]">03 // DIGITAL CARD MINT (636 PLAYER-SEASONS)</a>
   </div>
 </nav>
 <!-- END SITE NAVIGATION -->
@@ -369,6 +368,7 @@
       <!-- Dynamic Spotlight Summary Strip -->
       <div id="spotlightSummaryBanner" class="hidden items-center flex-wrap gap-2 bg-[#FEF08A] border border-[#111111] px-2.5 py-0.5">
         <span id="spotlightSummaryText" class="font-mono-tabular text-[10.5px] font-extrabold text-[#111111]"></span>
+        <a id="mintSpotlightLink" href="cards.html" class="text-[9.5px] font-mono-tabular uppercase bg-[#1D4ED8] text-white px-1.5 py-0.5 font-bold hover:bg-[#111111]">MINT CARD &rarr;</a>
         <button onclick="clearSpotlight()" class="text-[9.5px] font-mono-tabular uppercase bg-[#111111] text-white px-1.5 py-0.5 font-bold">RESET ×</button>
       </div>
     </div>
@@ -552,6 +552,7 @@
 
       banner.classList.remove("hidden");
       banner.classList.add("flex");
+      const ml = document.getElementById("mintSpotlightLink"); if (ml) ml.href = `cards.html?player=${encodeURIComponent(state.spotlightQuery)}`;
       textEl.innerHTML = `DOSSIER [${state.spotlightQuery.toUpperCase()}] IN ${matchedSeasons} SEASONS: ${mvpCount}× MVP · ${allConfCount}× ALL-CONF (2–6) · ${bbCount}× BRONZE BUCKET · ${ssCount}× SILVER SCORER · ${shCount}× SHARP SHOOTER · ${deCount}× DEAD EYE`;
     }
 

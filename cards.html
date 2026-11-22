@@ -1,0 +1,2250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EXHIBIT 03 // DIGITAL BASKETBALL CARD MINT (&rsquo;84&ndash;&rsquo;26)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-paper: #F4F3EF;
+      --bg-poster: #FAF9F6;
+      --ink: #111111;
+      --ink-secondary: #555552;
+      --ink-muted: #8C8B85;
+      --east-cobalt: #1D4ED8;
+      --west-vermilion: #D92B2B;
+      --amber: #F2A900;
+      --chassis: #111214;
+      --grid-subtle: #D8D6CE;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-radius: 0px !important;
+    }
+
+    body {
+      background-color: var(--bg-paper);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .font-mono-tabular {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #16181C; }
+    ::-webkit-scrollbar-thumb { background: #474D57; }
+
+    .ctrl-btn {
+      border: 1px solid var(--ink);
+      background: var(--bg-poster);
+      color: var(--ink);
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 8px;
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+    .ctrl-btn:hover { background: #E5E3DC; }
+    .ctrl-btn.active { background: var(--ink); color: var(--bg-poster); }
+
+    /* Dark Gallery Stage */
+    .vault-stage {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(242, 169, 0, 0.09) 0%, rgba(17, 18, 20, 0) 58%),
+        radial-gradient(circle at 20% 80%, rgba(29, 78, 216, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(217, 43, 43, 0.06) 0%, transparent 45%),
+        #0D0F12;
+      position: relative;
+    }
+
+    /* Interactive 3D Foil Tilt Wrapper */
+    .card-tilt-wrap {
+      perspective: 1400px;
+      display: inline-block;
+      position: relative;
+    }
+
+    .card-tilt-inner {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+      box-shadow: 0 28px 65px rgba(0, 0, 0, 0.72), 0 4px 18px rgba(0, 0, 0, 0.55);
+    }
+
+    .card-tilt-inner canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 76vh;
+      object-fit: contain;
+    }
+
+    /* Interactive Specular Foil Sheen Overlay */
+    .foil-glare {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.22s ease;
+      mix-blend-mode: overlay;
+    }
+    .card-tilt-wrap:hover .foil-glare {
+      opacity: 0.85;
+    }
+
+    /* Optional One-Touch Magnetic Acrylic Slab Frame */
+    .slab-shell {
+      padding: 18px 16px 16px 16px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.04) 35%, rgba(255,255,255,0.11) 65%, rgba(255,255,255,0.03) 100%);
+      border: 1.5px solid rgba(255,255,255,0.28);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.12),
+        inset 0 2px 14px rgba(255,255,255,0.16),
+        0 30px 70px rgba(0,0,0,0.82);
+      position: relative;
+    }
+    .slab-shell::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16px;
+      height: 16px;
+      border-radius: 50% !important;
+      background: radial-gradient(circle at 35% 35%, #F6E6B4 0%, #B8913D 55%, #5E4614 100%);
+      border: 1px solid rgba(255,255,255,0.45);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.65);
+      z-index: 5;
+    }
+
+    /* Catalog Browser List */
+    .catalog-item {
+      cursor: pointer;
+      transition: background-color 0.08s ease;
+    }
+    .catalog-item:hover { background-color: #1D2129; }
+    .catalog-item.is-slot-a { background-color: #232018; border-left: 3px solid #F2A900; }
+    .catalog-item.is-slot-b { background-color: #172133; border-left: 3px solid #3B82F6; }
+
+    .badge-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 1px 4px;
+      letter-spacing: 0.04em;
+      display: inline-block;
+      line-height: 1.3;
+    }
+
+    @media print {
+      @page { size: landscape; margin: 0.35in; }
+      body { background: #0D0F12 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      #siteNav, .no-print, footer { display: none !important; }
+      #vaultMain { display: block !important; padding: 0 !important; max-width: none !important; }
+      .vault-stage { background: #0D0F12 !important; border: none !important; padding: 12px !important; }
+      .card-tilt-inner { transform: none !important; box-shadow: none !important; }
+      .foil-glare { display: none !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-[#F2A900] selection:text-[#111214]">
+
+  <!-- =======================================================================
+     BEGIN SITE NAVIGATION // WHERE BUCKETS REIGN ARCHIVE
+     ======================================================================= -->
+<nav id="siteNav" aria-label="Primary Archive Navigation" class="bg-[#111214] text-[#FAF9F6] border-b-2 border-[#111111] print:hidden">
+  <div class="max-w-[1840px] mx-auto flex items-stretch justify-between border-x border-[#2A2D33]">
+    <!-- Brand Mark -->
+    <a href="index.html" class="flex items-center gap-2.5 px-3.5 sm:px-4 py-2 border-r border-[#2A2D33] hover:bg-[#181A1F] transition-colors shrink-0">
+      <span class="text-[#F2A900] text-xs leading-none" aria-hidden="true">&#9670;</span>
+      <span class="font-black text-xs sm:text-[13px] tracking-[0.06em] uppercase text-[#FAF9F6]">WHERE BUCKETS REIGN</span>
+      <span class="hidden xl:inline-block font-mono-tabular text-[9.5px] tracking-[0.12em] uppercase text-[#8C8B85] border-l border-[#2A2D33] pl-2.5">
+        NBA SCORING ARCHIVE &rsquo;84&ndash;&rsquo;26
+      </span>
+    </a>
+
+    <!-- Desktop Exhibit Links -->
+    <div class="hidden md:flex items-stretch flex-1">
+      <a href="index.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">00</span>
+        <span>OVERVIEW</span>
+      </a>
+      <a href="posters.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">01</span>
+        <span>SEASON POSTERS</span>
+      </a>
+      <a href="pantheon.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">02</span>
+        <span>EXTRA PERIOD PANTHEON</span>
+      </a>
+      <a href="cards.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap bg-[#1C1F24] text-[#FAF9F6] border-b-2 border-b-[#F2A900]">
+        <span class="text-[#F2A900] text-[9.5px]">03</span>
+        <span>CARD MINT</span>
+      </a>
+    </div>
+
+    <!-- Right Archive Status & Mobile Toggle -->
+    <div class="flex items-center">
+      <div class="hidden lg:flex items-center gap-3 px-4 font-mono-tabular text-[9.5px] uppercase tracking-[0.1em] text-[#8C8B85]">
+        <span>43 SEASONS</span>
+        <span class="text-[#2A2D33]">|</span>
+        <span>53 SCORERS</span>
+        <span class="text-[#2A2D33]">|</span>
+        <span class="text-[#F2A900]">636 CARDS</span>
+      </div>
+      <button type="button" onclick="document.getElementById('mobileSiteNav').classList.toggle('hidden')"
+              aria-label="Toggle Navigation Menu"
+              class="md:hidden font-mono-tabular text-[10px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-l border-[#2A2D33] text-[#FAF9F6] hover:bg-[#1C1F24]">
+        MENU &#9776;
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Drawer -->
+  <div id="mobileSiteNav" class="hidden md:hidden border-t border-[#2A2D33] bg-[#16181C]">
+    <a href="index.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">00 // OVERVIEW</a>
+    <a href="posters.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">01 // SEASON POSTERS (&rsquo;84&ndash;&rsquo;26)</a>
+    <a href="pantheon.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">02 // THE EXTRA PERIOD PANTHEON</a>
+    <a href="cards.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] text-[#F2A900] bg-[#1C1F24]">03 // DIGITAL CARD MINT (636 PLAYER-SEASONS)</a>
+  </div>
+</nav>
+<!-- END SITE NAVIGATION -->
+
+  <!-- TOP SWISS STUDIO CONTROL BAR -->
+  <header class="no-print sticky top-0 z-30 bg-[#F4F3EF] border-b-2 border-[#111111]">
+    <div class="max-w-[1840px] mx-auto grid grid-cols-1 lg:grid-cols-12 border-x border-[#111111]">
+
+      <!-- Studio Identity (Cols 1-3) -->
+      <div class="lg:col-span-3 p-3 border-b lg:border-b-0 lg:border-r border-[#111111] flex flex-col justify-between">
+        <div class="flex items-center justify-between gap-2">
+          <span class="font-mono-tabular text-[10px] uppercase tracking-[0.14em] text-[#555552] font-bold">
+            EXHIBIT 03 // CARD ENGINE
+          </span>
+          <span class="font-mono-tabular text-[10px] uppercase bg-[#111111] text-[#F2A900] px-1.5 py-0.5 font-bold">
+            636 ISSUES
+          </span>
+        </div>
+        <h1 class="text-lg sm:text-xl font-black tracking-[-0.03em] uppercase leading-none mt-1">
+          Digital Card Mint
+        </h1>
+      </div>
+
+      <!-- Mode, Logo Finish & Display Switches (Cols 4-9) -->
+      <div class="lg:col-span-6 p-3 border-b lg:border-b-0 lg:border-r border-[#111111] bg-[#FAF9F6] flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center">
+          <button id="modeDualBtn" class="ctrl-btn active" onclick="setViewMode('dual')">COMPARE</button>
+          <button id="modeSingleBtn" class="ctrl-btn border-l-0" onclick="setViewMode('single')">SINGLE</button>
+        </div>
+        <div class="flex items-center">
+          <span class="font-mono-tabular text-[9.5px] font-bold text-[#555552] mr-1.5 uppercase">LOGO:</span>
+          <button id="logoStylizedBtn" class="ctrl-btn active" onclick="setLogoFinish('stylized')">STYLIZED</button>
+          <button id="logoEtchedBtn" class="ctrl-btn border-l-0" onclick="setLogoFinish('etched')">ETCHED</button>
+          <button id="logoColorBtn" class="ctrl-btn border-l-0" onclick="setLogoFinish('color')">FULL</button>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button id="slabToggleBtn" class="ctrl-btn active" onclick="toggleSlab()">SLAB: ON</button>
+          <button id="tiltToggleBtn" class="ctrl-btn active" onclick="toggleTilt()">3D FOIL: ON</button>
+        </div>
+      </div>
+
+      <!-- Export & Mint Actions (Cols 10-12) -->
+      <div class="lg:col-span-3 p-3 flex flex-wrap items-center justify-between lg:justify-end gap-1.5">
+        <button onclick="mintRandomPair()" class="ctrl-btn">RANDOM MINT</button>
+        <button onclick="exportCurrentPNG()" class="ctrl-btn !bg-[#111111] !text-[#F2A900] hover:!bg-[#F2A900] hover:!text-[#111111]">EXPORT PNG</button>
+        <button onclick="window.print()" class="ctrl-btn">PRINT / PDF</button>
+      </div>
+    </div>
+
+    <!-- Curated Matchup Presets Strip -->
+    <div class="max-w-[1840px] mx-auto border-x border-t border-[#111111] bg-[#ECEAE2] px-3 py-1.5 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex flex-wrap items-center gap-1.5">
+        <span class="font-mono-tabular text-[9.5px] font-extrabold uppercase tracking-[0.08em] text-[#555552] mr-1">PRESETS:</span>
+        <button onclick="loadPreset('2003-04','Tracy McGrady','2004-05','Tracy McGrady')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">&rsquo;04 vs &rsquo;05 McGRADY</button>
+        <button onclick="loadPreset('1989-90','Michael Jordan','2015-16','Stephen Curry')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">&rsquo;90 JORDAN (5-AWARD) vs &rsquo;16 CURRY</button>
+        <button onclick="loadPreset('2025-26','Kon Knueppel','2025-26','OG Anunoby')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">&rsquo;26 KNUEPPEL vs &rsquo;26 ANUNOBY</button>
+        <button onclick="loadPreset('1993-94','Hakeem Olajuwon','1999-00','Shaquille O\'Neal')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">&rsquo;94 HAKEEM (4-AWARD) vs &rsquo;00 SHAQ</button>
+        <button onclick="loadPreset('2012-13','LeBron James','2011-12','Kevin Durant')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">&rsquo;13 LeBRON vs &rsquo;12 DURANT</button>
+        <button onclick="loadPreset('2004-05','Vince Carter','1994-95','Clyde Drexler')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">2TM: &rsquo;05 CARTER vs &rsquo;95 DREXLER</button>
+        <button onclick="loadPreset('1984-85','James Worthy','1986-87','James Worthy')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">DUAL SPEC: &rsquo;85 vs &rsquo;87 WORTHY</button>
+      </div>
+      <div class="font-mono-tabular text-[9.5px] font-bold text-[#555552]" id="catalogMatchCount">
+        636 PLAYER-SEASONS
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STUDIO WORKSPACE: LEFT ARCHIVE PICKER + RIGHT VAULT STAGE -->
+  <main id="vaultMain" class="flex-1 max-w-[1840px] w-full mx-auto grid grid-cols-1 xl:grid-cols-12 border-x border-[#111111]">
+
+    <!-- LEFT SIDEBAR: 636-CARD ARCHIVE BROWSER & SERIAL CONTROLS (Cols 1-3) -->
+    <aside class="no-print xl:col-span-3 bg-[#111214] text-[#E8E3D5] border-b-2 xl:border-b-0 xl:border-r-2 border-[#111111] flex flex-col max-h-[600px] xl:max-h-[calc(100vh-120px)] xl:sticky xl:top-[106px]">
+
+      <!-- Target Slot Selector (Card A vs Card B) -->
+      <div class="p-3 bg-[#16181C] border-b border-[#2A2E36]">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-mono-tabular text-[9.5px] font-bold uppercase tracking-[0.12em] text-[#8E939E]">ACTIVE MINT SLOT</span>
+          <button onclick="swapCards()" class="font-mono-tabular text-[9.5px] font-bold uppercase px-1.5 py-0.5 border border-[#3A404B] text-[#E8E3D5] hover:border-[#F2A900] hover:text-[#F2A900]">SWAP A &#8644; B</button>
+        </div>
+        <div class="grid grid-cols-2 gap-1.5">
+          <button id="slotABtn" onclick="setActiveSlot('A')" class="text-left p-2 border border-[#F2A900] bg-[#232018]">
+            <div class="font-mono-tabular text-[9px] font-bold text-[#F2A900] uppercase">SLOT A (LEFT)</div>
+            <div id="slotALabel" class="text-[11px] font-bold text-white truncate mt-0.5">&rsquo;04 Tracy McGrady</div>
+          </button>
+          <button id="slotBBtn" onclick="setActiveSlot('B')" class="text-left p-2 border border-[#2D323B] bg-[#111214] hover:border-[#3B82F6]">
+            <div class="font-mono-tabular text-[9px] font-bold text-[#60A5FA] uppercase">SLOT B (RIGHT)</div>
+            <div id="slotBLabel" class="text-[11px] font-bold text-[#C7C3B7] truncate mt-0.5">&rsquo;05 Tracy McGrady</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search & Facet Filters -->
+      <div class="p-3 border-b border-[#2A2E36] space-y-2 bg-[#14161A]">
+        <input id="cardSearchInput" type="text" oninput="filterCatalog()" placeholder="SEARCH PLAYER, TEAM, YEAR ('26)..."
+               class="w-full bg-[#0D0F12] border border-[#3A404B] px-2.5 py-1.5 font-mono-tabular text-[11px] uppercase text-[#FAF9F6] placeholder:text-[#6B707B] focus:outline-none focus:border-[#F2A900]" />
+
+        <div class="grid grid-cols-3 gap-1.5">
+          <select id="seasonFilter" onchange="filterCatalog()" class="bg-[#0D0F12] border border-[#3A404B] px-1.5 py-1 font-mono-tabular text-[10px] text-[#E8E3D5] focus:outline-none focus:border-[#F2A900]">
+            <option value="ALL">ALL &rsquo;84&ndash;&rsquo;26</option>
+          </select>
+          <select id="confFilter" onchange="filterCatalog()" class="bg-[#0D0F12] border border-[#3A404B] px-1.5 py-1 font-mono-tabular text-[10px] text-[#E8E3D5] focus:outline-none focus:border-[#F2A900]">
+            <option value="ALL">EAST + WEST</option>
+            <option value="E">EAST</option>
+            <option value="W">WEST</option>
+          </select>
+          <select id="tierFilter" onchange="filterCatalog()" class="bg-[#0D0F12] border border-[#3A404B] px-1.5 py-1 font-mono-tabular text-[10px] text-[#E8E3D5] focus:outline-none focus:border-[#F2A900]">
+            <option value="ALL">ALL AWARDS</option>
+            <option value="GS">5-AWARD SWEEP</option>
+            <option value="MVP">EAST / WEST MVP</option>
+            <option value="AC_PLUS">ALL-CONF + AWARDS</option>
+            <option value="AC_PURE">ALL-EAST / WEST ONLY</option>
+            <option value="BB">BRONZE BUCKET</option>
+            <option value="SS">SILVER SCORER</option>
+            <option value="SH">SHARP SHOOTER</option>
+            <option value="DE">DEAD EYE</option>
+            <option value="SPEC">SINGLE / DUAL AWARD</option>
+            <option value="2TM">TRADED (2TM)</option>
+          </select>
+        </div>
+
+        <!-- Randomized Serial Scarcity Controls -->
+        <div class="flex items-center justify-between pt-1 font-mono-tabular text-[9.5px] text-[#8E939E]">
+          <button onclick="rerollSerials()" class="px-2 py-0.5 border border-[#3A404B] bg-[#0D0F12] text-[#F2A900] font-bold hover:border-[#F2A900]">
+            &#8635; RE-ROLL // 82
+          </button>
+          <div class="flex items-center gap-1.5">
+            <label class="text-[#F2A900]">A#</label>
+            <input id="copyNumA" type="number" min="1" max="82" value="1" oninput="updateCopyNumbers()"
+                   class="w-11 bg-[#0D0F12] border border-[#3A404B] px-1 py-0.5 text-center text-[10px] text-[#FAF9F6] focus:border-[#F2A900] focus:outline-none" />
+            <label class="text-[#60A5FA]">B#</label>
+            <input id="copyNumB" type="number" min="1" max="82" value="1" oninput="updateCopyNumbers()"
+                   class="w-11 bg-[#0D0F12] border border-[#3A404B] px-1 py-0.5 text-center text-[10px] text-[#FAF9F6] focus:border-[#60A5FA] focus:outline-none" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Scrollable Player-Season Catalog List -->
+      <div id="catalogList" class="flex-1 overflow-y-auto divide-y divide-[#1D2027]"></div>
+    </aside>
+
+    <!-- RIGHT VAULT STAGE: HIGH-RES CANVAS CARDS + COMPARISON TELEMETRY (Cols 4-12) -->
+    <section class="xl:col-span-9 vault-stage p-5 sm:p-8 flex flex-col justify-between gap-6">
+
+      <!-- Card Rendering Arena -->
+      <div id="cardsArena" class="flex-1 flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-10 py-2">
+
+        <!-- CARD A CONTAINER -->
+        <div id="cardAContainer" class="flex flex-col items-center gap-3 w-full max-w-[445px]">
+          <div class="no-print w-full flex items-center justify-between font-mono-tabular text-[10px] text-[#8E939E]">
+            <span id="metaTitleA" class="font-bold text-[#F2A900] uppercase tracking-wider">SLOT A</span>
+            <div class="flex items-center gap-2">
+              <a id="posterLinkA" href="posters.html" class="hover:text-white underline">POSTER &rarr;</a>
+              <button onclick="downloadSingleCard('A')" class="px-2 py-0.5 border border-[#3A404B] text-[#E8E3D5] hover:border-[#F2A900] hover:text-[#F2A900]">PNG &darr;</button>
+            </div>
+          </div>
+          <div class="card-tilt-wrap w-full" data-slot="A">
+            <div id="tiltInnerA" class="card-tilt-inner slab-shell w-full">
+              <canvas id="canvasA" width="1500" height="2100"></canvas>
+              <div id="glareA" class="foil-glare"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD B CONTAINER (Hidden in Single Showcase Mode) -->
+        <div id="cardBContainer" class="flex flex-col items-center gap-3 w-full max-w-[445px]">
+          <div class="no-print w-full flex items-center justify-between font-mono-tabular text-[10px] text-[#8E939E]">
+            <span id="metaTitleB" class="font-bold text-[#60A5FA] uppercase tracking-wider">SLOT B</span>
+            <div class="flex items-center gap-2">
+              <a id="posterLinkB" href="posters.html" class="hover:text-white underline">POSTER &rarr;</a>
+              <button onclick="downloadSingleCard('B')" class="px-2 py-0.5 border border-[#3A404B] text-[#E8E3D5] hover:border-[#60A5FA] hover:text-[#60A5FA]">PNG &darr;</button>
+            </div>
+          </div>
+          <div class="card-tilt-wrap w-full" data-slot="B">
+            <div id="tiltInnerB" class="card-tilt-inner slab-shell w-full">
+              <canvas id="canvasB" width="1500" height="2100"></canvas>
+              <div id="glareB" class="foil-glare"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- HEAD-TO-HEAD COMPARATIVE TELEMETRY RAIL -->
+      <div id="comparisonTelemetry" class="no-print border border-[#2A2E36] bg-[#121418]/90 p-4 font-mono-tabular text-[10.5px] text-[#C7C3B7]">
+        <div id="deltaGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- SHARED COLOPHON FOOTER -->
+  <footer class="no-print border-t-2 border-[#111111] bg-[#FAF9F6]">
+    <div class="max-w-[1840px] mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono-tabular text-[#555552]">
+      <div>
+        <strong class="text-[#111111]">WHERE BUCKETS REIGN // EXHIBIT 03 &middot; DIGITAL CARD MINT (&rsquo;84&ndash;&rsquo;26)</strong><br/>
+        636 player-seasons extracted directly from all 43 Season Posters &middot; 1500&times;2100 px (5&times;7&quot; @ 300 DPI).
+      </div>
+      <div class="sm:text-right">
+        <a href="index.html" class="underline hover:text-[#111111]">00 OVERVIEW</a> &middot;
+        <a href="posters.html" class="underline hover:text-[#111111]">01 POSTERS</a> &middot;
+        <a href="pantheon.html" class="underline hover:text-[#111111]">02 PANTHEON</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // =========================================================================
+    // 1. EMBEDDED AUTHORITATIVE DATASETS (100% SYNCED TO POSTERS & PANTHEON)
+    // =========================================================================
+    const SEASONS_DATA = [{"s": "1983-84", "em": ["Larry Bird", "BOS", 2540, 102], "wm": ["Adrian Dantley", "UTA", 2772, 90], "ae": [["Bernard King", "NYK", 2444, 89], ["Sidney Moncrief", "MIL", 1959, 95], ["Robert Parish", "BOS", 1862, 103], ["Marques Johnson", "MIL", 1859, 90], ["Isiah Thomas", "DET", 1855, 87]], "aw": [["Mark Aguirre", "DAL", 2550, 89], ["Kiki VanDeWeghe", "DEN", 2422, 83], ["Alex English", "DEN", 2312, 87], ["Kareem Abdul-Jabbar", "LAL", 2219, 101], ["Rolando Blackman", "DAL", 2054, 91]], "ebb": ["Bernard King", "NYK", 2027], "wbb": ["Adrian Dantley", "UTA", 2418], "ess": ["Larry Bird", "BOS", 632], "wss": ["Kareem Abdul-Jabbar", "LAL", 502], "sh": [["Adrian Dantley", "UTA", "W", 264.8], ["Kiki VanDeWeghe", "DEN", "W", 261.8], ["Bernard King", "NYK", "E", 213.3], ["Kareem Abdul-Jabbar", "LAL", "W", 182.3], ["Calvin Natt", "POR", "W", 163.7]], "de": ["Larry Bird", "BOS", "E", 60.3]}, {"s": "1984-85", "em": ["Larry Bird", "BOS", 2815, 100], "wm": ["Alex English", "DEN", 2685, 95], "ae": [["Michael Jordan", "CHI", 2430, 86], ["Dominique Wilkins", "ATL", 2217, 81], ["Moses Malone", "PHI", 2203, 92], ["Terry Cummings", "MIL", 2081, 87], ["Kevin McHale", "BOS", 2030, 100]], "aw": [["Purvis Short", "GSW", 2186, 78], ["Mark Aguirre", "DAL", 2171, 84], ["Kareem Abdul-Jabbar", "LAL", 2151, 98], ["Calvin Natt", "DEN", 2151, 93], ["Darrell Griffith", "UTA", 1939, 88]], "ebb": ["Michael Jordan", "CHI", 2313], "wbb": ["Alex English", "DEN", 2262], "ess": ["Larry Bird", "BOS", 520], "wss": ["Alex English", "DEN", 423], "sh": [["Kareem Abdul-Jabbar", "LAL", "W", 228.9], ["Larry Bird", "BOS", "E", 209.1], ["Artis Gilmore", "SAS", "W", 202.6], ["James Worthy", "LAL", "W", 160.0], ["Magic Johnson", "LAL", "W", 159.9]], "de": ["James Worthy", "LAL", "W", 55.1]}, {"s": "1985-86", "em": ["Dominique Wilkins", "ATL", 2623, 87], "wm": ["Alex English", "DEN", 2687, 91], "ae": [["Larry Bird", "BOS", 2581, 100], ["Terry Cummings", "MIL", 1930, 96], ["Jeff Malone", "WAS", 1905, 85], ["Charles Barkley", "PHI", 1903, 92], ["Kevin McHale", "BOS", 1896, 86]], "aw": [["Adrian Dantley", "UTA", 2267, 76], ["Kareem Abdul-Jabbar", "LAL", 2208, 93], ["Hakeem Olajuwon", "HOU", 2134, 88], ["Kiki VanDeWeghe", "POR", 2074, 83], ["Rolando Blackman", "DAL", 1970, 92]], "ebb": ["Dominique Wilkins", "ATL", 2366], "wbb": ["Alex English", "DEN", 2414], "ess": ["Larry Bird", "BOS", 466], "wss": ["Hakeem Olajuwon", "HOU", 537], "sh": [["Adrian Dantley", "UTA", "W", 228.3], ["Kareem Abdul-Jabbar", "LAL", "W", 189.8], ["James Worthy", "LAL", "W", 189.4], ["Kiki VanDeWeghe", "POR", "W", 189.3], ["Larry Bird", "BOS", "E", 180.9]], "de": ["Larry Bird", "BOS", "E", 56.8]}, {"s": "1986-87", "em": ["Michael Jordan", "CHI", 3148, 85], "wm": ["Alex English", "DEN", 2401, 85], "ae": [["Larry Bird", "BOS", 2698, 97], ["Dominique Wilkins", "ATL", 2535, 88], ["Kevin McHale", "BOS", 2452, 98], ["Adrian Dantley", "DET", 2050, 96], ["Isiah Thomas", "DET", 2032, 96]], "aw": [["Dale Ellis", "SEA", 2394, 96], ["Magic Johnson", "LAL", 2301, 98], ["Tom Chambers", "SEA", 2231, 96], ["Kiki VanDeWeghe", "POR", 2221, 83], ["Xavier McDaniel", "SEA", 2174, 96]], "ebb": ["Michael Jordan", "CHI", 3041], "wbb": ["Alex English", "DEN", 2345], "ess": ["Larry Bird", "BOS", 622], "wss": ["James Worthy", "LAL", 425], "sh": [["Kevin McHale", "BOS", "E", 336.7], ["Larry Bird", "BOS", "E", 279.0], ["Charles Barkley", "PHI", "E", 223.4], ["Kiki VanDeWeghe", "POR", "W", 211.8], ["Dale Ellis", "SEA", "W", 196.6]], "de": ["James Worthy", "LAL", "W", 54.0]}, {"s": "1987-88", "em": ["Michael Jordan", "CHI", 3231, 92], "wm": ["Karl Malone", "UTA", 2595, 93], "ae": [["Dominique Wilkins", "ATL", 2771, 90], ["Larry Bird", "BOS", 2692, 93], ["Charles Barkley", "PHI", 2264, 80], ["Isiah Thomas", "DET", 2081, 104], ["Kevin McHale", "BOS", 1878, 81]], "aw": [["Mark Aguirre", "DAL", 2299, 94], ["Clyde Drexler", "POR", 2273, 85], ["Alex English", "DEN", 2267, 91], ["Byron Scott", "LAL", 2224, 105], ["Dale Ellis", "SEA", 2042, 80]], "ebb": ["Michael Jordan", "CHI", 2868], "wbb": ["Karl Malone", "UTA", 2268], "ess": ["Isiah Thomas", "DET", 504], "wss": ["James Worthy", "LAL", 506], "sh": [["Larry Bird", "BOS", "E", 297.0], ["Charles Barkley", "PHI", "E", 283.3], ["Michael Jordan", "CHI", "E", 252.9], ["Kevin McHale", "BOS", "E", 220.7], ["Byron Scott", "LAL", "W", 195.7]], "de": ["Kevin McHale", "BOS", "E", 68.7]}, {"s": "1988-89", "em": ["Michael Jordan", "CHI", 3224, 98], "wm": ["Dale Ellis", "SEA", 2436, 90], "ae": [["Dominique Wilkins", "ATL", 2235, 85], ["Charles Barkley", "PHI", 2118, 82], ["Patrick Ewing", "NYK", 1994, 89], ["Terry Cummings", "MIL", 1893, 85], ["Kevin McHale", "BOS", 1815, 81]], "aw": [["Karl Malone", "UTA", 2418, 83], ["Chris Mullin", "GSW", 2411, 90], ["Tom Chambers", "PHX", 2397, 93], ["Alex English", "DEN", 2253, 85], ["Clyde Drexler", "POR", 2206, 81]], "ebb": ["Michael Jordan", "CHI", 2633], "wbb": ["Karl Malone", "UTA", 2326], "ess": ["Michael Jordan", "CHI", 591], "wss": ["James Worthy", "LAL", 372], "sh": [["Michael Jordan", "CHI", "E", 266.2], ["Charles Barkley", "PHI", "E", 241.9], ["Dale Ellis", "SEA", "W", 227.0], ["Mark Price", "CLE", "E", 206.7], ["Patrick Ewing", "NYK", "E", 187.1]], "de": ["James Worthy", "LAL", "W", 46.2]}, {"s": "1989-90", "em": ["Michael Jordan", "CHI", 3340, 98], "wm": ["Karl Malone", "UTA", 2666, 87], "ae": [["Patrick Ewing", "NYK", 2641, 92], ["Charles Barkley", "PHI", 2236, 89], ["Dominique Wilkins", "ATL", 2138, 80], ["Reggie Miller", "IND", 2078, 85], ["Larry Bird", "BOS", 1942, 80]], "aw": [["Tom Chambers", "PHX", 2556, 97], ["David Robinson", "SAS", 2236, 92], ["Clyde Drexler", "POR", 2152, 94], ["Hakeem Olajuwon", "HOU", 2069, 86], ["Terry Cummings", "SAS", 2067, 91]], "ebb": ["Michael Jordan", "CHI", 2753], "wbb": ["Karl Malone", "UTA", 2540], "ess": ["Michael Jordan", "CHI", 587], "wss": ["Clyde Drexler", "POR", 449], "sh": [["Michael Jordan", "CHI", "E", 297.8], ["Chris Mullin", "GSW", "W", 276.5], ["Reggie Miller", "IND", "E", 274.6], ["Charles Barkley", "PHI", "E", 270.3], ["Karl Malone", "UTA", "W", 253.8]], "de": ["Michael Jordan", "CHI", "E", 48.5]}, {"s": "1990-91", "em": ["Michael Jordan", "CHI", 3109, 99], "wm": ["Karl Malone", "UTA", 2649, 91], "ae": [["Dominique Wilkins", "ATL", 2205, 86], ["Patrick Ewing", "NYK", 2204, 84], ["Charles Barkley", "PHI", 2048, 75], ["Reggie Miller", "IND", 1963, 87], ["Joe Dumars", "DET", 1938, 95]], "aw": [["Chris Mullin", "GSW", 2297, 90], ["David Robinson", "SAS", 2204, 86], ["Clyde Drexler", "POR", 2114, 98], ["Tim Hardaway", "GSW", 2108, 91], ["James Worthy", "LAL", 2049, 96]], "ebb": ["Michael Jordan", "CHI", 2580], "wbb": ["Karl Malone", "UTA", 2382], "ess": ["Michael Jordan", "CHI", 529], "wss": ["Magic Johnson", "LAL", 414], "sh": [["Michael Jordan", "CHI", "E", 275.2], ["Reggie Miller", "IND", "E", 265.0], ["Chris Mullin", "GSW", "W", 251.2], ["Charles Barkley", "PHI", "E", 209.1], ["Terry Porter", "POR", "W", 205.2]], "de": ["Michael Jordan", "CHI", "E", 43.2]}, {"s": "1991-92", "em": ["Michael Jordan", "CHI", 3163, 102], "wm": ["Karl Malone", "UTA", 2737, 97], "ae": [["Patrick Ewing", "NYK", 2242, 94], ["Scottie Pippen", "CHI", 2148, 104], ["Reggie Lewis", "BOS", 1983, 92], ["Brad Daugherty", "CLE", 1932, 90], ["Glen Rice", "MIA", 1822, 82]], "aw": [["Clyde Drexler", "POR", 2456, 97], ["Chris Mullin", "GSW", 2145, 85], ["Tim Hardaway", "GSW", 1991, 85], ["Jeff Malone", "UTA", 1970, 97], ["Terry Porter", "POR", 1935, 103]], "ebb": ["Michael Jordan", "CHI", 2404], "wbb": ["Karl Malone", "UTA", 2272], "ess": ["Michael Jordan", "CHI", 759], "wss": ["Clyde Drexler", "POR", 553], "sh": [["Chris Mullin", "GSW", "W", 211.8], ["Reggie Miller", "IND", "E", 207.2], ["Dražen Petrović", "NJN", "E", 189.0], ["Michael Jordan", "CHI", "E", 186.9], ["Jeff Hornacek", "PHX", "W", 183.6]], "de": ["Terry Porter", "POR", "W", 58.2]}, {"s": "1992-93", "em": ["Michael Jordan", "CHI", 3207, 97], "wm": ["Charles Barkley", "PHX", 2582, 100], "ae": [["Patrick Ewing", "NYK", 2341, 96], ["Dominique Wilkins", "ATL", 2211, 74], ["Larry Johnson", "CHA", 1988, 91], ["Shaquille O'Neal", "ORL", 1893, 81], ["Scottie Pippen", "CHI", 1891, 100]], "aw": [["Hakeem Olajuwon", "HOU", 2448, 94], ["Karl Malone", "UTA", 2337, 87], ["David Robinson", "SAS", 2147, 92], ["Danny Manning", "LAC", 1891, 84], ["Dan Majerle", "PHX", 1758, 106]], "ebb": ["Michael Jordan", "CHI", 2541], "wbb": ["Karl Malone", "UTA", 2217], "ess": ["Michael Jordan", "CHI", 666], "wss": ["Charles Barkley", "PHX", 638], "sh": [["Reggie Miller", "IND", "E", 190.9], ["Dražen Petrović", "NJN", "E", 176.8], ["Karl Malone", "UTA", "W", 174.9], ["Brad Daugherty", "CLE", "E", 169.8], ["Kenny Smith", "HOU", "W", 163.3]], "de": ["B.J. Armstrong", "CHI", "E", 34.9]}, {"s": "1993-94", "em": ["Patrick Ewing", "NYK", 2486, 104], "wm": ["Hakeem Olajuwon", "HOU", 2848, 103], "ae": [["Shaquille O'Neal", "ORL", 2439, 84], ["Reggie Miller", "IND", 1945, 95], ["Scottie Pippen", "CHI", 1815, 82], ["Glen Rice", "MIA", 1773, 86], ["Kevin Willis", "ATL", 1665, 91]], "aw": [["Karl Malone", "UTA", 2497, 98], ["David Robinson", "SAS", 2463, 84], ["Mitch Richmond", "SAC", 1823, 78], ["Latrell Sprewell", "GSW", 1788, 85], ["Clifford Robinson", "POR", 1712, 86]], "ebb": ["Shaquille O'Neal", "ORL", 2377], "wbb": ["David Robinson", "SAS", 2383], "ess": ["Patrick Ewing", "NYK", 547], "wss": ["Hakeem Olajuwon", "HOU", 664], "sh": [["Reggie Miller", "IND", "E", 231.8], ["Shaquille O'Neal", "ORL", "E", 216.2], ["Hakeem Olajuwon", "HOU", "W", 149.1], ["Dale Ellis", "SAS", "W", 146.2], ["John Stockton", "UTA", "W", 144.5]], "de": ["Hakeem Olajuwon", "HOU", "W", 73.7]}, {"s": "1994-95", "em": ["Shaquille O'Neal", "ORL", 2854, 100], "wm": ["Hakeem Olajuwon", "HOU", 2730, 94], "ae": [["Patrick Ewing", "NYK", 2095, 90], ["Anfernee Hardaway", "ORL", 2025, 98], ["Reggie Miller", "IND", 2022, 98], ["Scottie Pippen", "CHI", 1870, 89], ["Glen Rice", "MIA", 1831, 82]], "aw": [["David Robinson", "SAS", 2618, 96], ["Karl Malone", "UTA", 2338, 87], ["Clyde Drexler", "2TM", 2103, 98], ["Jamal Mashburn", "DAL", 1926, 80], ["Mitch Richmond", "SAC", 1867, 82]], "ebb": ["Shaquille O'Neal", "ORL", 2315], "wbb": ["David Robinson", "SAS", 2238], "ess": ["Shaquille O'Neal", "ORL", 539], "wss": ["Hakeem Olajuwon", "HOU", 725], "sh": [["Dana Barros", "PHI", "E", 217.0], ["Detlef Schrempf", "SEA", "W", 191.6], ["John Stockton", "UTA", "W", 182.0], ["Jeff Hornacek", "UTA", "W", 158.6], ["Reggie Miller", "IND", "E", 156.2]], "de": ["Hakeem Olajuwon", "HOU", "W", 44.6]}, {"s": "1995-96", "em": ["Michael Jordan", "CHI", 3043, 100], "wm": ["Karl Malone", "UTA", 2583, 100], "ae": [["Anfernee Hardaway", "ORL", 2060, 94], ["Patrick Ewing", "NYK", 1883, 84], ["Scottie Pippen", "CHI", 1801, 95], ["Juwan Howard", "WAS", 1789, 81], ["Shaquille O'Neal", "ORL", 1744, 66]], "aw": [["David Robinson", "SAS", 2287, 92], ["Hakeem Olajuwon", "HOU", 2115, 80], ["Gary Payton", "SEA", 1997, 102], ["Shawn Kemp", "SEA", 1968, 99], ["Mitch Richmond", "SAC", 1956, 85]], "ebb": ["Michael Jordan", "CHI", 2491], "wbb": ["Karl Malone", "UTA", 2106], "ess": ["Michael Jordan", "CHI", 552], "wss": ["Karl Malone", "UTA", 477], "sh": [["John Stockton", "UTA", "W", 176.1], ["Michael Jordan", "CHI", "E", 173.0], ["Cedric Ceballos", "LAL", "W", 160.3], ["Reggie Miller", "IND", "E", 148.2], ["Jeff Hornacek", "UTA", "W", 148.1]], "de": ["Shawn Kemp", "SEA", "W", 55.9]}, {"s": "1996-97", "em": ["Michael Jordan", "CHI", 3021, 101], "wm": ["Karl Malone", "UTA", 2768, 102], "ae": [["Glen Rice", "CHA", 2198, 82], ["Scottie Pippen", "CHI", 2021, 101], ["Tim Hardaway", "MIA", 1962, 98], ["Patrick Ewing", "NYK", 1954, 87], ["Grant Hill", "DET", 1828, 85]], "aw": [["Hakeem Olajuwon", "HOU", 2180, 94], ["Mitch Richmond", "SAC", 2095, 81], ["Gary Payton", "SEA", 2070, 94], ["Latrell Sprewell", "GSW", 1938, 80], ["Shawn Kemp", "SEA", 1775, 93]], "ebb": ["Michael Jordan", "CHI", 2431], "wbb": ["Karl Malone", "UTA", 2249], "ess": ["Michael Jordan", "CHI", 590], "wss": ["Karl Malone", "UTA", 519], "sh": [["Karl Malone", "UTA", "W", 230.0], ["Glen Rice", "CHA", "E", 214.9], ["Chris Mullin", "GSW", "W", 201.2], ["John Stockton", "UTA", "W", 192.8], ["Michael Jordan", "CHI", "E", 153.9]], "de": ["Hakeem Olajuwon", "HOU", "W", 55.8]}, {"s": "1997-98", "em": ["Michael Jordan", "CHI", 3037, 103], "wm": ["Karl Malone", "UTA", 2716, 101], "ae": [["Glen Rice", "CHA", 2031, 91], ["Reggie Miller", "IND", 1897, 97], ["Antoine Walker", "BOS", 1840, 82], ["Allen Iverson", "PHI", 1758, 80], ["Allan Houston", "NYK", 1720, 92]], "aw": [["Shaquille O'Neal", "LAL", 2095, 73], ["Tim Duncan", "SAS", 1917, 91], ["Shareef Abdur-Rahim", "VAN", 1829, 82], ["Gary Payton", "SEA", 1811, 92], ["Michael Finley", "DAL", 1763, 82]], "ebb": ["Michael Jordan", "CHI", 2357], "wbb": ["Karl Malone", "UTA", 2190], "ess": ["Michael Jordan", "CHI", 680], "wss": ["Karl Malone", "UTA", 526], "sh": [["Reggie Miller", "IND", "E", 200.0], ["Karl Malone", "UTA", "W", 197.6], ["Tim Duncan", "SAS", "W", 165.1], ["Dale Ellis", "SEA", "W", 144.3], ["Eddie Jones", "LAL", "W", 142.6]], "de": ["Shaquille O'Neal", "LAL", "W", 36.7]}, {"s": "1998-99", "em": ["Allen Iverson", "PHI", 1512, 56], "wm": ["Shaquille O'Neal", "LAL", 1502, 57], "ae": [["Reggie Miller", "IND", 1183, 63], ["Allan Houston", "NYK", 1183, 70], ["Grant Hill", "DET", 1150, 55], ["Alonzo Mourning", "MIA", 1032, 51], ["Latrell Sprewell", "NYK", 1013, 57]], "aw": [["Tim Duncan", "SAS", 1479, 67], ["Karl Malone", "UTA", 1404, 60], ["Kobe Bryant", "LAL", 1154, 58], ["Shareef Abdur-Rahim", "VAN", 1152, 50], ["Gary Payton", "SEA", 1084, 50]], "ebb": ["Allen Iverson", "PHI", 1284], "wbb": ["Shaquille O'Neal", "LAL", 1289], "ess": ["Latrell Sprewell", "NYK", 407], "wss": ["Tim Duncan", "SAS", 395], "sh": [["Shaquille O'Neal", "LAL", "W", 117.5], ["Reggie Miller", "IND", "E", 98.4], ["Karl Malone", "UTA", "W", 85.9], ["Chris Mullin", "IND", "E", 84.7], ["Hakeem Olajuwon", "HOU", "W", 83.0]], "de": ["Tim Duncan", "SAS", "W", 35.2]}, {"s": "1999-00", "em": ["Allen Iverson", "PHI", 2251, 80], "wm": ["Shaquille O'Neal", "LAL", 3051, 102], "ae": [["Vince Carter", "TOR", 2165, 85], ["Jerry Stackhouse", "DET", 2013, 85], ["Reggie Miller", "IND", 1997, 103], ["Jalen Rose", "IND", 1936, 103], ["Alonzo Mourning", "MIA", 1934, 89]], "aw": [["Karl Malone", "UTA", 2367, 92], ["Gary Payton", "SEA", 2111, 87], ["Chris Webber", "SAC", 1956, 80], ["Kobe Bryant", "LAL", 1950, 88], ["Kevin Garnett", "MIN", 1932, 85]], "ebb": ["Vince Carter", "TOR", 2107], "wbb": ["Shaquille O'Neal", "LAL", 2344], "ess": ["Reggie Miller", "IND", 527], "wss": ["Shaquille O'Neal", "LAL", 707], "sh": [["Alonzo Mourning", "MIA", "E", 172.8], ["Shaquille O'Neal", "LAL", "W", 167.4], ["Karl Malone", "UTA", "W", 158.2], ["Allan Houston", "NYK", "E", 143.8], ["Reggie Miller", "IND", "E", 141.3]], "de": ["Reggie Miller", "IND", "E", 60.0]}, {"s": "2000-01", "em": ["Allen Iverson", "PHI", 2930, 93], "wm": ["Shaquille O'Neal", "LAL", 2612, 90], "ae": [["Vince Carter", "TOR", 2397, 87], ["Jerry Stackhouse", "DET", 2380, 80], ["Ray Allen", "MIL", 2258, 100], ["Tracy McGrady", "ORL", 2200, 81], ["Paul Pierce", "BOS", 2071, 82]], "aw": [["Kobe Bryant", "LAL", 2409, 84], ["Tim Duncan", "SAS", 2137, 95], ["Chris Webber", "SAC", 2084, 78], ["Antawn Jamison", "GSW", 2044, 82], ["Dirk Nowitzki", "DAL", 2018, 92]], "ebb": ["Jerry Stackhouse", "DET", 2380], "wbb": ["Shaquille O'Neal", "LAL", 2125], "ess": ["Allen Iverson", "PHI", 723], "wss": ["Shaquille O'Neal", "LAL", 487], "sh": [["Ray Allen", "MIL", "E", 240.3], ["Dirk Nowitzki", "DAL", "W", 177.1], ["Peja Stojaković", "SAC", "W", 148.8], ["Steve Nash", "DAL", "W", 138.0], ["Rashard Lewis", "SEA", "W", 133.8]], "de": ["Ray Allen", "MIL", "E", 70.6]}, {"s": "2001-02", "em": ["Paul Pierce", "BOS", 2538, 98], "wm": ["Kobe Bryant", "LAL", 2525, 99], "ae": [["Antoine Walker", "BOS", 2148, 97], ["Tracy McGrady", "ORL", 2071, 80], ["Allen Iverson", "PHI", 2033, 65], ["Jerry Stackhouse", "DET", 1805, 86], ["Jalen Rose", "2TM", 1696, 83]], "aw": [["Shaquille O'Neal", "LAL", 2363, 86], ["Tim Duncan", "SAS", 2337, 91], ["Dirk Nowitzki", "DAL", 2006, 84], ["Gary Payton", "SEA", 1926, 87], ["Karl Malone", "UTA", 1868, 84]], "ebb": ["Paul Pierce", "BOS", 2144], "wbb": ["Tim Duncan", "SAS", 2089], "ess": ["Paul Pierce", "BOS", 394], "wss": ["Shaquille O'Neal", "LAL", 541], "sh": [["Brent Barry", "SEA", "W", 202.2], ["Steve Nash", "DAL", "W", 188.4], ["Wally Szczerbiak", "MIN", "W", 185.1], ["Ray Allen", "MIL", "E", 181.3], ["Dirk Nowitzki", "DAL", "W", 174.7]], "de": ["Shaquille O'Neal", "LAL", "W", 36.4]}, {"s": "2002-03", "em": ["Allen Iverson", "PHI", 2642, 94], "wm": ["Kobe Bryant", "LAL", 2846, 94], "ae": [["Tracy McGrady", "ORL", 2629, 82], ["Paul Pierce", "BOS", 2319, 89], ["Richard Hamilton", "DET", 1995, 99], ["Jason Kidd", "NJN", 1897, 100], ["Jamal Mashburn", "NOH", 1871, 86]], "aw": [["Tim Duncan", "SAS", 2477, 105], ["Dirk Nowitzki", "DAL", 2441, 97], ["Shaquille O'Neal", "LAL", 2165, 79], ["Kevin Garnett", "MIN", 2045, 88], ["Stephon Marbury", "PHX", 1938, 87]], "ebb": ["Tracy McGrady", "ORL", 2407], "wbb": ["Kobe Bryant", "LAL", 2461], "ess": ["Jason Kidd", "NJN", 402], "wss": ["Tim Duncan", "SAS", 593], "sh": [["Peja Stojaković", "SAC", "W", 173.1], ["Shaquille O'Neal", "LAL", "W", 170.1], ["Dirk Nowitzki", "DAL", "W", 169.5], ["Matt Harpring", "UTA", "W", 155.1], ["Michael Redd", "MIL", "E", 151.1]], "de": ["Dirk Nowitzki", "DAL", "W", 48.1]}, {"s": "2003-04", "em": ["Paul Pierce", "BOS", 1919, 84], "wm": ["Kevin Garnett", "MIN", 2425, 100], "ae": [["Tracy McGrady", "ORL", 1878, 67], ["Jermaine O'Neal", "IND", 1873, 94], ["Richard Hamilton", "DET", 1869, 101], ["Michael Redd", "MIL", 1866, 87], ["Richard Jefferson", "NJN", 1733, 93]], "aw": [["Peja Stojakovic", "SAC", 2174, 93], ["Kobe Bryant", "LAL", 2096, 87], ["Shaquille O'Neal", "LAL", 1912, 89], ["Sam Cassell", "MIN", 1868, 97], ["Dirk Nowitzki", "DAL", 1813, 82]], "ebb": ["Tracy McGrady", "ORL", 1878], "wbb": ["Kevin Garnett", "MIN", 1987], "ess": ["Richard Hamilton", "DET", 494], "wss": ["Kobe Bryant", "LAL", 539], "sh": [["Peja Stojakovic", "SAC", "W", 302.1], ["Sam Cassell", "MIN", "W", 163.0], ["Yao Ming", "HOU", "W", 152.4], ["Kevin Garnett", "MIN", "W", 150.0], ["Antawn Jamison", "DAL", "W", 146.1]], "de": ["Sam Cassell", "MIN", "W", 36.0]}, {"s": "2004-05", "em": ["Allen Iverson", "PHI", 2458, 80], "wm": ["Amar'e Stoudemire", "PHX", 2529, 95], "ae": [["Gilbert Arenas", "WAS", 2274, 90], ["Dwyane Wade", "MIA", 2238, 91], ["LeBron James", "CLE", 2175, 80], ["Vince Carter", "2TM", 1993, 81], ["Paul Pierce", "BOS", 1929, 89]], "aw": [["Dirk Nowitzki", "DAL", 2340, 91], ["Tracy McGrady", "HOU", 2218, 85], ["Ray Allen", "SEA", 2158, 89], ["Tim Duncan", "SAS", 1884, 89], ["Shawn Marion", "PHX", 1833, 96]], "ebb": ["Allen Iverson", "PHI", 2302], "wbb": ["Amar'e Stoudemire", "PHX", 2080], "ess": ["Richard Hamilton", "DET", 501], "wss": ["Tim Duncan", "SAS", 542], "sh": [["Amar'e Stoudemire", "PHX", "W", 221.2], ["Yao Ming", "HOU", "W", 172.7], ["Steve Nash", "PHX", "W", 151.4], ["Mike Miller", "MEM", "W", 147.1], ["Damon Jones", "MIA", "E", 140.7]], "de": ["Manu Ginóbili", "SAS", "W", 57.8]}, {"s": "2005-06", "em": ["LeBron James", "CLE", 2878, 92], "wm": ["Kobe Bryant", "LAL", 3027, 87], "ae": [["Dwyane Wade", "MIA", 2694, 98], ["Gilbert Arenas", "WAS", 2550, 86], ["Allen Iverson", "PHI", 2377, 72], ["Vince Carter", "NJN", 2237, 90], ["Michael Redd", "MIL", 2164, 85]], "aw": [["Dirk Nowitzki", "DAL", 2771, 104], ["Elton Brand", "LAC", 2258, 91], ["Carmelo Anthony", "DEN", 2227, 85], ["Shawn Marion", "PHX", 2176, 101], ["Ray Allen", "SEA", 1955, 78]], "ebb": ["LeBron James", "CLE", 2478], "wbb": ["Kobe Bryant", "LAL", 2832], "ess": ["Dwyane Wade", "MIA", 654], "wss": ["Dirk Nowitzki", "DAL", 620], "sh": [["Steve Nash", "PHX", "W", 231.1], ["Shawn Marion", "PHX", "W", 207.8], ["Dirk Nowitzki", "DAL", "W", 178.1], ["Ray Allen", "SEA", "W", 176.3], ["Elton Brand", "LAC", "W", 157.6]], "de": ["Steve Nash", "PHX", "W", 46.5]}, {"s": "2006-07", "em": ["LeBron James", "CLE", 2633, 98], "wm": ["Kobe Bryant", "LAL", 2594, 82], "ae": [["Vince Carter", "NJN", 2338, 94], ["Gilbert Arenas", "WAS", 2105, 74], ["Ben Gordon", "CHI", 1957, 92], ["Richard Hamilton", "DET", 1786, 91], ["Luol Deng", "CHI", 1762, 92]], "aw": [["Tim Duncan", "SAS", 2043, 100], ["Dirk Nowitzki", "DAL", 2034, 84], ["Carmelo Anthony", "DEN", 2015, 70], ["Carlos Boozer", "UTA", 1949, 91], ["Amar'e Stoudemire", "PHX", 1924, 92]], "ebb": ["LeBron James", "CLE", 2132], "wbb": ["Kobe Bryant", "LAL", 2430], "ess": ["LeBron James", "CLE", 501], "wss": ["Tim Duncan", "SAS", 444], "sh": [["Steve Nash", "PHX", "W", 248.6], ["Amar'e Stoudemire", "PHX", "W", 207.3], ["Dirk Nowitzki", "DAL", "W", 182.7], ["Shawn Marion", "PHX", "W", 151.4], ["Carlos Boozer", "UTA", "W", 149.9]], "de": ["Carlos Boozer", "UTA", "W", 39.0]}, {"s": "2007-08", "em": ["LeBron James", "CLE", 2616, 88], "wm": ["Kobe Bryant", "LAL", 2956, 103], "ae": [["Paul Pierce", "BOS", 2081, 106], ["Joe Johnson", "ATL", 1919, 89], ["Dwight Howard", "ORL", 1884, 92], ["Kevin Garnett", "BOS", 1867, 97], ["Richard Jefferson", "NJN", 1857, 82]], "aw": [["Allen Iverson", "DEN", 2262, 86], ["Amar'e Stoudemire", "PHX", 2105, 84], ["Carmelo Anthony", "DEN", 2068, 81], ["Chris Paul", "NOH", 1973, 92], ["Dirk Nowitzki", "DAL", 1951, 82]], "ebb": ["LeBron James", "CLE", 2250], "wbb": ["Kobe Bryant", "LAL", 2323], "ess": ["Kevin Garnett", "BOS", 530], "wss": ["Kobe Bryant", "LAL", 633], "sh": [["Amar'e Stoudemire", "PHX", "W", 291.3], ["Steve Nash", "PHX", "W", 209.7], ["Carlos Boozer", "UTA", "W", 155.7], ["Mike Miller", "MEM", "W", 146.8], ["Mike Dunleavy", "IND", "E", 133.4]], "de": ["Kobe Bryant", "LAL", "W", 38.1]}, {"s": "2008-09", "em": ["LeBron James", "CLE", 2798, 95], "wm": ["Kobe Bryant", "LAL", 2896, 105], "ae": [["Dwyane Wade", "MIA", 2590, 86], ["Dwight Howard", "ORL", 2091, 102], ["Paul Pierce", "BOS", 1952, 95], ["Ben Gordon", "CHI", 1869, 89], ["Joe Johnson", "ATL", 1868, 90]], "aw": [["Dirk Nowitzki", "DAL", 2362, 91], ["Pau Gasol", "LAL", 1948, 104], ["Carmelo Anthony", "DEN", 1939, 82], ["Brandon Roy", "POR", 1925, 84], ["Kevin Durant", "OKC", 1871, 74]], "ebb": ["Dwyane Wade", "MIA", 2386], "wbb": ["Kobe Bryant", "LAL", 2201], "ess": ["LeBron James", "CLE", 494], "wss": ["Kobe Bryant", "LAL", 695], "sh": [["Pau Gasol", "LAL", "W", 175.4], ["Yao Ming", "HOU", "W", 173.4], ["Ray Allen", "BOS", "E", 169.5], ["Nenê", "DEN", "W", 150.9], ["Steve Nash", "PHX", "W", 140.2]], "de": ["Pau Gasol", "LAL", "W", 46.9]}, {"s": "2009-10", "em": ["LeBron James", "CLE", 2578, 87], "wm": ["Kobe Bryant", "LAL", 2641, 96], "ae": [["Dwyane Wade", "MIA", 2211, 82], ["Joe Johnson", "ATL", 1816, 87], ["Dwight Howard", "ORL", 1757, 96], ["Derrick Rose", "CHI", 1753, 83], ["Paul Pierce", "BOS", 1747, 95]], "aw": [["Kevin Durant", "OKC", 2622, 88], ["Amar'e Stoudemire", "PHX", 2251, 98], ["Dirk Nowitzki", "DAL", 2187, 87], ["Carmelo Anthony", "DEN", 2127, 75], ["Carlos Boozer", "UTA", 1716, 88]], "ebb": ["LeBron James", "CLE", 2258], "wbb": ["Kevin Durant", "OKC", 2472], "ess": ["Paul Pierce", "BOS", 451], "wss": ["Kobe Bryant", "LAL", 671], "sh": [["Amar'e Stoudemire", "PHX", "W", 172.1], ["Steve Nash", "PHX", "W", 169.3], ["Kevin Durant", "OKC", "W", 164.5], ["David Lee", "NYK", "E", 151.0], ["Carlos Boozer", "UTA", "W", 147.1]], "de": ["Jason Richardson", "PHX", "W", 47.9]}, {"s": "2010-11", "em": ["LeBron James", "MIA", 2608, 100], "wm": ["Kevin Durant", "OKC", 2648, 95], "ae": [["Derrick Rose", "CHI", 2460, 97], ["Dwyane Wade", "MIA", 2456, 97], ["Amar'e Stoudemire", "NYK", 2029, 82], ["Dwight Howard", "ORL", 1946, 84], ["Chris Bosh", "MIA", 1828, 98]], "aw": [["Kobe Bryant", "LAL", 2306, 92], ["Dirk Nowitzki", "DAL", 2263, 94], ["Russell Westbrook", "OKC", 2198, 99], ["Monta Ellis", "GSW", 1929, 80], ["LaMarcus Aldridge", "POR", 1894, 87]], "ebb": ["LeBron James", "MIA", 2111], "wbb": ["Kevin Durant", "OKC", 2161], "ess": ["Dwyane Wade", "MIA", 515], "wss": ["Dirk Nowitzki", "DAL", 582], "sh": [["Dirk Nowitzki", "DAL", "W", 177.6], ["Ray Allen", "BOS", "E", 163.5], ["Nenê", "DEN", "W", 146.8], ["Paul Pierce", "BOS", "E", 144.2], ["Stephen Curry", "GSW", "W", 139.7]], "de": ["Dirk Nowitzki", "DAL", "W", 62.9]}, {"s": "2011-12", "em": ["LeBron James", "MIA", 2380, 85], "wm": ["Kevin Durant", "OKC", 2420, 86], "ae": [["Dwyane Wade", "MIA", 1607, 72], ["Paul Pierce", "BOS", 1558, 81], ["Carmelo Anthony", "NYK", 1384, 60], ["Danny Granger", "IND", 1346, 73], ["Kevin Garnett", "BOS", 1331, 80]], "aw": [["Russell Westbrook", "OKC", 2019, 86], ["Kobe Bryant", "LAL", 1976, 70], ["Blake Griffin", "LAC", 1578, 77], ["Dirk Nowitzki", "DAL", 1449, 66], ["Kevin Love", "MIN", 1432, 55]], "ebb": ["LeBron James", "MIA", 1683], "wbb": ["Kevin Durant", "OKC", 1850], "ess": ["LeBron James", "MIA", 697], "wss": ["Kevin Durant", "OKC", 570], "sh": [["Kevin Durant", "OKC", "W", 203.8], ["LeBron James", "MIA", "E", 176.2], ["James Harden", "OKC", "W", 139.2], ["Tyson Chandler", "NYK", "E", 123.4], ["Steve Nash", "PHX", "W", 122.5]], "de": ["Kevin Durant", "OKC", "W", 87.8]}, {"s": "2012-13", "em": ["LeBron James", "MIA", 2632, 99], "wm": ["Kevin Durant", "OKC", 2619, 92], "ae": [["Carmelo Anthony", "NYK", 2266, 79], ["Dwyane Wade", "MIA", 1812, 91], ["Paul George", "IND", 1742, 98], ["Monta Ellis", "MIL", 1634, 86], ["Deron Williams", "BKN", 1620, 85]], "aw": [["James Harden", "HOU", 2181, 84], ["Kobe Bryant", "LAL", 2133, 78], ["Stephen Curry", "GSW", 2067, 90], ["Russell Westbrook", "OKC", 1951, 84], ["Tony Parker", "SAS", 1773, 87]], "ebb": ["LeBron James", "MIA", 2036], "wbb": ["Kevin Durant", "OKC", 2280], "ess": ["LeBron James", "MIA", 596], "wss": ["Tony Parker", "SAS", 432], "sh": [["LeBron James", "MIA", "E", 296.9], ["Kevin Durant", "OKC", "W", 293.7], ["Stephen Curry", "GSW", "W", 159.4], ["Serge Ibaka", "OKC", "W", 153.4], ["Kyle Korver", "ATL", "E", 124.7]], "de": ["LeBron James", "MIA", "E", 46.2]}, {"s": "2013-14", "em": ["LeBron James", "MIA", 2637, 97], "wm": ["Kevin Durant", "OKC", 3156, 100], "ae": [["Paul George", "IND", 2166, 99], ["Carmelo Anthony", "NYK", 2112, 77], ["DeMar DeRozan", "TOR", 1958, 86], ["John Wall", "WAS", 1762, 93], ["Al Jefferson", "CHA", 1650, 76]], "aw": [["Blake Griffin", "LAC", 2236, 93], ["Stephen Curry", "GSW", 2034, 85], ["James Harden", "HOU", 2012, 79], ["Kevin Love", "MIN", 2010, 77], ["Damian Lillard", "POR", 1947, 93]], "ebb": ["Carmelo Anthony", "NYK", 2112], "wbb": ["Kevin Durant", "OKC", 2593], "ess": ["LeBron James", "MIA", 548], "wss": ["Kevin Durant", "OKC", 563], "sh": [["LeBron James", "MIA", "E", 294.4], ["Kevin Durant", "OKC", "W", 285.8], ["Stephen Curry", "GSW", "W", 196.1], ["Dirk Nowitzki", "DAL", "W", 173.9], ["Kyle Korver", "ATL", "E", 143.8]], "de": ["LeBron James", "MIA", "E", 83.5]}, {"s": "2014-15", "em": ["LeBron James", "CLE", 2344, 89], "wm": ["James Harden", "HOU", 2679, 98], "ae": [["Kyrie Irving", "CLE", 1875, 88], ["Pau Gasol", "CHI", 1590, 88], ["Jimmy Butler III", "CHI", 1576, 77], ["John Wall", "WAS", 1509, 86], ["Paul Millsap", "ATL", 1461, 89]], "aw": [["Stephen Curry", "GSW", 2494, 101], ["Klay Thompson", "GSW", 2059, 98], ["Russell Westbrook", "OKC", 1886, 67], ["Chris Paul", "LAC", 1829, 94], ["Damian Lillard", "POR", 1828, 87]], "ebb": ["LeBron James", "CLE", 1743], "wbb": ["James Harden", "HOU", 2217], "ess": ["LeBron James", "CLE", 601], "wss": ["Stephen Curry", "GSW", 594], "sh": [["Stephen Curry", "GSW", "W", 294.7], ["Kyle Korver", "ATL", "E", 204.6], ["JJ Redick", "LAC", "W", 178.2], ["Klay Thompson", "GSW", "W", 172.4], ["Chris Paul", "LAC", "W", 160.3]], "de": ["Stephen Curry", "GSW", "W", 74.4]}, {"s": "2015-16", "em": ["LeBron James", "CLE", 2472, 97], "wm": ["Stephen Curry", "GSW", 2827, 97], "ae": [["DeMar DeRozan", "TOR", 2248, 98], ["Paul George", "IND", 2065, 88], ["Kyle Lowry", "TOR", 2016, 97], ["Isaiah Thomas", "BOS", 1968, 88], ["Kemba Walker", "CHA", 1848, 88]], "aw": [["Kevin Durant", "OKC", 2540, 90], ["James Harden", "HOU", 2509, 87], ["Klay Thompson", "GSW", 2353, 104], ["Russell Westbrook", "OKC", 2346, 98], ["Damian Lillard", "POR", 2170, 86]], "ebb": ["LeBron James", "CLE", 1920], "wbb": ["James Harden", "HOU", 2376], "ess": ["LeBron James", "CLE", 552], "wss": ["Klay Thompson", "GSW", 582], "sh": [["Stephen Curry", "GSW", "W", 432.0], ["Kevin Durant", "OKC", "W", 257.3], ["Klay Thompson", "GSW", "W", 190.6], ["Kawhi Leonard", "SAS", "W", 176.3], ["JJ Redick", "LAC", "W", 172.9]], "de": ["Klay Thompson", "GSW", "W", 52.6]}, {"s": "2016-17", "em": ["Isaiah Thomas", "BOS", 2548, 91], "wm": ["Russell Westbrook", "OKC", 2745, 86], "ae": [["LeBron James", "CLE", 2545, 92], ["Kyrie Irving", "CLE", 2282, 90], ["DeMar DeRozan", "TOR", 2244, 84], ["John Wall", "WAS", 2158, 91], ["Bradley Beal", "WAS", 2102, 90]], "aw": [["James Harden", "HOU", 2669, 92], ["Stephen Curry", "GSW", 2476, 96], ["Kawhi Leonard", "SAS", 2220, 86], ["Damian Lillard", "POR", 2135, 79], ["Anthony Davis", "NOP", 2099, 75]], "ebb": ["Isaiah Thomas", "BOS", 2199], "wbb": ["Russell Westbrook", "OKC", 2558], "ess": ["LeBron James", "CLE", 591], "wss": ["Stephen Curry", "GSW", 477], "sh": [["Karl-Anthony Towns", "MIN", "W", 222.8], ["Stephen Curry", "GSW", "W", 214.1], ["Kevin Durant", "GSW", "W", 205.1], ["Nikola Jokić", "DEN", "W", 176.4], ["Isaiah Thomas", "BOS", "E", 172.0]], "de": ["Kevin Durant", "GSW", "W", 68.0]}, {"s": "2017-18", "em": ["LeBron James", "CLE", 2999, 104], "wm": ["James Harden", "HOU", 2677, 89], "ae": [["Giannis Antetokounmpo", "MIL", 2194, 82], ["DeMar DeRozan", "TOR", 2067, 90], ["Bradley Beal", "WAS", 1996, 88], ["Victor Oladipo", "IND", 1894, 82], ["Khris Middleton", "MIL", 1825, 89]], "aw": [["Kevin Durant", "GSW", 2400, 89], ["Anthony Davis", "NOP", 2381, 84], ["Russell Westbrook", "OKC", 2204, 86], ["Damian Lillard", "POR", 2036, 77], ["Donovan Mitchell", "UTA", 1884, 90]], "ebb": ["LeBron James", "CLE", 2251], "wbb": ["James Harden", "HOU", 2191], "ess": ["LeBron James", "CLE", 748], "wss": ["Kevin Durant", "GSW", 608], "sh": [["Karl-Anthony Towns", "MIN", "W", 220.2], ["Kevin Durant", "GSW", "W", 208.3], ["LeBron James", "CLE", "E", 205.3], ["Stephen Curry", "GSW", "W", 199.9], ["Anthony Davis", "NOP", "W", 149.4]], "de": ["LeBron James", "CLE", "E", 58.8]}, {"s": "2018-19", "em": ["Giannis Antetokounmpo", "MIL", 2377, 87], "wm": ["James Harden", "HOU", 3166, 89], "ae": [["Kawhi Leonard", "TOR", 2328, 84], ["Kemba Walker", "CHA", 2102, 82], ["Bradley Beal", "WAS", 2099, 82], ["Joel Embiid", "PHI", 1983, 75], ["Blake Griffin", "DET", 1890, 77]], "aw": [["Stephen Curry", "GSW", 2501, 91], ["Damian Lillard", "POR", 2497, 96], ["Kevin Durant", "GSW", 2414, 90], ["Paul George", "OKC", 2302, 82], ["Klay Thompson", "GSW", 2115, 99]], "ebb": ["Kemba Walker", "CHA", 2102], "wbb": ["James Harden", "HOU", 2818], "ess": ["Kawhi Leonard", "TOR", 732], "wss": ["Stephen Curry", "GSW", 620], "sh": [["Stephen Curry", "GSW", "W", 247.1], ["Kevin Durant", "GSW", "W", 191.4], ["Giannis Antetokounmpo", "MIL", "E", 166.7], ["Karl-Anthony Towns", "MIN", "W", 159.8], ["Clint Capela", "HOU", "W", 152.8]], "de": ["Kawhi Leonard", "TOR", "E", 60.0]}, {"s": "2019-20", "em": ["Giannis Antetokounmpo", "MIL", 2097, 72], "wm": ["James Harden", "HOU", 2690, 80], "ae": [["Jayson Tatum", "BOS", 1984, 83], ["Trae Young", "ATL", 1778, 60], ["Bradley Beal", "WAS", 1741, 57], ["Jimmy Butler III", "MIA", 1624, 79], ["Pascal Siakam", "TOR", 1558, 71]], "aw": [["LeBron James", "LAL", 2278, 88], ["Anthony Davis", "LAL", 2200, 83], ["Damian Lillard", "POR", 2075, 70], ["Luka Dončić", "DAL", 1945, 67], ["Nikola Jokić", "DEN", 1920, 92]], "ebb": ["Giannis Antetokounmpo", "MIL", 1857], "wbb": ["James Harden", "HOU", 2335], "ess": ["Jimmy Butler III", "MIA", 467], "wss": ["Anthony Davis", "LAL", 582], "sh": [["Duncan Robinson", "MIA", "E", 191.5], ["Damian Lillard", "POR", "W", 146.2], ["John Collins", "ATL", "E", 131.1], ["Rudy Gobert", "UTA", "W", 130.7], ["Khris Middleton", "MIL", "E", 119.8]], "de": ["Anthony Davis", "LAL", "W", 59.7]}, {"s": "2020-21", "em": ["Giannis Antetokounmpo", "MIL", 2351, 82], "wm": ["Devin Booker", "PHX", 2313, 89], "ae": [["Trae Young", "ATL", 2055, 79], ["Bradley Beal", "WAS", 2028, 65], ["Khris Middleton", "MIL", 1927, 91], ["Jayson Tatum", "BOS", 1845, 69], ["Julius Randle", "NYK", 1802, 76]], "aw": [["Nikola Jokić", "DEN", 2196, 82], ["Damian Lillard", "POR", 2134, 73], ["Luka Dončić", "DAL", 2080, 73], ["Stephen Curry", "GSW", 2015, 63], ["Paul George", "LAC", 1770, 73]], "ebb": ["Bradley Beal", "WAS", 1878], "wbb": ["Stephen Curry", "GSW", 2015], "ess": ["Giannis Antetokounmpo", "MIL", 634], "wss": ["Devin Booker", "PHX", 601], "sh": [["Stephen Curry", "GSW", "W", 227.7], ["Nikola Jokić", "DEN", "W", 211.0], ["Michael Porter Jr.", "DEN", "W", 176.0], ["Joe Harris", "BRK", "E", 157.3], ["Zach LaVine", "CHI", "E", 149.1]], "de": ["Deandre Ayton", "PHX", "W", 58.7]}, {"s": "2021-22", "em": ["Jayson Tatum", "BOS", 2661, 100], "wm": ["Luka Dončić", "DAL", 2322, 80], "ae": [["Giannis Antetokounmpo", "MIL", 2382, 79], ["Joel Embiid", "PHI", 2315, 78], ["Trae Young", "ATL", 2232, 81], ["DeMar DeRozan", "CHI", 2222, 81], ["Jaylen Brown", "BOS", 2113, 90]], "aw": [["Stephen Curry", "GSW", 2232, 86], ["Nikola Jokić", "DEN", 2159, 79], ["Devin Booker", "PHX", 2055, 78], ["Karl-Anthony Towns", "MIN", 1949, 80], ["Donovan Mitchell", "UTA", 1886, 73]], "ebb": ["Trae Young", "ATL", 2155], "wbb": ["Nikola Jokić", "DEN", 2004], "ess": ["Jayson Tatum", "BOS", 615], "wss": ["Stephen Curry", "GSW", 602], "sh": [["Nikola Jokić", "DEN", "W", 244.9], ["Karl-Anthony Towns", "MIN", "W", 163.3], ["Rudy Gobert", "UTA", "W", 145.3], ["Deandre Ayton", "PHX", "W", 144.0], ["Jarrett Allen", "CLE", "E", 142.5]], "de": ["Jordan Poole", "GSW", "W", 47.9]}, {"s": "2022-23", "em": ["Jayson Tatum", "BOS", 2768, 94], "wm": ["Nikola Jokić", "DEN", 2290, 89], "ae": [["Joel Embiid", "PHI", 2396, 75], ["Jaylen Brown", "BOS", 2237, 87], ["Julius Randle", "NYK", 2102, 87], ["Trae Young", "ATL", 2089, 79], ["Jimmy Butler III", "MIA", 2058, 86]], "aw": [["Luka Dončić", "DAL", 2138, 66], ["Shai Gilgeous-Alexander", "OKC", 2135, 68], ["Anthony Edwards", "MIN", 2104, 84], ["Stephen Curry", "GSW", 2044, 69], ["De'Aaron Fox", "SAC", 2018, 80]], "ebb": ["Jayson Tatum", "BOS", 2225], "wbb": ["Luka Dončić", "DAL", 2138], "ess": ["Jimmy Butler III", "MIA", 592], "wss": ["Nikola Jokić", "DEN", 600], "sh": [["Nikola Jokić", "DEN", "W", 247.1], ["Stephen Curry", "GSW", "W", 194.6], ["Kevin Durant", "2TM", "W", 163.0], ["Domantas Sabonis", "SAC", "W", 140.5], ["Lauri Markkanen", "UTA", "W", 130.5]], "de": ["Devin Booker", "PHX", "W", 61.9]}, {"s": "2023-24", "em": ["Jalen Brunson", "NYK", 2633, 90], "wm": ["Luka Dončić", "DAL", 3005, 92], "ae": [["Jayson Tatum", "BOS", 2462, 93], ["Giannis Antetokounmpo", "MIL", 2222, 73], ["Pascal Siakam", "2TM", 2104, 97], ["Jaylen Brown", "BOS", 2064, 89], ["Tyrese Maxey", "PHI", 1995, 76]], "aw": [["Shai Gilgeous-Alexander", "OKC", 2556, 85], ["Anthony Edwards", "MIN", 2490, 95], ["Nikola Jokić", "DEN", 2429, 91], ["Kevin Durant", "PHX", 2139, 79], ["Anthony Davis", "LAL", 2015, 81]], "ebb": ["Giannis Antetokounmpo", "MIL", 2222], "wbb": ["Luka Dončić", "DAL", 2370], "ess": ["Jayson Tatum", "BOS", 475], "wss": ["Luka Dončić", "DAL", 635], "sh": [["Nikola Jokić", "DEN", "W", 206.0], ["Grayson Allen", "PHX", "W", 159.7], ["Daniel Gafford", "2TM", "W", 153.6], ["Kevin Durant", "PHX", "W", 139.0], ["Obi Toppin", "IND", "E", 135.9]], "de": ["Andrew Nembhard", "IND", "E", 39.0]}, {"s": "2024-25", "em": ["Jalen Brunson", "NYK", 2220, 83], "wm": ["Shai Gilgeous-Alexander", "OKC", 3172, 99], "ae": [["Giannis Antetokounmpo", "MIL", 2201, 72], ["Jayson Tatum", "BOS", 2157, 80], ["Karl-Anthony Towns", "NYK", 2145, 90], ["Pascal Siakam", "IND", 2050, 101], ["Cade Cunningham", "DET", 1980, 76]], "aw": [["Anthony Edwards", "MIN", 2557, 94], ["Nikola Jokić", "DEN", 2438, 84], ["Jalen Williams", "OKC", 1982, 92], ["James Harden", "LAC", 1933, 86], ["Devin Booker", "PHX", 1923, 75]], "ebb": ["Giannis Antetokounmpo", "MIL", 2036], "wbb": ["Shai Gilgeous-Alexander", "OKC", 2484], "ess": ["Jalen Brunson", "NYK", 530], "wss": ["Shai Gilgeous-Alexander", "OKC", 688], "sh": [["Nikola Jokić", "DEN", "W", 235.7], ["Jarrett Allen", "CLE", "E", 189.4], ["Zach LaVine", "2TM", "W", 173.9], ["Shai Gilgeous-Alexander", "OKC", "W", 161.4], ["Christian Braun", "DEN", "W", 158.2]], "de": ["Aaron Nesmith", "IND", "E", 38.9]}, {"s": "2025-26", "em": ["Jalen Brunson", "NYK", 2466, 93], "wm": ["Shai Gilgeous-Alexander", "OKC", 2531, 83], "ae": [["Donovan Mitchell", "CLE", 2420, 88], ["Tyrese Maxey", "PHI", 2241, 81], ["Jaylen Brown", "BOS", 2218, 78], ["Cade Cunningham", "DET", 1925, 78], ["Karl-Anthony Towns", "NYK", 1806, 94]], "aw": [["Luka Dončić", "LAL", 2143, 64], ["Victor Wembanyama", "SAS", 2124, 86], ["Kevin Durant", "HOU", 2049, 79], ["Jamal Murray", "DEN", 2047, 81], ["Anthony Edwards", "MIN", 1973, 71]], "ebb": ["Jaylen Brown", "BOS", 2038], "wbb": ["Luka Dončić", "LAL", 2143], "ess": ["Jalen Brunson", "NYK", 539], "wss": ["Victor Wembanyama", "SAS", 524], "sh": [["Shai Gilgeous-Alexander", "OKC", "W", 189.0], ["Nikola Jokić", "DEN", "W", 183.8], ["Kevin Durant", "HOU", "W", 155.6], ["Jalen Duren", "DET", "E", 145.1], ["Kon Knueppel", "CHA", "E", 141.4]], "de": ["OG Anunoby", "NYK", "E", 66.8]}];
+    const PANTHEON_MAP = {"dwight howard": {"min": ":01", "num": 1, "q": "1Q", "mvp": 0, "ac": 4}, "mitch richmond": {"min": ":02", "num": 2, "q": "1Q", "mvp": 0, "ac": 4}, "terry cummings": {"min": ":03", "num": 3, "q": "1Q", "mvp": 0, "ac": 4}, "trae young": {"min": ":04", "num": 4, "q": "1Q", "mvp": 0, "ac": 4}, "jaylen brown": {"min": ":05", "num": 5, "q": "1Q", "mvp": 0, "ac": 4}, "anthony davis": {"min": ":06", "num": 6, "q": "1Q", "mvp": 0, "ac": 4}, "anthony edwards": {"min": ":07", "num": 7, "q": "1Q", "mvp": 0, "ac": 4}, "glen rice": {"min": ":08", "num": 8, "q": "1Q", "mvp": 0, "ac": 5}, "bradley beal": {"min": ":09", "num": 9, "q": "1Q", "mvp": 0, "ac": 5}, "paul george": {"min": ":10", "num": 10, "q": "1Q", "mvp": 0, "ac": 5}, "kevin mchale": {"min": ":11", "num": 11, "q": "1Q", "mvp": 0, "ac": 5}, "demar derozan": {"min": ":12", "num": 12, "q": "1Q", "mvp": 0, "ac": 5}, "vince carter": {"min": ":13", "num": 13, "q": "2Q", "mvp": 0, "ac": 5}, "tracy mcgrady": {"min": ":14", "num": 14, "q": "2Q", "mvp": 0, "ac": 5}, "gary payton": {"min": ":15", "num": 15, "q": "2Q", "mvp": 0, "ac": 6}, "scottie pippen": {"min": ":16", "num": 16, "q": "2Q", "mvp": 0, "ac": 6}, "clyde drexler": {"min": ":17", "num": 17, "q": "2Q", "mvp": 0, "ac": 6}, "david robinson": {"min": ":18", "num": 18, "q": "2Q", "mvp": 0, "ac": 6}, "reggie miller": {"min": ":19", "num": 19, "q": "2Q", "mvp": 0, "ac": 7}, "tim duncan": {"min": ":20", "num": 20, "q": "2Q", "mvp": 0, "ac": 7}, "dwyane wade": {"min": ":21", "num": 21, "q": "2Q", "mvp": 0, "ac": 7}, "carmelo anthony": {"min": ":22", "num": 22, "q": "2Q", "mvp": 0, "ac": 8}, "damian lillard": {"min": ":23", "num": 23, "q": "2Q", "mvp": 0, "ac": 8}, "dirk nowitzki": {"min": ":24", "num": 24, "q": "2Q", "mvp": 0, "ac": 12}, "isaiah thomas": {"min": ":25", "num": 25, "q": "3Q", "mvp": 1, "ac": 1}, "devin booker": {"min": ":26", "num": 26, "q": "3Q", "mvp": 1, "ac": 2}, "dale ellis": {"min": ":27", "num": 27, "q": "3Q", "mvp": 1, "ac": 2}, "adrian dantley": {"min": ":28", "num": 28, "q": "3Q", "mvp": 1, "ac": 2}, "amar'e stoudemire": {"min": ":29", "num": 29, "q": "3Q", "mvp": 1, "ac": 4}, "kevin garnett": {"min": ":30", "num": 30, "q": "3Q", "mvp": 1, "ac": 4}, "charles barkley": {"min": ":31", "num": 31, "q": "3Q", "mvp": 1, "ac": 5}, "nikola jokic": {"min": ":32", "num": 32, "q": "3Q", "mvp": 1, "ac": 5}, "russell westbrook": {"min": ":33", "num": 33, "q": "3Q", "mvp": 1, "ac": 6}, "dominique wilkins": {"min": ":34", "num": 34, "q": "3Q", "mvp": 1, "ac": 7}, "patrick ewing": {"min": ":35", "num": 35, "q": "3Q", "mvp": 1, "ac": 8}, "stephen curry": {"min": ":36", "num": 36, "q": "3Q", "mvp": 1, "ac": 8}, "shai gilgeous-alexander": {"min": ":37", "num": 37, "q": "4Q", "mvp": 2, "ac": 2}, "luka doncic": {"min": ":38", "num": 38, "q": "4Q", "mvp": 2, "ac": 4}, "jayson tatum": {"min": ":39", "num": 39, "q": "4Q", "mvp": 2, "ac": 4}, "larry bird": {"min": ":40", "num": 40, "q": "4Q", "mvp": 2, "ac": 4}, "hakeem olajuwon": {"min": ":41", "num": 41, "q": "4Q", "mvp": 2, "ac": 5}, "paul pierce": {"min": ":42", "num": 42, "q": "4Q", "mvp": 2, "ac": 7}, "jalen brunson": {"min": ":43", "num": 43, "q": "4Q", "mvp": 3, "ac": 0}, "alex english": {"min": ":44", "num": 44, "q": "4Q", "mvp": 3, "ac": 3}, "giannis antetokounmpo": {"min": ":45", "num": 45, "q": "4Q", "mvp": 3, "ac": 4}, "james harden": {"min": ":46", "num": 46, "q": "4Q", "mvp": 4, "ac": 5}, "shaquille o'neal": {"min": ":47", "num": 47, "q": "4Q", "mvp": 4, "ac": 7}, "kevin durant": {"min": ":48", "num": 48, "q": "4Q", "mvp": 4, "ac": 7}, "allen iverson": {"min": ":49", "num": 49, "q": "OT", "mvp": 5, "ac": 4}, "kobe bryant": {"min": ":50", "num": 50, "q": "OT", "mvp": 7, "ac": 7}, "karl malone": {"min": ":51", "num": 51, "q": "OT", "mvp": 7, "ac": 7}, "michael jordan": {"min": ":52", "num": 52, "q": "OT", "mvp": 10, "ac": 1}, "lebron james": {"min": ":53", "num": 53, "q": "OT", "mvp": 12, "ac": 3}};
+
+    const SCALES = {
+      pts: 3400,
+      g: 106,
+      ppg: 38.0,
+      bb: 3100,
+      ss: 800,
+      sh: 440.0,
+      de: 90.0
+    };
+
+    function normalizeStr(s) {
+      return (s || "").replace(/\u2019/g, "'").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+    }
+
+    function randomSerialCopy() {
+      return Math.floor(Math.random() * 82) + 1;
+    }
+
+    // Build all 636 player-season card records
+    const ALL_CARDS = [];
+    SEASONS_DATA.forEach((s, idx) => {
+      const ed = idx + 1;
+      const endYr = parseInt(s.s.split("-")[0], 10) + 1;
+      const yy = String(endYr).slice(2);
+      const decade = Math.floor(endYr / 10) * 10;
+      const psMap = {};
+
+      function getRec(name, team, conf) {
+        const k = normalizeStr(name);
+        if (!psMap[k]) {
+          const pan = PANTHEON_MAP[k] || null;
+          psMap[k] = {
+            id: `${yy}_${k.replace(/[^a-z0-9]+/g, "_")}`,
+            s: s.s, // kept strictly for internal posters.html ?season= URL deep-link, NEVER rendered on card
+            ed,
+            yr: endYr,
+            yy,
+            decade,
+            name,
+            team,
+            conf,
+            rank: null,
+            pts: null,
+            g: null,
+            ppg: null,
+            isMvp: false,
+            isAc: false,
+            bb: null,
+            ss: null,
+            shRank: null,
+            shVal: null,
+            deVal: null,
+            pantheon: pan
+          };
+        }
+        return psMap[k];
+      }
+
+      let r = getRec(s.em[0], s.em[1], "E");
+      r.rank = 1; r.pts = s.em[2]; r.g = s.em[3]; r.ppg = s.em[2] / s.em[3]; r.isMvp = true;
+      s.ae.forEach((p, i) => {
+        const x = getRec(p[0], p[1], "E");
+        x.rank = i + 2; x.pts = p[2]; x.g = p[3]; x.ppg = p[2] / p[3]; x.isAc = true;
+      });
+
+      r = getRec(s.wm[0], s.wm[1], "W");
+      r.rank = 1; r.pts = s.wm[2]; r.g = s.wm[3]; r.ppg = s.wm[2] / s.wm[3]; r.isMvp = true;
+      s.aw.forEach((p, i) => {
+        const x = getRec(p[0], p[1], "W");
+        x.rank = i + 2; x.pts = p[2]; x.g = p[3]; x.ppg = p[2] / p[3]; x.isAc = true;
+      });
+
+      getRec(s.ebb[0], s.ebb[1], "E").bb = s.ebb[2];
+      getRec(s.wbb[0], s.wbb[1], "W").bb = s.wbb[2];
+      getRec(s.ess[0], s.ess[1], "E").ss = s.ess[2];
+      getRec(s.wss[0], s.wss[1], "W").ss = s.wss[2];
+      s.sh.forEach((sh, i) => {
+        const x = getRec(sh[0], sh[1], sh[2]);
+        x.shRank = i + 1;
+        x.shVal = sh[3];
+      });
+      getRec(s.de[0], s.de[1], s.de[2]).deVal = s.de[3];
+
+      Object.values(psMap).forEach(rec => {
+        // Ordered specialist awards list (each carries exact label & value)
+        const secAwards = [];
+        if (rec.bb !== null) {
+          secAwards.push({
+            key: "BB",
+            label: "BRONZE BUCKET",
+            val: rec.bb.toLocaleString(),
+            ratio: rec.bb / SCALES.bb
+          });
+        }
+        if (rec.ss !== null) {
+          secAwards.push({
+            key: "SS",
+            label: "SILVER SCORER",
+            val: rec.ss.toLocaleString(),
+            ratio: rec.ss / SCALES.ss
+          });
+        }
+        if (rec.shVal !== null) {
+          secAwards.push({
+            key: "SH",
+            label: "SHARP SHOOTER",
+            subRank: `#${rec.shRank}`,
+            val: `+${rec.shVal.toFixed(1)}`,
+            ratio: rec.shVal / SCALES.sh
+          });
+        }
+        if (rec.deVal !== null) {
+          secAwards.push({
+            key: "DE",
+            label: "DEAD EYE",
+            val: `+${rec.deVal.toFixed(1)}`,
+            ratio: rec.deVal / SCALES.de
+          });
+        }
+        rec.secAwards = secAwards;
+        rec.honors = secAwards.map(a => a.key);
+
+        if (rec.isMvp && secAwards.length === 4) {
+          rec.tier = "GS";
+          rec.primaryLabel = rec.conf === "E" ? "EAST MVP" : "WEST MVP";
+        } else if (rec.isMvp) {
+          rec.tier = "MVP";
+          rec.primaryLabel = rec.conf === "E" ? "EAST MVP" : "WEST MVP";
+        } else if (rec.isAc && secAwards.length > 0) {
+          rec.tier = "AC_PLUS";
+          rec.primaryLabel = rec.conf === "E" ? "ALL-EAST" : "ALL-WEST";
+        } else if (rec.isAc) {
+          rec.tier = "AC_PURE";
+          rec.primaryLabel = rec.conf === "E" ? "ALL-EAST" : "ALL-WEST";
+        } else {
+          rec.tier = "SPEC";
+          rec.primaryLabel = secAwards[0] ? secAwards[0].label : "";
+        }
+
+        // Clean serial token
+        if (rec.tier === "GS") {
+          rec.serialCode = "MVP·4";
+        } else if (rec.isMvp) {
+          rec.serialCode = rec.honors.length ? `MVP·${rec.honors.join("")}` : "MVP";
+        } else if (rec.isAc) {
+          rec.serialCode = rec.honors.length ? rec.honors.join("·") : "AC";
+        } else {
+          rec.serialCode = rec.honors.join("·");
+        }
+
+        if (rec.rank !== null) rec.serialRank = String(rec.rank).padStart(2, "0");
+        else if (rec.deVal !== null) rec.serialRank = "DE";
+        else if (rec.ss !== null) rec.serialRank = "SS";
+        else if (rec.shRank !== null) rec.serialRank = "S" + rec.shRank;
+        else rec.serialRank = "00";
+
+        ALL_CARDS.push(rec);
+      });
+    });
+
+    // =========================================================================
+    // 2. REAL OFFICIAL NBA TEAM LOGOS + ERA PALETTES (ALL 36 CODES)
+    //    Ordered resilient CDN fallback chain: ESPN 500px PNG -> NBA SVG -> Wikipedia SVG
+    // =========================================================================
+    const NBA_TEAM_META = {
+      "2TM": { nbaId: null, espn: null, urls: [
+        "https://a.espncdn.com/i/teamlogos/leagues/500/nba.png",
+        "https://en.wikipedia.org/wiki/Special:FilePath/National_Basketball_Association_logo.svg"
+      ]},
+      ATL: { nbaId: "1610612737", espn: "atl" },
+      BOS: { nbaId: "1610612738", espn: "bos" },
+      CLE: { nbaId: "1610612739", espn: "cle" },
+      NOP: { nbaId: "1610612740", espn: "no" },
+      CHI: { nbaId: "1610612741", espn: "chi" },
+      DAL: { nbaId: "1610612742", espn: "dal" },
+      DEN: { nbaId: "1610612743", espn: "den" },
+      GSW: { nbaId: "1610612744", espn: "gs" },
+      HOU: { nbaId: "1610612745", espn: "hou" },
+      LAC: { nbaId: "1610612746", espn: "lac" },
+      LAL: { nbaId: "1610612747", espn: "lal" },
+      MIA: { nbaId: "1610612748", espn: "mia" },
+      MIL: { nbaId: "1610612749", espn: "mil" },
+      MIN: { nbaId: "1610612750", espn: "min" },
+      BKN: { nbaId: "1610612751", espn: "bkn" },
+      BRK: { nbaId: "1610612751", espn: "bkn" },
+      NYK: { nbaId: "1610612752", espn: "ny" },
+      ORL: { nbaId: "1610612753", espn: "orl" },
+      IND: { nbaId: "1610612754", espn: "ind" },
+      PHI: { nbaId: "1610612755", espn: "phi" },
+      PHX: { nbaId: "1610612756", espn: "phx" },
+      POR: { nbaId: "1610612757", espn: "por" },
+      SAC: { nbaId: "1610612758", espn: "sac" },
+      SAS: { nbaId: "1610612759", espn: "sa" },
+      OKC: { nbaId: "1610612760", espn: "okc" },
+      TOR: { nbaId: "1610612761", espn: "tor" },
+      UTA: { nbaId: "1610612762", espn: "utah" },
+      MEM: { nbaId: "1610612763", espn: "mem" },
+      WAS: { nbaId: "1610612764", espn: "wsh" },
+      DET: { nbaId: "1610612765", espn: "det" },
+      CHA: { nbaId: "1610612766", espn: "cha" },
+      // Historical franchises: authentic vintage SVG logos via Wikimedia Commons with graceful fallback
+      SEA: { urls: [
+        "https://en.wikipedia.org/wiki/Special:FilePath/Seattle_SuperSonics_logo.svg",
+        "https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg"
+      ]},
+      VAN: { urls: [
+        "https://en.wikipedia.org/wiki/Special:FilePath/Vancouver_Grizzlies_logo.svg",
+        "https://a.espncdn.com/i/teamlogos/nba/500/mem.png"
+      ]},
+      NJN: { urls: [
+        "https://en.wikipedia.org/wiki/Special:FilePath/New_Jersey_Nets_logo.svg",
+        "https://a.espncdn.com/i/teamlogos/nba/500/bkn.png"
+      ]},
+      NOH: { urls: [
+        "https://en.wikipedia.org/wiki/Special:FilePath/New_Orleans_Hornets_logo.svg",
+        "https://a.espncdn.com/i/teamlogos/nba/500/no.png"
+      ]}
+    };
+
+    function getLogoUrls(team) {
+      const m = NBA_TEAM_META[team];
+      if (!m) return [];
+      if (m.urls) return m.urls;
+      const list = [];
+      if (m.espn) list.push(`https://a.espncdn.com/i/teamlogos/nba/500/${m.espn}.png`);
+      if (m.nbaId) list.push(`https://cdn.nba.com/logos/nba/${m.nbaId}/primary/L/logo.svg`);
+      return list;
+    }
+
+    // Async CORS-aware Image Cache
+    const LOGO_CACHE = {}; // team -> { status: 'loading'|'ok'|'fail', img: Image|null, corsClean: bool }
+
+    function ensureLogoLoaded(team, onReady) {
+      if (LOGO_CACHE[team]) {
+        if (LOGO_CACHE[team].status === "ok" && onReady) onReady();
+        return LOGO_CACHE[team];
+      }
+      const urls = getLogoUrls(team);
+      const entry = { status: "loading", img: null, corsClean: true };
+      LOGO_CACHE[team] = entry;
+
+      // Attempt sequence: first try every URL with crossOrigin='anonymous' (keeps PNG export untainted),
+      // then retry without crossOrigin so real logos still display even under strict local file:// policies.
+      const attempts = [
+        ...urls.map(u => ({ url: u, cors: true })),
+        ...urls.map(u => ({ url: u, cors: false }))
+      ];
+
+      function tryNext(idx) {
+        if (idx >= attempts.length) {
+          entry.status = "fail";
+          if (onReady) onReady();
+          return;
+        }
+        const { url, cors } = attempts[idx];
+        const img = new Image();
+        if (cors) img.crossOrigin = "anonymous";
+        img.onload = () => {
+          if (img.naturalWidth > 0) {
+            entry.status = "ok";
+            entry.img = img;
+            entry.corsClean = cors;
+            if (onReady) onReady();
+          } else {
+            tryNext(idx + 1);
+          }
+        };
+        img.onerror = () => tryNext(idx + 1);
+        img.src = url;
+      }
+
+      tryNext(0);
+      return entry;
+    }
+
+    function getFranchiseTheme(team, yr) {
+      if (team === "2TM") {
+        return { name: "NBA", primary: "#1D428A", dark: "#0B1B3D", accent: "#C8102E", metal: "#FAF9F6" };
+      }
+      const T = {
+        ATL: yr < 1996
+          ? { name: "ATLANTA HAWKS", primary: "#C8102E", dark: "#4A0510", accent: "#FDB927", metal: "#E5C16C" }
+          : yr < 2016
+          ? { name: "ATLANTA HAWKS", primary: "#B91C1C", dark: "#1B1E2A", accent: "#C5A059", metal: "#D9C38C" }
+          : { name: "ATLANTA HAWKS", primary: "#C8102E", dark: "#2E070E", accent: "#FDB927", metal: "#E8C872" },
+        BKN: { name: "BROOKLYN NETS", primary: "#1F2228", dark: "#090A0C", accent: "#D4D7DD", metal: "#C7CCD4" },
+        BRK: { name: "BROOKLYN NETS", primary: "#1F2228", dark: "#090A0C", accent: "#D4D7DD", metal: "#C7CCD4" },
+        BOS: { name: "BOSTON CELTICS", primary: "#007A33", dark: "#012E14", accent: "#BA9653", metal: "#D9C18A" },
+        CHA: yr <= 2002 || yr >= 2015
+          ? { name: "CHARLOTTE HORNETS", primary: "#00788C", dark: "#0A233A", accent: "#5C2D91", metal: "#A5D8DD" }
+          : { name: "CHARLOTTE BOBCATS", primary: "#D9531E", dark: "#132240", accent: "#6C8EBF", metal: "#D2D7DF" },
+        CHI: { name: "CHICAGO BULLS", primary: "#BA0C2F", dark: "#30030B", accent: "#E8E3D5", metal: "#D6C5A2" },
+        CLE: yr < 1995
+          ? { name: "CLEVELAND CAVALIERS", primary: "#E35205", dark: "#0B1E40", accent: "#1D428A", metal: "#E0B97F" }
+          : { name: "CLEVELAND CAVALIERS", primary: "#6F1D2C", dark: "#22070C", accent: "#FFB81C", metal: "#E2C06B" },
+        DAL: yr < 2002
+          ? { name: "DALLAS MAVERICKS", primary: "#006BB6", dark: "#05261A", accent: "#00843D", metal: "#D0D7DE" }
+          : { name: "DALLAS MAVERICKS", primary: "#00538C", dark: "#041A33", accent: "#B8C4CA", metal: "#D5DDE2" },
+        DEN: yr < 1994
+          ? { name: "DENVER NUGGETS", primary: "#1D428A", dark: "#0B1838", accent: "#FEC524", metal: "#F0C860" }
+          : yr < 2019
+          ? { name: "DENVER NUGGETS", primary: "#2D77B8", dark: "#0C1E38", accent: "#FDB927", metal: "#E8C56E" }
+          : { name: "DENVER NUGGETS", primary: "#0E2240", dark: "#061020", accent: "#FEC524", metal: "#E7C268" },
+        DET: yr >= 1997 && yr <= 2001
+          ? { name: "DETROIT PISTONS", primary: "#006272", dark: "#06242B", accent: "#C8102E", metal: "#D9B982" }
+          : { name: "DETROIT PISTONS", primary: "#1D42BA", dark: "#091742", accent: "#C8102E", metal: "#D7DCE5" },
+        GSW: yr < 2011
+          ? { name: "GOLDEN STATE WARRIORS", primary: "#0E2D5C", dark: "#07142B", accent: "#FDB927", metal: "#E6C16C" }
+          : { name: "GOLDEN STATE WARRIORS", primary: "#1D428A", dark: "#0A1B3F", accent: "#FFC72C", metal: "#F2C963" },
+        HOU: yr < 1996
+          ? { name: "HOUSTON ROCKETS", primary: "#CE1141", dark: "#4A0516", accent: "#FFB81C", metal: "#E5C16C" }
+          : yr < 2004
+          ? { name: "HOUSTON ROCKETS", primary: "#14274E", dark: "#071024", accent: "#CE1141", metal: "#C7CED8" }
+          : { name: "HOUSTON ROCKETS", primary: "#A6192E", dark: "#3B0610", accent: "#C4CED4", metal: "#D8D2C5" },
+        IND: { name: "INDIANA PACERS", primary: "#002D62", dark: "#041329", accent: "#FDBB30", metal: "#E7C268" },
+        LAC: { name: "LA CLIPPERS", primary: "#C8102E", dark: "#0C1F3E", accent: "#1D428A", metal: "#D5DBE3" },
+        LAL: { name: "LOS ANGELES LAKERS", primary: "#552583", dark: "#1F0A36", accent: "#FDB927", metal: "#ECC35C" },
+        MEM: { name: "MEMPHIS GRIZZLIES", primary: "#223A5E", dark: "#0B1628", accent: "#7399C6", metal: "#C5D4E5" },
+        MIA: { name: "MIAMI HEAT", primary: "#98002E", dark: "#26020B", accent: "#F9A01B", metal: "#E6B86A" },
+        MIL: yr >= 1994 && yr <= 2006
+          ? { name: "MILWAUKEE BUCKS", primary: "#00471B", dark: "#170C29", accent: "#702F8A", metal: "#C8D0D8" }
+          : { name: "MILWAUKEE BUCKS", primary: "#00471B", dark: "#021F0D", accent: "#EEE1C6", metal: "#DFD0AE" },
+        MIN: { name: "MINNESOTA TIMBERWOLVES", primary: "#0C2340", dark: "#05101F", accent: "#78BE20", metal: "#B7C6D4" },
+        NJN: { name: "NEW JERSEY NETS", primary: "#0E2240", dark: "#07101F", accent: "#C8102E", metal: "#CBD2DC" },
+        NOH: { name: "NEW ORLEANS HORNETS", primary: "#00778B", dark: "#07202B", accent: "#FDB927", metal: "#DEC478" },
+        NOP: { name: "NEW ORLEANS PELICANS", primary: "#0C2340", dark: "#051020", accent: "#B4975A", metal: "#D4BE8A" },
+        NYK: { name: "NEW YORK KNICKS", primary: "#006BB6", dark: "#062142", accent: "#F58426", metal: "#E6C188" },
+        OKC: { name: "OKLAHOMA CITY THUNDER", primary: "#007AC1", dark: "#062442", accent: "#EF3B24", metal: "#E0C58A" },
+        ORL: { name: "ORLANDO MAGIC", primary: "#0057B8", dark: "#041633", accent: "#C4CED4", metal: "#D5DDE5" },
+        PHI: yr >= 1998 && yr <= 2009
+          ? { name: "PHILADELPHIA 76ERS", primary: "#181A20", dark: "#08090C", accent: "#C8102E", metal: "#D9B972" }
+          : { name: "PHILADELPHIA 76ERS", primary: "#006BB6", dark: "#071E3E", accent: "#ED174C", metal: "#DCE0E6" },
+        PHX: { name: "PHOENIX SUNS", primary: "#3E1F6D", dark: "#170A2E", accent: "#E56020", metal: "#E8B968" },
+        POR: { name: "PORTLAND TRAIL BLAZERS", primary: "#B81D24", dark: "#1A0507", accent: "#E8E3D5", metal: "#D5D2CA" },
+        SAC: { name: "SACRAMENTO KINGS", primary: "#5A2D81", dark: "#1E0C30", accent: "#C4CED4", metal: "#D5D9E0" },
+        SAS: yr <= 2002
+          ? { name: "SAN ANTONIO SPURS", primary: "#1E2226", dark: "#0B0C0E", accent: "#00B2A9", metal: "#C7CDD4" }
+          : { name: "SAN ANTONIO SPURS", primary: "#22252A", dark: "#0B0C0F", accent: "#C4CED4", metal: "#D2D7DE" },
+        SEA: { name: "SEATTLE SUPERSONICS", primary: "#00653A", dark: "#022616", accent: "#FFC200", metal: "#E9C75E" },
+        TOR: yr < 2007
+          ? { name: "TORONTO RAPTORS", primary: "#6B21A8", dark: "#210738", accent: "#CE1141", metal: "#D4CEDD" }
+          : { name: "TORONTO RAPTORS", primary: "#CE1141", dark: "#2E0410", accent: "#D4AF37", metal: "#DFC375" },
+        UTA: yr < 2005
+          ? { name: "UTAH JAZZ", primary: "#4A2376", dark: "#180A2E", accent: "#F9A01B", metal: "#E5C26E" }
+          : { name: "UTAH JAZZ", primary: "#002B5C", dark: "#041126", accent: "#F9A01B", metal: "#DFC276" },
+        VAN: { name: "VANCOUVER GRIZZLIES", primary: "#00B2A9", dark: "#052B29", accent: "#E43C40", metal: "#D4BC88" },
+        WAS: yr < 1998
+          ? { name: "WASHINGTON BULLETS", primary: "#C8102E", dark: "#0E1C3D", accent: "#1D428A", metal: "#D9DDE4" }
+          : yr < 2012
+          ? { name: "WASHINGTON WIZARDS", primary: "#004B87", dark: "#07182E", accent: "#C69C6D", metal: "#D9BC8E" }
+          : { name: "WASHINGTON WIZARDS", primary: "#002B5C", dark: "#061229", accent: "#E31837", metal: "#D6DBE2" }
+      };
+      return T[team] || { name: team, primary: "#1F2937", dark: "#0D1117", accent: "#F2A900", metal: "#D8D2C5" };
+    }
+
+    // Distinct Metallurgy & Micro-Motif Spec for Each of the 4 Specialist Honors
+    const AWARD_STYLES = {
+      BB: {
+        bgStops: ["#4A2609", "#241103", "#381B05"],
+        borderStops: ["#F5C58A", "#CD7F32", "#8C4A12"],
+        labelColor: "#F5C082",
+        valStops: ["#FFF1DB", "#E89B4C", "#B8661E"],
+        barStart: "#8F4A10", barEnd: "#F8C98E"
+      },
+      SS: {
+        bgStops: ["#283240", "#131922", "#1E2733"],
+        borderStops: ["#F8FAFC", "#B8C4D4", "#64748B"],
+        labelColor: "#E2E8F0",
+        valStops: ["#FFFFFF", "#CBD5E1", "#94A3B8"],
+        barStart: "#64748B", barEnd: "#F1F5F9"
+      },
+      SH: {
+        bgStops: ["#18202B", "#0C1017", "#141A24"],
+        borderStops: ["#E2E8F0", "#64748B", "#CBD5E1"],
+        labelColor: "#93C5FD",
+        valStops: ["#FFFFFF", "#E2E8F0", "#94A3B8"],
+        barStart: "#3B82F6", barEnd: "#E0F2FE"
+      },
+      DE: {
+        bgStops: ["#211906", "#0C0902", "#1A1405"],
+        borderStops: ["#FFF1B8", "#F2A900", "#9E6A05"],
+        labelColor: "#F2A900",
+        valStops: ["#FFF9DC", "#F2A900", "#C48108"],
+        barStart: "#B87A08", barEnd: "#FFE999"
+      }
+    };
+
+    // =========================================================================
+    // 3. ULTRA-HIGH-RES CANVAS BULLION CARD RENDERING ENGINE (1500 x 2100)
+    // =========================================================================
+    const W = 1500, H = 2100;
+
+    function hexToRgb(hex) {
+      const clean = hex.replace("#", "");
+      const n = parseInt(clean, 16);
+      return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+    }
+    function rgba(hex, a) {
+      const [r, g, b] = hexToRgb(hex);
+      return `rgba(${r},${g},${b},${a})`;
+    }
+
+    function drawRoundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
+    // Draw Real Official Team Logo — Stylized to Harmonize with Card Aesthetic
+    function drawStylizedRealLogo(ctx, card, cx, cy, size, theme, frameGrad, logoFinish) {
+      const entry = LOGO_CACHE[card.team];
+      const isEast = card.conf === "E";
+      const isMVP = card.isMvp;
+      const isGS = card.tier === "GS";
+
+      ctx.save();
+
+      // Subtle luxury backdrop ring & ambient glow behind logo
+      const ringR = size * 0.62;
+      const glow = ctx.createRadialGradient(cx, cy, size * 0.06, cx, cy, ringR * 1.45);
+      if (isGS || isMVP) {
+        glow.addColorStop(0, "rgba(242, 169, 0, 0.34)");
+        glow.addColorStop(1, "rgba(242, 169, 0, 0)");
+      } else {
+        glow.addColorStop(0, rgba(theme.metal, 0.24));
+        glow.addColorStop(1, "rgba(0,0,0,0)");
+      }
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(cx, cy, ringR * 1.45, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Dark smoked-glass medallion backing so any logo (dark or bright) pops cleanly
+      ctx.beginPath();
+      ctx.arc(cx, cy, ringR, 0, Math.PI * 2);
+      const medBg = ctx.createRadialGradient(cx, cy - ringR * 0.35, 8, cx, cy, ringR);
+      medBg.addColorStop(0, rgba("#FFFFFF", 0.14));
+      medBg.addColorStop(0.55, "rgba(10, 12, 16, 0.56)");
+      medBg.addColorStop(1, "rgba(6, 7, 10, 0.82)");
+      ctx.fillStyle = medBg;
+      ctx.fill();
+      ctx.lineWidth = 3.5;
+      ctx.strokeStyle = frameGrad;
+      ctx.stroke();
+
+      // Inner precision hairline ring
+      ctx.beginPath();
+      ctx.arc(cx, cy, ringR - 10, 0, Math.PI * 2);
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = rgba(theme.metal, 0.32);
+      ctx.stroke();
+
+      if (entry && entry.status === "ok" && entry.img) {
+        const img = entry.img;
+        const aspect = img.naturalWidth / img.naturalHeight;
+        let dw = size * 0.94, dh = size * 0.94;
+        if (aspect > 1) dh = dw / aspect;
+        else dw = dh * aspect;
+        // Extra crisp fit for tall NBA Logoman shield
+        if (card.team === "2TM") {
+          dh = size * 0.96;
+          dw = dh * aspect;
+        }
+        const dx = cx - dw / 2;
+        const dy = cy - dh / 2;
+
+        // Clip inside smoked-glass medallion for luxury integration
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(cx, cy, ringR - 12, 0, Math.PI * 2);
+        ctx.clip();
+
+        if (logoFinish === "etched" && entry.corsClean) {
+          // True offscreen metallic foil embossing of the real team logo
+          const off = document.createElement("canvas");
+          off.width = Math.ceil(dw);
+          off.height = Math.ceil(dh);
+          const octx = off.getContext("2d");
+          octx.drawImage(img, 0, 0, off.width, off.height);
+          octx.globalCompositeOperation = "source-in";
+          const mGrad = octx.createLinearGradient(0, 0, off.width, off.height);
+          if (isGS || isMVP) {
+            mGrad.addColorStop(0, "#FFF6D1");
+            mGrad.addColorStop(0.45, "#F2A900");
+            mGrad.addColorStop(1, "#B87A08");
+          } else if (isEast) {
+            mGrad.addColorStop(0, "#FFFFFF");
+            mGrad.addColorStop(0.5, "#CBD5E1");
+            mGrad.addColorStop(1, "#7B8494");
+          } else {
+            mGrad.addColorStop(0, "#FFF3C4");
+            mGrad.addColorStop(0.5, "#E0B44E");
+            mGrad.addColorStop(1, "#9B6D16");
+          }
+          octx.fillStyle = mGrad;
+          octx.fillRect(0, 0, off.width, off.height);
+
+          ctx.shadowColor = "rgba(0,0,0,0.75)";
+          ctx.shadowBlur = 18;
+          ctx.shadowOffsetY = 6;
+          ctx.drawImage(off, dx, dy, dw, dh);
+        } else {
+          // Adaptive luxury stylization via Canvas filter + studio shadow
+          if (logoFinish === "etched") {
+            ctx.filter = isEast
+              ? "grayscale(1) contrast(1.35) brightness(1.18)"
+              : "grayscale(1) sepia(0.85) hue-rotate(8deg) saturate(1.8) contrast(1.25) brightness(1.08)";
+          } else if (logoFinish === "stylized") {
+            if (isGS || isMVP) {
+              ctx.filter = "contrast(1.16) saturate(0.95) sepia(0.14) brightness(1.05)";
+            } else if (card.tier === "SPEC") {
+              ctx.filter = "contrast(1.18) saturate(0.82) brightness(1.06)";
+            } else if (isEast) {
+              ctx.filter = "contrast(1.14) saturate(0.88) brightness(1.06)";
+            } else {
+              ctx.filter = "contrast(1.12) saturate(1.04) sepia(0.08) brightness(1.04)";
+            }
+          } else {
+            ctx.filter = "contrast(1.06)";
+          }
+
+          ctx.shadowColor = "rgba(0,0,0,0.72)";
+          ctx.shadowBlur = 22;
+          ctx.shadowOffsetY = 7;
+          ctx.drawImage(img, dx, dy, dw, dh);
+          ctx.filter = "none";
+          ctx.shadowColor = "transparent";
+        }
+
+        // Diagonal smoked-crystal foil gloss across the medallion
+        const gloss = ctx.createLinearGradient(cx - ringR, cy - ringR, cx + ringR, cy + ringR);
+        gloss.addColorStop(0.0, "rgba(255,255,255,0.20)");
+        gloss.addColorStop(0.42, "rgba(255,255,255,0.03)");
+        gloss.addColorStop(0.48, "rgba(255,255,255,0.0)");
+        gloss.addColorStop(1.0, "rgba(0,0,0,0.12)");
+        ctx.fillStyle = gloss;
+        ctx.fillRect(cx - ringR, cy - ringR, ringR * 2, ringR * 2);
+
+        ctx.restore();
+      } else {
+        // Ultra-clean engraved typographic seal while loading or if offline
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.font = `900 72px "Barlow Condensed", sans-serif`;
+        ctx.fillStyle = frameGrad;
+        ctx.fillText(card.team === "2TM" ? "NBA" : card.team, cx, cy + 4);
+      }
+
+      ctx.restore();
+    }
+
+    // Draw Sculpted Crown (only for EAST MVP / WEST MVP)
+    function drawCrown(ctx, cx, cy, w, h, isGrandSlam) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      const grad = ctx.createLinearGradient(-w / 2, -h / 2, w / 2, h / 2);
+      if (isGrandSlam) {
+        grad.addColorStop(0, "#FFF5CC");
+        grad.addColorStop(0.35, "#F2A900");
+        grad.addColorStop(0.65, "#E0F2FE");
+        grad.addColorStop(1, "#F2A900");
+      } else {
+        grad.addColorStop(0, "#FCE29A");
+        grad.addColorStop(0.5, "#F2A900");
+        grad.addColorStop(1, "#9E6B08");
+      }
+      ctx.fillStyle = grad;
+      ctx.strokeStyle = "#111214";
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(-w * 0.46, h * 0.45);
+      ctx.lineTo(-w * 0.5, -h * 0.22);
+      ctx.lineTo(-w * 0.22, h * 0.08);
+      ctx.lineTo(0, -h * 0.5);
+      ctx.lineTo(w * 0.22, h * 0.08);
+      ctx.lineTo(w * 0.5, -h * 0.22);
+      ctx.lineTo(w * 0.46, h * 0.45);
+      ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      ctx.fillRect(-w * 0.46, h * 0.45, w * 0.92, h * 0.14);
+      ctx.restore();
+    }
+
+    // Draw Single Mechanical Watch-Dial Split-Flap Cell + Calibrated Comparative Gauge Bar
+    function drawDialChamber(ctx, x, y, w, h, valueStr, labelStr, ratio, theme, isGoldDial) {
+      ctx.save();
+      const bezelGrad = ctx.createLinearGradient(x, y, x, y + h);
+      if (isGoldDial) {
+        bezelGrad.addColorStop(0, "#FCE29A");
+        bezelGrad.addColorStop(0.5, "#C98D14");
+        bezelGrad.addColorStop(1, "#704B06");
+      } else {
+        bezelGrad.addColorStop(0, rgba(theme.metal, 0.92));
+        bezelGrad.addColorStop(0.5, rgba(theme.metal, 0.42));
+        bezelGrad.addColorStop(1, rgba(theme.metal, 0.80));
+      }
+      drawRoundRect(ctx, x, y, w, h, 14);
+      ctx.fillStyle = bezelGrad;
+      ctx.fill();
+
+      const pad = 6;
+      const ix = x + pad, iy = y + pad, iw = w - pad * 2, ih = h - pad * 2;
+      drawRoundRect(ctx, ix, iy, iw, ih, 10);
+      const faceGrad = ctx.createLinearGradient(ix, iy, ix, iy + ih);
+      if (isGoldDial) {
+        faceGrad.addColorStop(0, "#1A1509");
+        faceGrad.addColorStop(0.49, "#0F0C05");
+        faceGrad.addColorStop(0.51, "#181308");
+        faceGrad.addColorStop(1, "#0B0904");
+      } else {
+        faceGrad.addColorStop(0, "#181B22");
+        faceGrad.addColorStop(0.49, "#0E1014");
+        faceGrad.addColorStop(0.51, "#14171D");
+        faceGrad.addColorStop(1, "#0A0C0F");
+      }
+      ctx.fillStyle = faceGrad;
+      ctx.fill();
+
+      ctx.strokeStyle = rgba("#FFFFFF", 0.12);
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      const fontSize = h >= 210 ? 148 : (valueStr.length >= 6 ? 94 : (valueStr.length >= 5 ? 106 : 122));
+      ctx.font = `800 ${fontSize}px "Barlow Condensed", sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      const textGrad = ctx.createLinearGradient(ix, iy + 18, ix, iy + ih - 18);
+      if (isGoldDial) {
+        textGrad.addColorStop(0, "#FFF6D6");
+        textGrad.addColorStop(0.55, "#F2A900");
+        textGrad.addColorStop(1, "#C98508");
+      } else {
+        textGrad.addColorStop(0, "#FFFFFF");
+        textGrad.addColorStop(0.6, "#E8E3D5");
+        textGrad.addColorStop(1, "#B8B4A7");
+      }
+      ctx.fillStyle = textGrad;
+      ctx.fillText(valueStr, x + w / 2, y + h / 2 + 4);
+
+      // Horizontal split-flap mechanical seam + side hinges
+      const midY = y + h / 2;
+      ctx.fillStyle = "rgba(0,0,0,0.62)";
+      ctx.fillRect(ix + 2, midY - 2.5, iw - 4, 5);
+      ctx.fillStyle = rgba("#FFFFFF", 0.08);
+      ctx.fillRect(ix + 2, midY + 2.5, iw - 4, 1.5);
+      ctx.fillStyle = isGoldDial ? "#C98D14" : "#5A606B";
+      ctx.fillRect(ix + 4, midY - 12, 6, 24);
+      ctx.fillRect(ix + iw - 10, midY - 12, 6, 24);
+
+      // Calibrated Global Comparative Gauge Bar beneath dial
+      const gy = y + h + 16;
+      const gh = 14;
+      ctx.fillStyle = "rgba(0,0,0,0.52)";
+      ctx.fillRect(x + 4, gy, w - 8, gh);
+      ctx.strokeStyle = rgba(theme.metal, 0.35);
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(x + 4, gy, w - 8, gh);
+
+      const clamped = Math.max(0.04, Math.min(1, ratio));
+      const fillGrad = ctx.createLinearGradient(x + 4, gy, x + w - 4, gy);
+      if (isGoldDial) {
+        fillGrad.addColorStop(0, "#B87A08");
+        fillGrad.addColorStop(1, "#FDE08D");
+      } else {
+        fillGrad.addColorStop(0, theme.accent);
+        fillGrad.addColorStop(1, theme.metal);
+      }
+      ctx.fillStyle = fillGrad;
+      ctx.fillRect(x + 6, gy + 2, (w - 12) * clamped, gh - 4);
+
+      ctx.fillStyle = "rgba(10,12,15,0.72)";
+      [0.25, 0.5, 0.75].forEach(t => {
+        const tx = x + 4 + (w - 8) * t;
+        ctx.fillRect(tx - 1, gy, 2, gh);
+      });
+
+      if (labelStr) {
+        ctx.font = `700 26px "JetBrains Mono", monospace`;
+        ctx.fillStyle = isGoldDial ? "#F5CF76" : rgba("#E8E3D5", 0.88);
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+        ctx.fillText(labelStr, x + w / 2, gy + gh + 10);
+      }
+
+      ctx.restore();
+    }
+
+    // Draw Bespoke Specialist Award Bullion Module (Supports Full-Width, Twin, Triad, and 2x2 Quad!)
+    function drawAwardModule(ctx, award, x, y, w, h, layoutMode) {
+      const st = AWARD_STYLES[award.key];
+      ctx.save();
+
+      // Background metallic chamber
+      const bg = ctx.createLinearGradient(x, y, x + w, y + h);
+      bg.addColorStop(0, st.bgStops[0]);
+      bg.addColorStop(0.5, st.bgStops[1]);
+      bg.addColorStop(1, st.bgStops[2]);
+
+      const brd = ctx.createLinearGradient(x, y, x + w, y + h);
+      brd.addColorStop(0, st.borderStops[0]);
+      brd.addColorStop(0.5, st.borderStops[1]);
+      brd.addColorStop(1, st.borderStops[2]);
+
+      drawRoundRect(ctx, x, y, w, h, 10);
+      ctx.fillStyle = bg;
+      ctx.fill();
+      ctx.lineWidth = 3.5;
+      ctx.strokeStyle = brd;
+      ctx.stroke();
+
+      // Signature subtle micro-pattern per award type inside clip
+      ctx.save();
+      drawRoundRect(ctx, x + 2, y + 2, w - 4, h - 4, 8);
+      ctx.clip();
+      if (award.key === "SH") {
+        // Subtle precision crosshair reticle watermark
+        ctx.strokeStyle = "rgba(147, 197, 253, 0.14)";
+        ctx.lineWidth = 2;
+        const rx = layoutMode === "full" ? x + w * 0.56 : x + w * 0.5;
+        const ry = y + h * 0.5;
+        ctx.beginPath(); ctx.arc(rx, ry, Math.min(w, h) * 0.34, 0, Math.PI * 2); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(rx - 44, ry); ctx.lineTo(rx + 44, ry);
+        ctx.moveTo(rx, ry - 44); ctx.lineTo(rx, ry + 44);
+        ctx.stroke();
+      } else if (award.key === "DE") {
+        // Sniper gold diagonal precision gleam
+        ctx.strokeStyle = "rgba(242, 169, 0, 0.14)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(x + 18, y + 18); ctx.lineTo(x + 48, y + 18);
+        ctx.moveTo(x + 18, y + 18); ctx.lineTo(x + 18, y + 48);
+        ctx.moveTo(x + w - 18, y + h - 18); ctx.lineTo(x + w - 48, y + h - 18);
+        ctx.moveTo(x + w - 18, y + h - 18); ctx.lineTo(x + w - 18, y + h - 48);
+        ctx.stroke();
+      } else if (award.key === "BB") {
+        // Warm hammered bronze diagonal highlight
+        const sheen = ctx.createLinearGradient(x, y, x + w, y + h);
+        sheen.addColorStop(0, "rgba(255,215,165,0.12)");
+        sheen.addColorStop(0.5, "rgba(255,215,165,0)");
+        sheen.addColorStop(1, "rgba(255,215,165,0.08)");
+        ctx.fillStyle = sheen;
+        ctx.fillRect(x, y, w, h);
+      } else if (award.key === "SS") {
+        // Brushed sterling silver micro-sheen
+        const sheen = ctx.createLinearGradient(x, y, x + w, y);
+        sheen.addColorStop(0, "rgba(255,255,255,0.10)");
+        sheen.addColorStop(0.5, "rgba(255,255,255,0.02)");
+        sheen.addColorStop(1, "rgba(255,255,255,0.12)");
+        ctx.fillStyle = sheen;
+        ctx.fillRect(x, y, w, h);
+      }
+      ctx.restore();
+
+      const valGrad = ctx.createLinearGradient(x, y, x, y + h);
+      valGrad.addColorStop(0, st.valStops[0]);
+      valGrad.addColorStop(0.55, st.valStops[1]);
+      valGrad.addColorStop(1, st.valStops[2]);
+
+      const titleStr = award.subRank ? `${award.label} ${award.subRank}` : award.label;
+
+      if (layoutMode === "full") {
+        // FULL-WIDTH HORIZONTAL SIGNATURE PLAQUE (1 secondary award)
+        // Left: Monumental Award Name | Right: Oversized Value + Calibrated Bar
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        ctx.font = `900 72px "Barlow Condensed", sans-serif`;
+        ctx.fillStyle = st.labelColor;
+        ctx.fillText(titleStr, x + 44, y + h * 0.44);
+
+        // Calibrated horizontal gauge under title
+        const gx = x + 44, gy = y + h - 34, gw = w * 0.50, gh = 12;
+        ctx.fillStyle = "rgba(0,0,0,0.48)";
+        ctx.fillRect(gx, gy, gw, gh);
+        const fg = ctx.createLinearGradient(gx, gy, gx + gw, gy);
+        fg.addColorStop(0, st.barStart);
+        fg.addColorStop(1, st.barEnd);
+        ctx.fillStyle = fg;
+        ctx.fillRect(gx + 2, gy + 2, (gw - 4) * Math.max(0.06, Math.min(1, award.ratio)), gh - 4);
+
+        // Right recessed value readout
+        ctx.textAlign = "right";
+        ctx.textBaseline = "middle";
+        ctx.font = `900 104px "Barlow Condensed", sans-serif`;
+        ctx.fillStyle = valGrad;
+        ctx.fillText(award.val, x + w - 44, y + h * 0.52);
+      } else if (layoutMode === "quad") {
+        // COMPACT 2x2 GRAND SLAM HORIZONTAL CHAMBER
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        ctx.font = `800 36px "Barlow Condensed", sans-serif`;
+        ctx.fillStyle = st.labelColor;
+        ctx.fillText(titleStr, x + 26, y + h * 0.38);
+
+        const gx = x + 26, gy = y + h - 26, gw = w * 0.48, gh = 8;
+        ctx.fillStyle = "rgba(0,0,0,0.48)";
+        ctx.fillRect(gx, gy, gw, gh);
+        const fg = ctx.createLinearGradient(gx, gy, gx + gw, gy);
+        fg.addColorStop(0, st.barStart); fg.addColorStop(1, st.barEnd);
+        ctx.fillStyle = fg;
+        ctx.fillRect(gx + 1, gy + 1, (gw - 2) * Math.max(0.06, Math.min(1, award.ratio)), gh - 2);
+
+        ctx.textAlign = "right";
+        ctx.textBaseline = "middle";
+        ctx.font = `900 68px "Barlow Condensed", sans-serif`;
+        ctx.fillStyle = valGrad;
+        ctx.fillText(award.val, x + w - 26, y + h * 0.52);
+      } else {
+        // TWIN (2-col) OR TRIAD (3-col) VERTICAL CHAMBER
+        const isTriad = layoutMode === "triad";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.font = `800 ${isTriad ? 38 : 48}px "Barlow Condensed", sans-serif`;
+        ctx.fillStyle = st.labelColor;
+        ctx.fillText(titleStr, x + w / 2, y + h * 0.25);
+
+        ctx.font = `900 ${isTriad ? 76 : 92}px "Barlow Condensed", sans-serif`;
+        ctx.fillStyle = valGrad;
+        ctx.fillText(award.val, x + w / 2, y + h * 0.62);
+
+        // Calibrated bottom bar
+        const gx = x + 24, gy = y + h - 24, gw = w - 48, gh = 10;
+        ctx.fillStyle = "rgba(0,0,0,0.5)";
+        ctx.fillRect(gx, gy, gw, gh);
+        const fg = ctx.createLinearGradient(gx, gy, gx + gw, gy);
+        fg.addColorStop(0, st.barStart); fg.addColorStop(1, st.barEnd);
+        ctx.fillStyle = fg;
+        ctx.fillRect(gx + 1.5, gy + 1.5, (gw - 3) * Math.max(0.06, Math.min(1, award.ratio)), gh - 3);
+      }
+
+      ctx.restore();
+    }
+
+    // MAIN CARD RENDERER (1500 x 2100 px)
+    function renderCardToCanvas(canvas, card, copyNum) {
+      const ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, W, H);
+
+      const isEast = card.conf === "E";
+      const isGS = card.tier === "GS";
+      const isMVP = card.isMvp;
+      const isSpec = card.tier === "SPEC";
+      const theme = getFranchiseTheme(card.team, card.yr);
+      const logoEntry = LOGO_CACHE[card.team];
+
+      // =====================================================================
+      // LAYER 1: OUTER BULLION CHASSIS (EAST = OBSIDIAN+PLATINUM | WEST = ALABASTER+18K GOLD)
+      // =====================================================================
+      const outerGrad = ctx.createLinearGradient(0, 0, W, H);
+      if (isEast) {
+        outerGrad.addColorStop(0, "#191C22");
+        outerGrad.addColorStop(0.45, "#0D0F13");
+        outerGrad.addColorStop(1, "#161920");
+      } else {
+        outerGrad.addColorStop(0, "#FAF8F2");
+        outerGrad.addColorStop(0.5, "#EAE4D3");
+        outerGrad.addColorStop(1, "#F4EFE0");
+      }
+      ctx.fillStyle = outerGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle brushed metallic grain
+      ctx.save();
+      ctx.strokeStyle = isEast ? "rgba(255,255,255,0.024)" : "rgba(140,110,50,0.042)";
+      ctx.lineWidth = 2;
+      for (let i = 0; i < H; i += 6) {
+        ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(W, i); ctx.stroke();
+      }
+      ctx.restore();
+
+      // Primary Metallic Foil Frame Gradient
+      const frameGrad = ctx.createLinearGradient(0, 0, W, H);
+      if (isGS) {
+        frameGrad.addColorStop(0.0, "#FFF7D6");
+        frameGrad.addColorStop(0.22, "#F2A900");
+        frameGrad.addColorStop(0.45, "#D9F2FF");
+        frameGrad.addColorStop(0.68, "#F2A900");
+        frameGrad.addColorStop(0.88, "#C7922E");
+        frameGrad.addColorStop(1.0, "#FFF4CC");
+      } else if (isEast) {
+        frameGrad.addColorStop(0.0, isMVP ? "#FCE4A6" : "#E5E8EE");
+        frameGrad.addColorStop(0.35, isMVP ? "#D49B1A" : "#8F97A5");
+        frameGrad.addColorStop(0.68, isMVP ? "#FFF0C2" : "#DCE1E8");
+        frameGrad.addColorStop(1.0, isMVP ? "#9C6D0B" : "#6D7482");
+      } else {
+        frameGrad.addColorStop(0.0, "#F6DC96");
+        frameGrad.addColorStop(0.35, "#BA8822");
+        frameGrad.addColorStop(0.68, "#FCE8B2");
+        frameGrad.addColorStop(1.0, "#8E6312");
+      }
+
+      ctx.strokeStyle = frameGrad;
+      ctx.lineWidth = 10;
+      ctx.strokeRect(38, 38, W - 76, H - 76);
+      ctx.lineWidth = 3;
+      ctx.strokeRect(56, 56, W - 112, H - 112);
+
+      // =====================================================================
+      // LAYER 2: INNER ARENA-SPOTLIGHT FRANCHISE FIELD + SUBTLE REAL LOGO WATERMARK
+      // =====================================================================
+      const fx = 76, fy = 76, fw = W - 152, fh = H - 152;
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(fx, fy, fw, fh);
+      ctx.clip();
+
+      const fieldBase = ctx.createLinearGradient(fx, fy, fx, fy + fh);
+      fieldBase.addColorStop(0, theme.dark);
+      fieldBase.addColorStop(0.36, theme.primary);
+      fieldBase.addColorStop(0.76, theme.dark);
+      fieldBase.addColorStop(1, "#090A0D");
+      ctx.fillStyle = fieldBase;
+      ctx.fillRect(fx, fy, fw, fh);
+
+      // Overhead Arena Radial Spotlight Cone
+      const spot = ctx.createRadialGradient(W / 2, fy + 360, 40, W / 2, fy + 500, 920);
+      spot.addColorStop(0, rgba(isMVP || isGS ? "#FFE9A8" : "#FFFFFF", isGS ? 0.30 : 0.22));
+      spot.addColorStop(0.45, rgba(theme.primary, 0.14));
+      spot.addColorStop(1, "rgba(0,0,0,0.48)");
+      ctx.fillStyle = spot;
+      ctx.fillRect(fx, fy, fw, fh);
+
+      // Oversized Ghost Watermark of Real Team Logo (luxury Panini National Treasures depth)
+      if (logoEntry && logoEntry.status === "ok" && logoEntry.img) {
+        ctx.save();
+        ctx.globalAlpha = 0.065;
+        ctx.filter = "grayscale(1) contrast(1.4)";
+        const wmSize = 1120;
+        const asp = logoEntry.img.naturalWidth / logoEntry.img.naturalHeight;
+        const ww = asp > 1 ? wmSize : wmSize * asp;
+        const wh = asp > 1 ? wmSize / asp : wmSize;
+        ctx.drawImage(logoEntry.img, (W - ww) / 2, 220, ww, wh);
+        ctx.restore();
+      }
+
+      // Decade-Specific Era Micro-Motif ('80s / '90s / '00s / '10s / '20s)
+      ctx.save();
+      if (card.decade === 1980) {
+        ctx.strokeStyle = rgba(theme.metal, 0.08);
+        ctx.lineWidth = 2;
+        for (let gx = fx; gx < fx + fw; gx += 26) {
+          ctx.beginPath(); ctx.moveTo(gx, fy); ctx.lineTo(gx, fy + fh); ctx.stroke();
+        }
+        for (let gy = fy; gy < fy + fh; gy += 130) {
+          ctx.beginPath(); ctx.moveTo(fx, gy); ctx.lineTo(fx + fw, gy); ctx.stroke();
+        }
+      } else if (card.decade === 1990) {
+        ctx.strokeStyle = rgba(theme.metal, 0.075);
+        ctx.lineWidth = 14;
+        for (let a = 0; a < 24; a++) {
+          const ang = (a * Math.PI) / 12;
+          ctx.beginPath();
+          ctx.moveTo(W / 2, fy + 420);
+          ctx.lineTo(W / 2 + Math.cos(ang) * 1400, fy + 420 + Math.sin(ang) * 1400);
+          ctx.stroke();
+        }
+      } else if (card.decade === 2000) {
+        ctx.strokeStyle = rgba(theme.metal, 0.11);
+        ctx.lineWidth = 3;
+        for (let px = fx + 18; px < fx + fw; px += 34) {
+          ctx.beginPath(); ctx.moveTo(px, fy); ctx.lineTo(px, fy + fh); ctx.stroke();
+        }
+      } else if (card.decade === 2010) {
+        ctx.strokeStyle = rgba(theme.metal, 0.07);
+        ctx.lineWidth = 2;
+        for (let d = -fh; d < fw + fh; d += 64) {
+          ctx.beginPath(); ctx.moveTo(fx + d, fy); ctx.lineTo(fx + d + fh, fy + fh); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(fx + d, fy + fh); ctx.lineTo(fx + d + fh, fy); ctx.stroke();
+        }
+      } else {
+        ctx.strokeStyle = rgba("#FFFFFF", 0.085);
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(fx, fy + 380); ctx.lineTo(W / 2, fy); ctx.lineTo(fx + fw, fy + 380);
+        ctx.moveTo(fx, fy + fh - 380); ctx.lineTo(W / 2, fy + fh); ctx.lineTo(fx + fw, fy + fh - 380);
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // Conference Architectural Hallmarks (East Fluted Vertical Columns vs West Horizon Bands & Chevrons)
+      if (isEast) {
+        const colW = 38;
+        ctx.fillStyle = "rgba(9, 11, 15, 0.44)";
+        ctx.fillRect(fx, fy, colW, fh);
+        ctx.fillRect(fx + fw - colW, fy, colW, fh);
+        ctx.strokeStyle = rgba(theme.metal, 0.34);
+        ctx.lineWidth = 2;
+        [fx + 13, fx + 25, fx + 38, fx + fw - 38, fx + fw - 25, fx + fw - 13].forEach(lx => {
+          ctx.beginPath(); ctx.moveTo(lx, fy); ctx.lineTo(lx, fy + fh); ctx.stroke();
+        });
+        ctx.strokeStyle = frameGrad;
+        ctx.lineWidth = 4;
+        [
+          [fx + 54, fy + 24, 1, 1],
+          [fx + fw - 54, fy + 24, -1, 1],
+          [fx + 54, fy + fh - 24, 1, -1],
+          [fx + fw - 54, fy + fh - 24, -1, -1]
+        ].forEach(([cx, cy, dx, dy]) => {
+          ctx.beginPath();
+          ctx.moveTo(cx, cy + dy * 72);
+          ctx.lineTo(cx, cy);
+          ctx.lineTo(cx + dx * 88, cy);
+          ctx.stroke();
+        });
+      } else {
+        ctx.fillStyle = "rgba(12, 10, 8, 0.36)";
+        ctx.fillRect(fx, fy, fw, 40);
+        ctx.fillRect(fx, fy + fh - 40, fw, 40);
+        ctx.strokeStyle = rgba(theme.metal, 0.40);
+        ctx.lineWidth = 2.5;
+        [fy + 15, fy + 28, fy + 40, fy + fh - 40, fy + fh - 28, fy + fh - 15].forEach(ly => {
+          ctx.beginPath(); ctx.moveTo(fx, ly); ctx.lineTo(fx + fw, ly); ctx.stroke();
+        });
+        ctx.strokeStyle = frameGrad;
+        ctx.lineWidth = 4;
+        const drawTri = (x1, y1, x2, y2, x3, y3) => {
+          ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.lineTo(x3, y3); ctx.closePath(); ctx.stroke();
+        };
+        drawTri(fx + 28, fy + 64, fx + 112, fy + 64, fx + 28, fy + 148);
+        drawTri(fx + fw - 28, fy + 64, fx + fw - 112, fy + 64, fx + fw - 28, fy + 148);
+        drawTri(fx + 28, fy + fh - 64, fx + 112, fy + fh - 64, fx + 28, fy + fh - 148);
+        drawTri(fx + fw - 28, fy + fh - 64, fx + fw - 112, fy + fh - 64, fx + fw - 28, fy + fh - 148);
+      }
+
+      // Vignette depth
+      const vig = ctx.createRadialGradient(W / 2, H / 2, 480, W / 2, H / 2, 1180);
+      vig.addColorStop(0, "rgba(0,0,0,0)");
+      vig.addColorStop(1, "rgba(0,0,0,0.48)");
+      ctx.fillStyle = vig;
+      ctx.fillRect(fx, fy, fw, fh);
+      ctx.restore(); // End inner clip
+
+      ctx.strokeStyle = frameGrad;
+      ctx.lineWidth = 5;
+      ctx.strokeRect(fx, fy, fw, fh);
+
+      // =====================================================================
+      // LAYER 3: TOP HEADER — SEASON ('XX) + PANTHEON-ONLY TOP-RIGHT MEDALLION
+      // (Non-Pantheon players leave top-right corner completely blank!)
+      // =====================================================================
+      if (card.pantheon) {
+        const medX = isEast ? W - 190 : W - 184;
+        const medY = 186;
+        const medR = 62;
+        const isOT = card.pantheon.q === "OT";
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(medX, medY, medR, 0, Math.PI * 2);
+        ctx.fillStyle = isOT ? "#1C1606" : "#101217";
+        ctx.fill();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = isOT ? "#F2A900" : frameGrad;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(medX, medY, medR - 10, 0, Math.PI * 2);
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = rgba(isOT ? "#F2A900" : "#FFFFFF", 0.42);
+        ctx.stroke();
+
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.font = `700 20px "JetBrains Mono", monospace`;
+        ctx.fillStyle = isOT ? "#F2A900" : "#B0B5C0";
+        ctx.fillText("№", medX, medY - 22);
+        ctx.font = `800 52px "Barlow Condensed", sans-serif`;
+        ctx.fillStyle = isOT ? "#FFF2C2" : "#FAF9F6";
+        ctx.fillText(String(card.pantheon.num).padStart(2, "0"), medX, medY + 15);
+        ctx.restore();
+      }
+
+      // Monumental Season Designation ('04, '05, '26, etc.) — NEVER hyphenated
+      ctx.save();
+      const seasonY = isMVP || isGS ? 216 : 192;
+      if (isMVP || isGS) {
+        drawCrown(ctx, W / 2, 134, 136, 62, isGS);
+      }
+      ctx.strokeStyle = rgba(theme.metal, 0.44);
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(W / 2 - 220, seasonY); ctx.lineTo(W / 2 - 114, seasonY);
+      ctx.moveTo(W / 2 + 114, seasonY); ctx.lineTo(W / 2 + 220, seasonY);
+      ctx.stroke();
+
+      ctx.font = `800 112px "Barlow Condensed", sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      const sGrad = ctx.createLinearGradient(W / 2, seasonY - 46, W / 2, seasonY + 46);
+      if (isMVP || isGS) {
+        sGrad.addColorStop(0, "#FFF6D1");
+        sGrad.addColorStop(0.55, "#F2A900");
+        sGrad.addColorStop(1, "#C4810A");
+      } else {
+        sGrad.addColorStop(0, "#FFFFFF");
+        sGrad.addColorStop(1, "#D5CFC0");
+      }
+      ctx.fillStyle = sGrad;
+      ctx.fillText(`\u2019${card.yy}`, W / 2, seasonY + 4);
+      ctx.restore();
+
+      // =====================================================================
+      // LAYER 4: STYLIZED REAL TEAM LOGO MEDALLION
+      // =====================================================================
+      const hasManySec = card.secAwards.length === 4;
+      const logoY = hasManySec ? 388 : 408;
+      const logoSize = hasManySec ? 198 : 228;
+      drawStylizedRealLogo(ctx, card, W / 2, logoY, logoSize, theme, frameGrad, studio.logoFinish);
+
+      // =====================================================================
+      // LAYER 5: EMBOSSED MONUMENTAL PLAYER TYPOGRAPHY
+      // =====================================================================
+      const parts = card.name.trim().split(" ");
+      let firstLine = parts[0];
+      let lastLine = parts.slice(1).join(" ");
+      if (!lastLine) { firstLine = ""; lastLine = parts[0]; }
+
+      const nameFirstY = hasManySec ? 592 : 626;
+      const nameLastY = hasManySec ? 732 : 772;
+
+      ctx.save();
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      const fSize = firstLine.length > 10 ? 92 : 108;
+      ctx.font = `700 ${fSize}px "Barlow Condensed", sans-serif`;
+      ctx.fillStyle = "rgba(0,0,0,0.68)";
+      ctx.fillText(firstLine.toUpperCase(), W / 2 + 4, nameFirstY + 5);
+      ctx.fillStyle = rgba("#FAF9F6", 0.94);
+      ctx.fillText(firstLine.toUpperCase(), W / 2, nameFirstY);
+
+      let lSize = hasManySec ? 168 : 184;
+      if (lastLine.length >= 15) lSize = 112;
+      else if (lastLine.length >= 12) lSize = 132;
+      else if (lastLine.length >= 9) lSize = 154;
+
+      ctx.font = `900 ${lSize}px "Barlow Condensed", sans-serif`;
+      ctx.fillStyle = "rgba(0,0,0,0.78)";
+      ctx.fillText(lastLine.toUpperCase(), W / 2 + 6, nameLastY + 8);
+
+      const nameGrad = ctx.createLinearGradient(W / 2, nameLastY - lSize / 2, W / 2, nameLastY + lSize / 2);
+      if (isGS) {
+        nameGrad.addColorStop(0, "#FFFFFF");
+        nameGrad.addColorStop(0.45, "#FDE399");
+        nameGrad.addColorStop(0.75, "#F2A900");
+        nameGrad.addColorStop(1, "#FFF5D6");
+      } else if (isMVP) {
+        nameGrad.addColorStop(0, "#FFF9E6");
+        nameGrad.addColorStop(0.55, "#F5C656");
+        nameGrad.addColorStop(1, "#C98D14");
+      } else {
+        nameGrad.addColorStop(0, "#FFFFFF");
+        nameGrad.addColorStop(0.55, "#ECEAE2");
+        nameGrad.addColorStop(1, "#B8B4A8");
+      }
+      ctx.fillStyle = nameGrad;
+      ctx.fillText(lastLine.toUpperCase(), W / 2, nameLastY);
+      ctx.restore();
+
+      // =====================================================================
+      // LAYER 6: PROMINENT AWARDS & VALUES MONUMENT STAGE
+      // Adaptive per card architecture:
+      //   - Specialist Single (e.g. '26 Kon Knueppel): Giant Award Banner + Giant Hero Value Dial
+      //   - Specialist Dual (e.g. '85 Worthy): Twin Equal Hero Award Chambers
+      //   - Top-6 Conference (MVP / All-East / All-West):
+      //       Bold Primary Honor Plate + Locked (PTS | G | PPG) Watch Dials
+      //       + Adaptive Secondary Award Vault (0, 1 full, 2 twin, 3 triad, 4 quad)
+      // =====================================================================
+      const stageX = 164;
+      const stageW = W - 328;
+
+      if (isSpec) {
+        // --- SPECIALIST-ONLY ARCHITECTURE (120 CARDS: e.g. '26 KON KNUEPPEL, '26 OG ANUNOBY) ---
+        if (card.secAwards.length === 1) {
+          const aw = card.secAwards[0];
+          const st = AWARD_STYLES[aw.key];
+          const banY = 918, banH = 166;
+
+          // Sculpted Primary Award Banner (Pure name — e.g. SHARP SHOOTER #5, DEAD EYE, SILVER SCORER)
+          const banGrad = ctx.createLinearGradient(stageX, banY, stageX + stageW, banY + banH);
+          banGrad.addColorStop(0, st.bgStops[0]);
+          banGrad.addColorStop(0.5, st.bgStops[1]);
+          banGrad.addColorStop(1, st.bgStops[2]);
+          const brdGrad = ctx.createLinearGradient(stageX, banY, stageX + stageW, banY + banH);
+          brdGrad.addColorStop(0, st.borderStops[0]);
+          brdGrad.addColorStop(0.5, st.borderStops[1]);
+          brdGrad.addColorStop(1, st.borderStops[2]);
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(stageX - 22, banY + 24);
+          ctx.lineTo(stageX, banY);
+          ctx.lineTo(stageX + stageW, banY);
+          ctx.lineTo(stageX + stageW + 22, banY + 24);
+          ctx.lineTo(stageX + stageW + 22, banY + banH - 24);
+          ctx.lineTo(stageX + stageW, banY + banH);
+          ctx.lineTo(stageX, banY + banH);
+          ctx.lineTo(stageX - 22, banY + banH - 24);
+          ctx.closePath();
+          ctx.fillStyle = banGrad;
+          ctx.fill();
+          ctx.lineWidth = 4.5;
+          ctx.strokeStyle = brdGrad;
+          ctx.stroke();
+
+          ctx.strokeStyle = rgba(st.borderStops[0], 0.25);
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(stageX + 12, banY + 12, stageW - 24, banH - 24);
+
+          const fullTitle = aw.subRank ? `${aw.label}  ${aw.subRank}` : aw.label;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.font = `900 94px "Barlow Condensed", sans-serif`;
+          ctx.fillStyle = st.labelColor;
+          ctx.fillText(fullTitle, W / 2, banY + banH / 2 + 4);
+          ctx.restore();
+
+          // Monumental Single Hero Split-Flap Value Dial (e.g. +141.4, +66.8, 506)
+          const heroW = 760;
+          const heroH = 270;
+          const heroX = (W - heroW) / 2;
+          const heroY = 1146;
+          drawDialChamber(ctx, heroX, heroY, heroW, heroH, aw.val, "", aw.ratio, theme, aw.key === "DE");
+
+        } else {
+          // DUAL SPECIALIST ARCHITECTURE (5 cards: e.g. '85 Worthy SH + DE, '87 Worthy SS + DE)
+          const gap = 36;
+          const cw = (stageW - gap) / 2;
+          const cy = 968;
+          const ch = 468;
+          card.secAwards.forEach((aw, i) => {
+            drawAwardModule(ctx, aw, stageX + i * (cw + gap), cy, cw, ch, "twin");
+          });
+        }
+
+      } else {
+        // --- TOP-6 CONFERENCE ARCHITECTURE (516 CARDS: EAST/WEST MVP & ALL-EAST/WEST) ---
+        const numSec = card.secAwards.length;
+
+        // 1. Primary Honor Bar (EAST MVP, WEST MVP, ALL-EAST, ALL-WEST) — Clean, unadorned!
+        const pBanY = hasManySec ? 842 : (numSec === 0 ? 900 : 882);
+        const pBanH = numSec === 0 ? 136 : 112;
+
+        ctx.save();
+        const pGrad = ctx.createLinearGradient(stageX, pBanY, stageX + stageW, pBanY + pBanH);
+        let pTextColor = "#FAF9F6";
+        if (isGS) {
+          pGrad.addColorStop(0, "#FCE7A2");
+          pGrad.addColorStop(0.32, "#F2A900");
+          pGrad.addColorStop(0.58, "#E0F2FE");
+          pGrad.addColorStop(1, "#C4820A");
+          pTextColor = "#111214";
+        } else if (isMVP) {
+          pGrad.addColorStop(0, "#FCE29A");
+          pGrad.addColorStop(0.5, "#E59E0B");
+          pGrad.addColorStop(1, "#9E6A06");
+          pTextColor = "#111214";
+        } else if (isEast) {
+          pGrad.addColorStop(0, "#1F242D");
+          pGrad.addColorStop(0.5, "#11141A");
+          pGrad.addColorStop(1, "#1C212A");
+          pTextColor = "#FAF9F6";
+        } else {
+          pGrad.addColorStop(0, "#241D12");
+          pGrad.addColorStop(0.5, "#141009");
+          pGrad.addColorStop(1, "#211A0E");
+          pTextColor = "#FCE29A";
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(stageX - 20, pBanY + 18);
+        ctx.lineTo(stageX, pBanY);
+        ctx.lineTo(stageX + stageW, pBanY);
+        ctx.lineTo(stageX + stageW + 20, pBanY + 18);
+        ctx.lineTo(stageX + stageW + 20, pBanY + pBanH - 18);
+        ctx.lineTo(stageX + stageW, pBanY + pBanH);
+        ctx.lineTo(stageX, pBanY + pBanH);
+        ctx.lineTo(stageX - 20, pBanY + pBanH - 18);
+        ctx.closePath();
+        ctx.fillStyle = pGrad;
+        ctx.fill();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = frameGrad;
+        ctx.stroke();
+
+        ctx.strokeStyle = rgba(pTextColor, 0.22);
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(stageX + 10, pBanY + 10, stageW - 20, pBanH - 20);
+
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.font = `900 ${numSec === 0 ? 86 : 74}px "Barlow Condensed", sans-serif`;
+        ctx.fillStyle = pTextColor;
+        ctx.fillText(card.primaryLabel, W / 2, pBanY + pBanH / 2 + 4);
+        ctx.restore();
+
+        // 2. Locked Watch-Dial Split-Flap Trio (PTS | G | PPG) — Always aligned for side-by-side comparison!
+        const dialY = hasManySec ? 988 : (numSec === 0 ? 1110 : 1030);
+        const dialH = hasManySec ? 176 : (numSec === 0 ? 216 : 192);
+        const dialGap = 32;
+        const w1 = 444, w2 = 282, w3 = 346;
+        const dialStartX = (W - (w1 + w2 + w3 + dialGap * 2)) / 2;
+        const goldDial = isMVP || isGS;
+
+        drawDialChamber(ctx, dialStartX, dialY, w1, dialH, String(card.pts), "PTS", card.pts / SCALES.pts, theme, goldDial);
+        drawDialChamber(ctx, dialStartX + w1 + dialGap, dialY, w2, dialH, String(card.g), "G", card.g / SCALES.g, theme, goldDial);
+        drawDialChamber(ctx, dialStartX + w1 + dialGap + w2 + dialGap, dialY, w3, dialH, card.ppg.toFixed(1), "PPG", card.ppg / SCALES.ppg, theme, goldDial);
+
+        // 3. Adaptive Secondary Award Vault Zone (0, 1, 2, 3, or 4 Stacked Specialist Awards)
+        if (numSec === 0) {
+          // Pure All-East / All-West / MVP — Sculptural Architectural Divider Ornament
+          ctx.save();
+          const oy = 1496;
+          ctx.strokeStyle = rgba(theme.metal, 0.36);
+          ctx.lineWidth = 2.5;
+          ctx.beginPath();
+          ctx.moveTo(290, oy); ctx.lineTo(W / 2 - 48, oy);
+          ctx.moveTo(W / 2 + 48, oy); ctx.lineTo(W - 290, oy);
+          ctx.stroke();
+          ctx.fillStyle = isMVP ? "#F2A900" : theme.metal;
+          ctx.beginPath();
+          ctx.moveTo(W / 2, oy - 18); ctx.lineTo(W / 2 + 18, oy); ctx.lineTo(W / 2, oy + 18); ctx.lineTo(W / 2 - 18, oy);
+          ctx.closePath(); ctx.fill();
+          ctx.restore();
+        } else if (numSec === 1) {
+          // Single Additional Award -> Full-Width Signature Alloy Plaque (e.g. '04 McGrady BRONZE BUCKET 1,878)
+          drawAwardModule(ctx, card.secAwards[0], stageX, 1344, stageW, 198, "full");
+        } else if (numSec === 2) {
+          // Two Additional Awards -> Balanced Twin Alloy Chambers
+          const g = 28;
+          const cw = (stageW - g) / 2;
+          card.secAwards.forEach((aw, i) => {
+            drawAwardModule(ctx, aw, stageX + i * (cw + g), 1334, cw, 224, "twin");
+          });
+        } else if (numSec === 3) {
+          // Three Additional Awards -> Precision Triad Vault
+          const g = 22;
+          const cw = (stageW - g * 2) / 3;
+          card.secAwards.forEach((aw, i) => {
+            drawAwardModule(ctx, aw, stageX + i * (cw + g), 1334, cw, 224, "triad");
+          });
+        } else if (numSec === 4) {
+          // Four Additional Awards (5-Award Grand Slam!) -> 2x2 Bullion Quad Grid
+          const gx = 24, gy = 20;
+          const cw = (stageW - gx) / 2;
+          const ch = 152;
+          const topY = 1262;
+          card.secAwards.forEach((aw, i) => {
+            const col = i % 2;
+            const row = Math.floor(i / 2);
+            drawAwardModule(ctx, aw, stageX + col * (cw + gx), topY + row * (ch + gy), cw, ch, "quad");
+          });
+        }
+      }
+
+      // =====================================================================
+      // LAYER 7: FRANCHISE NAME & ENGRAVED RANDOMIZED SCARCITY SERIAL PLAQUE
+      // Format: 04E : 02 : BB : XX // 82  (Zero extra colophon clutter!)
+      // =====================================================================
+      ctx.save();
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = `800 46px "Barlow Condensed", sans-serif`;
+      ctx.fillStyle = "#FAF9F6";
+      ctx.fillText(theme.name, W / 2, 1712);
+
+      const copyStr = String(Math.max(1, Math.min(82, parseInt(copyNum, 10) || 1))).padStart(2, "0");
+      const serialStr = `${card.yy}${card.conf} : ${card.serialRank} : ${card.serialCode} : ${copyStr} // 82`;
+
+      const plW = 860, plH = 76;
+      const plX = (W - plW) / 2, plY = 1780;
+      drawRoundRect(ctx, plX, plY, plW, plH, 6);
+      const plGrad = ctx.createLinearGradient(plX, plY, plX + plW, plY + plH);
+      plGrad.addColorStop(0, "#101217");
+      plGrad.addColorStop(0.5, "#1A1E26");
+      plGrad.addColorStop(1, "#0E1014");
+      ctx.fillStyle = plGrad;
+      ctx.fill();
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = frameGrad;
+      ctx.stroke();
+
+      ctx.fillStyle = isEast ? "#A8B0BE" : "#D4A439";
+      [[plX + 18, plY + plH / 2], [plX + plW - 18, plY + plH / 2]].forEach(([sx, sy]) => {
+        ctx.beginPath(); ctx.arc(sx, sy, 5, 0, Math.PI * 2); ctx.fill();
+      });
+
+      ctx.font = `700 31px "JetBrains Mono", monospace`;
+      ctx.fillStyle = isGS || isMVP ? "#FCE29A" : "#E8E3D5";
+      ctx.fillText(serialStr, W / 2, plY + plH / 2 + 2);
+      ctx.restore();
+
+      // Subtle diagonal metallic specular foil sweep
+      ctx.save();
+      const sheen = ctx.createLinearGradient(0, 0, W, H);
+      sheen.addColorStop(0.0, "rgba(255,255,255,0.06)");
+      sheen.addColorStop(0.28, "rgba(255,255,255,0.0)");
+      sheen.addColorStop(0.46, "rgba(255,255,255,0.08)");
+      sheen.addColorStop(0.54, "rgba(255,255,255,0.0)");
+      sheen.addColorStop(1.0, "rgba(255,255,255,0.04)");
+      ctx.fillStyle = sheen;
+      ctx.fillRect(0, 0, W, H);
+      ctx.restore();
+    }
+
+    // =========================================================================
+    // 4. INTERACTIVE STUDIO STATE, FILTERING, LOGO FINISH, 3D TILT & EXPORTS
+    // =========================================================================
+    const studio = {
+      mode: "dual",
+      activeSlot: "A",
+      logoFinish: "stylized", // 'stylized' | 'etched' | 'color'
+      slab: true,
+      tilt: true,
+      cardA: null,
+      cardB: null,
+      copyA: randomSerialCopy(),
+      copyB: randomSerialCopy()
+    };
+
+    function findCard(seasonStr, playerName) {
+      const pn = normalizeStr(playerName);
+      return ALL_CARDS.find(c => (!seasonStr || c.s === seasonStr || c.yy === seasonStr) && normalizeStr(c.name) === pn)
+        || ALL_CARDS.find(c => normalizeStr(c.name).includes(pn) && (!seasonStr || c.s === seasonStr || c.yy === seasonStr))
+        || ALL_CARDS[0];
+    }
+
+    function populateSeasonSelect() {
+      const sel = document.getElementById("seasonFilter");
+      SEASONS_DATA.forEach(s => {
+        const endYr = parseInt(s.s.split("-")[0], 10) + 1;
+        const yy = String(endYr).slice(2);
+        const opt = document.createElement("option");
+        opt.value = s.s;
+        opt.textContent = `\u2019${yy}`;
+        sel.appendChild(opt);
+      });
+    }
+
+    function filterCatalog() {
+      const q = normalizeStr(document.getElementById("cardSearchInput").value);
+      const sVal = document.getElementById("seasonFilter").value;
+      const cVal = document.getElementById("confFilter").value;
+      const tVal = document.getElementById("tierFilter").value;
+
+      const filtered = ALL_CARDS.filter(c => {
+        if (sVal !== "ALL" && c.s !== sVal) return false;
+        if (cVal !== "ALL" && c.conf !== cVal) return false;
+        if (tVal === "GS" && c.tier !== "GS") return false;
+        if (tVal === "MVP" && !c.isMvp) return false;
+        if (tVal === "AC_PLUS" && c.tier !== "AC_PLUS") return false;
+        if (tVal === "AC_PURE" && c.tier !== "AC_PURE") return false;
+        if (tVal === "BB" && c.bb === null) return false;
+        if (tVal === "SS" && c.ss === null) return false;
+        if (tVal === "SH" && c.shVal === null) return false;
+        if (tVal === "DE" && c.deVal === null) return false;
+        if (tVal === "SPEC" && c.tier !== "SPEC") return false;
+        if (tVal === "2TM" && c.team !== "2TM") return false;
+
+        if (q) {
+          const hay = `${normalizeStr(c.name)} ${normalizeStr(c.team)} '${c.yy} ${c.yy} ${normalizeStr(c.primaryLabel)} ${normalizeStr(c.serialCode)}`;
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      document.getElementById("catalogMatchCount").textContent = `${filtered.length} / ${ALL_CARDS.length} ISSUES`;
+
+      const listEl = document.getElementById("catalogList");
+      listEl.innerHTML = filtered.map(c => {
+        const isA = studio.cardA && studio.cardA.id === c.id;
+        const isB = studio.cardB && studio.cardB.id === c.id;
+        const cls = isA ? "is-slot-a" : (isB ? "is-slot-b" : "");
+
+        const badges = [];
+        if (c.isMvp) badges.push(`<span class="badge-chip bg-[#F2A900] text-[#111214]">${c.primaryLabel}</span>`);
+        else if (c.isAc) badges.push(`<span class="badge-chip bg-[#2A2F37] text-[#E8E3D5]">${c.primaryLabel}</span>`);
+        if (c.bb !== null) badges.push(`<span class="badge-chip bg-[#7A4314] text-[#FCE3C2]">BB</span>`);
+        if (c.ss !== null) badges.push(`<span class="badge-chip bg-[#475569] text-white">SS</span>`);
+        if (c.shVal !== null) badges.push(`<span class="badge-chip bg-[#1E293B] text-[#93C5FD] border border-[#475569]">SH#${c.shRank}</span>`);
+        if (c.deVal !== null) badges.push(`<span class="badge-chip bg-[#111214] text-[#F2A900] border border-[#F2A900]">DE</span>`);
+
+        const statHint = c.pts !== null
+          ? `${c.pts} · ${c.g}G`
+          : c.secAwards.map(a => a.val).join(" · ");
+
+        return `
+          <div onclick="selectCatalogCard('${c.id}')" class="catalog-item ${cls} px-3 py-2 flex items-center justify-between gap-2">
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="font-mono-tabular text-[10px] font-bold ${c.conf === 'E' ? 'text-[#60A5FA]' : 'text-[#F87171]'}">&rsquo;${c.yy}</span>
+                <span class="text-[11.5px] font-bold text-[#FAF9F6] truncate">${c.name}</span>
+                <span class="font-mono-tabular text-[9.5px] text-[#8E939E]">${c.team}</span>
+              </div>
+              <div class="mt-1 flex flex-wrap items-center gap-1">${badges.join("")}</div>
+            </div>
+            <div class="font-mono-tabular text-[9.5px] text-[#8E939E] text-right shrink-0">
+              <div>${statHint}</div>
+              ${isA ? '<div class="text-[#F2A900] font-bold">SLOT A</div>' : (isB ? '<div class="text-[#60A5FA] font-bold">SLOT B</div>' : '')}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function selectCatalogCard(id) {
+      const card = ALL_CARDS.find(c => c.id === id);
+      if (!card) return;
+      if (studio.activeSlot === "A" || studio.mode === "single") {
+        studio.cardA = card;
+        studio.copyA = randomSerialCopy();
+        document.getElementById("copyNumA").value = studio.copyA;
+      } else {
+        studio.cardB = card;
+        studio.copyB = randomSerialCopy();
+        document.getElementById("copyNumB").value = studio.copyB;
+      }
+      renderAll();
+    }
+
+    function setActiveSlot(slot) {
+      studio.activeSlot = slot;
+      document.getElementById("slotABtn").className = slot === "A"
+        ? "text-left p-2 border border-[#F2A900] bg-[#232018]"
+        : "text-left p-2 border border-[#2D323B] bg-[#111214] hover:border-[#F2A900]";
+      document.getElementById("slotBBtn").className = slot === "B"
+        ? "text-left p-2 border border-[#60A5FA] bg-[#172133]"
+        : "text-left p-2 border border-[#2D323B] bg-[#111214] hover:border-[#60A5FA]";
+    }
+
+    function setViewMode(mode) {
+      studio.mode = mode;
+      document.getElementById("modeDualBtn").classList.toggle("active", mode === "dual");
+      document.getElementById("modeSingleBtn").classList.toggle("active", mode === "single");
+      const bCont = document.getElementById("cardBContainer");
+      const aCont = document.getElementById("cardAContainer");
+      if (mode === "single") {
+        bCont.classList.add("hidden");
+        aCont.classList.remove("max-w-[445px]");
+        aCont.classList.add("max-w-[520px]");
+        setActiveSlot("A");
+      } else {
+        bCont.classList.remove("hidden");
+        aCont.classList.remove("max-w-[520px]");
+        aCont.classList.add("max-w-[445px]");
+      }
+      renderDeltaTelemetry();
+    }
+
+    function setLogoFinish(finish) {
+      studio.logoFinish = finish;
+      document.getElementById("logoStylizedBtn").classList.toggle("active", finish === "stylized");
+      document.getElementById("logoEtchedBtn").classList.toggle("active", finish === "etched");
+      document.getElementById("logoColorBtn").classList.toggle("active", finish === "color");
+      renderCanvases();
+    }
+
+    function toggleSlab() {
+      studio.slab = !studio.slab;
+      document.getElementById("slabToggleBtn").textContent = `SLAB: ${studio.slab ? "ON" : "OFF"}`;
+      document.getElementById("slabToggleBtn").classList.toggle("active", studio.slab);
+      ["tiltInnerA", "tiltInnerB"].forEach(id => {
+        document.getElementById(id).classList.toggle("slab-shell", studio.slab);
+      });
+    }
+
+    function toggleTilt() {
+      studio.tilt = !studio.tilt;
+      document.getElementById("tiltToggleBtn").textContent = `3D FOIL: ${studio.tilt ? "ON" : "OFF"}`;
+      document.getElementById("tiltToggleBtn").classList.toggle("active", studio.tilt);
+      if (!studio.tilt) {
+        ["tiltInnerA", "tiltInnerB"].forEach(id => document.getElementById(id).style.transform = "");
+      }
+    }
+
+    function swapCards() {
+      [studio.cardA, studio.cardB] = [studio.cardB, studio.cardA];
+      [studio.copyA, studio.copyB] = [studio.copyB, studio.copyA];
+      document.getElementById("copyNumA").value = studio.copyA;
+      document.getElementById("copyNumB").value = studio.copyB;
+      renderAll();
+    }
+
+    function rerollSerials() {
+      studio.copyA = randomSerialCopy();
+      studio.copyB = randomSerialCopy();
+      document.getElementById("copyNumA").value = studio.copyA;
+      document.getElementById("copyNumB").value = studio.copyB;
+      renderCanvases();
+      renderDeltaTelemetry();
+    }
+
+    function updateCopyNumbers() {
+      studio.copyA = parseInt(document.getElementById("copyNumA").value, 10) || 1;
+      studio.copyB = parseInt(document.getElementById("copyNumB").value, 10) || 1;
+      renderCanvases();
+      renderDeltaTelemetry();
+    }
+
+    function loadPreset(sA, pA, sB, pB) {
+      studio.cardA = findCard(sA, pA);
+      studio.cardB = findCard(sB, pB);
+      studio.copyA = randomSerialCopy();
+      studio.copyB = randomSerialCopy();
+      document.getElementById("copyNumA").value = studio.copyA;
+      document.getElementById("copyNumB").value = studio.copyB;
+      if (studio.mode !== "dual") setViewMode("dual");
+      renderAll();
+    }
+
+    function mintRandomPair() {
+      const iA = Math.floor(Math.random() * ALL_CARDS.length);
+      let iB = Math.floor(Math.random() * ALL_CARDS.length);
+      if (iB === iA) iB = (iA + 1) % ALL_CARDS.length;
+      studio.cardA = ALL_CARDS[iA];
+      studio.cardB = ALL_CARDS[iB];
+      studio.copyA = randomSerialCopy();
+      studio.copyB = randomSerialCopy();
+      document.getElementById("copyNumA").value = studio.copyA;
+      document.getElementById("copyNumB").value = studio.copyB;
+      renderAll();
+    }
+
+    function renderCanvases() {
+      if (studio.cardA) {
+        ensureLogoLoaded(studio.cardA.team, () => renderCardToCanvas(document.getElementById("canvasA"), studio.cardA, studio.copyA));
+        renderCardToCanvas(document.getElementById("canvasA"), studio.cardA, studio.copyA);
+      }
+      if (studio.cardB) {
+        ensureLogoLoaded(studio.cardB.team, () => renderCardToCanvas(document.getElementById("canvasB"), studio.cardB, studio.copyB));
+        renderCardToCanvas(document.getElementById("canvasB"), studio.cardB, studio.copyB);
+      }
+    }
+
+    function cardAwardsSummary(c) {
+      const parts = [];
+      if (c.isMvp || c.isAc) parts.push(c.primaryLabel);
+      c.secAwards.forEach(a => parts.push(`${a.label} (${a.val})`));
+      return parts.join(" · ");
+    }
+
+    function renderDeltaTelemetry() {
+      const grid = document.getElementById("deltaGrid");
+      const a = studio.cardA, b = studio.cardB;
+      if (!a) return;
+
+      if (studio.mode === "single" || !b) {
+        const serA = `${a.yy}${a.conf} : ${a.serialRank} : ${a.serialCode} : ${String(studio.copyA).padStart(2, "0")} // 82`;
+        grid.innerHTML = `
+          <div class="border border-[#252830] p-3 bg-[#0E1014]">
+            <div class="text-[#F2A900] text-[9.5px] font-bold uppercase">&rsquo;${a.yy} ${a.name} (${a.team})</div>
+            <div class="text-white font-bold mt-1">${cardAwardsSummary(a)}</div>
+          </div>
+          <div class="border border-[#252830] p-3 bg-[#0E1014]">
+            <div class="text-[#8E939E] text-[9.5px] uppercase">VALUES</div>
+            <div class="text-white font-bold mt-1">${a.pts !== null ? `${a.pts.toLocaleString()} PTS · ${a.g} G · ${a.ppg.toFixed(1)} PPG` : a.secAwards.map(x => `${x.label}: ${x.val}`).join(" · ")}</div>
+          </div>
+          <div class="border border-[#252830] p-3 bg-[#0E1014]">
+            <div class="text-[#8E939E] text-[9.5px] uppercase">SERIAL${a.pantheon ? ` · PANTHEON ${a.pantheon.min}` : ""}</div>
+            <div class="text-[#F2A900] font-bold mt-1">${serA}</div>
+          </div>
+        `;
+        return;
+      }
+
+      const ptsDiff = (a.pts !== null && b.pts !== null)
+        ? `${a.pts - b.pts >= 0 ? "+" : ""}${(a.pts - b.pts).toLocaleString()} PTS`
+        : "—";
+      const ppgDiff = (a.ppg !== null && b.ppg !== null)
+        ? `${a.ppg - b.ppg >= 0 ? "+" : ""}${(a.ppg - b.ppg).toFixed(1)} PPG`
+        : "—";
+      const gDiff = (a.g !== null && b.g !== null)
+        ? `${a.g - b.g >= 0 ? "+" : ""}${a.g - b.g} G`
+        : "—";
+
+      grid.innerHTML = `
+        <div class="border border-[#252830] p-3 bg-[#0E1014]">
+          <div class="text-[#F2A900] text-[9.5px] font-bold uppercase">SLOT A // &rsquo;${a.yy} ${a.name} (${a.team})</div>
+          <div class="text-white font-bold mt-1">${cardAwardsSummary(a)}</div>
+          <div class="text-[#8E939E] text-[9.5px] mt-0.5">${a.pts !== null ? `${a.pts.toLocaleString()} PTS · ${a.g}G · ${a.ppg.toFixed(1)} PPG` : ""}</div>
+        </div>
+        <div class="border border-[#252830] p-3 bg-[#14171D] text-center flex flex-col justify-center">
+          <div class="text-[#8E939E] text-[9.5px] uppercase">DELTA (A &minus; B)</div>
+          <div class="text-[#FAF9F6] font-bold mt-1">${ptsDiff} &middot; ${gDiff} &middot; ${ppgDiff}</div>
+        </div>
+        <div class="border border-[#252830] p-3 bg-[#0E1014] md:text-right">
+          <div class="text-[#60A5FA] text-[9.5px] font-bold uppercase">SLOT B // &rsquo;${b.yy} ${b.name} (${b.team})</div>
+          <div class="text-white font-bold mt-1">${cardAwardsSummary(b)}</div>
+          <div class="text-[#8E939E] text-[9.5px] mt-0.5">${b.pts !== null ? `${b.pts.toLocaleString()} PTS · ${b.g}G · ${b.ppg.toFixed(1)} PPG` : ""}</div>
+        </div>
+      `;
+    }
+
+    function renderAll() {
+      const a = studio.cardA, b = studio.cardB;
+      document.getElementById("slotALabel").textContent = `\u2019${a.yy} ${a.name} (${a.team})`;
+      document.getElementById("slotBLabel").textContent = `\u2019${b.yy} ${b.name} (${b.team})`;
+      document.getElementById("metaTitleA").textContent = `SLOT A // \u2019${a.yy} ${a.name.toUpperCase()} (${a.team})`;
+      document.getElementById("metaTitleB").textContent = `SLOT B // \u2019${b.yy} ${b.name.toUpperCase()} (${b.team})`;
+      document.getElementById("posterLinkA").href = `posters.html?season=${encodeURIComponent(a.s)}&player=${encodeURIComponent(a.name.replace(/\u2019/g, "'"))}`;
+      document.getElementById("posterLinkB").href = `posters.html?season=${encodeURIComponent(b.s)}&player=${encodeURIComponent(b.name.replace(/\u2019/g, "'"))}`;
+
+      renderCanvases();
+      renderDeltaTelemetry();
+      filterCatalog();
+    }
+
+    function downloadSingleCard(slot) {
+      const card = slot === "A" ? studio.cardA : studio.cardB;
+      const canvas = document.getElementById(slot === "A" ? "canvasA" : "canvasB");
+      const slug = `${card.yy}${card.conf}_${card.name.toLowerCase().replace(/[^a-z0-9]+/g, "_")}_${card.team.toLowerCase()}`;
+      try {
+        const url = canvas.toDataURL("image/png");
+        const a = document.createElement("a");
+        a.download = `card_${slug}.png`;
+        a.href = url;
+        a.click();
+      } catch (err) {
+        // Fallback if opened via strict local file:// CORS on a historical logo
+        window.print();
+      }
+    }
+
+    function exportCurrentPNG() {
+      if (studio.mode === "single") {
+        downloadSingleCard("A");
+        return;
+      }
+      try {
+        const dip = document.createElement("canvas");
+        dip.width = 3240;
+        dip.height = 2280;
+        const dctx = dip.getContext("2d");
+        dctx.fillStyle = "#0B0C0F";
+        dctx.fillRect(0, 0, dip.width, dip.height);
+        dctx.drawImage(document.getElementById("canvasA"), 90, 90, 1500, 2100);
+        dctx.drawImage(document.getElementById("canvasB"), 1650, 90, 1500, 2100);
+
+        const a = document.createElement("a");
+        const sA = `${studio.cardA.yy}${studio.cardA.name.split(" ").pop().toLowerCase()}`;
+        const sB = `${studio.cardB.yy}${studio.cardB.name.split(" ").pop().toLowerCase()}`;
+        a.download = `cards_${sA}_vs_${sB}.png`;
+        a.href = dip.toDataURL("image/png");
+        a.click();
+      } catch (err) {
+        window.print();
+      }
+    }
+
+    function setupTiltHandlers() {
+      document.querySelectorAll(".card-tilt-wrap").forEach(wrap => {
+        const slot = wrap.getAttribute("data-slot");
+        const inner = document.getElementById("tiltInner" + slot);
+        const glare = document.getElementById("glare" + slot);
+
+        wrap.addEventListener("mousemove", (e) => {
+          if (!studio.tilt) return;
+          const rect = wrap.getBoundingClientRect();
+          const px = (e.clientX - rect.left) / rect.width;
+          const py = (e.clientY - rect.top) / rect.height;
+          const rx = (0.5 - py) * 14;
+          const ry = (px - 0.5) * 14;
+          inner.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.015)`;
+          glare.style.background = `radial-gradient(circle at ${px * 100}% ${py * 100}%, rgba(255,248,220,0.48) 0%, rgba(255,255,255,0.12) 28%, rgba(0,0,0,0) 64%)`;
+        });
+        wrap.addEventListener("mouseleave", () => {
+          inner.style.transform = "";
+        });
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", async () => {
+      populateSeasonSelect();
+      setupTiltHandlers();
+
+      const params = new URLSearchParams(window.location.search);
+      const sA = params.get("season");
+      const pA = params.get("player");
+      const sB = params.get("compareSeason");
+      const pB = params.get("comparePlayer");
+
+      if (sA || pA) {
+        studio.cardA = findCard(sA, pA || "");
+        if (sB || pB) {
+          studio.cardB = findCard(sB, pB || "");
+        } else {
+          const alt = ALL_CARDS.find(c => normalizeStr(c.name) === normalizeStr(studio.cardA.name) && c.id !== studio.cardA.id);
+          studio.cardB = alt || findCard("2004-05", "Tracy McGrady");
+          if (!alt) setViewMode("single");
+        }
+      } else {
+        studio.cardA = findCard("2003-04", "Tracy McGrady");
+        studio.cardB = findCard("2004-05", "Tracy McGrady");
+      }
+
+      // Always randomize serial scarcity numbers on load
+      studio.copyA = randomSerialCopy();
+      studio.copyB = randomSerialCopy();
+      document.getElementById("copyNumA").value = studio.copyA;
+      document.getElementById("copyNumB").value = studio.copyB;
+
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+      renderAll();
+    });
+  </script>
+</body>
+</html>

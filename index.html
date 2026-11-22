@@ -59,7 +59,6 @@
 
   <!-- =======================================================================
      BEGIN SITE NAVIGATION // WHERE BUCKETS REIGN ARCHIVE
-     Drop directly after <body> on any page in the archive.
      ======================================================================= -->
 <nav id="siteNav" aria-label="Primary Archive Navigation" class="bg-[#111214] text-[#FAF9F6] border-b-2 border-[#111111] print:hidden">
   <div class="max-w-[1840px] mx-auto flex items-stretch justify-between border-x border-[#2A2D33]">
@@ -86,7 +85,10 @@
         <span class="text-[#F2A900] text-[9.5px]">02</span>
         <span>EXTRA PERIOD PANTHEON</span>
       </a>
-      <!-- FUTURE EXHIBIT SLOT: Duplicate the <a> block above as 03, 04, etc. -->
+      <a href="cards.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">03</span>
+        <span>CARD MINT</span>
+      </a>
     </div>
 
     <!-- Right Archive Status & Mobile Toggle -->
@@ -95,6 +97,8 @@
         <span>43 SEASONS</span>
         <span class="text-[#2A2D33]">|</span>
         <span>53 SCORERS</span>
+        <span class="text-[#2A2D33]">|</span>
+        <span class="text-[#F2A900]">636 CARDS</span>
       </div>
       <button type="button" onclick="document.getElementById('mobileSiteNav').classList.toggle('hidden')"
               aria-label="Toggle Navigation Menu"
@@ -106,15 +110,10 @@
 
   <!-- Mobile Dropdown Drawer -->
   <div id="mobileSiteNav" class="hidden md:hidden border-t border-[#2A2D33] bg-[#16181C]">
-    <a href="index.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#F2A900] bg-[#1C1F24]">
-      00 // OVERVIEW
-    </a>
-    <a href="posters.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">
-      01 // SEASON POSTERS (1983&ndash;84 TO 2025&ndash;26)
-    </a>
-    <a href="pantheon.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] text-[#E8E3D5]">
-      02 // THE EXTRA PERIOD PANTHEON
-    </a>
+    <a href="index.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#F2A900] bg-[#1C1F24]">00 // OVERVIEW</a>
+    <a href="posters.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">01 // SEASON POSTERS (1983&ndash;84 TO 2025&ndash;26)</a>
+    <a href="pantheon.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">02 // THE EXTRA PERIOD PANTHEON</a>
+    <a href="cards.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] text-[#E8E3D5]">03 // DIGITAL CARD MINT (636 PLAYER-SEASONS)</a>
   </div>
 </nav>
 <!-- END SITE NAVIGATION -->
@@ -150,6 +149,10 @@
           <a href="pantheon.html"
              class="inline-flex items-center gap-2 px-4 py-2.5 bg-[#F2A900] text-[#111214] border border-[#111111] font-mono-tabular text-xs font-extrabold uppercase tracking-[0.08em] hover:bg-[#111214] hover:text-[#F2A900] transition-colors">
             02 // OPEN EXTRA PERIOD PANTHEON &rarr;
+          </a>
+          <a href="cards.html"
+             class="inline-flex items-center gap-2 px-4 py-2.5 bg-[#FAF9F6] text-[#111111] border-2 border-[#111111] font-mono-tabular text-xs font-extrabold uppercase tracking-[0.08em] hover:bg-[#111214] hover:text-[#FAF9F6] transition-colors">
+            03 // DIGITAL CARD MINT (636) &rarr;
           </a>
         </div>
       </div>
@@ -398,6 +401,58 @@
       </article>
     </section>
 
+
+    <!-- EXHIBIT 03: ON-DEMAND DIGITAL BASKETBALL CARD MINT -->
+    <section class="border-2 border-[#111111] bg-[#111214] text-[#FAF9F6] grid grid-cols-1 lg:grid-cols-12">
+      <div class="lg:col-span-8 p-6 sm:p-7 border-b lg:border-b-0 lg:border-r border-[#2A2E36] flex flex-col justify-between">
+        <div>
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+            <span class="font-mono-tabular text-[10.5px] font-extrabold uppercase tracking-[0.14em] text-[#F2A900]">
+              EXHIBIT 03 // ON-DEMAND 300-DPI BULLION CARD ENGINE
+            </span>
+            <span class="font-mono-tabular text-[9.5px] font-bold px-2 py-0.5 border border-[#3A404B] text-[#E8E3D5]">
+              636 UNIQUE PLAYER-SEASONS
+            </span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-[-0.02em] leading-none text-[#FAF9F6]">
+            Digital Basketball Card Mint
+          </h2>
+          <p class="mt-2.5 text-xs sm:text-sm text-[#A6A8AE] leading-relaxed max-w-3xl">
+            Mint and compare any player-season across all 43 posters on demand&mdash;sans player likeness. Every card dynamically adapts its architecture by conference (East Obsidian/Platinum vs. West Alabaster/18K Gold), decade era motif (&rsquo;80s&ndash;&rsquo;20s), era-accurate franchise crest (or NBA tricolor shield for 2TM trades), and five metallic award tiers from Specialist Vault to 5-Honor Grand Slam.
+          </p>
+        </div>
+        <div class="mt-4 flex flex-wrap items-center gap-2 font-mono-tabular text-[10px]">
+          <a href="cards.html?season=2003-04&player=Tracy%20McGrady&compareSeason=2004-05&comparePlayer=Tracy%20McGrady" class="px-2.5 py-1 border border-[#3A404B] bg-[#181B20] text-[#E8E3D5] font-bold hover:border-[#F2A900] hover:text-[#F2A900]">&rsquo;04 vs &rsquo;05 McGRADY</a>
+          <a href="cards.html?season=1989-90&player=Michael%20Jordan&compareSeason=2015-16&comparePlayer=Stephen%20Curry" class="px-2.5 py-1 border border-[#3A404B] bg-[#181B20] text-[#E8E3D5] font-bold hover:border-[#F2A900] hover:text-[#F2A900]">&rsquo;90 JORDAN (GS) vs &rsquo;16 CURRY</a>
+          <a href="cards.html?season=2004-05&player=Vince%20Carter&compareSeason=1994-95&comparePlayer=Clyde%20Drexler" class="px-2.5 py-1 border border-[#3A404B] bg-[#181B20] text-[#E8E3D5] font-bold hover:border-[#F2A900] hover:text-[#F2A900]">2TM NBA ISSUES</a>
+        </div>
+      </div>
+      <div class="lg:col-span-4 p-6 bg-[#16181C] flex flex-col justify-between gap-4">
+        <div class="grid grid-cols-2 gap-2 font-mono-tabular text-[10px]">
+          <div class="border border-[#2A2E36] p-2.5 bg-[#111214]">
+            <div class="text-[#F2A900] font-bold">86 <span class="text-[9px] text-[#A6A8AE]">(5 GS)</span></div>
+            <div class="text-[#8E939E] text-[9px]">CONF. MVP CARDS</div>
+          </div>
+          <div class="border border-[#2A2E36] p-2.5 bg-[#111214]">
+            <div class="text-[#E8E3D5] font-bold">430</div>
+            <div class="text-[#8E939E] text-[9px]">ALL-CONF (#2&ndash;#6)</div>
+          </div>
+          <div class="border border-[#2A2E36] p-2.5 bg-[#111214]">
+            <div class="text-[#60A5FA] font-bold">120</div>
+            <div class="text-[#8E939E] text-[9px]">SPECIALIST VAULT</div>
+          </div>
+          <div class="border border-[#2A2E36] p-2.5 bg-[#111214]">
+            <div class="text-[#FAF9F6] font-bold">636</div>
+            <div class="text-[#8E939E] text-[9px]">TOTAL UNIQUE ISSUES</div>
+          </div>
+        </div>
+        <a href="cards.html" class="block px-4 py-3 bg-[#F2A900] text-[#111214] font-mono-tabular text-xs font-extrabold uppercase tracking-[0.1em] flex items-center justify-between hover:bg-[#FAF9F6] transition-colors">
+          <span>LAUNCH DIGITAL CARD MINT</span>
+          <span>&rarr;</span>
+        </a>
+      </div>
+    </section>
+
     <!-- THE 53-MINUTE GAME ARCHITECTURE LEDGER -->
     <section class="border-2 border-[#111111] bg-[#FAF9F6]">
       <div class="px-4 py-2 bg-[#111111] text-[#FAF9F6] flex flex-wrap items-center justify-between gap-2 font-mono-tabular text-[10px] font-bold uppercase tracking-[0.14em]">
@@ -495,6 +550,7 @@
       <div class="sm:text-right">
         <a href="posters.html" class="underline hover:text-[#111111]">01 SEASON POSTERS</a> &middot;
         <a href="pantheon.html" class="underline hover:text-[#111111]">02 EXTRA PERIOD PANTHEON</a> &middot;
+        <a href="cards.html" class="underline hover:text-[#111111]">03 CARD MINT</a> &middot;
         <a href="nav-template.html" class="underline hover:text-[#111111]">NAV TEMPLATE</a>
       </div>
     </div>
