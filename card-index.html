@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EXHIBIT 04 // SERIES CARD INDEX (&rsquo;84&ndash;&rsquo;26)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-paper: #F4F3EF;
+      --bg-poster: #FAF9F6;
+      --ink: #111111;
+      --ink-secondary: #555552;
+      --ink-muted: #8C8B85;
+      --east-cobalt: #1D4ED8;
+      --west-vermilion: #D92B2B;
+      --amber: #F2A900;
+      --chassis: #111214;
+      --grid-subtle: #D8D6CE;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-radius: 0px !important;
+    }
+
+    body {
+      background-color: var(--bg-paper);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .font-mono-tabular {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-paper); border-left: 1px solid var(--ink); }
+    ::-webkit-scrollbar-thumb { background: var(--ink); }
+
+    .ctrl-btn {
+      border: 1px solid var(--ink);
+      background: var(--bg-poster);
+      color: var(--ink);
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 8px;
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+    .ctrl-btn:hover { background: #E5E3DC; }
+    .ctrl-btn.active { background: var(--ink); color: var(--bg-poster); }
+
+    /* Primary Axis Sort Tabs */
+    .axis-tab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 9px 14px;
+      border-right: 1px solid var(--ink);
+      background: var(--bg-poster);
+      color: var(--ink-secondary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.08s ease;
+      user-select: none;
+    }
+    .axis-tab:hover { background: #ECEAE2; color: var(--ink); }
+    .axis-tab.active {
+      background: #111214;
+      color: #FAF9F6;
+      box-shadow: inset 0 -3px 0 #F2A900;
+    }
+
+    /* Micro Award Badges */
+    .aw-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 1.5px 5px;
+      letter-spacing: 0.04em;
+      display: inline-block;
+      text-transform: uppercase;
+      border: 1px solid #111111;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+    .aw-mvp { background: #F2A900; color: #111214; border-color: #111214; }
+    .aw-ae { background: #EFF6FF; color: #1D4ED8; border-color: #1D4ED8; }
+    .aw-aw { background: #FEF2F2; color: #B91C1C; border-color: #B91C1C; }
+    .aw-bb { background: #FEF3C7; color: #9A5B13; border-color: #9A5B13; }
+    .aw-ss { background: #E2E8F0; color: #334155; border-color: #475569; }
+    .aw-sh { background: #F4F3EF; color: #111111; border-color: #111111; }
+    .aw-de { background: #111214; color: #F2A900; border-color: #111214; }
+
+    /* Ledger Table Styling */
+    .ledger-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-poster);
+    }
+    .ledger-table thead th {
+      background: #111214;
+      color: #E8E3D5;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 9px 10px;
+      text-align: left;
+      border-right: 1px solid #2A2D33;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .ledger-table thead th:hover { background: #1C1F24; color: #F2A900; }
+    .ledger-table thead th.sorted-col { color: #F2A900; background: #191B20; }
+    .ledger-table tbody tr {
+      border-bottom: 1px solid var(--grid-subtle);
+      transition: background-color 0.07s ease;
+    }
+    .ledger-table tbody tr:hover { background: #ECEAE2; }
+    .ledger-table tbody tr.in-compare { background: #FEF9C3; }
+    .ledger-table tbody td {
+      padding: 7px 10px;
+      vertical-align: middle;
+      font-size: 12px;
+    }
+
+    /* Quick Jump Pills */
+    .jump-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 3px 6px;
+      border-right: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      background: var(--bg-poster);
+      color: var(--ink-secondary);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .jump-pill:hover { background: var(--ink); color: var(--bg-poster); }
+    .jump-pill.active { background: #F2A900; color: #111214; font-weight: 800; }
+
+    /* Scarcity Bar */
+    .inv-track {
+      width: 78px;
+      height: 8px;
+      background: #E2E0D8;
+      border: 1px solid #111111;
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      overflow: hidden;
+    }
+    .inv-fill {
+      height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-[#F2A900] selection:text-[#111214]">
+
+  <!-- =======================================================================
+     BEGIN SITE NAVIGATION // WHERE BUCKETS REIGN ARCHIVE
+     ======================================================================= -->
+<nav id="siteNav" aria-label="Primary Archive Navigation" class="bg-[#111214] text-[#FAF9F6] border-b-2 border-[#111111] print:hidden">
+  <div class="max-w-[1840px] mx-auto flex items-stretch justify-between border-x border-[#2A2D33]">
+    <!-- Brand Mark -->
+    <a href="index.html" class="flex items-center gap-2.5 px-3.5 sm:px-4 py-2 border-r border-[#2A2D33] hover:bg-[#181A1F] transition-colors shrink-0">
+      <span class="text-[#F2A900] text-xs leading-none" aria-hidden="true">&#9670;</span>
+      <span class="font-black text-xs sm:text-[13px] tracking-[0.06em] uppercase text-[#FAF9F6]">WHERE BUCKETS REIGN</span>
+      <span class="hidden xl:inline-block font-mono-tabular text-[9.5px] tracking-[0.12em] uppercase text-[#8C8B85] border-l border-[#2A2D33] pl-2.5">
+        NBA SCORING ARCHIVE &rsquo;84&ndash;&rsquo;26
+      </span>
+    </a>
+
+    <!-- Desktop Exhibit Links -->
+    <div class="hidden md:flex items-stretch flex-1 overflow-x-auto">
+      <a href="index.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3 py-2.5 border-r border-[#2A2D33] flex items-center gap-1.5 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">00</span>
+        <span>OVERVIEW</span>
+      </a>
+      <a href="posters.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3 py-2.5 border-r border-[#2A2D33] flex items-center gap-1.5 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">01</span>
+        <span>SEASON POSTERS</span>
+      </a>
+      <a href="pantheon.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3 py-2.5 border-r border-[#2A2D33] flex items-center gap-1.5 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">02</span>
+        <span>PANTHEON</span>
+      </a>
+      <a href="cards.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3 py-2.5 border-r border-[#2A2D33] flex items-center gap-1.5 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">03</span>
+        <span>CARD MINT</span>
+      </a>
+      <a href="card-index.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3 py-2.5 border-r border-[#2A2D33] flex items-center gap-1.5 transition-colors whitespace-nowrap bg-[#1C1F24] text-[#FAF9F6] border-b-2 border-b-[#F2A900]">
+        <span class="text-[#F2A900] text-[9.5px]">04</span>
+        <span>CARD INDEX</span>
+      </a>
+    </div>
+
+    <!-- Right Archive Status & Mobile Toggle -->
+    <div class="flex items-center">
+      <div class="hidden lg:flex items-center gap-3 px-4 font-mono-tabular text-[9.5px] uppercase tracking-[0.1em] text-[#8C8B85]">
+        <span>43 SEASONS</span>
+        <span class="text-[#2A2D33]">|</span>
+        <span>53 SCORERS</span>
+        <span class="text-[#2A2D33]">|</span>
+        <span class="text-[#F2A900]">636 CARDS</span>
+      </div>
+      <button type="button" onclick="document.getElementById('mobileSiteNav').classList.toggle('hidden')"
+              aria-label="Toggle Navigation Menu"
+              class="md:hidden font-mono-tabular text-[10px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-l border-[#2A2D33] text-[#FAF9F6] hover:bg-[#1C1F24]">
+        MENU &#9776;
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Drawer -->
+  <div id="mobileSiteNav" class="hidden md:hidden border-t border-[#2A2D33] bg-[#16181C]">
+    <a href="index.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">00 // OVERVIEW</a>
+    <a href="posters.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">01 // SEASON POSTERS (&rsquo;84&ndash;&rsquo;26)</a>
+    <a href="pantheon.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">02 // THE EXTRA PERIOD PANTHEON</a>
+    <a href="cards.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">03 // DIGITAL CARD MINT</a>
+    <a href="card-index.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] text-[#F2A900] bg-[#1C1F24]">04 // SERIES CARD INDEX (636 ISSUES)</a>
+  </div>
+</nav>
+<!-- END SITE NAVIGATION -->
+
+  <!-- STICKY SWISS INDEX CONTROL HEADER -->
+  <header class="sticky top-0 z-30 bg-[#F4F3EF] border-b-2 border-[#111111]">
+    <!-- Row 1: Identity + Primary 5-Axis Sort Bar + View Toggle -->
+    <div class="max-w-[1840px] mx-auto grid grid-cols-1 lg:grid-cols-12 border-x border-[#111111]">
+
+      <!-- Identity (Cols 1-3) -->
+      <div class="lg:col-span-3 p-3 border-b lg:border-b-0 lg:border-r border-[#111111] flex flex-col justify-between">
+        <div class="flex items-center justify-between gap-2">
+          <span class="font-mono-tabular text-[10px] uppercase tracking-[0.14em] text-[#555552] font-bold">
+            EXHIBIT 04 // SERIES MANIFEST
+          </span>
+          <span class="font-mono-tabular text-[10px] uppercase bg-[#111111] text-[#F2A900] px-1.5 py-0.5 font-bold">
+            636 CARDS
+          </span>
+        </div>
+        <h1 class="text-lg sm:text-xl font-black tracking-[-0.03em] uppercase leading-none mt-1">
+          Series Card Index
+        </h1>
+      </div>
+
+      <!-- 5 Primary Sort Axes: PLAYER | TEAM | AWARD | SEASON | INVENTORY (Cols 4-9) -->
+      <div class="lg:col-span-6 border-b lg:border-b-0 lg:border-r border-[#111111] bg-[#FAF9F6] flex flex-wrap items-stretch">
+        <button id="axisPlayer" class="axis-tab" onclick="setSortAxis('player')">
+          <span>PLAYER</span><span id="dirPlayer" class="text-[9.5px] opacity-80"></span>
+        </button>
+        <button id="axisTeam" class="axis-tab" onclick="setSortAxis('team')">
+          <span>TEAM</span><span id="dirTeam" class="text-[9.5px] opacity-80"></span>
+        </button>
+        <button id="axisAward" class="axis-tab" onclick="setSortAxis('award')">
+          <span>AWARD</span><span id="dirAward" class="text-[9.5px] opacity-80"></span>
+        </button>
+        <button id="axisSeason" class="axis-tab" onclick="setSortAxis('season')">
+          <span>SEASON</span><span id="dirSeason" class="text-[9.5px] opacity-80"></span>
+        </button>
+        <button id="axisInventory" class="axis-tab active" onclick="setSortAxis('inventory')">
+          <span>INVENTORY</span><span id="dirInventory" class="text-[9.5px] text-[#F2A900]">&#9650;</span>
+        </button>
+      </div>
+
+      <!-- Layout Mode & Inventory Controls (Cols 10-12) -->
+      <div class="lg:col-span-3 p-2.5 sm:px-3 flex flex-wrap items-center justify-between lg:justify-end gap-1.5">
+        <div class="flex">
+          <button id="viewLedgerBtn" class="ctrl-btn active" onclick="setViewMode('ledger')">LEDGER</button>
+          <button id="viewGroupedBtn" class="ctrl-btn border-l-0" onclick="setViewMode('grouped')">GROUPED</button>
+        </div>
+        <button onclick="rerollAllInventory()" class="ctrl-btn" title="Randomize inventory (1–82) across all 636 cards">&#8635; SHUFFLE INV</button>
+      </div>
+    </div>
+
+    <!-- Row 2: Faceted Filter Rail -->
+    <div class="max-w-[1840px] mx-auto border-x border-t border-[#111111] bg-[#FAF9F6] px-3 py-2 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex flex-wrap items-center gap-2 flex-1">
+        <input id="searchInput" type="text" oninput="renderIndex()" placeholder="FILTER PLAYER, TEAM, AWARD, 'XX..."
+               class="w-full sm:w-56 border border-[#111111] bg-white px-2.5 py-1 font-mono-tabular text-[11px] uppercase placeholder:text-[#8C8B85] focus:outline-none focus:bg-[#FEF08A]" />
+
+        <select id="confFilter" onchange="renderIndex()" class="border border-[#111111] bg-white px-2 py-1 font-mono-tabular text-[10.5px] font-bold uppercase focus:outline-none">
+          <option value="ALL">EAST + WEST</option>
+          <option value="E">EAST</option>
+          <option value="W">WEST</option>
+        </select>
+
+        <select id="awardFilter" onchange="renderIndex()" class="border border-[#111111] bg-white px-2 py-1 font-mono-tabular text-[10.5px] font-bold uppercase focus:outline-none">
+          <option value="ALL">ALL AWARDS</option>
+          <option value="MVP">EAST / WEST MVP</option>
+          <option value="ALL_CONF">ALL-EAST / ALL-WEST</option>
+          <option value="BB">BRONZE BUCKET</option>
+          <option value="SS">SILVER SCORER</option>
+          <option value="SH">SHARP SHOOTER</option>
+          <option value="DE">DEAD EYE</option>
+          <option value="MULTI">MULTI-AWARD (2+)</option>
+          <option value="SWEEP">5-AWARD SWEEP</option>
+          <option value="SPEC">SPECIALIST ONLY</option>
+        </select>
+
+        <select id="teamFilter" onchange="renderIndex()" class="border border-[#111111] bg-white px-2 py-1 font-mono-tabular text-[10.5px] font-bold uppercase focus:outline-none">
+          <option value="ALL">ALL 36 TEAMS</option>
+        </select>
+
+        <select id="seasonFilter" onchange="renderIndex()" class="border border-[#111111] bg-white px-2 py-1 font-mono-tabular text-[10.5px] font-bold uppercase focus:outline-none">
+          <option value="ALL">ALL &rsquo;84&ndash;&rsquo;26</option>
+        </select>
+
+        <!-- Inventory Range Filter (1 to 82) -->
+        <div class="flex items-center gap-1 border border-[#111111] bg-[#ECEAE2] px-2 py-0.5 font-mono-tabular text-[10px]">
+          <span class="font-bold text-[#555552]">INV:</span>
+          <input id="invMin" type="number" min="1" max="82" value="1" oninput="renderIndex()"
+                 class="w-10 border border-[#111111] bg-white px-1 py-0.5 text-center font-bold text-[10px] focus:outline-none" />
+          <span class="text-[#555552]">&ndash;</span>
+          <input id="invMax" type="number" min="1" max="82" value="82" oninput="renderIndex()"
+                 class="w-10 border border-[#111111] bg-white px-1 py-0.5 text-center font-bold text-[10px] focus:outline-none" />
+          <span class="text-[#555552] ml-0.5">/ 82</span>
+        </div>
+
+        <label class="inline-flex items-center gap-1.5 font-mono-tabular text-[10px] font-bold uppercase cursor-pointer select-none px-1.5">
+          <input id="pantheonOnly" type="checkbox" onchange="renderIndex()" class="accent-[#111111]" />
+          <span>PANTHEON ONLY</span>
+        </label>
+
+        <button id="resetFiltersBtn" onclick="resetFilters()" class="hidden ctrl-btn !bg-[#111111] !text-[#FAF9F6]">RESET &times;</button>
+      </div>
+    </div>
+
+    <!-- Row 3: Context-Aware Quick-Jump Index Strip (adapts to Player A-Z / Team / Award / Season / Inventory Tier!) -->
+    <div class="max-w-[1840px] mx-auto border-x border-t border-[#111111] bg-[#ECEAE2] flex flex-col md:flex-row items-stretch">
+      <div id="quickJumpTitle" class="px-3 py-1 bg-[#111214] text-[#F2A900] font-mono-tabular text-[9.5px] font-bold uppercase tracking-[0.12em] flex items-center shrink-0">
+        INVENTORY TIERS
+      </div>
+      <div id="quickJumpStrip" class="flex flex-wrap flex-1"></div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="flex-1 max-w-[1840px] w-full mx-auto px-3 sm:px-6 py-5 sm:py-6 pb-24">
+
+    <!-- Compact Archival Telemetry Strip -->
+    <section class="grid grid-cols-2 sm:grid-cols-5 border-2 border-[#111111] bg-[#FAF9F6] divide-x divide-y sm:divide-y-0 divide-[#111111] mb-5 font-mono-tabular">
+      <div class="p-3">
+        <div class="text-[9.5px] uppercase tracking-[0.1em] text-[#555552] font-bold">MATCHED ISSUES</div>
+        <div id="statMatched" class="text-xl font-black text-[#111111] mt-0.5">636 / 636</div>
+      </div>
+      <div class="p-3">
+        <div class="text-[9.5px] uppercase tracking-[0.1em] text-[#555552] font-bold">AVAILABLE SUPPLY</div>
+        <div id="statSupply" class="text-xl font-black text-[#111111] mt-0.5">—</div>
+      </div>
+      <div class="p-3">
+        <div class="text-[9.5px] uppercase tracking-[0.1em] text-[#555552] font-bold">SCARCE (1&ndash;10)</div>
+        <div id="statScarce" class="text-xl font-black text-[#D92B2B] mt-0.5">—</div>
+      </div>
+      <div class="p-3">
+        <div class="text-[9.5px] uppercase tracking-[0.1em] text-[#555552] font-bold">INVENTORY SPAN</div>
+        <div id="statSpan" class="text-xl font-black text-[#111111] mt-0.5">1 &ndash; 82</div>
+      </div>
+      <div class="p-3 col-span-2 sm:col-span-1 bg-[#111214] text-[#FAF9F6]">
+        <div class="text-[9.5px] uppercase tracking-[0.1em] text-[#F2A900] font-bold">ACTIVE SORT</div>
+        <div id="statSort" class="text-sm font-black uppercase mt-1 truncate">INVENTORY &uarr;</div>
+      </div>
+    </section>
+
+    <!-- LEDGER TABLE CONTAINER -->
+    <section id="ledgerContainer" class="border-2 border-[#111111] overflow-x-auto bg-[#FAF9F6]">
+      <table class="ledger-table">
+        <thead>
+          <tr>
+            <th class="w-10 text-center !cursor-default">#</th>
+            <th id="thSeason" onclick="setSortAxis('season')" class="w-20">SEASON</th>
+            <th id="thPlayer" onclick="setSortAxis('player')">PLAYER</th>
+            <th id="thTeam" onclick="setSortAxis('team')" class="w-24">TEAM</th>
+            <th id="thAward" onclick="setSortAxis('award')">AWARDS</th>
+            <th class="!cursor-default">VALUES</th>
+            <th id="thInventory" onclick="setSortAxis('inventory')" class="w-44 text-right sorted-col">INVENTORY (/ 82) &#9650;</th>
+            <th class="w-40 text-right !cursor-default">NAVIGATE</th>
+          </tr>
+        </thead>
+        <tbody id="ledgerBody"></tbody>
+      </table>
+    </section>
+
+    <!-- GROUPED DIRECTORY CONTAINER (Hidden in Ledger Mode) -->
+    <section id="groupedContainer" class="hidden space-y-6"></section>
+
+  </main>
+
+  <!-- STICKY SIDE-BY-SIDE COMPARE DOCK (Appears when 1 or 2 cards are staged) -->
+  <div id="compareDock" class="hidden fixed bottom-0 left-0 right-0 z-40 bg-[#111214] text-[#FAF9F6] border-t-2 border-[#F2A900] shadow-2xl">
+    <div class="max-w-[1840px] mx-auto px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 font-mono-tabular text-xs">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="text-[#F2A900] font-extrabold uppercase tracking-[0.12em]">COMPARE QUEUE:</span>
+        <span id="dockSlotA" class="px-2.5 py-1 border border-[#F2A900] bg-[#232018] text-white font-bold">SLOT A: —</span>
+        <span class="text-[#6B707B]">vs</span>
+        <span id="dockSlotB" class="px-2.5 py-1 border border-[#3A404B] bg-[#181B20] text-[#9BA0AA]">SLOT B: SELECT 2ND CARD</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a id="dockLaunchBtn" href="cards.html" class="px-4 py-1.5 bg-[#F2A900] text-[#111214] font-extrabold uppercase tracking-[0.08em] hover:bg-[#FAF9F6]">
+          OPEN IN CARD MINT &rarr;
+        </a>
+        <button onclick="clearCompareQueue()" class="px-2.5 py-1.5 border border-[#3A404B] text-[#E8E3D5] hover:border-white">CLEAR &times;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHARED COLOPHON FOOTER -->
+  <footer class="border-t-2 border-[#111111] bg-[#FAF9F6] mt-6">
+    <div class="max-w-[1840px] mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono-tabular text-[#555552]">
+      <div>
+        <strong class="text-[#111111]">WHERE BUCKETS REIGN // EXHIBIT 04 &middot; SERIES CARD INDEX (&rsquo;84&ndash;&rsquo;26)</strong><br/>
+        Complete 636-card inventory manifest sorted by player, team, award, season, and scarcity (1&ndash;82).
+      </div>
+      <div class="sm:text-right">
+        <a href="index.html" class="underline hover:text-[#111111]">00 OVERVIEW</a> &middot;
+        <a href="posters.html" class="underline hover:text-[#111111]">01 POSTERS</a> &middot;
+        <a href="pantheon.html" class="underline hover:text-[#111111]">02 PANTHEON</a> &middot;
+        <a href="cards.html" class="underline hover:text-[#111111]">03 CARD MINT</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SEASONS_DATA = [{"s": "1983-84", "em": ["Larry Bird", "BOS", 2540, 102], "wm": ["Adrian Dantley", "UTA", 2772, 90], "ae": [["Bernard King", "NYK", 2444, 89], ["Sidney Moncrief", "MIL", 1959, 95], ["Robert Parish", "BOS", 1862, 103], ["Marques Johnson", "MIL", 1859, 90], ["Isiah Thomas", "DET", 1855, 87]], "aw": [["Mark Aguirre", "DAL", 2550, 89], ["Kiki VanDeWeghe", "DEN", 2422, 83], ["Alex English", "DEN", 2312, 87], ["Kareem Abdul-Jabbar", "LAL", 2219, 101], ["Rolando Blackman", "DAL", 2054, 91]], "ebb": ["Bernard King", "NYK", 2027], "wbb": ["Adrian Dantley", "UTA", 2418], "ess": ["Larry Bird", "BOS", 632], "wss": ["Kareem Abdul-Jabbar", "LAL", 502], "sh": [["Adrian Dantley", "UTA", "W", 264.8], ["Kiki VanDeWeghe", "DEN", "W", 261.8], ["Bernard King", "NYK", "E", 213.3], ["Kareem Abdul-Jabbar", "LAL", "W", 182.3], ["Calvin Natt", "POR", "W", 163.7]], "de": ["Larry Bird", "BOS", "E", 60.3]}, {"s": "1984-85", "em": ["Larry Bird", "BOS", 2815, 100], "wm": ["Alex English", "DEN", 2685, 95], "ae": [["Michael Jordan", "CHI", 2430, 86], ["Dominique Wilkins", "ATL", 2217, 81], ["Moses Malone", "PHI", 2203, 92], ["Terry Cummings", "MIL", 2081, 87], ["Kevin McHale", "BOS", 2030, 100]], "aw": [["Purvis Short", "GSW", 2186, 78], ["Mark Aguirre", "DAL", 2171, 84], ["Kareem Abdul-Jabbar", "LAL", 2151, 98], ["Calvin Natt", "DEN", 2151, 93], ["Darrell Griffith", "UTA", 1939, 88]], "ebb": ["Michael Jordan", "CHI", 2313], "wbb": ["Alex English", "DEN", 2262], "ess": ["Larry Bird", "BOS", 520], "wss": ["Alex English", "DEN", 423], "sh": [["Kareem Abdul-Jabbar", "LAL", "W", 228.9], ["Larry Bird", "BOS", "E", 209.1], ["Artis Gilmore", "SAS", "W", 202.6], ["James Worthy", "LAL", "W", 160.0], ["Magic Johnson", "LAL", "W", 159.9]], "de": ["James Worthy", "LAL", "W", 55.1]}, {"s": "1985-86", "em": ["Dominique Wilkins", "ATL", 2623, 87], "wm": ["Alex English", "DEN", 2687, 91], "ae": [["Larry Bird", "BOS", 2581, 100], ["Terry Cummings", "MIL", 1930, 96], ["Jeff Malone", "WAS", 1905, 85], ["Charles Barkley", "PHI", 1903, 92], ["Kevin McHale", "BOS", 1896, 86]], "aw": [["Adrian Dantley", "UTA", 2267, 76], ["Kareem Abdul-Jabbar", "LAL", 2208, 93], ["Hakeem Olajuwon", "HOU", 2134, 88], ["Kiki VanDeWeghe", "POR", 2074, 83], ["Rolando Blackman", "DAL", 1970, 92]], "ebb": ["Dominique Wilkins", "ATL", 2366], "wbb": ["Alex English", "DEN", 2414], "ess": ["Larry Bird", "BOS", 466], "wss": ["Hakeem Olajuwon", "HOU", 537], "sh": [["Adrian Dantley", "UTA", "W", 228.3], ["Kareem Abdul-Jabbar", "LAL", "W", 189.8], ["James Worthy", "LAL", "W", 189.4], ["Kiki VanDeWeghe", "POR", "W", 189.3], ["Larry Bird", "BOS", "E", 180.9]], "de": ["Larry Bird", "BOS", "E", 56.8]}, {"s": "1986-87", "em": ["Michael Jordan", "CHI", 3148, 85], "wm": ["Alex English", "DEN", 2401, 85], "ae": [["Larry Bird", "BOS", 2698, 97], ["Dominique Wilkins", "ATL", 2535, 88], ["Kevin McHale", "BOS", 2452, 98], ["Adrian Dantley", "DET", 2050, 96], ["Isiah Thomas", "DET", 2032, 96]], "aw": [["Dale Ellis", "SEA", 2394, 96], ["Magic Johnson", "LAL", 2301, 98], ["Tom Chambers", "SEA", 2231, 96], ["Kiki VanDeWeghe", "POR", 2221, 83], ["Xavier McDaniel", "SEA", 2174, 96]], "ebb": ["Michael Jordan", "CHI", 3041], "wbb": ["Alex English", "DEN", 2345], "ess": ["Larry Bird", "BOS", 622], "wss": ["James Worthy", "LAL", 425], "sh": [["Kevin McHale", "BOS", "E", 336.7], ["Larry Bird", "BOS", "E", 279.0], ["Charles Barkley", "PHI", "E", 223.4], ["Kiki VanDeWeghe", "POR", "W", 211.8], ["Dale Ellis", "SEA", "W", 196.6]], "de": ["James Worthy", "LAL", "W", 54.0]}, {"s": "1987-88", "em": ["Michael Jordan", "CHI", 3231, 92], "wm": ["Karl Malone", "UTA", 2595, 93], "ae": [["Dominique Wilkins", "ATL", 2771, 90], ["Larry Bird", "BOS", 2692, 93], ["Charles Barkley", "PHI", 2264, 80], ["Isiah Thomas", "DET", 2081, 104], ["Kevin McHale", "BOS", 1878, 81]], "aw": [["Mark Aguirre", "DAL", 2299, 94], ["Clyde Drexler", "POR", 2273, 85], ["Alex English", "DEN", 2267, 91], ["Byron Scott", "LAL", 2224, 105], ["Dale Ellis", "SEA", 2042, 80]], "ebb": ["Michael Jordan", "CHI", 2868], "wbb": ["Karl Malone", "UTA", 2268], "ess": ["Isiah Thomas", "DET", 504], "wss": ["James Worthy", "LAL", 506], "sh": [["Larry Bird", "BOS", "E", 297.0], ["Charles Barkley", "PHI", "E", 283.3], ["Michael Jordan", "CHI", "E", 252.9], ["Kevin McHale", "BOS", "E", 220.7], ["Byron Scott", "LAL", "W", 195.7]], "de": ["Kevin McHale", "BOS", "E", 68.7]}, {"s": "1988-89", "em": ["Michael Jordan", "CHI", 3224, 98], "wm": ["Dale Ellis", "SEA", 2436, 90], "ae": [["Dominique Wilkins", "ATL", 2235, 85], ["Charles Barkley", "PHI", 2118, 82], ["Patrick Ewing", "NYK", 1994, 89], ["Terry Cummings", "MIL", 1893, 85], ["Kevin McHale", "BOS", 1815, 81]], "aw": [["Karl Malone", "UTA", 2418, 83], ["Chris Mullin", "GSW", 2411, 90], ["Tom Chambers", "PHX", 2397, 93], ["Alex English", "DEN", 2253, 85], ["Clyde Drexler", "POR", 2206, 81]], "ebb": ["Michael Jordan", "CHI", 2633], "wbb": ["Karl Malone", "UTA", 2326], "ess": ["Michael Jordan", "CHI", 591], "wss": ["James Worthy", "LAL", 372], "sh": [["Michael Jordan", "CHI", "E", 266.2], ["Charles Barkley", "PHI", "E", 241.9], ["Dale Ellis", "SEA", "W", 227.0], ["Mark Price", "CLE", "E", 206.7], ["Patrick Ewing", "NYK", "E", 187.1]], "de": ["James Worthy", "LAL", "W", 46.2]}, {"s": "1989-90", "em": ["Michael Jordan", "CHI", 3340, 98], "wm": ["Karl Malone", "UTA", 2666, 87], "ae": [["Patrick Ewing", "NYK", 2641, 92], ["Charles Barkley", "PHI", 2236, 89], ["Dominique Wilkins", "ATL", 2138, 80], ["Reggie Miller", "IND", 2078, 85], ["Larry Bird", "BOS", 1942, 80]], "aw": [["Tom Chambers", "PHX", 2556, 97], ["David Robinson", "SAS", 2236, 92], ["Clyde Drexler", "POR", 2152, 94], ["Hakeem Olajuwon", "HOU", 2069, 86], ["Terry Cummings", "SAS", 2067, 91]], "ebb": ["Michael Jordan", "CHI", 2753], "wbb": ["Karl Malone", "UTA", 2540], "ess": ["Michael Jordan", "CHI", 587], "wss": ["Clyde Drexler", "POR", 449], "sh": [["Michael Jordan", "CHI", "E", 297.8], ["Chris Mullin", "GSW", "W", 276.5], ["Reggie Miller", "IND", "E", 274.6], ["Charles Barkley", "PHI", "E", 270.3], ["Karl Malone", "UTA", "W", 253.8]], "de": ["Michael Jordan", "CHI", "E", 48.5]}, {"s": "1990-91", "em": ["Michael Jordan", "CHI", 3109, 99], "wm": ["Karl Malone", "UTA", 2649, 91], "ae": [["Dominique Wilkins", "ATL", 2205, 86], ["Patrick Ewing", "NYK", 2204, 84], ["Charles Barkley", "PHI", 2048, 75], ["Reggie Miller", "IND", 1963, 87], ["Joe Dumars", "DET", 1938, 95]], "aw": [["Chris Mullin", "GSW", 2297, 90], ["David Robinson", "SAS", 2204, 86], ["Clyde Drexler", "POR", 2114, 98], ["Tim Hardaway", "GSW", 2108, 91], ["James Worthy", "LAL", 2049, 96]], "ebb": ["Michael Jordan", "CHI", 2580], "wbb": ["Karl Malone", "UTA", 2382], "ess": ["Michael Jordan", "CHI", 529], "wss": ["Magic Johnson", "LAL", 414], "sh": [["Michael Jordan", "CHI", "E", 275.2], ["Reggie Miller", "IND", "E", 265.0], ["Chris Mullin", "GSW", "W", 251.2], ["Charles Barkley", "PHI", "E", 209.1], ["Terry Porter", "POR", "W", 205.2]], "de": ["Michael Jordan", "CHI", "E", 43.2]}, {"s": "1991-92", "em": ["Michael Jordan", "CHI", 3163, 102], "wm": ["Karl Malone", "UTA", 2737, 97], "ae": [["Patrick Ewing", "NYK", 2242, 94], ["Scottie Pippen", "CHI", 2148, 104], ["Reggie Lewis", "BOS", 1983, 92], ["Brad Daugherty", "CLE", 1932, 90], ["Glen Rice", "MIA", 1822, 82]], "aw": [["Clyde Drexler", "POR", 2456, 97], ["Chris Mullin", "GSW", 2145, 85], ["Tim Hardaway", "GSW", 1991, 85], ["Jeff Malone", "UTA", 1970, 97], ["Terry Porter", "POR", 1935, 103]], "ebb": ["Michael Jordan", "CHI", 2404], "wbb": ["Karl Malone", "UTA", 2272], "ess": ["Michael Jordan", "CHI", 759], "wss": ["Clyde Drexler", "POR", 553], "sh": [["Chris Mullin", "GSW", "W", 211.8], ["Reggie Miller", "IND", "E", 207.2], ["Dražen Petrović", "NJN", "E", 189.0], ["Michael Jordan", "CHI", "E", 186.9], ["Jeff Hornacek", "PHX", "W", 183.6]], "de": ["Terry Porter", "POR", "W", 58.2]}, {"s": "1992-93", "em": ["Michael Jordan", "CHI", 3207, 97], "wm": ["Charles Barkley", "PHX", 2582, 100], "ae": [["Patrick Ewing", "NYK", 2341, 96], ["Dominique Wilkins", "ATL", 2211, 74], ["Larry Johnson", "CHA", 1988, 91], ["Shaquille O'Neal", "ORL", 1893, 81], ["Scottie Pippen", "CHI", 1891, 100]], "aw": [["Hakeem Olajuwon", "HOU", 2448, 94], ["Karl Malone", "UTA", 2337, 87], ["David Robinson", "SAS", 2147, 92], ["Danny Manning", "LAC", 1891, 84], ["Dan Majerle", "PHX", 1758, 106]], "ebb": ["Michael Jordan", "CHI", 2541], "wbb": ["Karl Malone", "UTA", 2217], "ess": ["Michael Jordan", "CHI", 666], "wss": ["Charles Barkley", "PHX", 638], "sh": [["Reggie Miller", "IND", "E", 190.9], ["Dražen Petrović", "NJN", "E", 176.8], ["Karl Malone", "UTA", "W", 174.9], ["Brad Daugherty", "CLE", "E", 169.8], ["Kenny Smith", "HOU", "W", 163.3]], "de": ["B.J. Armstrong", "CHI", "E", 34.9]}, {"s": "1993-94", "em": ["Patrick Ewing", "NYK", 2486, 104], "wm": ["Hakeem Olajuwon", "HOU", 2848, 103], "ae": [["Shaquille O'Neal", "ORL", 2439, 84], ["Reggie Miller", "IND", 1945, 95], ["Scottie Pippen", "CHI", 1815, 82], ["Glen Rice", "MIA", 1773, 86], ["Kevin Willis", "ATL", 1665, 91]], "aw": [["Karl Malone", "UTA", 2497, 98], ["David Robinson", "SAS", 2463, 84], ["Mitch Richmond", "SAC", 1823, 78], ["Latrell Sprewell", "GSW", 1788, 85], ["Clifford Robinson", "POR", 1712, 86]], "ebb": ["Shaquille O'Neal", "ORL", 2377], "wbb": ["David Robinson", "SAS", 2383], "ess": ["Patrick Ewing", "NYK", 547], "wss": ["Hakeem Olajuwon", "HOU", 664], "sh": [["Reggie Miller", "IND", "E", 231.8], ["Shaquille O'Neal", "ORL", "E", 216.2], ["Hakeem Olajuwon", "HOU", "W", 149.1], ["Dale Ellis", "SAS", "W", 146.2], ["John Stockton", "UTA", "W", 144.5]], "de": ["Hakeem Olajuwon", "HOU", "W", 73.7]}, {"s": "1994-95", "em": ["Shaquille O'Neal", "ORL", 2854, 100], "wm": ["Hakeem Olajuwon", "HOU", 2730, 94], "ae": [["Patrick Ewing", "NYK", 2095, 90], ["Anfernee Hardaway", "ORL", 2025, 98], ["Reggie Miller", "IND", 2022, 98], ["Scottie Pippen", "CHI", 1870, 89], ["Glen Rice", "MIA", 1831, 82]], "aw": [["David Robinson", "SAS", 2618, 96], ["Karl Malone", "UTA", 2338, 87], ["Clyde Drexler", "2TM", 2103, 98], ["Jamal Mashburn", "DAL", 1926, 80], ["Mitch Richmond", "SAC", 1867, 82]], "ebb": ["Shaquille O'Neal", "ORL", 2315], "wbb": ["David Robinson", "SAS", 2238], "ess": ["Shaquille O'Neal", "ORL", 539], "wss": ["Hakeem Olajuwon", "HOU", 725], "sh": [["Dana Barros", "PHI", "E", 217.0], ["Detlef Schrempf", "SEA", "W", 191.6], ["John Stockton", "UTA", "W", 182.0], ["Jeff Hornacek", "UTA", "W", 158.6], ["Reggie Miller", "IND", "E", 156.2]], "de": ["Hakeem Olajuwon", "HOU", "W", 44.6]}, {"s": "1995-96", "em": ["Michael Jordan", "CHI", 3043, 100], "wm": ["Karl Malone", "UTA", 2583, 100], "ae": [["Anfernee Hardaway", "ORL", 2060, 94], ["Patrick Ewing", "NYK", 1883, 84], ["Scottie Pippen", "CHI", 1801, 95], ["Juwan Howard", "WAS", 1789, 81], ["Shaquille O'Neal", "ORL", 1744, 66]], "aw": [["David Robinson", "SAS", 2287, 92], ["Hakeem Olajuwon", "HOU", 2115, 80], ["Gary Payton", "SEA", 1997, 102], ["Shawn Kemp", "SEA", 1968, 99], ["Mitch Richmond", "SAC", 1956, 85]], "ebb": ["Michael Jordan", "CHI", 2491], "wbb": ["Karl Malone", "UTA", 2106], "ess": ["Michael Jordan", "CHI", 552], "wss": ["Karl Malone", "UTA", 477], "sh": [["John Stockton", "UTA", "W", 176.1], ["Michael Jordan", "CHI", "E", 173.0], ["Cedric Ceballos", "LAL", "W", 160.3], ["Reggie Miller", "IND", "E", 148.2], ["Jeff Hornacek", "UTA", "W", 148.1]], "de": ["Shawn Kemp", "SEA", "W", 55.9]}, {"s": "1996-97", "em": ["Michael Jordan", "CHI", 3021, 101], "wm": ["Karl Malone", "UTA", 2768, 102], "ae": [["Glen Rice", "CHA", 2198, 82], ["Scottie Pippen", "CHI", 2021, 101], ["Tim Hardaway", "MIA", 1962, 98], ["Patrick Ewing", "NYK", 1954, 87], ["Grant Hill", "DET", 1828, 85]], "aw": [["Hakeem Olajuwon", "HOU", 2180, 94], ["Mitch Richmond", "SAC", 2095, 81], ["Gary Payton", "SEA", 2070, 94], ["Latrell Sprewell", "GSW", 1938, 80], ["Shawn Kemp", "SEA", 1775, 93]], "ebb": ["Michael Jordan", "CHI", 2431], "wbb": ["Karl Malone", "UTA", 2249], "ess": ["Michael Jordan", "CHI", 590], "wss": ["Karl Malone", "UTA", 519], "sh": [["Karl Malone", "UTA", "W", 230.0], ["Glen Rice", "CHA", "E", 214.9], ["Chris Mullin", "GSW", "W", 201.2], ["John Stockton", "UTA", "W", 192.8], ["Michael Jordan", "CHI", "E", 153.9]], "de": ["Hakeem Olajuwon", "HOU", "W", 55.8]}, {"s": "1997-98", "em": ["Michael Jordan", "CHI", 3037, 103], "wm": ["Karl Malone", "UTA", 2716, 101], "ae": [["Glen Rice", "CHA", 2031, 91], ["Reggie Miller", "IND", 1897, 97], ["Antoine Walker", "BOS", 1840, 82], ["Allen Iverson", "PHI", 1758, 80], ["Allan Houston", "NYK", 1720, 92]], "aw": [["Shaquille O'Neal", "LAL", 2095, 73], ["Tim Duncan", "SAS", 1917, 91], ["Shareef Abdur-Rahim", "VAN", 1829, 82], ["Gary Payton", "SEA", 1811, 92], ["Michael Finley", "DAL", 1763, 82]], "ebb": ["Michael Jordan", "CHI", 2357], "wbb": ["Karl Malone", "UTA", 2190], "ess": ["Michael Jordan", "CHI", 680], "wss": ["Karl Malone", "UTA", 526], "sh": [["Reggie Miller", "IND", "E", 200.0], ["Karl Malone", "UTA", "W", 197.6], ["Tim Duncan", "SAS", "W", 165.1], ["Dale Ellis", "SEA", "W", 144.3], ["Eddie Jones", "LAL", "W", 142.6]], "de": ["Shaquille O'Neal", "LAL", "W", 36.7]}, {"s": "1998-99", "em": ["Allen Iverson", "PHI", 1512, 56], "wm": ["Shaquille O'Neal", "LAL", 1502, 57], "ae": [["Reggie Miller", "IND", 1183, 63], ["Allan Houston", "NYK", 1183, 70], ["Grant Hill", "DET", 1150, 55], ["Alonzo Mourning", "MIA", 1032, 51], ["Latrell Sprewell", "NYK", 1013, 57]], "aw": [["Tim Duncan", "SAS", 1479, 67], ["Karl Malone", "UTA", 1404, 60], ["Kobe Bryant", "LAL", 1154, 58], ["Shareef Abdur-Rahim", "VAN", 1152, 50], ["Gary Payton", "SEA", 1084, 50]], "ebb": ["Allen Iverson", "PHI", 1284], "wbb": ["Shaquille O'Neal", "LAL", 1289], "ess": ["Latrell Sprewell", "NYK", 407], "wss": ["Tim Duncan", "SAS", 395], "sh": [["Shaquille O'Neal", "LAL", "W", 117.5], ["Reggie Miller", "IND", "E", 98.4], ["Karl Malone", "UTA", "W", 85.9], ["Chris Mullin", "IND", "E", 84.7], ["Hakeem Olajuwon", "HOU", "W", 83.0]], "de": ["Tim Duncan", "SAS", "W", 35.2]}, {"s": "1999-00", "em": ["Allen Iverson", "PHI", 2251, 80], "wm": ["Shaquille O'Neal", "LAL", 3051, 102], "ae": [["Vince Carter", "TOR", 2165, 85], ["Jerry Stackhouse", "DET", 2013, 85], ["Reggie Miller", "IND", 1997, 103], ["Jalen Rose", "IND", 1936, 103], ["Alonzo Mourning", "MIA", 1934, 89]], "aw": [["Karl Malone", "UTA", 2367, 92], ["Gary Payton", "SEA", 2111, 87], ["Chris Webber", "SAC", 1956, 80], ["Kobe Bryant", "LAL", 1950, 88], ["Kevin Garnett", "MIN", 1932, 85]], "ebb": ["Vince Carter", "TOR", 2107], "wbb": ["Shaquille O'Neal", "LAL", 2344], "ess": ["Reggie Miller", "IND", 527], "wss": ["Shaquille O'Neal", "LAL", 707], "sh": [["Alonzo Mourning", "MIA", "E", 172.8], ["Shaquille O'Neal", "LAL", "W", 167.4], ["Karl Malone", "UTA", "W", 158.2], ["Allan Houston", "NYK", "E", 143.8], ["Reggie Miller", "IND", "E", 141.3]], "de": ["Reggie Miller", "IND", "E", 60.0]}, {"s": "2000-01", "em": ["Allen Iverson", "PHI", 2930, 93], "wm": ["Shaquille O'Neal", "LAL", 2612, 90], "ae": [["Vince Carter", "TOR", 2397, 87], ["Jerry Stackhouse", "DET", 2380, 80], ["Ray Allen", "MIL", 2258, 100], ["Tracy McGrady", "ORL", 2200, 81], ["Paul Pierce", "BOS", 2071, 82]], "aw": [["Kobe Bryant", "LAL", 2409, 84], ["Tim Duncan", "SAS", 2137, 95], ["Chris Webber", "SAC", 2084, 78], ["Antawn Jamison", "GSW", 2044, 82], ["Dirk Nowitzki", "DAL", 2018, 92]], "ebb": ["Jerry Stackhouse", "DET", 2380], "wbb": ["Shaquille O'Neal", "LAL", 2125], "ess": ["Allen Iverson", "PHI", 723], "wss": ["Shaquille O'Neal", "LAL", 487], "sh": [["Ray Allen", "MIL", "E", 240.3], ["Dirk Nowitzki", "DAL", "W", 177.1], ["Peja Stojaković", "SAC", "W", 148.8], ["Steve Nash", "DAL", "W", 138.0], ["Rashard Lewis", "SEA", "W", 133.8]], "de": ["Ray Allen", "MIL", "E", 70.6]}, {"s": "2001-02", "em": ["Paul Pierce", "BOS", 2538, 98], "wm": ["Kobe Bryant", "LAL", 2525, 99], "ae": [["Antoine Walker", "BOS", 2148, 97], ["Tracy McGrady", "ORL", 2071, 80], ["Allen Iverson", "PHI", 2033, 65], ["Jerry Stackhouse", "DET", 1805, 86], ["Jalen Rose", "2TM", 1696, 83]], "aw": [["Shaquille O'Neal", "LAL", 2363, 86], ["Tim Duncan", "SAS", 2337, 91], ["Dirk Nowitzki", "DAL", 2006, 84], ["Gary Payton", "SEA", 1926, 87], ["Karl Malone", "UTA", 1868, 84]], "ebb": ["Paul Pierce", "BOS", 2144], "wbb": ["Tim Duncan", "SAS", 2089], "ess": ["Paul Pierce", "BOS", 394], "wss": ["Shaquille O'Neal", "LAL", 541], "sh": [["Brent Barry", "SEA", "W", 202.2], ["Steve Nash", "DAL", "W", 188.4], ["Wally Szczerbiak", "MIN", "W", 185.1], ["Ray Allen", "MIL", "E", 181.3], ["Dirk Nowitzki", "DAL", "W", 174.7]], "de": ["Shaquille O'Neal", "LAL", "W", 36.4]}, {"s": "2002-03", "em": ["Allen Iverson", "PHI", 2642, 94], "wm": ["Kobe Bryant", "LAL", 2846, 94], "ae": [["Tracy McGrady", "ORL", 2629, 82], ["Paul Pierce", "BOS", 2319, 89], ["Richard Hamilton", "DET", 1995, 99], ["Jason Kidd", "NJN", 1897, 100], ["Jamal Mashburn", "NOH", 1871, 86]], "aw": [["Tim Duncan", "SAS", 2477, 105], ["Dirk Nowitzki", "DAL", 2441, 97], ["Shaquille O'Neal", "LAL", 2165, 79], ["Kevin Garnett", "MIN", 2045, 88], ["Stephon Marbury", "PHX", 1938, 87]], "ebb": ["Tracy McGrady", "ORL", 2407], "wbb": ["Kobe Bryant", "LAL", 2461], "ess": ["Jason Kidd", "NJN", 402], "wss": ["Tim Duncan", "SAS", 593], "sh": [["Peja Stojaković", "SAC", "W", 173.1], ["Shaquille O'Neal", "LAL", "W", 170.1], ["Dirk Nowitzki", "DAL", "W", 169.5], ["Matt Harpring", "UTA", "W", 155.1], ["Michael Redd", "MIL", "E", 151.1]], "de": ["Dirk Nowitzki", "DAL", "W", 48.1]}, {"s": "2003-04", "em": ["Paul Pierce", "BOS", 1919, 84], "wm": ["Kevin Garnett", "MIN", 2425, 100], "ae": [["Tracy McGrady", "ORL", 1878, 67], ["Jermaine O'Neal", "IND", 1873, 94], ["Richard Hamilton", "DET", 1869, 101], ["Michael Redd", "MIL", 1866, 87], ["Richard Jefferson", "NJN", 1733, 93]], "aw": [["Peja Stojakovic", "SAC", 2174, 93], ["Kobe Bryant", "LAL", 2096, 87], ["Shaquille O'Neal", "LAL", 1912, 89], ["Sam Cassell", "MIN", 1868, 97], ["Dirk Nowitzki", "DAL", 1813, 82]], "ebb": ["Tracy McGrady", "ORL", 1878], "wbb": ["Kevin Garnett", "MIN", 1987], "ess": ["Richard Hamilton", "DET", 494], "wss": ["Kobe Bryant", "LAL", 539], "sh": [["Peja Stojakovic", "SAC", "W", 302.1], ["Sam Cassell", "MIN", "W", 163.0], ["Yao Ming", "HOU", "W", 152.4], ["Kevin Garnett", "MIN", "W", 150.0], ["Antawn Jamison", "DAL", "W", 146.1]], "de": ["Sam Cassell", "MIN", "W", 36.0]}, {"s": "2004-05", "em": ["Allen Iverson", "PHI", 2458, 80], "wm": ["Amar'e Stoudemire", "PHX", 2529, 95], "ae": [["Gilbert Arenas", "WAS", 2274, 90], ["Dwyane Wade", "MIA", 2238, 91], ["LeBron James", "CLE", 2175, 80], ["Vince Carter", "2TM", 1993, 81], ["Paul Pierce", "BOS", 1929, 89]], "aw": [["Dirk Nowitzki", "DAL", 2340, 91], ["Tracy McGrady", "HOU", 2218, 85], ["Ray Allen", "SEA", 2158, 89], ["Tim Duncan", "SAS", 1884, 89], ["Shawn Marion", "PHX", 1833, 96]], "ebb": ["Allen Iverson", "PHI", 2302], "wbb": ["Amar'e Stoudemire", "PHX", 2080], "ess": ["Richard Hamilton", "DET", 501], "wss": ["Tim Duncan", "SAS", 542], "sh": [["Amar'e Stoudemire", "PHX", "W", 221.2], ["Yao Ming", "HOU", "W", 172.7], ["Steve Nash", "PHX", "W", 151.4], ["Mike Miller", "MEM", "W", 147.1], ["Damon Jones", "MIA", "E", 140.7]], "de": ["Manu Ginóbili", "SAS", "W", 57.8]}, {"s": "2005-06", "em": ["LeBron James", "CLE", 2878, 92], "wm": ["Kobe Bryant", "LAL", 3027, 87], "ae": [["Dwyane Wade", "MIA", 2694, 98], ["Gilbert Arenas", "WAS", 2550, 86], ["Allen Iverson", "PHI", 2377, 72], ["Vince Carter", "NJN", 2237, 90], ["Michael Redd", "MIL", 2164, 85]], "aw": [["Dirk Nowitzki", "DAL", 2771, 104], ["Elton Brand", "LAC", 2258, 91], ["Carmelo Anthony", "DEN", 2227, 85], ["Shawn Marion", "PHX", 2176, 101], ["Ray Allen", "SEA", 1955, 78]], "ebb": ["LeBron James", "CLE", 2478], "wbb": ["Kobe Bryant", "LAL", 2832], "ess": ["Dwyane Wade", "MIA", 654], "wss": ["Dirk Nowitzki", "DAL", 620], "sh": [["Steve Nash", "PHX", "W", 231.1], ["Shawn Marion", "PHX", "W", 207.8], ["Dirk Nowitzki", "DAL", "W", 178.1], ["Ray Allen", "SEA", "W", 176.3], ["Elton Brand", "LAC", "W", 157.6]], "de": ["Steve Nash", "PHX", "W", 46.5]}, {"s": "2006-07", "em": ["LeBron James", "CLE", 2633, 98], "wm": ["Kobe Bryant", "LAL", 2594, 82], "ae": [["Vince Carter", "NJN", 2338, 94], ["Gilbert Arenas", "WAS", 2105, 74], ["Ben Gordon", "CHI", 1957, 92], ["Richard Hamilton", "DET", 1786, 91], ["Luol Deng", "CHI", 1762, 92]], "aw": [["Tim Duncan", "SAS", 2043, 100], ["Dirk Nowitzki", "DAL", 2034, 84], ["Carmelo Anthony", "DEN", 2015, 70], ["Carlos Boozer", "UTA", 1949, 91], ["Amar'e Stoudemire", "PHX", 1924, 92]], "ebb": ["LeBron James", "CLE", 2132], "wbb": ["Kobe Bryant", "LAL", 2430], "ess": ["LeBron James", "CLE", 501], "wss": ["Tim Duncan", "SAS", 444], "sh": [["Steve Nash", "PHX", "W", 248.6], ["Amar'e Stoudemire", "PHX", "W", 207.3], ["Dirk Nowitzki", "DAL", "W", 182.7], ["Shawn Marion", "PHX", "W", 151.4], ["Carlos Boozer", "UTA", "W", 149.9]], "de": ["Carlos Boozer", "UTA", "W", 39.0]}, {"s": "2007-08", "em": ["LeBron James", "CLE", 2616, 88], "wm": ["Kobe Bryant", "LAL", 2956, 103], "ae": [["Paul Pierce", "BOS", 2081, 106], ["Joe Johnson", "ATL", 1919, 89], ["Dwight Howard", "ORL", 1884, 92], ["Kevin Garnett", "BOS", 1867, 97], ["Richard Jefferson", "NJN", 1857, 82]], "aw": [["Allen Iverson", "DEN", 2262, 86], ["Amar'e Stoudemire", "PHX", 2105, 84], ["Carmelo Anthony", "DEN", 2068, 81], ["Chris Paul", "NOH", 1973, 92], ["Dirk Nowitzki", "DAL", 1951, 82]], "ebb": ["LeBron James", "CLE", 2250], "wbb": ["Kobe Bryant", "LAL", 2323], "ess": ["Kevin Garnett", "BOS", 530], "wss": ["Kobe Bryant", "LAL", 633], "sh": [["Amar'e Stoudemire", "PHX", "W", 291.3], ["Steve Nash", "PHX", "W", 209.7], ["Carlos Boozer", "UTA", "W", 155.7], ["Mike Miller", "MEM", "W", 146.8], ["Mike Dunleavy", "IND", "E", 133.4]], "de": ["Kobe Bryant", "LAL", "W", 38.1]}, {"s": "2008-09", "em": ["LeBron James", "CLE", 2798, 95], "wm": ["Kobe Bryant", "LAL", 2896, 105], "ae": [["Dwyane Wade", "MIA", 2590, 86], ["Dwight Howard", "ORL", 2091, 102], ["Paul Pierce", "BOS", 1952, 95], ["Ben Gordon", "CHI", 1869, 89], ["Joe Johnson", "ATL", 1868, 90]], "aw": [["Dirk Nowitzki", "DAL", 2362, 91], ["Pau Gasol", "LAL", 1948, 104], ["Carmelo Anthony", "DEN", 1939, 82], ["Brandon Roy", "POR", 1925, 84], ["Kevin Durant", "OKC", 1871, 74]], "ebb": ["Dwyane Wade", "MIA", 2386], "wbb": ["Kobe Bryant", "LAL", 2201], "ess": ["LeBron James", "CLE", 494], "wss": ["Kobe Bryant", "LAL", 695], "sh": [["Pau Gasol", "LAL", "W", 175.4], ["Yao Ming", "HOU", "W", 173.4], ["Ray Allen", "BOS", "E", 169.5], ["Nenê", "DEN", "W", 150.9], ["Steve Nash", "PHX", "W", 140.2]], "de": ["Pau Gasol", "LAL", "W", 46.9]}, {"s": "2009-10", "em": ["LeBron James", "CLE", 2578, 87], "wm": ["Kobe Bryant", "LAL", 2641, 96], "ae": [["Dwyane Wade", "MIA", 2211, 82], ["Joe Johnson", "ATL", 1816, 87], ["Dwight Howard", "ORL", 1757, 96], ["Derrick Rose", "CHI", 1753, 83], ["Paul Pierce", "BOS", 1747, 95]], "aw": [["Kevin Durant", "OKC", 2622, 88], ["Amar'e Stoudemire", "PHX", 2251, 98], ["Dirk Nowitzki", "DAL", 2187, 87], ["Carmelo Anthony", "DEN", 2127, 75], ["Carlos Boozer", "UTA", 1716, 88]], "ebb": ["LeBron James", "CLE", 2258], "wbb": ["Kevin Durant", "OKC", 2472], "ess": ["Paul Pierce", "BOS", 451], "wss": ["Kobe Bryant", "LAL", 671], "sh": [["Amar'e Stoudemire", "PHX", "W", 172.1], ["Steve Nash", "PHX", "W", 169.3], ["Kevin Durant", "OKC", "W", 164.5], ["David Lee", "NYK", "E", 151.0], ["Carlos Boozer", "UTA", "W", 147.1]], "de": ["Jason Richardson", "PHX", "W", 47.9]}, {"s": "2010-11", "em": ["LeBron James", "MIA", 2608, 100], "wm": ["Kevin Durant", "OKC", 2648, 95], "ae": [["Derrick Rose", "CHI", 2460, 97], ["Dwyane Wade", "MIA", 2456, 97], ["Amar'e Stoudemire", "NYK", 2029, 82], ["Dwight Howard", "ORL", 1946, 84], ["Chris Bosh", "MIA", 1828, 98]], "aw": [["Kobe Bryant", "LAL", 2306, 92], ["Dirk Nowitzki", "DAL", 2263, 94], ["Russell Westbrook", "OKC", 2198, 99], ["Monta Ellis", "GSW", 1929, 80], ["LaMarcus Aldridge", "POR", 1894, 87]], "ebb": ["LeBron James", "MIA", 2111], "wbb": ["Kevin Durant", "OKC", 2161], "ess": ["Dwyane Wade", "MIA", 515], "wss": ["Dirk Nowitzki", "DAL", 582], "sh": [["Dirk Nowitzki", "DAL", "W", 177.6], ["Ray Allen", "BOS", "E", 163.5], ["Nenê", "DEN", "W", 146.8], ["Paul Pierce", "BOS", "E", 144.2], ["Stephen Curry", "GSW", "W", 139.7]], "de": ["Dirk Nowitzki", "DAL", "W", 62.9]}, {"s": "2011-12", "em": ["LeBron James", "MIA", 2380, 85], "wm": ["Kevin Durant", "OKC", 2420, 86], "ae": [["Dwyane Wade", "MIA", 1607, 72], ["Paul Pierce", "BOS", 1558, 81], ["Carmelo Anthony", "NYK", 1384, 60], ["Danny Granger", "IND", 1346, 73], ["Kevin Garnett", "BOS", 1331, 80]], "aw": [["Russell Westbrook", "OKC", 2019, 86], ["Kobe Bryant", "LAL", 1976, 70], ["Blake Griffin", "LAC", 1578, 77], ["Dirk Nowitzki", "DAL", 1449, 66], ["Kevin Love", "MIN", 1432, 55]], "ebb": ["LeBron James", "MIA", 1683], "wbb": ["Kevin Durant", "OKC", 1850], "ess": ["LeBron James", "MIA", 697], "wss": ["Kevin Durant", "OKC", 570], "sh": [["Kevin Durant", "OKC", "W", 203.8], ["LeBron James", "MIA", "E", 176.2], ["James Harden", "OKC", "W", 139.2], ["Tyson Chandler", "NYK", "E", 123.4], ["Steve Nash", "PHX", "W", 122.5]], "de": ["Kevin Durant", "OKC", "W", 87.8]}, {"s": "2012-13", "em": ["LeBron James", "MIA", 2632, 99], "wm": ["Kevin Durant", "OKC", 2619, 92], "ae": [["Carmelo Anthony", "NYK", 2266, 79], ["Dwyane Wade", "MIA", 1812, 91], ["Paul George", "IND", 1742, 98], ["Monta Ellis", "MIL", 1634, 86], ["Deron Williams", "BKN", 1620, 85]], "aw": [["James Harden", "HOU", 2181, 84], ["Kobe Bryant", "LAL", 2133, 78], ["Stephen Curry", "GSW", 2067, 90], ["Russell Westbrook", "OKC", 1951, 84], ["Tony Parker", "SAS", 1773, 87]], "ebb": ["LeBron James", "MIA", 2036], "wbb": ["Kevin Durant", "OKC", 2280], "ess": ["LeBron James", "MIA", 596], "wss": ["Tony Parker", "SAS", 432], "sh": [["LeBron James", "MIA", "E", 296.9], ["Kevin Durant", "OKC", "W", 293.7], ["Stephen Curry", "GSW", "W", 159.4], ["Serge Ibaka", "OKC", "W", 153.4], ["Kyle Korver", "ATL", "E", 124.7]], "de": ["LeBron James", "MIA", "E", 46.2]}, {"s": "2013-14", "em": ["LeBron James", "MIA", 2637, 97], "wm": ["Kevin Durant", "OKC", 3156, 100], "ae": [["Paul George", "IND", 2166, 99], ["Carmelo Anthony", "NYK", 2112, 77], ["DeMar DeRozan", "TOR", 1958, 86], ["John Wall", "WAS", 1762, 93], ["Al Jefferson", "CHA", 1650, 76]], "aw": [["Blake Griffin", "LAC", 2236, 93], ["Stephen Curry", "GSW", 2034, 85], ["James Harden", "HOU", 2012, 79], ["Kevin Love", "MIN", 2010, 77], ["Damian Lillard", "POR", 1947, 93]], "ebb": ["Carmelo Anthony", "NYK", 2112], "wbb": ["Kevin Durant", "OKC", 2593], "ess": ["LeBron James", "MIA", 548], "wss": ["Kevin Durant", "OKC", 563], "sh": [["LeBron James", "MIA", "E", 294.4], ["Kevin Durant", "OKC", "W", 285.8], ["Stephen Curry", "GSW", "W", 196.1], ["Dirk Nowitzki", "DAL", "W", 173.9], ["Kyle Korver", "ATL", "E", 143.8]], "de": ["LeBron James", "MIA", "E", 83.5]}, {"s": "2014-15", "em": ["LeBron James", "CLE", 2344, 89], "wm": ["James Harden", "HOU", 2679, 98], "ae": [["Kyrie Irving", "CLE", 1875, 88], ["Pau Gasol", "CHI", 1590, 88], ["Jimmy Butler III", "CHI", 1576, 77], ["John Wall", "WAS", 1509, 86], ["Paul Millsap", "ATL", 1461, 89]], "aw": [["Stephen Curry", "GSW", 2494, 101], ["Klay Thompson", "GSW", 2059, 98], ["Russell Westbrook", "OKC", 1886, 67], ["Chris Paul", "LAC", 1829, 94], ["Damian Lillard", "POR", 1828, 87]], "ebb": ["LeBron James", "CLE", 1743], "wbb": ["James Harden", "HOU", 2217], "ess": ["LeBron James", "CLE", 601], "wss": ["Stephen Curry", "GSW", 594], "sh": [["Stephen Curry", "GSW", "W", 294.7], ["Kyle Korver", "ATL", "E", 204.6], ["JJ Redick", "LAC", "W", 178.2], ["Klay Thompson", "GSW", "W", 172.4], ["Chris Paul", "LAC", "W", 160.3]], "de": ["Stephen Curry", "GSW", "W", 74.4]}, {"s": "2015-16", "em": ["LeBron James", "CLE", 2472, 97], "wm": ["Stephen Curry", "GSW", 2827, 97], "ae": [["DeMar DeRozan", "TOR", 2248, 98], ["Paul George", "IND", 2065, 88], ["Kyle Lowry", "TOR", 2016, 97], ["Isaiah Thomas", "BOS", 1968, 88], ["Kemba Walker", "CHA", 1848, 88]], "aw": [["Kevin Durant", "OKC", 2540, 90], ["James Harden", "HOU", 2509, 87], ["Klay Thompson", "GSW", 2353, 104], ["Russell Westbrook", "OKC", 2346, 98], ["Damian Lillard", "POR", 2170, 86]], "ebb": ["LeBron James", "CLE", 1920], "wbb": ["James Harden", "HOU", 2376], "ess": ["LeBron James", "CLE", 552], "wss": ["Klay Thompson", "GSW", 582], "sh": [["Stephen Curry", "GSW", "W", 432.0], ["Kevin Durant", "OKC", "W", 257.3], ["Klay Thompson", "GSW", "W", 190.6], ["Kawhi Leonard", "SAS", "W", 176.3], ["JJ Redick", "LAC", "W", 172.9]], "de": ["Klay Thompson", "GSW", "W", 52.6]}, {"s": "2016-17", "em": ["Isaiah Thomas", "BOS", 2548, 91], "wm": ["Russell Westbrook", "OKC", 2745, 86], "ae": [["LeBron James", "CLE", 2545, 92], ["Kyrie Irving", "CLE", 2282, 90], ["DeMar DeRozan", "TOR", 2244, 84], ["John Wall", "WAS", 2158, 91], ["Bradley Beal", "WAS", 2102, 90]], "aw": [["James Harden", "HOU", 2669, 92], ["Stephen Curry", "GSW", 2476, 96], ["Kawhi Leonard", "SAS", 2220, 86], ["Damian Lillard", "POR", 2135, 79], ["Anthony Davis", "NOP", 2099, 75]], "ebb": ["Isaiah Thomas", "BOS", 2199], "wbb": ["Russell Westbrook", "OKC", 2558], "ess": ["LeBron James", "CLE", 591], "wss": ["Stephen Curry", "GSW", 477], "sh": [["Karl-Anthony Towns", "MIN", "W", 222.8], ["Stephen Curry", "GSW", "W", 214.1], ["Kevin Durant", "GSW", "W", 205.1], ["Nikola Jokić", "DEN", "W", 176.4], ["Isaiah Thomas", "BOS", "E", 172.0]], "de": ["Kevin Durant", "GSW", "W", 68.0]}, {"s": "2017-18", "em": ["LeBron James", "CLE", 2999, 104], "wm": ["James Harden", "HOU", 2677, 89], "ae": [["Giannis Antetokounmpo", "MIL", 2194, 82], ["DeMar DeRozan", "TOR", 2067, 90], ["Bradley Beal", "WAS", 1996, 88], ["Victor Oladipo", "IND", 1894, 82], ["Khris Middleton", "MIL", 1825, 89]], "aw": [["Kevin Durant", "GSW", 2400, 89], ["Anthony Davis", "NOP", 2381, 84], ["Russell Westbrook", "OKC", 2204, 86], ["Damian Lillard", "POR", 2036, 77], ["Donovan Mitchell", "UTA", 1884, 90]], "ebb": ["LeBron James", "CLE", 2251], "wbb": ["James Harden", "HOU", 2191], "ess": ["LeBron James", "CLE", 748], "wss": ["Kevin Durant", "GSW", 608], "sh": [["Karl-Anthony Towns", "MIN", "W", 220.2], ["Kevin Durant", "GSW", "W", 208.3], ["LeBron James", "CLE", "E", 205.3], ["Stephen Curry", "GSW", "W", 199.9], ["Anthony Davis", "NOP", "W", 149.4]], "de": ["LeBron James", "CLE", "E", 58.8]}, {"s": "2018-19", "em": ["Giannis Antetokounmpo", "MIL", 2377, 87], "wm": ["James Harden", "HOU", 3166, 89], "ae": [["Kawhi Leonard", "TOR", 2328, 84], ["Kemba Walker", "CHA", 2102, 82], ["Bradley Beal", "WAS", 2099, 82], ["Joel Embiid", "PHI", 1983, 75], ["Blake Griffin", "DET", 1890, 77]], "aw": [["Stephen Curry", "GSW", 2501, 91], ["Damian Lillard", "POR", 2497, 96], ["Kevin Durant", "GSW", 2414, 90], ["Paul George", "OKC", 2302, 82], ["Klay Thompson", "GSW", 2115, 99]], "ebb": ["Kemba Walker", "CHA", 2102], "wbb": ["James Harden", "HOU", 2818], "ess": ["Kawhi Leonard", "TOR", 732], "wss": ["Stephen Curry", "GSW", 620], "sh": [["Stephen Curry", "GSW", "W", 247.1], ["Kevin Durant", "GSW", "W", 191.4], ["Giannis Antetokounmpo", "MIL", "E", 166.7], ["Karl-Anthony Towns", "MIN", "W", 159.8], ["Clint Capela", "HOU", "W", 152.8]], "de": ["Kawhi Leonard", "TOR", "E", 60.0]}, {"s": "2019-20", "em": ["Giannis Antetokounmpo", "MIL", 2097, 72], "wm": ["James Harden", "HOU", 2690, 80], "ae": [["Jayson Tatum", "BOS", 1984, 83], ["Trae Young", "ATL", 1778, 60], ["Bradley Beal", "WAS", 1741, 57], ["Jimmy Butler III", "MIA", 1624, 79], ["Pascal Siakam", "TOR", 1558, 71]], "aw": [["LeBron James", "LAL", 2278, 88], ["Anthony Davis", "LAL", 2200, 83], ["Damian Lillard", "POR", 2075, 70], ["Luka Dončić", "DAL", 1945, 67], ["Nikola Jokić", "DEN", 1920, 92]], "ebb": ["Giannis Antetokounmpo", "MIL", 1857], "wbb": ["James Harden", "HOU", 2335], "ess": ["Jimmy Butler III", "MIA", 467], "wss": ["Anthony Davis", "LAL", 582], "sh": [["Duncan Robinson", "MIA", "E", 191.5], ["Damian Lillard", "POR", "W", 146.2], ["John Collins", "ATL", "E", 131.1], ["Rudy Gobert", "UTA", "W", 130.7], ["Khris Middleton", "MIL", "E", 119.8]], "de": ["Anthony Davis", "LAL", "W", 59.7]}, {"s": "2020-21", "em": ["Giannis Antetokounmpo", "MIL", 2351, 82], "wm": ["Devin Booker", "PHX", 2313, 89], "ae": [["Trae Young", "ATL", 2055, 79], ["Bradley Beal", "WAS", 2028, 65], ["Khris Middleton", "MIL", 1927, 91], ["Jayson Tatum", "BOS", 1845, 69], ["Julius Randle", "NYK", 1802, 76]], "aw": [["Nikola Jokić", "DEN", 2196, 82], ["Damian Lillard", "POR", 2134, 73], ["Luka Dončić", "DAL", 2080, 73], ["Stephen Curry", "GSW", 2015, 63], ["Paul George", "LAC", 1770, 73]], "ebb": ["Bradley Beal", "WAS", 1878], "wbb": ["Stephen Curry", "GSW", 2015], "ess": ["Giannis Antetokounmpo", "MIL", 634], "wss": ["Devin Booker", "PHX", 601], "sh": [["Stephen Curry", "GSW", "W", 227.7], ["Nikola Jokić", "DEN", "W", 211.0], ["Michael Porter Jr.", "DEN", "W", 176.0], ["Joe Harris", "BRK", "E", 157.3], ["Zach LaVine", "CHI", "E", 149.1]], "de": ["Deandre Ayton", "PHX", "W", 58.7]}, {"s": "2021-22", "em": ["Jayson Tatum", "BOS", 2661, 100], "wm": ["Luka Dončić", "DAL", 2322, 80], "ae": [["Giannis Antetokounmpo", "MIL", 2382, 79], ["Joel Embiid", "PHI", 2315, 78], ["Trae Young", "ATL", 2232, 81], ["DeMar DeRozan", "CHI", 2222, 81], ["Jaylen Brown", "BOS", 2113, 90]], "aw": [["Stephen Curry", "GSW", 2232, 86], ["Nikola Jokić", "DEN", 2159, 79], ["Devin Booker", "PHX", 2055, 78], ["Karl-Anthony Towns", "MIN", 1949, 80], ["Donovan Mitchell", "UTA", 1886, 73]], "ebb": ["Trae Young", "ATL", 2155], "wbb": ["Nikola Jokić", "DEN", 2004], "ess": ["Jayson Tatum", "BOS", 615], "wss": ["Stephen Curry", "GSW", 602], "sh": [["Nikola Jokić", "DEN", "W", 244.9], ["Karl-Anthony Towns", "MIN", "W", 163.3], ["Rudy Gobert", "UTA", "W", 145.3], ["Deandre Ayton", "PHX", "W", 144.0], ["Jarrett Allen", "CLE", "E", 142.5]], "de": ["Jordan Poole", "GSW", "W", 47.9]}, {"s": "2022-23", "em": ["Jayson Tatum", "BOS", 2768, 94], "wm": ["Nikola Jokić", "DEN", 2290, 89], "ae": [["Joel Embiid", "PHI", 2396, 75], ["Jaylen Brown", "BOS", 2237, 87], ["Julius Randle", "NYK", 2102, 87], ["Trae Young", "ATL", 2089, 79], ["Jimmy Butler III", "MIA", 2058, 86]], "aw": [["Luka Dončić", "DAL", 2138, 66], ["Shai Gilgeous-Alexander", "OKC", 2135, 68], ["Anthony Edwards", "MIN", 2104, 84], ["Stephen Curry", "GSW", 2044, 69], ["De'Aaron Fox", "SAC", 2018, 80]], "ebb": ["Jayson Tatum", "BOS", 2225], "wbb": ["Luka Dončić", "DAL", 2138], "ess": ["Jimmy Butler III", "MIA", 592], "wss": ["Nikola Jokić", "DEN", 600], "sh": [["Nikola Jokić", "DEN", "W", 247.1], ["Stephen Curry", "GSW", "W", 194.6], ["Kevin Durant", "2TM", "W", 163.0], ["Domantas Sabonis", "SAC", "W", 140.5], ["Lauri Markkanen", "UTA", "W", 130.5]], "de": ["Devin Booker", "PHX", "W", 61.9]}, {"s": "2023-24", "em": ["Jalen Brunson", "NYK", 2633, 90], "wm": ["Luka Dončić", "DAL", 3005, 92], "ae": [["Jayson Tatum", "BOS", 2462, 93], ["Giannis Antetokounmpo", "MIL", 2222, 73], ["Pascal Siakam", "2TM", 2104, 97], ["Jaylen Brown", "BOS", 2064, 89], ["Tyrese Maxey", "PHI", 1995, 76]], "aw": [["Shai Gilgeous-Alexander", "OKC", 2556, 85], ["Anthony Edwards", "MIN", 2490, 95], ["Nikola Jokić", "DEN", 2429, 91], ["Kevin Durant", "PHX", 2139, 79], ["Anthony Davis", "LAL", 2015, 81]], "ebb": ["Giannis Antetokounmpo", "MIL", 2222], "wbb": ["Luka Dončić", "DAL", 2370], "ess": ["Jayson Tatum", "BOS", 475], "wss": ["Luka Dončić", "DAL", 635], "sh": [["Nikola Jokić", "DEN", "W", 206.0], ["Grayson Allen", "PHX", "W", 159.7], ["Daniel Gafford", "2TM", "W", 153.6], ["Kevin Durant", "PHX", "W", 139.0], ["Obi Toppin", "IND", "E", 135.9]], "de": ["Andrew Nembhard", "IND", "E", 39.0]}, {"s": "2024-25", "em": ["Jalen Brunson", "NYK", 2220, 83], "wm": ["Shai Gilgeous-Alexander", "OKC", 3172, 99], "ae": [["Giannis Antetokounmpo", "MIL", 2201, 72], ["Jayson Tatum", "BOS", 2157, 80], ["Karl-Anthony Towns", "NYK", 2145, 90], ["Pascal Siakam", "IND", 2050, 101], ["Cade Cunningham", "DET", 1980, 76]], "aw": [["Anthony Edwards", "MIN", 2557, 94], ["Nikola Jokić", "DEN", 2438, 84], ["Jalen Williams", "OKC", 1982, 92], ["James Harden", "LAC", 1933, 86], ["Devin Booker", "PHX", 1923, 75]], "ebb": ["Giannis Antetokounmpo", "MIL", 2036], "wbb": ["Shai Gilgeous-Alexander", "OKC", 2484], "ess": ["Jalen Brunson", "NYK", 530], "wss": ["Shai Gilgeous-Alexander", "OKC", 688], "sh": [["Nikola Jokić", "DEN", "W", 235.7], ["Jarrett Allen", "CLE", "E", 189.4], ["Zach LaVine", "2TM", "W", 173.9], ["Shai Gilgeous-Alexander", "OKC", "W", 161.4], ["Christian Braun", "DEN", "W", 158.2]], "de": ["Aaron Nesmith", "IND", "E", 38.9]}, {"s": "2025-26", "em": ["Jalen Brunson", "NYK", 2466, 93], "wm": ["Shai Gilgeous-Alexander", "OKC", 2531, 83], "ae": [["Donovan Mitchell", "CLE", 2420, 88], ["Tyrese Maxey", "PHI", 2241, 81], ["Jaylen Brown", "BOS", 2218, 78], ["Cade Cunningham", "DET", 1925, 78], ["Karl-Anthony Towns", "NYK", 1806, 94]], "aw": [["Luka Dončić", "LAL", 2143, 64], ["Victor Wembanyama", "SAS", 2124, 86], ["Kevin Durant", "HOU", 2049, 79], ["Jamal Murray", "DEN", 2047, 81], ["Anthony Edwards", "MIN", 1973, 71]], "ebb": ["Jaylen Brown", "BOS", 2038], "wbb": ["Luka Dončić", "LAL", 2143], "ess": ["Jalen Brunson", "NYK", 539], "wss": ["Victor Wembanyama", "SAS", 524], "sh": [["Shai Gilgeous-Alexander", "OKC", "W", 189.0], ["Nikola Jokić", "DEN", "W", 183.8], ["Kevin Durant", "HOU", "W", 155.6], ["Jalen Duren", "DET", "E", 145.1], ["Kon Knueppel", "CHA", "E", 141.4]], "de": ["OG Anunoby", "NYK", "E", 66.8]}];
+    const PANTHEON_MAP = {"dwight howard": {"min": ":01", "num": 1, "q": "1Q", "mvp": 0, "ac": 4}, "mitch richmond": {"min": ":02", "num": 2, "q": "1Q", "mvp": 0, "ac": 4}, "terry cummings": {"min": ":03", "num": 3, "q": "1Q", "mvp": 0, "ac": 4}, "trae young": {"min": ":04", "num": 4, "q": "1Q", "mvp": 0, "ac": 4}, "jaylen brown": {"min": ":05", "num": 5, "q": "1Q", "mvp": 0, "ac": 4}, "anthony davis": {"min": ":06", "num": 6, "q": "1Q", "mvp": 0, "ac": 4}, "anthony edwards": {"min": ":07", "num": 7, "q": "1Q", "mvp": 0, "ac": 4}, "glen rice": {"min": ":08", "num": 8, "q": "1Q", "mvp": 0, "ac": 5}, "bradley beal": {"min": ":09", "num": 9, "q": "1Q", "mvp": 0, "ac": 5}, "paul george": {"min": ":10", "num": 10, "q": "1Q", "mvp": 0, "ac": 5}, "kevin mchale": {"min": ":11", "num": 11, "q": "1Q", "mvp": 0, "ac": 5}, "demar derozan": {"min": ":12", "num": 12, "q": "1Q", "mvp": 0, "ac": 5}, "vince carter": {"min": ":13", "num": 13, "q": "2Q", "mvp": 0, "ac": 5}, "tracy mcgrady": {"min": ":14", "num": 14, "q": "2Q", "mvp": 0, "ac": 5}, "gary payton": {"min": ":15", "num": 15, "q": "2Q", "mvp": 0, "ac": 6}, "scottie pippen": {"min": ":16", "num": 16, "q": "2Q", "mvp": 0, "ac": 6}, "clyde drexler": {"min": ":17", "num": 17, "q": "2Q", "mvp": 0, "ac": 6}, "david robinson": {"min": ":18", "num": 18, "q": "2Q", "mvp": 0, "ac": 6}, "reggie miller": {"min": ":19", "num": 19, "q": "2Q", "mvp": 0, "ac": 7}, "tim duncan": {"min": ":20", "num": 20, "q": "2Q", "mvp": 0, "ac": 7}, "dwyane wade": {"min": ":21", "num": 21, "q": "2Q", "mvp": 0, "ac": 7}, "carmelo anthony": {"min": ":22", "num": 22, "q": "2Q", "mvp": 0, "ac": 8}, "damian lillard": {"min": ":23", "num": 23, "q": "2Q", "mvp": 0, "ac": 8}, "dirk nowitzki": {"min": ":24", "num": 24, "q": "2Q", "mvp": 0, "ac": 12}, "isaiah thomas": {"min": ":25", "num": 25, "q": "3Q", "mvp": 1, "ac": 1}, "devin booker": {"min": ":26", "num": 26, "q": "3Q", "mvp": 1, "ac": 2}, "dale ellis": {"min": ":27", "num": 27, "q": "3Q", "mvp": 1, "ac": 2}, "adrian dantley": {"min": ":28", "num": 28, "q": "3Q", "mvp": 1, "ac": 2}, "amar'e stoudemire": {"min": ":29", "num": 29, "q": "3Q", "mvp": 1, "ac": 4}, "kevin garnett": {"min": ":30", "num": 30, "q": "3Q", "mvp": 1, "ac": 4}, "charles barkley": {"min": ":31", "num": 31, "q": "3Q", "mvp": 1, "ac": 5}, "nikola jokic": {"min": ":32", "num": 32, "q": "3Q", "mvp": 1, "ac": 5}, "russell westbrook": {"min": ":33", "num": 33, "q": "3Q", "mvp": 1, "ac": 6}, "dominique wilkins": {"min": ":34", "num": 34, "q": "3Q", "mvp": 1, "ac": 7}, "patrick ewing": {"min": ":35", "num": 35, "q": "3Q", "mvp": 1, "ac": 8}, "stephen curry": {"min": ":36", "num": 36, "q": "3Q", "mvp": 1, "ac": 8}, "shai gilgeous-alexander": {"min": ":37", "num": 37, "q": "4Q", "mvp": 2, "ac": 2}, "luka doncic": {"min": ":38", "num": 38, "q": "4Q", "mvp": 2, "ac": 4}, "jayson tatum": {"min": ":39", "num": 39, "q": "4Q", "mvp": 2, "ac": 4}, "larry bird": {"min": ":40", "num": 40, "q": "4Q", "mvp": 2, "ac": 4}, "hakeem olajuwon": {"min": ":41", "num": 41, "q": "4Q", "mvp": 2, "ac": 5}, "paul pierce": {"min": ":42", "num": 42, "q": "4Q", "mvp": 2, "ac": 7}, "jalen brunson": {"min": ":43", "num": 43, "q": "4Q", "mvp": 3, "ac": 0}, "alex english": {"min": ":44", "num": 44, "q": "4Q", "mvp": 3, "ac": 3}, "giannis antetokounmpo": {"min": ":45", "num": 45, "q": "4Q", "mvp": 3, "ac": 4}, "james harden": {"min": ":46", "num": 46, "q": "4Q", "mvp": 4, "ac": 5}, "shaquille o'neal": {"min": ":47", "num": 47, "q": "4Q", "mvp": 4, "ac": 7}, "kevin durant": {"min": ":48", "num": 48, "q": "4Q", "mvp": 4, "ac": 7}, "allen iverson": {"min": ":49", "num": 49, "q": "OT", "mvp": 5, "ac": 4}, "kobe bryant": {"min": ":50", "num": 50, "q": "OT", "mvp": 7, "ac": 7}, "karl malone": {"min": ":51", "num": 51, "q": "OT", "mvp": 7, "ac": 7}, "michael jordan": {"min": ":52", "num": 52, "q": "OT", "mvp": 10, "ac": 1}, "lebron james": {"min": ":53", "num": 53, "q": "OT", "mvp": 12, "ac": 3}};
+
+    function normalizeStr(s) {
+      return (s || "").replace(/\u2019/g, "'").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+    }
+
+    function getLastName(fullName) {
+      const clean = fullName.replace(/\s+(Jr\.|Sr\.|II|III|IV)$/i, "").trim();
+      const parts = clean.split(" ");
+      return parts[parts.length - 1];
+    }
+
+    // Deterministic hash for stable baseline inventory (1..82) per card
+    function hashSeed(str) {
+      let h = 2166136261;
+      for (let i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return (h >>> 0) / 4294967295;
+    }
+
+    // Calibrated Scarcity Inventory (strictly clamped 1..82; rare multi-award & OT cards scarcer)
+    function computeBaselineInventory(rec) {
+      // Anchor exact extremes so min=1 and max=82 are guaranteed in the series
+      if (rec.yy === "90" && normalizeStr(rec.name) === "michael jordan") return 1;
+      if (rec.yy === "84" && normalizeStr(rec.name) === "calvin natt") return 82;
+
+      const u = hashSeed(`${rec.yy}_${rec.name}_${rec.team}`);
+      let lo, hi;
+      if (rec.isMvp && rec.secAwards.length === 4) {
+        lo = 1; hi = 5;
+      } else if (rec.isMvp && rec.secAwards.length >= 2) {
+        lo = 2; hi = 14;
+      } else if (rec.isMvp) {
+        lo = 5; hi = 24;
+      } else if (rec.isAc && rec.secAwards.length >= 2) {
+        lo = 8; hi = 32;
+      } else if (rec.isAc && rec.secAwards.length === 1) {
+        lo = 14; hi = 48;
+      } else if (rec.isAc) {
+        lo = rec.pantheon && rec.pantheon.q === "OT" ? 12 : 24;
+        hi = rec.pantheon && rec.pantheon.q === "OT" ? 42 : 76;
+      } else if (rec.deVal !== null) {
+        lo = 10; hi = 36;
+      } else {
+        lo = 28; hi = 82;
+      }
+      return Math.max(1, Math.min(82, Math.floor(lo + u * (hi - lo + 1))));
+    }
+
+    // Build all 636 cards
+    const ALL_CARDS = [];
+    SEASONS_DATA.forEach((s, idx) => {
+      const ed = idx + 1;
+      const endYr = parseInt(s.s.split("-")[0], 10) + 1;
+      const yy = String(endYr).slice(2);
+      const psMap = {};
+
+      function getRec(name, team, conf) {
+        const k = normalizeStr(name);
+        if (!psMap[k]) {
+          psMap[k] = {
+            id: `${yy}_${k.replace(/[^a-z0-9]+/g, "_")}`,
+            s: s.s,
+            ed,
+            yr: endYr,
+            yy,
+            name,
+            lastName: getLastName(name),
+            team,
+            conf,
+            rank: null,
+            pts: null,
+            g: null,
+            ppg: null,
+            isMvp: false,
+            isAc: false,
+            bb: null,
+            ss: null,
+            shRank: null,
+            shVal: null,
+            deVal: null,
+            pantheon: PANTHEON_MAP[k] || null
+          };
+        }
+        return psMap[k];
+      }
+
+      let r = getRec(s.em[0], s.em[1], "E");
+      r.rank = 1; r.pts = s.em[2]; r.g = s.em[3]; r.ppg = s.em[2] / s.em[3]; r.isMvp = true;
+      s.ae.forEach((p, i) => {
+        const x = getRec(p[0], p[1], "E");
+        x.rank = i + 2; x.pts = p[2]; x.g = p[3]; x.ppg = p[2] / p[3]; x.isAc = true;
+      });
+      r = getRec(s.wm[0], s.wm[1], "W");
+      r.rank = 1; r.pts = s.wm[2]; r.g = s.wm[3]; r.ppg = s.wm[2] / s.wm[3]; r.isMvp = true;
+      s.aw.forEach((p, i) => {
+        const x = getRec(p[0], p[1], "W");
+        x.rank = i + 2; x.pts = p[2]; x.g = p[3]; x.ppg = p[2] / p[3]; x.isAc = true;
+      });
+
+      getRec(s.ebb[0], s.ebb[1], "E").bb = s.ebb[2];
+      getRec(s.wbb[0], s.wbb[1], "W").bb = s.wbb[2];
+      getRec(s.ess[0], s.ess[1], "E").ss = s.ess[2];
+      getRec(s.wss[0], s.wss[1], "W").ss = s.wss[2];
+      s.sh.forEach((sh, i) => {
+        const x = getRec(sh[0], sh[1], sh[2]);
+        x.shRank = i + 1; x.shVal = sh[3];
+      });
+      getRec(s.de[0], s.de[1], s.de[2]).deVal = s.de[3];
+
+      Object.values(psMap).forEach(rec => {
+        const secAwards = [];
+        if (rec.bb !== null) secAwards.push({ key: "BB", label: "BRONZE BUCKET", val: rec.bb.toLocaleString() });
+        if (rec.ss !== null) secAwards.push({ key: "SS", label: "SILVER SCORER", val: rec.ss.toLocaleString() });
+        if (rec.shVal !== null) secAwards.push({ key: "SH", label: `SHARP SHOOTER #${rec.shRank}`, val: `+${rec.shVal.toFixed(1)}` });
+        if (rec.deVal !== null) secAwards.push({ key: "DE", label: "DEAD EYE", val: `+${rec.deVal.toFixed(1)}` });
+        rec.secAwards = secAwards;
+
+        rec.totalAwards = (rec.isMvp || rec.isAc ? 1 : 0) + secAwards.length;
+        rec.primaryLabel = rec.isMvp
+          ? (rec.conf === "E" ? "EAST MVP" : "WEST MVP")
+          : (rec.isAc ? (rec.conf === "E" ? "ALL-EAST" : "ALL-WEST") : secAwards[0].label);
+
+        // Award sort rank (lower = higher prestige)
+        if (rec.isMvp && secAwards.length === 4) { rec.awardTier = 1; rec.awardGroup = "5-AWARD SWEEP"; }
+        else if (rec.isMvp) { rec.awardTier = 2; rec.awardGroup = rec.conf === "E" ? "EAST MVP" : "WEST MVP"; }
+        else if (rec.isAc && secAwards.length > 0) { rec.awardTier = 3; rec.awardGroup = `${rec.conf === "E" ? "ALL-EAST" : "ALL-WEST"} + HONORS`; }
+        else if (rec.isAc) { rec.awardTier = 4; rec.awardGroup = rec.conf === "E" ? "ALL-EAST" : "ALL-WEST"; }
+        else if (rec.deVal !== null) { rec.awardTier = 5; rec.awardGroup = "DEAD EYE"; }
+        else if (rec.ss !== null) { rec.awardTier = 6; rec.awardGroup = "SILVER SCORER"; }
+        else { rec.awardTier = 7; rec.awardGroup = "SHARP SHOOTER"; }
+
+        rec.inv = computeBaselineInventory(rec);
+        ALL_CARDS.push(rec);
+      });
+    });
+
+    // Application State
+    const state = {
+      sortAxis: "inventory",  // 'player' | 'team' | 'award' | 'season' | 'inventory'
+      sortDir: "asc",         // 'asc' | 'desc'
+      viewMode: "ledger",     // 'ledger' | 'grouped'
+      quickJump: null,        // active quick-jump token (letter, team, award, year, inv-tier)
+      compareQueue: []        // up to 2 card objects
+    };
+
+    function populateFilters() {
+      const teamSel = document.getElementById("teamFilter");
+      const teams = [...new Set(ALL_CARDS.map(c => c.team))].sort((a, b) => (a === "2TM" ? 1 : b === "2TM" ? -1 : a.localeCompare(b)));
+      teams.forEach(t => {
+        const count = ALL_CARDS.filter(c => c.team === t).length;
+        const opt = document.createElement("option");
+        opt.value = t;
+        opt.textContent = `${t === "2TM" ? "2TM (NBA)" : t} (${count})`;
+        teamSel.appendChild(opt);
+      });
+
+      const seasonSel = document.getElementById("seasonFilter");
+      SEASONS_DATA.forEach(s => {
+        const yr = parseInt(s.s.split("-")[0], 10) + 1;
+        const yy = String(yr).slice(2);
+        const opt = document.createElement("option");
+        opt.value = yy;
+        opt.textContent = `\u2019${yy}`;
+        seasonSel.appendChild(opt);
+      });
+    }
+
+    function getInvTier(inv) {
+      if (inv <= 10) return { key: "SCARCE", label: "01–10 · SCARCE", color: "#D92B2B", textCls: "text-[#D92B2B]" };
+      if (inv <= 25) return { key: "LOW", label: "11–25 · LOW", color: "#D97706", textCls: "text-[#B45309]" };
+      if (inv <= 50) return { key: "MID", label: "26–50 · MID", color: "#111111", textCls: "text-[#111111]" };
+      return { key: "OPEN", label: "51–82 · OPEN", color: "#64748B", textCls: "text-[#475569]" };
+    }
+
+    function setSortAxis(axis) {
+      if (state.sortAxis === axis) {
+        state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
+      } else {
+        state.sortAxis = axis;
+        // Sensible default direction per axis
+        state.sortDir = axis === "season" ? "desc" : "asc";
+        state.quickJump = null;
+      }
+      updateAxisUI();
+      renderQuickJump();
+      renderIndex();
+    }
+
+    function updateAxisUI() {
+      const axes = ["player", "team", "award", "season", "inventory"];
+      const arrow = state.sortDir === "asc" ? "\u25B2" : "\u25BC";
+      axes.forEach(ax => {
+        const cap = ax.charAt(0).toUpperCase() + ax.slice(1);
+        const tab = document.getElementById("axis" + cap);
+        const dirEl = document.getElementById("dir" + cap);
+        const th = document.getElementById("th" + cap);
+        const active = state.sortAxis === ax;
+
+        tab.classList.toggle("active", active);
+        dirEl.textContent = active ? arrow : "";
+        dirEl.className = active ? "text-[9.5px] text-[#F2A900]" : "text-[9.5px] opacity-0";
+
+        if (th) {
+          th.classList.toggle("sorted-col", active);
+          const baseLabels = { player: "PLAYER", team: "TEAM", award: "AWARDS", season: "SEASON", inventory: "INVENTORY (/ 82)" };
+          th.textContent = active ? `${baseLabels[ax]} ${arrow}` : baseLabels[ax];
+        }
+      });
+
+      const axisLabels = { player: "PLAYER", team: "TEAM", award: "AWARD", season: "SEASON", inventory: "INVENTORY" };
+      document.getElementById("statSort").textContent = `${axisLabels[state.sortAxis]} ${state.sortDir === "asc" ? "\u2191" : "\u2193"}`;
+    }
+
+    function setViewMode(mode) {
+      state.viewMode = mode;
+      document.getElementById("viewLedgerBtn").classList.toggle("active", mode === "ledger");
+      document.getElementById("viewGroupedBtn").classList.toggle("active", mode === "grouped");
+      document.getElementById("ledgerContainer").classList.toggle("hidden", mode !== "ledger");
+      document.getElementById("groupedContainer").classList.toggle("hidden", mode !== "grouped");
+      renderIndex();
+    }
+
+    function toggleQuickJump(val) {
+      state.quickJump = state.quickJump === val ? null : val;
+      renderQuickJump();
+      renderIndex();
+    }
+
+    function renderQuickJump() {
+      const titleEl = document.getElementById("quickJumpTitle");
+      const stripEl = document.getElementById("quickJumpStrip");
+      let items = [];
+
+      if (state.sortAxis === "player") {
+        titleEl.textContent = "LAST NAME A–Z";
+        const letters = [...new Set(ALL_CARDS.map(c => normalizeStr(c.lastName)[0].toUpperCase()))].sort();
+        items = letters.map(L => ({ val: L, label: L }));
+      } else if (state.sortAxis === "team") {
+        titleEl.textContent = "FRANCHISE INDEX";
+        const teams = [...new Set(ALL_CARDS.map(c => c.team))].sort((a, b) => (a === "2TM" ? 1 : b === "2TM" ? -1 : a.localeCompare(b)));
+        items = teams.map(t => ({ val: t, label: t }));
+      } else if (state.sortAxis === "award") {
+        titleEl.textContent = "AWARD FILTER";
+        items = [
+          { val: "EAST MVP", label: "EAST MVP" },
+          { val: "WEST MVP", label: "WEST MVP" },
+          { val: "ALL-EAST", label: "ALL-EAST" },
+          { val: "ALL-WEST", label: "ALL-WEST" },
+          { val: "BB", label: "BRONZE BUCKET" },
+          { val: "SS", label: "SILVER SCORER" },
+          { val: "SH", label: "SHARP SHOOTER" },
+          { val: "DE", label: "DEAD EYE" }
+        ];
+      } else if (state.sortAxis === "season") {
+        titleEl.textContent = "SEASON INDEX";
+        items = SEASONS_DATA.map(s => {
+          const yy = String(parseInt(s.s.split("-")[0], 10) + 1).slice(2);
+          return { val: yy, label: `\u2019${yy}` };
+        });
+      } else {
+        titleEl.textContent = "INVENTORY TIERS";
+        items = [
+          { val: "SCARCE", label: "01–10 SCARCE" },
+          { val: "LOW", label: "11–25 LOW" },
+          { val: "MID", label: "26–50 MID" },
+          { val: "OPEN", label: "51–82 OPEN" }
+        ];
+      }
+
+      stripEl.innerHTML =
+        `<div class="jump-pill ${state.quickJump === null ? 'active' : ''}" onclick="toggleQuickJump(null)">ALL</div>` +
+        items.map(it => `<div class="jump-pill ${state.quickJump === it.val ? 'active' : ''}" onclick="toggleQuickJump('${it.val}')">${it.label}</div>`).join("");
+    }
+
+    function getFilteredAndSorted() {
+      const q = normalizeStr(document.getElementById("searchInput").value);
+      const conf = document.getElementById("confFilter").value;
+      const aw = document.getElementById("awardFilter").value;
+      const team = document.getElementById("teamFilter").value;
+      const yy = document.getElementById("seasonFilter").value;
+      const invMin = Math.max(1, parseInt(document.getElementById("invMin").value, 10) || 1);
+      const invMax = Math.min(82, parseInt(document.getElementById("invMax").value, 10) || 82);
+      const panOnly = document.getElementById("pantheonOnly").checked;
+
+      const hasActiveFilter = q || conf !== "ALL" || aw !== "ALL" || team !== "ALL" || yy !== "ALL" || invMin > 1 || invMax < 82 || panOnly || state.quickJump !== null;
+      document.getElementById("resetFiltersBtn").classList.toggle("hidden", !hasActiveFilter);
+
+      let list = ALL_CARDS.filter(c => {
+        if (conf !== "ALL" && c.conf !== conf) return false;
+        if (team !== "ALL" && c.team !== team) return false;
+        if (yy !== "ALL" && c.yy !== yy) return false;
+        if (c.inv < invMin || c.inv > invMax) return false;
+        if (panOnly && !c.pantheon) return false;
+
+        if (aw === "MVP" && !c.isMvp) return false;
+        if (aw === "ALL_CONF" && !c.isAc) return false;
+        if (aw === "BB" && c.bb === null) return false;
+        if (aw === "SS" && c.ss === null) return false;
+        if (aw === "SH" && c.shVal === null) return false;
+        if (aw === "DE" && c.deVal === null) return false;
+        if (aw === "MULTI" && c.totalAwards < 2) return false;
+        if (aw === "SWEEP" && !(c.isMvp && c.secAwards.length === 4)) return false;
+        if (aw === "SPEC" && (c.isMvp || c.isAc)) return false;
+
+        // Context-aware Quick-Jump filter
+        if (state.quickJump !== null) {
+          const j = state.quickJump;
+          if (state.sortAxis === "player" && normalizeStr(c.lastName)[0].toUpperCase() !== j) return false;
+          if (state.sortAxis === "team" && c.team !== j) return false;
+          if (state.sortAxis === "season" && c.yy !== j) return false;
+          if (state.sortAxis === "inventory" && getInvTier(c.inv).key !== j) return false;
+          if (state.sortAxis === "award") {
+            if (j === "EAST MVP" && !(c.isMvp && c.conf === "E")) return false;
+            if (j === "WEST MVP" && !(c.isMvp && c.conf === "W")) return false;
+            if (j === "ALL-EAST" && !(c.isAc && c.conf === "E")) return false;
+            if (j === "ALL-WEST" && !(c.isAc && c.conf === "W")) return false;
+            if (j === "BB" && c.bb === null) return false;
+            if (j === "SS" && c.ss === null) return false;
+            if (j === "SH" && c.shVal === null) return false;
+            if (j === "DE" && c.deVal === null) return false;
+          }
+        }
+
+        if (q) {
+          const hay = `${normalizeStr(c.name)} ${normalizeStr(c.team)} '${c.yy} ${c.yy} ${normalizeStr(c.primaryLabel)} ${c.secAwards.map(a => normalizeStr(a.label)).join(" ")}`;
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+
+      const mul = state.sortDir === "asc" ? 1 : -1;
+      list.sort((a, b) => {
+        let cmp = 0;
+        if (state.sortAxis === "player") {
+          cmp = normalizeStr(a.lastName).localeCompare(normalizeStr(b.lastName)) || normalizeStr(a.name).localeCompare(normalizeStr(b.name)) || (a.yr - b.yr);
+        } else if (state.sortAxis === "team") {
+          const ta = a.team === "2TM" ? "ZZZ" : a.team;
+          const tb = b.team === "2TM" ? "ZZZ" : b.team;
+          cmp = ta.localeCompare(tb) || (a.yr - b.yr) || (a.awardTier - b.awardTier);
+        } else if (state.sortAxis === "award") {
+          cmp = (a.awardTier - b.awardTier) || (b.totalAwards - a.totalAwards) || (b.yr - a.yr) || normalizeStr(a.lastName).localeCompare(normalizeStr(b.lastName));
+        } else if (state.sortAxis === "season") {
+          cmp = (a.yr - b.yr) || (a.awardTier - b.awardTier) || (a.conf.localeCompare(b.conf)) || ((a.rank || 9) - (b.rank || 9));
+        } else {
+          // Inventory
+          cmp = (a.inv - b.inv) || (a.awardTier - b.awardTier) || (b.yr - a.yr);
+        }
+        return cmp * mul;
+      });
+
+      return list;
+    }
+
+    function renderAwardPills(c) {
+      const pills = [];
+      if (c.isMvp) {
+        pills.push(`<span class="aw-pill aw-mvp">${c.primaryLabel}</span>`);
+      } else if (c.isAc) {
+        pills.push(`<span class="aw-pill ${c.conf === 'E' ? 'aw-ae' : 'aw-aw'}">${c.primaryLabel}</span>`);
+      }
+      c.secAwards.forEach(a => {
+        const cls = a.key === "BB" ? "aw-bb" : a.key === "SS" ? "aw-ss" : a.key === "SH" ? "aw-sh" : "aw-de";
+        pills.push(`<span class="aw-pill ${cls}">${a.label}</span>`);
+      });
+      return pills.join(" ");
+    }
+
+    function renderValuesSummary(c) {
+      const parts = [];
+      if (c.pts !== null) {
+        parts.push(`<strong class="text-[#111111]">${c.pts.toLocaleString()}</strong> <span class="text-[#8C8B85]">PTS</span> · ${c.g}G · ${c.ppg.toFixed(1)}`);
+      }
+      c.secAwards.forEach(a => {
+        if (c.pts !== null && a.key === "BB" && c.bb === c.pts) return; // avoid duplicate number when reg=total
+        parts.push(`<span class="text-[#555552]">${a.key}:</span> <strong class="text-[#111111]">${a.val}</strong>`);
+      });
+      return parts.join(" &middot; ");
+    }
+
+    function mintHref(c) {
+      const safeName = encodeURIComponent(c.name.replace(/\u2019/g, "'"));
+      return `cards.html?season=${encodeURIComponent(c.s)}&player=${safeName}&copy=${c.inv}`;
+    }
+
+    function buildRowHTML(c, rowNum) {
+      const tier = getInvTier(c.inv);
+      const pct = ((c.inv / 82) * 100).toFixed(1);
+      const inCmp = state.compareQueue.some(x => x.id === c.id);
+      const panBadge = c.pantheon
+        ? `<span class="font-mono-tabular text-[9.5px] font-bold px-1 py-0.5 ml-1.5 ${c.pantheon.q === 'OT' ? 'bg-[#111214] text-[#F2A900]' : 'bg-[#ECEAE2] text-[#555552] border border-[#C7C5BC]'}">№${String(c.pantheon.num).padStart(2, '0')}</span>`
+        : "";
+
+      return `
+        <tr class="${inCmp ? 'in-compare' : ''}">
+          <td class="font-mono-tabular text-[10px] text-[#8C8B85] text-center">${rowNum}</td>
+          <td class="font-mono-tabular font-extrabold text-[12px] ${c.conf === 'E' ? 'text-[#1D4ED8]' : 'text-[#D92B2B]'}">&rsquo;${c.yy}</td>
+          <td class="font-bold text-[#111111] whitespace-nowrap">
+            <a href="${mintHref(c)}" class="hover:underline">${c.name}</a>${panBadge}
+          </td>
+          <td class="font-mono-tabular text-[11px] font-bold">
+            <span class="px-1.5 py-0.5 border border-[#111111] ${c.team === '2TM' ? 'bg-[#1D428A] text-white' : 'bg-[#ECEAE2] text-[#111111]'}">${c.team}</span>
+          </td>
+          <td><div class="flex flex-wrap gap-1">${renderAwardPills(c)}</div></td>
+          <td class="font-mono-tabular text-[10.5px] text-[#555552] whitespace-nowrap">${renderValuesSummary(c)}</td>
+          <td class="font-mono-tabular text-right whitespace-nowrap">
+            <span class="inv-track mr-2"><span class="inv-fill" style="width:${pct}%; background:${tier.color};"></span></span>
+            <strong class="${tier.textCls} text-[11.5px]">${String(c.inv).padStart(2, '0')}</strong><span class="text-[#8C8B85] text-[10px]"> / 82</span>
+          </td>
+          <td class="font-mono-tabular text-right whitespace-nowrap">
+            <button onclick="toggleCompare('${c.id}')" class="text-[9.5px] font-bold uppercase px-1.5 py-1 border border-[#111111] ${inCmp ? 'bg-[#F2A900] text-[#111214]' : 'bg-[#FAF9F6] text-[#111111] hover:bg-[#ECEAE2]'} mr-1">
+              ${inCmp ? 'STAGED ✓' : '+ CMP'}
+            </button>
+            <a href="${mintHref(c)}" class="inline-block text-[9.5px] font-bold uppercase px-2 py-1 bg-[#111214] text-[#F2A900] hover:bg-[#1D4ED8] hover:text-white">
+              MINT &rarr;
+            </a>
+          </td>
+        </tr>
+      `;
+    }
+
+    function getGroupKey(c) {
+      if (state.sortAxis === "player") return `${c.name}${c.pantheon ? `  ·  №${String(c.pantheon.num).padStart(2, '0')}` : ''}`;
+      if (state.sortAxis === "team") return c.team === "2TM" ? "2TM · TRADED IN-SEASON (NBA)" : c.team;
+      if (state.sortAxis === "award") return c.awardGroup;
+      if (state.sortAxis === "season") return `\u2019${c.yy}`;
+      return getInvTier(c.inv).label;
+    }
+
+    function renderIndex() {
+      const list = getFilteredAndSorted();
+
+      // Update Summary Telemetry
+      document.getElementById("statMatched").textContent = `${list.length} / ${ALL_CARDS.length}`;
+      const totalSupply = list.reduce((acc, c) => acc + c.inv, 0);
+      document.getElementById("statSupply").textContent = totalSupply.toLocaleString();
+      document.getElementById("statScarce").textContent = list.filter(c => c.inv <= 10).length;
+      if (list.length > 0) {
+        const minI = Math.min(...list.map(c => c.inv));
+        const maxI = Math.max(...list.map(c => c.inv));
+        document.getElementById("statSpan").textContent = `${minI} – ${maxI}`;
+      } else {
+        document.getElementById("statSpan").textContent = "—";
+      }
+
+      if (state.viewMode === "ledger") {
+        const tbody = document.getElementById("ledgerBody");
+        if (list.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="8" class="p-8 text-center font-mono-tabular text-xs text-[#555552]">NO CARDS MATCH CURRENT FILTERS.</td></tr>`;
+          return;
+        }
+        tbody.innerHTML = list.map((c, i) => buildRowHTML(c, i + 1)).join("");
+      } else {
+        // Grouped Directory View
+        const cont = document.getElementById("groupedContainer");
+        if (list.length === 0) {
+          cont.innerHTML = `<div class="border-2 border-[#111111] bg-[#FAF9F6] p-8 text-center font-mono-tabular text-xs text-[#555552]">NO CARDS MATCH CURRENT FILTERS.</div>`;
+          return;
+        }
+        const groups = new Map();
+        list.forEach(c => {
+          const gk = getGroupKey(c);
+          if (!groups.has(gk)) groups.set(gk, []);
+          groups.get(gk).push(c);
+        });
+
+        let html = "";
+        groups.forEach((cards, gTitle) => {
+          const gSupply = cards.reduce((a, x) => a + x.inv, 0);
+          html += `
+            <div class="border-2 border-[#111111] bg-[#FAF9F6]">
+              <div class="px-4 py-2 bg-[#111214] text-[#FAF9F6] flex items-center justify-between font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em]">
+                <span>${gTitle}</span>
+                <span class="text-[#F2A900]">${cards.length} CARD${cards.length === 1 ? '' : 'S'} &middot; ${gSupply.toLocaleString()} INV</span>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="ledger-table">
+                  <tbody>
+                    ${cards.map((c, idx) => buildRowHTML(c, idx + 1)).join("")}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+        });
+        cont.innerHTML = html;
+      }
+    }
+
+    function toggleCompare(id) {
+      const idx = state.compareQueue.findIndex(x => x.id === id);
+      if (idx !== -1) {
+        state.compareQueue.splice(idx, 1);
+      } else {
+        const card = ALL_CARDS.find(c => c.id === id);
+        if (!card) return;
+        if (state.compareQueue.length >= 2) state.compareQueue.shift();
+        state.compareQueue.push(card);
+      }
+      updateCompareDock();
+      renderIndex();
+    }
+
+    function clearCompareQueue() {
+      state.compareQueue = [];
+      updateCompareDock();
+      renderIndex();
+    }
+
+    function updateCompareDock() {
+      const dock = document.getElementById("compareDock");
+      if (state.compareQueue.length === 0) {
+        dock.classList.add("hidden");
+        return;
+      }
+      dock.classList.remove("hidden");
+      const a = state.compareQueue[0];
+      const b = state.compareQueue[1];
+      document.getElementById("dockSlotA").textContent = `SLOT A: \u2019${a.yy} ${a.name} (${a.team}) · ${a.inv}/82`;
+      const bEl = document.getElementById("dockSlotB");
+      const btn = document.getElementById("dockLaunchBtn");
+
+      const safeA = encodeURIComponent(a.name.replace(/\u2019/g, "'"));
+      if (b) {
+        const safeB = encodeURIComponent(b.name.replace(/\u2019/g, "'"));
+        bEl.textContent = `SLOT B: \u2019${b.yy} ${b.name} (${b.team}) · ${b.inv}/82`;
+        bEl.className = "px-2.5 py-1 border border-[#60A5FA] bg-[#172133] text-white font-bold";
+        btn.href = `cards.html?season=${encodeURIComponent(a.s)}&player=${safeA}&copyA=${a.inv}&compareSeason=${encodeURIComponent(b.s)}&comparePlayer=${safeB}&copyB=${b.inv}`;
+        btn.textContent = "COMPARE SIDE-BY-SIDE IN CARD MINT \u2192";
+      } else {
+        bEl.textContent = "SLOT B: SELECT 2ND CARD (OPTIONAL)";
+        bEl.className = "px-2.5 py-1 border border-[#3A404B] bg-[#181B20] text-[#9BA0AA]";
+        btn.href = `cards.html?season=${encodeURIComponent(a.s)}&player=${safeA}&copy=${a.inv}`;
+        btn.textContent = "OPEN SLOT A IN CARD MINT \u2192";
+      }
+    }
+
+    function rerollAllInventory() {
+      ALL_CARDS.forEach(c => {
+        c.inv = Math.floor(Math.random() * 82) + 1;
+      });
+      // Guarantee exact min (1) and max (82) exist on distinct cards in the shuffled series
+      const idxMin = Math.floor(Math.random() * ALL_CARDS.length);
+      let idxMax = Math.floor(Math.random() * ALL_CARDS.length);
+      if (idxMax === idxMin) idxMax = (idxMin + 1) % ALL_CARDS.length;
+      ALL_CARDS[idxMin].inv = 1;
+      ALL_CARDS[idxMax].inv = 82;
+      updateCompareDock();
+      renderIndex();
+    }
+
+    function resetFilters() {
+      document.getElementById("searchInput").value = "";
+      document.getElementById("confFilter").value = "ALL";
+      document.getElementById("awardFilter").value = "ALL";
+      document.getElementById("teamFilter").value = "ALL";
+      document.getElementById("seasonFilter").value = "ALL";
+      document.getElementById("invMin").value = "1";
+      document.getElementById("invMax").value = "82";
+      document.getElementById("pantheonOnly").checked = false;
+      state.quickJump = null;
+      renderQuickJump();
+      renderIndex();
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      populateFilters();
+      const params = new URLSearchParams(window.location.search);
+      const sortP = params.get("sort");
+      if (sortP && ["player", "team", "award", "season", "inventory"].includes(sortP.toLowerCase())) {
+        state.sortAxis = sortP.toLowerCase();
+      }
+      updateAxisUI();
+      renderQuickJump();
+      renderIndex();
+    });
+  </script>
+</body>
+</html>
