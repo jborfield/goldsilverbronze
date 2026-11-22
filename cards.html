@@ -150,6 +150,33 @@
       display: inline-block;
       line-height: 1.3;
     }
+
+    .nav-seg-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 5px 4px;
+      border: 1px solid #3A404B;
+      background: #0D0F12;
+      color: #9BA0AA;
+      cursor: pointer;
+      transition: all 0.08s ease;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .nav-seg-btn:hover {
+      border-color: #8E939E;
+      color: #FAF9F6;
+      background: #1A1D24;
+    }
+    .nav-seg-btn.active {
+      background: #F2A900;
+      color: #111214;
+      border-color: #F2A900;
+      font-weight: 800;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-[#F2A900] selection:text-[#111214]">
@@ -251,11 +278,11 @@
         </div>
       </div>
 
-      <!-- Random Mint & PNG Export Controls (Cols 9-12) -->
+      <!-- Random Mint & Instagram PNG Export Controls (Cols 9-12) -->
       <div class="lg:col-span-4 p-3 flex flex-wrap items-center justify-between lg:justify-end gap-1.5">
         <button onclick="mintRandomPair()" class="ctrl-btn">RANDOM MINT</button>
-        <button id="exportSingleBtn" onclick="downloadSingleCard(studio.activeSlot)" class="ctrl-btn" title="Export active card as 1500×2100 PNG">SINGLE PNG &darr;</button>
-        <button id="exportCompareBtn" onclick="exportComparisonPNG()" class="ctrl-btn !bg-[#111111] !text-[#F2A900] hover:!bg-[#F2A900] hover:!text-[#111111]" title="Export side-by-side comparison as 3240×2280 PNG">COMPARE PNG &darr;</button>
+        <button id="exportSingleBtn" onclick="downloadSingleCard(studio.activeSlot)" class="ctrl-btn" title="Export active card optimized for Instagram 4:5 (1920×2400 PNG)">IG 4:5 PNG &darr;</button>
+        <button id="exportCompareBtn" onclick="exportComparisonPNG()" class="ctrl-btn !bg-[#111111] !text-[#F2A900] hover:!bg-[#F2A900] hover:!text-[#111111]" title="Export side-by-side comparison optimized for Instagram 16:9 (3840×2160 PNG)">IG 16:9 PNG &darr;</button>
       </div>
     </div>
 
@@ -301,33 +328,31 @@
         </div>
       </div>
 
-      <!-- Search & Facet Filters -->
+      <!-- Simplified Left-Side Card Navigation -->
       <div class="p-3 border-b border-[#2A2E36] space-y-2 bg-[#14161A]">
         <input id="cardSearchInput" type="text" oninput="filterCatalog()" placeholder="SEARCH PLAYER, TEAM, YEAR ('26)..."
                class="w-full bg-[#0D0F12] border border-[#3A404B] px-2.5 py-1.5 font-mono-tabular text-[11px] uppercase text-[#FAF9F6] placeholder:text-[#6B707B] focus:outline-none focus:border-[#F2A900]" />
 
-        <div class="grid grid-cols-3 gap-1.5">
-          <select id="seasonFilter" onchange="filterCatalog()" class="bg-[#0D0F12] border border-[#3A404B] px-1.5 py-1 font-mono-tabular text-[10px] text-[#E8E3D5] focus:outline-none focus:border-[#F2A900]">
+        <!-- Row 1: Seasons (as is) :: NBA | East | West -->
+        <div class="grid grid-cols-12 gap-1.5 items-stretch">
+          <select id="seasonFilter" onchange="filterCatalog()" class="col-span-5 bg-[#0D0F12] border border-[#3A404B] px-2 py-1 font-mono-tabular text-[10px] font-bold text-[#E8E3D5] focus:outline-none focus:border-[#F2A900]">
             <option value="ALL">ALL &rsquo;84&ndash;&rsquo;26</option>
           </select>
-          <select id="confFilter" onchange="filterCatalog()" class="bg-[#0D0F12] border border-[#3A404B] px-1.5 py-1 font-mono-tabular text-[10px] text-[#E8E3D5] focus:outline-none focus:border-[#F2A900]">
-            <option value="ALL">EAST + WEST</option>
-            <option value="E">EAST</option>
-            <option value="W">WEST</option>
-          </select>
-          <select id="tierFilter" onchange="filterCatalog()" class="bg-[#0D0F12] border border-[#3A404B] px-1.5 py-1 font-mono-tabular text-[10px] text-[#E8E3D5] focus:outline-none focus:border-[#F2A900]">
-            <option value="ALL">ALL AWARDS</option>
-            <option value="GS">5-AWARD SWEEP</option>
-            <option value="MVP">EAST / WEST MVP</option>
-            <option value="AC_PLUS">ALL-CONF + AWARDS</option>
-            <option value="AC_PURE">ALL-EAST / WEST ONLY</option>
-            <option value="BB">BRONZE BUCKET</option>
-            <option value="SS">SILVER SCORER</option>
-            <option value="SH">SHARP SHOOTER</option>
-            <option value="DE">DEAD EYE</option>
-            <option value="SPEC">SINGLE / DUAL AWARD</option>
-            <option value="2TM">TRADED (2TM)</option>
-          </select>
+          <div class="col-span-7 grid grid-cols-3">
+            <button type="button" id="confBtnALL" onclick="setConfFilter('ALL')" class="nav-seg-btn active">NBA</button>
+            <button type="button" id="confBtnE" onclick="setConfFilter('E')" class="nav-seg-btn border-l-0">EAST</button>
+            <button type="button" id="confBtnW" onclick="setConfFilter('W')" class="nav-seg-btn border-l-0">WEST</button>
+          </div>
+        </div>
+
+        <!-- Row 2: 5-AWARD SWEEP | MVP | All-Conference | Bronze Bucket | Silver Scorer | Dead Eye -->
+        <div class="grid grid-cols-3 gap-1">
+          <button type="button" id="awBtnGS" onclick="toggleAwardFilter('GS')" class="nav-seg-btn !text-[8.5px]">5-AWARD SWEEP</button>
+          <button type="button" id="awBtnMVP" onclick="toggleAwardFilter('MVP')" class="nav-seg-btn !text-[8.5px]">MVP</button>
+          <button type="button" id="awBtnAC" onclick="toggleAwardFilter('AC')" class="nav-seg-btn !text-[8.5px]">ALL-CONFERENCE</button>
+          <button type="button" id="awBtnBB" onclick="toggleAwardFilter('BB')" class="nav-seg-btn !text-[8.5px]">BRONZE BUCKET</button>
+          <button type="button" id="awBtnSS" onclick="toggleAwardFilter('SS')" class="nav-seg-btn !text-[8.5px]">SILVER SCORER</button>
+          <button type="button" id="awBtnDE" onclick="toggleAwardFilter('DE')" class="nav-seg-btn !text-[8.5px]">DEAD EYE</button>
         </div>
 
         <!-- Randomized Serial Scarcity Controls -->
@@ -362,7 +387,7 @@
             <span id="metaTitleA" class="font-bold text-[#F2A900] uppercase tracking-wider">SLOT A</span>
             <div class="flex items-center gap-2">
               <a id="posterLinkA" href="posters.html" class="hover:text-white underline">POSTER &rarr;</a>
-              <button onclick="downloadSingleCard('A')" class="px-2 py-0.5 border border-[#3A404B] text-[#E8E3D5] hover:border-[#F2A900] hover:text-[#F2A900]">PNG &darr;</button>
+              <button onclick="downloadSingleCard('A')" class="px-2 py-0.5 border border-[#3A404B] text-[#E8E3D5] hover:border-[#F2A900] hover:text-[#F2A900]" title="Export Slot A as Instagram 4:5 PNG">4:5 PNG &darr;</button>
             </div>
           </div>
           <div class="card-tilt-wrap w-full" data-slot="A">
@@ -379,7 +404,7 @@
             <span id="metaTitleB" class="font-bold text-[#60A5FA] uppercase tracking-wider">SLOT B</span>
             <div class="flex items-center gap-2">
               <a id="posterLinkB" href="posters.html" class="hover:text-white underline">POSTER &rarr;</a>
-              <button onclick="downloadSingleCard('B')" class="px-2 py-0.5 border border-[#3A404B] text-[#E8E3D5] hover:border-[#60A5FA] hover:text-[#60A5FA]">PNG &darr;</button>
+              <button onclick="downloadSingleCard('B')" class="px-2 py-0.5 border border-[#3A404B] text-[#E8E3D5] hover:border-[#60A5FA] hover:text-[#60A5FA]" title="Export Slot B as Instagram 4:5 PNG">4:5 PNG &darr;</button>
             </div>
           </div>
           <div class="card-tilt-wrap w-full" data-slot="B">
@@ -405,7 +430,7 @@
     <div class="max-w-[1840px] mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono-tabular text-[#555552]">
       <div>
         <strong class="text-[#111111]">WHERE BUCKETS REIGN // EXHIBIT 03 &middot; DIGITAL CARD MINT (&rsquo;84&ndash;&rsquo;26)</strong><br/>
-        636 player-seasons extracted directly from all 43 Season Posters &middot; 1500&times;2100 px PNG single &amp; 3240&times;2280 px comparison exports.
+        636 player-seasons extracted directly from all 43 Season Posters &middot; Instagram-optimized PNG exports: 4:5 single (1920&times;2400 px) &amp; 16:9 comparison (3840&times;2160 px).
       </div>
       <div class="sm:text-right">
         <a href="index.html" class="underline hover:text-[#111111]">00 OVERVIEW</a> &middot;
@@ -1823,11 +1848,31 @@
       activeSlot: "A",
       slab: true,
       tilt: true,
+      confFilter: "ALL",   // 'ALL' (NBA) | 'E' (East) | 'W' (West)
+      awardFilter: "ALL",  // 'ALL' | 'GS' | 'MVP' | 'AC' | 'BB' | 'SS' | 'DE'
       cardA: null,
       cardB: null,
       copyA: randomSerialCopy(),
       copyB: randomSerialCopy()
     };
+
+    function setConfFilter(conf) {
+      studio.confFilter = conf;
+      ["ALL", "E", "W"].forEach(k => {
+        const el = document.getElementById("confBtn" + k);
+        if (el) el.classList.toggle("active", k === conf);
+      });
+      filterCatalog();
+    }
+
+    function toggleAwardFilter(aw) {
+      studio.awardFilter = (studio.awardFilter === aw) ? "ALL" : aw;
+      ["GS", "MVP", "AC", "BB", "SS", "DE"].forEach(k => {
+        const el = document.getElementById("awBtn" + k);
+        if (el) el.classList.toggle("active", k === studio.awardFilter);
+      });
+      filterCatalog();
+    }
 
     function findCard(seasonStr, playerName) {
       const pn = normalizeStr(playerName);
@@ -1851,22 +1896,18 @@
     function filterCatalog() {
       const q = normalizeStr(document.getElementById("cardSearchInput").value);
       const sVal = document.getElementById("seasonFilter").value;
-      const cVal = document.getElementById("confFilter").value;
-      const tVal = document.getElementById("tierFilter").value;
+      const cVal = studio.confFilter;
+      const tVal = studio.awardFilter;
 
       const filtered = ALL_CARDS.filter(c => {
         if (sVal !== "ALL" && c.s !== sVal) return false;
         if (cVal !== "ALL" && c.conf !== cVal) return false;
         if (tVal === "GS" && c.tier !== "GS") return false;
         if (tVal === "MVP" && !c.isMvp) return false;
-        if (tVal === "AC_PLUS" && c.tier !== "AC_PLUS") return false;
-        if (tVal === "AC_PURE" && c.tier !== "AC_PURE") return false;
+        if (tVal === "AC" && !c.isAc) return false;
         if (tVal === "BB" && c.bb === null) return false;
         if (tVal === "SS" && c.ss === null) return false;
-        if (tVal === "SH" && c.shVal === null) return false;
         if (tVal === "DE" && c.deVal === null) return false;
-        if (tVal === "SPEC" && c.tier !== "SPEC") return false;
-        if (tVal === "2TM" && c.team !== "2TM") return false;
 
         if (q) {
           const hay = `${normalizeStr(c.name)} ${normalizeStr(c.team)} '${c.yy} ${c.yy} ${normalizeStr(c.primaryLabel)} ${normalizeStr(c.serialCode)}`;
@@ -2115,41 +2156,174 @@
       filterCatalog();
     }
 
+    // Draw a gallery-lit card (with optional One-Touch magnetic acrylic slab) onto an export stage
+    function drawStagedCardForExport(ctx, cardCanvas, x, y, cw, ch, withSlab) {
+      ctx.save();
+      if (withSlab) {
+        const padX = Math.round(cw * 0.028);
+        const padTop = Math.round(cw * 0.036);
+        const padBot = Math.round(cw * 0.028);
+        const sx = x - padX;
+        const sy = y - padTop;
+        const sw = cw + padX * 2;
+        const sh = ch + padTop + padBot;
+
+        // Deep studio drop shadow under acrylic slab
+        ctx.save();
+        ctx.shadowColor = "rgba(0, 0, 0, 0.82)";
+        ctx.shadowBlur = 72;
+        ctx.shadowOffsetY = 28;
+        ctx.fillStyle = "#14171D";
+        ctx.fillRect(sx, sy, sw, sh);
+        ctx.restore();
+
+        // Translucent beveled magnetic acrylic housing
+        const slabGrad = ctx.createLinearGradient(sx, sy, sx + sw, sy + sh);
+        slabGrad.addColorStop(0.0, "rgba(255, 255, 255, 0.18)");
+        slabGrad.addColorStop(0.35, "rgba(255, 255, 255, 0.05)");
+        slabGrad.addColorStop(0.68, "rgba(255, 255, 255, 0.12)");
+        slabGrad.addColorStop(1.0, "rgba(255, 255, 255, 0.04)");
+        ctx.fillStyle = slabGrad;
+        ctx.fillRect(sx, sy, sw, sh);
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.30)";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(sx + 1.5, sy + 1.5, sw - 3, sh - 3);
+
+        // Inner card recess edge
+        ctx.strokeStyle = "rgba(0, 0, 0, 0.72)";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x - 1, y - 1, cw + 2, ch + 2);
+
+        // Card artwork
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
+        ctx.drawImage(cardCanvas, x, y, cw, ch);
+
+        // Top-center brushed brass magnetic clasp
+        const magX = sx + sw / 2;
+        const magY = sy + padTop * 0.48;
+        const magR = Math.max(12, Math.round(padTop * 0.30));
+        const magGrad = ctx.createRadialGradient(magX - magR * 0.3, magY - magR * 0.3, 2, magX, magY, magR);
+        magGrad.addColorStop(0, "#FAF0C8");
+        magGrad.addColorStop(0.55, "#B8913D");
+        magGrad.addColorStop(1, "#5A4212");
+        ctx.beginPath();
+        ctx.arc(magX, magY, magR, 0, Math.PI * 2);
+        ctx.fillStyle = magGrad;
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
+        ctx.stroke();
+      } else {
+        // Pure unslabbed card with soft gallery shadow
+        ctx.save();
+        ctx.shadowColor = "rgba(0, 0, 0, 0.80)";
+        ctx.shadowBlur = 64;
+        ctx.shadowOffsetY = 24;
+        ctx.fillStyle = "#0B0C0F";
+        ctx.fillRect(x, y, cw, ch);
+        ctx.restore();
+
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
+        ctx.drawImage(cardCanvas, x, y, cw, ch);
+      }
+      ctx.restore();
+    }
+
+    // INSTAGRAM 4:5 SINGLE CARD PNG EXPORT (1920 x 2400 px — exact 4:5 portrait)
     function downloadSingleCard(slot) {
       const card = slot === "A" ? studio.cardA : studio.cardB;
-      const canvas = document.getElementById(slot === "A" ? "canvasA" : "canvasB");
+      const srcCanvas = document.getElementById(slot === "A" ? "canvasA" : "canvasB");
       const slug = `${card.yy}${card.conf}_${card.name.toLowerCase().replace(/[^a-z0-9]+/g, "_")}_${card.team.toLowerCase()}`;
       try {
-        const url = canvas.toDataURL("image/png");
+        const out = document.createElement("canvas");
+        out.width = 1920;
+        out.height = 2400; // Exact 4:5 aspect ratio (1920 / 2400 = 0.80)
+        const ctx = out.getContext("2d");
+
+        // Luxury dark gallery backdrop with subtle arena spotlight
+        ctx.fillStyle = "#0B0D11";
+        ctx.fillRect(0, 0, out.width, out.height);
+
+        const spot = ctx.createRadialGradient(out.width / 2, out.height * 0.28, 80, out.width / 2, out.height * 0.48, 1380);
+        if (card.isMvp || card.tier === "GS") {
+          spot.addColorStop(0, "rgba(242, 169, 0, 0.14)");
+        } else if (card.conf === "E") {
+          spot.addColorStop(0, "rgba(148, 163, 184, 0.12)");
+        } else {
+          spot.addColorStop(0, "rgba(218, 172, 72, 0.12)");
+        }
+        spot.addColorStop(0.6, "rgba(17, 19, 24, 0.04)");
+        spot.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.fillStyle = spot;
+        ctx.fillRect(0, 0, out.width, out.height);
+
+        // Native 1:1 1500x2100 card centered with balanced gallery mat margins (210px L/R, 150px T/B)
+        const cw = 1500, ch = 2100;
+        const cx = (out.width - cw) / 2;
+        const cy = (out.height - ch) / 2;
+        drawStagedCardForExport(ctx, srcCanvas, cx, cy, cw, ch, studio.slab);
+
         const a = document.createElement("a");
-        a.download = `card_${slug}.png`;
-        a.href = url;
+        a.download = `ig_4x5_${slug}.png`;
+        a.href = out.toDataURL("image/png");
         a.click();
       } catch (err) {
         alert("PNG export blocked by browser local-file CORS on an external logo image. Serve this folder over localhost or a static host for direct PNG export.");
       }
     }
 
+    // INSTAGRAM 16:9 SIDE-BY-SIDE COMPARISON PNG EXPORT (3840 x 2160 px — exact 4K 16:9)
     function exportComparisonPNG() {
       if (studio.mode === "single") {
         downloadSingleCard("A");
         return;
       }
       try {
-        const dip = document.createElement("canvas");
-        dip.width = 3240;
-        dip.height = 2280;
-        const dctx = dip.getContext("2d");
-        dctx.fillStyle = "#0B0C0F";
-        dctx.fillRect(0, 0, dip.width, dip.height);
-        dctx.drawImage(document.getElementById("canvasA"), 90, 90, 1500, 2100);
-        dctx.drawImage(document.getElementById("canvasB"), 1650, 90, 1500, 2100);
+        const out = document.createElement("canvas");
+        out.width = 3840;
+        out.height = 2160; // Exact 16:9 aspect ratio (3840 / 2160 = 1.7778)
+        const ctx = out.getContext("2d");
+
+        // Dark gallery stage with balanced dual spotlights behind Card A & Card B
+        ctx.fillStyle = "#0B0D11";
+        ctx.fillRect(0, 0, out.width, out.height);
+
+        const topGlow = ctx.createRadialGradient(out.width / 2, 0, 120, out.width / 2, out.height * 0.45, 2200);
+        topGlow.addColorStop(0, "rgba(242, 169, 0, 0.11)");
+        topGlow.addColorStop(0.55, "rgba(22, 26, 34, 0.05)");
+        topGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.fillStyle = topGlow;
+        ctx.fillRect(0, 0, out.width, out.height);
+
+        // Precision 5:7 cards (1320 x 1848) cleanly centered in 3840 x 2160 (gap 220px, margins 490px L/R, 156px T/B)
+        const cw = 1320, ch = 1848, gap = 220;
+        const xA = (out.width - (cw * 2 + gap)) / 2;
+        const xB = xA + cw + gap;
+        const yCard = (out.height - ch) / 2;
+
+        // Subtle gallery center meridian rule between the two cards
+        const midLine = ctx.createLinearGradient(0, yCard, 0, yCard + ch);
+        midLine.addColorStop(0, "rgba(255,255,255,0)");
+        midLine.addColorStop(0.5, "rgba(255,255,255,0.12)");
+        midLine.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.strokeStyle = midLine;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(out.width / 2, yCard + 60);
+        ctx.lineTo(out.width / 2, yCard + ch - 60);
+        ctx.stroke();
+
+        drawStagedCardForExport(ctx, document.getElementById("canvasA"), xA, yCard, cw, ch, studio.slab);
+        drawStagedCardForExport(ctx, document.getElementById("canvasB"), xB, yCard, cw, ch, studio.slab);
 
         const a = document.createElement("a");
         const sA = `${studio.cardA.yy}${studio.cardA.name.split(" ").pop().toLowerCase()}`;
         const sB = `${studio.cardB.yy}${studio.cardB.name.split(" ").pop().toLowerCase()}`;
-        a.download = `cards_${sA}_vs_${sB}.png`;
-        a.href = dip.toDataURL("image/png");
+        a.download = `ig_16x9_${sA}_vs_${sB}.png`;
+        a.href = out.toDataURL("image/png");
         a.click();
       } catch (err) {
         alert("Comparison PNG export blocked by browser local-file CORS on an external logo image. Serve this folder over localhost or a static host for direct PNG export.");
