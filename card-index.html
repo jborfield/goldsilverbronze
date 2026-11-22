@@ -556,7 +556,7 @@
 
       Object.values(psMap).forEach(rec => {
         const secAwards = [];
-        if (rec.bb !== null) secAwards.push({ key: "BB", label: "BRONZE BUCKET", val: rec.bb.toLocaleString() });
+        if (rec.bb !== null) secAwards.push({ key: "BB", label: "BRONZE BUCKET", val: String(rec.bb) });
         if (rec.ss !== null) secAwards.push({ key: "SS", label: "SILVER SCORER", val: rec.ss.toLocaleString() });
         if (rec.shVal !== null) secAwards.push({ key: "SH", label: `SHARP SHOOTER #${rec.shRank}`, val: `+${rec.shVal.toFixed(1)}` });
         if (rec.deVal !== null) secAwards.push({ key: "DE", label: "DEAD EYE", val: `+${rec.deVal.toFixed(1)}` });

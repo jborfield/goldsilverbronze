@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&family=Cinzel:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-paper: #F4F3EF;
@@ -54,7 +54,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 4px 8px;
+      padding: 4px 9px;
       cursor: pointer;
       transition: all 0.1s ease;
     }
@@ -150,16 +150,6 @@
       display: inline-block;
       line-height: 1.3;
     }
-
-    @media print {
-      @page { size: landscape; margin: 0.35in; }
-      body { background: #0D0F12 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-      #siteNav, .no-print, footer { display: none !important; }
-      #vaultMain { display: block !important; padding: 0 !important; max-width: none !important; }
-      .vault-stage { background: #0D0F12 !important; border: none !important; padding: 12px !important; }
-      .card-tilt-inner { transform: none !important; box-shadow: none !important; }
-      .foil-glare { display: none !important; }
-    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-[#F2A900] selection:text-[#111214]">
@@ -167,7 +157,7 @@
   <!-- =======================================================================
      BEGIN SITE NAVIGATION // WHERE BUCKETS REIGN ARCHIVE
      ======================================================================= -->
-<nav id="siteNav" aria-label="Primary Archive Navigation" class="bg-[#111214] text-[#FAF9F6] border-b-2 border-[#111111] print:hidden">
+<nav id="siteNav" aria-label="Primary Archive Navigation" class="bg-[#111214] text-[#FAF9F6] border-b-2 border-[#111111]">
   <div class="max-w-[1840px] mx-auto flex items-stretch justify-between border-x border-[#2A2D33]">
     <!-- Brand Mark -->
     <a href="index.html" class="flex items-center gap-2.5 px-3.5 sm:px-4 py-2 border-r border-[#2A2D33] hover:bg-[#181A1F] transition-colors shrink-0">
@@ -231,7 +221,7 @@
 <!-- END SITE NAVIGATION -->
 
   <!-- TOP SWISS STUDIO CONTROL BAR -->
-  <header class="no-print sticky top-0 z-30 bg-[#F4F3EF] border-b-2 border-[#111111]">
+  <header class="sticky top-0 z-30 bg-[#F4F3EF] border-b-2 border-[#111111]">
     <div class="max-w-[1840px] mx-auto grid grid-cols-1 lg:grid-cols-12 border-x border-[#111111]">
 
       <!-- Studio Identity (Cols 1-3) -->
@@ -249,17 +239,11 @@
         </h1>
       </div>
 
-      <!-- Mode, Logo Finish & Display Switches (Cols 4-9) -->
-      <div class="lg:col-span-6 p-3 border-b lg:border-b-0 lg:border-r border-[#111111] bg-[#FAF9F6] flex flex-wrap items-center justify-between gap-2">
+      <!-- Mode & Display Switches (Cols 4-8) -->
+      <div class="lg:col-span-5 p-3 border-b lg:border-b-0 lg:border-r border-[#111111] bg-[#FAF9F6] flex flex-wrap items-center justify-between gap-2">
         <div class="flex items-center">
-          <button id="modeDualBtn" class="ctrl-btn active" onclick="setViewMode('dual')">COMPARE</button>
-          <button id="modeSingleBtn" class="ctrl-btn border-l-0" onclick="setViewMode('single')">SINGLE</button>
-        </div>
-        <div class="flex items-center">
-          <span class="font-mono-tabular text-[9.5px] font-bold text-[#555552] mr-1.5 uppercase">LOGO:</span>
-          <button id="logoStylizedBtn" class="ctrl-btn active" onclick="setLogoFinish('stylized')">STYLIZED</button>
-          <button id="logoEtchedBtn" class="ctrl-btn border-l-0" onclick="setLogoFinish('etched')">ETCHED</button>
-          <button id="logoColorBtn" class="ctrl-btn border-l-0" onclick="setLogoFinish('color')">FULL</button>
+          <button id="modeDualBtn" class="ctrl-btn active" onclick="setViewMode('dual')">SIDE-BY-SIDE</button>
+          <button id="modeSingleBtn" class="ctrl-btn border-l-0" onclick="setViewMode('single')">SINGLE CARD</button>
         </div>
         <div class="flex items-center gap-1.5">
           <button id="slabToggleBtn" class="ctrl-btn active" onclick="toggleSlab()">SLAB: ON</button>
@@ -267,11 +251,11 @@
         </div>
       </div>
 
-      <!-- Export & Mint Actions (Cols 10-12) -->
-      <div class="lg:col-span-3 p-3 flex flex-wrap items-center justify-between lg:justify-end gap-1.5">
+      <!-- Random Mint & PNG Export Controls (Cols 9-12) -->
+      <div class="lg:col-span-4 p-3 flex flex-wrap items-center justify-between lg:justify-end gap-1.5">
         <button onclick="mintRandomPair()" class="ctrl-btn">RANDOM MINT</button>
-        <button onclick="exportCurrentPNG()" class="ctrl-btn !bg-[#111111] !text-[#F2A900] hover:!bg-[#F2A900] hover:!text-[#111111]">EXPORT PNG</button>
-        <button onclick="window.print()" class="ctrl-btn">PRINT / PDF</button>
+        <button id="exportSingleBtn" onclick="downloadSingleCard(studio.activeSlot)" class="ctrl-btn" title="Export active card as 1500×2100 PNG">SINGLE PNG &darr;</button>
+        <button id="exportCompareBtn" onclick="exportComparisonPNG()" class="ctrl-btn !bg-[#111111] !text-[#F2A900] hover:!bg-[#F2A900] hover:!text-[#111111]" title="Export side-by-side comparison as 3240×2280 PNG">COMPARE PNG &darr;</button>
       </div>
     </div>
 
@@ -285,7 +269,7 @@
         <button onclick="loadPreset('1993-94','Hakeem Olajuwon','1999-00','Shaquille O\'Neal')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">&rsquo;94 HAKEEM (4-AWARD) vs &rsquo;00 SHAQ</button>
         <button onclick="loadPreset('2012-13','LeBron James','2011-12','Kevin Durant')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">&rsquo;13 LeBRON vs &rsquo;12 DURANT</button>
         <button onclick="loadPreset('2004-05','Vince Carter','1994-95','Clyde Drexler')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">2TM: &rsquo;05 CARTER vs &rsquo;95 DREXLER</button>
-        <button onclick="loadPreset('1984-85','James Worthy','1986-87','James Worthy')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">DUAL SPEC: &rsquo;85 vs &rsquo;87 WORTHY</button>
+        <button onclick="loadPreset('1984-85','Larry Bird','1984-85','James Worthy')" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">&rsquo;85 BIRD vs &rsquo;85 WORTHY</button>
       </div>
       <div class="font-mono-tabular text-[9.5px] font-bold text-[#555552]" id="catalogMatchCount">
         636 PLAYER-SEASONS
@@ -297,7 +281,7 @@
   <main id="vaultMain" class="flex-1 max-w-[1840px] w-full mx-auto grid grid-cols-1 xl:grid-cols-12 border-x border-[#111111]">
 
     <!-- LEFT SIDEBAR: 636-CARD ARCHIVE BROWSER & SERIAL CONTROLS (Cols 1-3) -->
-    <aside class="no-print xl:col-span-3 bg-[#111214] text-[#E8E3D5] border-b-2 xl:border-b-0 xl:border-r-2 border-[#111111] flex flex-col max-h-[600px] xl:max-h-[calc(100vh-120px)] xl:sticky xl:top-[106px]">
+    <aside class="xl:col-span-3 bg-[#111214] text-[#E8E3D5] border-b-2 xl:border-b-0 xl:border-r-2 border-[#111111] flex flex-col max-h-[600px] xl:max-h-[calc(100vh-120px)] xl:sticky xl:top-[106px]">
 
       <!-- Target Slot Selector (Card A vs Card B) -->
       <div class="p-3 bg-[#16181C] border-b border-[#2A2E36]">
@@ -374,7 +358,7 @@
 
         <!-- CARD A CONTAINER -->
         <div id="cardAContainer" class="flex flex-col items-center gap-3 w-full max-w-[445px]">
-          <div class="no-print w-full flex items-center justify-between font-mono-tabular text-[10px] text-[#8E939E]">
+          <div class="w-full flex items-center justify-between font-mono-tabular text-[10px] text-[#8E939E]">
             <span id="metaTitleA" class="font-bold text-[#F2A900] uppercase tracking-wider">SLOT A</span>
             <div class="flex items-center gap-2">
               <a id="posterLinkA" href="posters.html" class="hover:text-white underline">POSTER &rarr;</a>
@@ -391,7 +375,7 @@
 
         <!-- CARD B CONTAINER (Hidden in Single Showcase Mode) -->
         <div id="cardBContainer" class="flex flex-col items-center gap-3 w-full max-w-[445px]">
-          <div class="no-print w-full flex items-center justify-between font-mono-tabular text-[10px] text-[#8E939E]">
+          <div class="w-full flex items-center justify-between font-mono-tabular text-[10px] text-[#8E939E]">
             <span id="metaTitleB" class="font-bold text-[#60A5FA] uppercase tracking-wider">SLOT B</span>
             <div class="flex items-center gap-2">
               <a id="posterLinkB" href="posters.html" class="hover:text-white underline">POSTER &rarr;</a>
@@ -409,7 +393,7 @@
       </div>
 
       <!-- HEAD-TO-HEAD COMPARATIVE TELEMETRY RAIL -->
-      <div id="comparisonTelemetry" class="no-print border border-[#2A2E36] bg-[#121418]/90 p-4 font-mono-tabular text-[10.5px] text-[#C7C3B7]">
+      <div id="comparisonTelemetry" class="border border-[#2A2E36] bg-[#121418]/90 p-4 font-mono-tabular text-[10.5px] text-[#C7C3B7]">
         <div id="deltaGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
       </div>
 
@@ -417,11 +401,11 @@
   </main>
 
   <!-- SHARED COLOPHON FOOTER -->
-  <footer class="no-print border-t-2 border-[#111111] bg-[#FAF9F6]">
+  <footer class="border-t-2 border-[#111111] bg-[#FAF9F6]">
     <div class="max-w-[1840px] mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono-tabular text-[#555552]">
       <div>
         <strong class="text-[#111111]">WHERE BUCKETS REIGN // EXHIBIT 03 &middot; DIGITAL CARD MINT (&rsquo;84&ndash;&rsquo;26)</strong><br/>
-        636 player-seasons extracted directly from all 43 Season Posters &middot; 1500&times;2100 px (5&times;7&quot; @ 300 DPI).
+        636 player-seasons extracted directly from all 43 Season Posters &middot; 1500&times;2100 px PNG single &amp; 3240&times;2280 px comparison exports.
       </div>
       <div class="sm:text-right">
         <a href="index.html" class="underline hover:text-[#111111]">00 OVERVIEW</a> &middot;
@@ -472,7 +456,7 @@
           const pan = PANTHEON_MAP[k] || null;
           psMap[k] = {
             id: `${yy}_${k.replace(/[^a-z0-9]+/g, "_")}`,
-            s: s.s, // kept strictly for internal posters.html ?season= URL deep-link, NEVER rendered on card
+            s: s.s, // internal URL deep-link only, NEVER rendered on card
             ed,
             yr: endYr,
             yy,
@@ -523,13 +507,13 @@
       getRec(s.de[0], s.de[1], s.de[2]).deVal = s.de[3];
 
       Object.values(psMap).forEach(rec => {
-        // Ordered specialist awards list (each carries exact label & value)
+        // Ordered specialist awards list — ZERO commas on Bronze Bucket (and all scoring values)
         const secAwards = [];
         if (rec.bb !== null) {
           secAwards.push({
             key: "BB",
             label: "BRONZE BUCKET",
-            val: rec.bb.toLocaleString(),
+            val: String(rec.bb),
             ratio: rec.bb / SCALES.bb
           });
         }
@@ -537,7 +521,7 @@
           secAwards.push({
             key: "SS",
             label: "SILVER SCORER",
-            val: rec.ss.toLocaleString(),
+            val: String(rec.ss),
             ratio: rec.ss / SCALES.ss
           });
         }
@@ -578,7 +562,6 @@
           rec.primaryLabel = secAwards[0] ? secAwards[0].label : "";
         }
 
-        // Clean serial token
         if (rec.tier === "GS") {
           rec.serialCode = "MVP·4";
         } else if (rec.isMvp) {
@@ -600,11 +583,10 @@
     });
 
     // =========================================================================
-    // 2. REAL OFFICIAL NBA TEAM LOGOS + ERA PALETTES (ALL 36 CODES)
-    //    Ordered resilient CDN fallback chain: ESPN 500px PNG -> NBA SVG -> Wikipedia SVG
+    // 2. REAL OFFICIAL NBA TEAM LOGOS (ALWAYS RENDERED IN FULL COLOR) + ERA PALETTES
     // =========================================================================
     const NBA_TEAM_META = {
-      "2TM": { nbaId: null, espn: null, urls: [
+      "2TM": { urls: [
         "https://a.espncdn.com/i/teamlogos/leagues/500/nba.png",
         "https://en.wikipedia.org/wiki/Special:FilePath/National_Basketball_Association_logo.svg"
       ]},
@@ -639,7 +621,6 @@
       WAS: { nbaId: "1610612764", espn: "wsh" },
       DET: { nbaId: "1610612765", espn: "det" },
       CHA: { nbaId: "1610612766", espn: "cha" },
-      // Historical franchises: authentic vintage SVG logos via Wikimedia Commons with graceful fallback
       SEA: { urls: [
         "https://en.wikipedia.org/wiki/Special:FilePath/Seattle_SuperSonics_logo.svg",
         "https://cdn.nba.com/logos/nba/1610612760/primary/L/logo.svg"
@@ -668,8 +649,7 @@
       return list;
     }
 
-    // Async CORS-aware Image Cache
-    const LOGO_CACHE = {}; // team -> { status: 'loading'|'ok'|'fail', img: Image|null, corsClean: bool }
+    const LOGO_CACHE = {};
 
     function ensureLogoLoaded(team, onReady) {
       if (LOGO_CACHE[team]) {
@@ -680,8 +660,6 @@
       const entry = { status: "loading", img: null, corsClean: true };
       LOGO_CACHE[team] = entry;
 
-      // Attempt sequence: first try every URL with crossOrigin='anonymous' (keeps PNG export untainted),
-      // then retry without crossOrigin so real logos still display even under strict local file:// policies.
       const attempts = [
         ...urls.map(u => ({ url: u, cors: true })),
         ...urls.map(u => ({ url: u, cors: false }))
@@ -794,40 +772,44 @@
       return T[team] || { name: team, primary: "#1F2937", dark: "#0D1117", accent: "#F2A900", metal: "#D8D2C5" };
     }
 
-    // Distinct Metallurgy & Micro-Motif Spec for Each of the 4 Specialist Honors
+    // Distinct Bullion Box Metallurgy — Boxes Speak Louder Than Words
     const AWARD_STYLES = {
       BB: {
-        bgStops: ["#4A2609", "#241103", "#381B05"],
-        borderStops: ["#F5C58A", "#CD7F32", "#8C4A12"],
-        labelColor: "#F5C082",
-        valStops: ["#FFF1DB", "#E89B4C", "#B8661E"],
-        barStart: "#8F4A10", barEnd: "#F8C98E"
+        // Hammered Burnished Copper-Bronze Ingot
+        outerBevel: ["#FFD7A8", "#C87528", "#6B3309", "#E89F54"],
+        bgStops: ["#4E2507", "#230E02", "#3A1904"],
+        labelColor: "rgba(248, 200, 146, 0.84)",
+        valStops: ["#FFF4E4", "#F2A65A", "#C46E22"],
+        barStart: "#8C420B", barEnd: "#FFD39E"
       },
       SS: {
-        bgStops: ["#283240", "#131922", "#1E2733"],
-        borderStops: ["#F8FAFC", "#B8C4D4", "#64748B"],
-        labelColor: "#E2E8F0",
-        valStops: ["#FFFFFF", "#CBD5E1", "#94A3B8"],
-        barStart: "#64748B", barEnd: "#F1F5F9"
+        // Machined Brushed Sterling Silver Bar
+        outerBevel: ["#FFFFFF", "#B4C2D2", "#526071", "#E2E8F0"],
+        bgStops: ["#293341", "#10161F", "#1E2734"],
+        labelColor: "rgba(226, 232, 240, 0.82)",
+        valStops: ["#FFFFFF", "#DCE4EE", "#9AA7B8"],
+        barStart: "#64748B", barEnd: "#F8FAFC"
       },
       SH: {
-        bgStops: ["#18202B", "#0C1017", "#141A24"],
-        borderStops: ["#E2E8F0", "#64748B", "#CBD5E1"],
-        labelColor: "#93C5FD",
-        valStops: ["#FFFFFF", "#E2E8F0", "#94A3B8"],
-        barStart: "#3B82F6", barEnd: "#E0F2FE"
+        // Sapphire-Titanium Optical Reticle Chamber
+        outerBevel: ["#E0F2FE", "#60A5FA", "#1E3A5F", "#BAE6FD"],
+        bgStops: ["#121D2D", "#080D16", "#0E1725"],
+        labelColor: "rgba(147, 197, 253, 0.86)",
+        valStops: ["#FFFFFF", "#DBEAFE", "#93C5FD"],
+        barStart: "#2563EB", barEnd: "#E0F2FE"
       },
       DE: {
-        bgStops: ["#211906", "#0C0902", "#1A1405"],
-        borderStops: ["#FFF1B8", "#F2A900", "#9E6A05"],
-        labelColor: "#F2A900",
-        valStops: ["#FFF9DC", "#F2A900", "#C48108"],
-        barStart: "#B87A08", barEnd: "#FFE999"
+        // Obsidian & 24K Liquid-Gold Sniper Vault
+        outerBevel: ["#FFF3BE", "#F2A900", "#7A5000", "#FCE08B"],
+        bgStops: ["#1A1404", "#080601", "#140F03"],
+        labelColor: "rgba(242, 169, 0, 0.88)",
+        valStops: ["#FFFBE6", "#F7BD2A", "#C98506"],
+        barStart: "#9E6604", barEnd: "#FFF0B3"
       }
     };
 
     // =========================================================================
-    // 3. ULTRA-HIGH-RES CANVAS BULLION CARD RENDERING ENGINE (1500 x 2100)
+    // 3. ULTRA-HIGH-RES CANVAS BULLION CARD ENGINE (1500 x 2100 px)
     // =========================================================================
     const W = 1500, H = 2100;
 
@@ -855,20 +837,223 @@
       ctx.closePath();
     }
 
-    // Draw Real Official Team Logo — Stylized to Harmonize with Card Aesthetic
-    function drawStylizedRealLogo(ctx, card, cx, cy, size, theme, frameGrad, logoFinish) {
-      const entry = LOGO_CACHE[card.team];
+    // Elegant 4-Point Compass Diamond Star (for haute-horlogerie MVP inlays — zero crowns!)
+    function drawCompassStar(ctx, cx, cy, outerR, innerR, fillStyle) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.beginPath();
+      for (let i = 0; i < 8; i++) {
+        const rad = i % 2 === 0 ? outerR : innerR;
+        const ang = (i * Math.PI) / 4 - Math.PI / 2;
+        const px = Math.cos(ang) * rad;
+        const py = Math.sin(ang) * rad;
+        i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.fillStyle = fillStyle;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // =========================================================================
+    // TOP-LEFT DECADE-DISTINCTIVE SEASON STAMP ('80s / '90s / '00s / '10s / '20s)
+    // =========================================================================
+    function drawDecadeSeasonBadge(ctx, card, theme, frameGrad) {
       const isEast = card.conf === "E";
+      const isMVP = card.isMvp;
+      const isGS = card.tier === "GS";
+      const dec = card.decade;
+      const text = `\u2019${card.yy}`;
+
+      // Anchor cleanly in top-left interior corner (mirrors Pantheon medallion on top-right)
+      const cx = isEast ? 236 : 228;
+      const cy = 194;
+
+      ctx.save();
+      const numGrad = ctx.createLinearGradient(cx, cy - 48, cx, cy + 48);
+      if (isMVP || isGS) {
+        numGrad.addColorStop(0, "#FFF8DC");
+        numGrad.addColorStop(0.55, "#F2A900");
+        numGrad.addColorStop(1, "#B87806");
+      } else {
+        numGrad.addColorStop(0, "#FFFFFF");
+        numGrad.addColorStop(0.6, "#ECEAE2");
+        numGrad.addColorStop(1, "#BDB8AA");
+      }
+
+      if (dec === 1980) {
+        // '80s HERITAGE COURTSIDE TICKET PLAQUE (Notched Corners + Classic Cinzel Serif)
+        const bw = 186, bh = 114, cut = 14;
+        const x = cx - bw / 2, y = cy - bh / 2;
+        ctx.beginPath();
+        ctx.moveTo(x + cut, y); ctx.lineTo(x + bw - cut, y);
+        ctx.arc(x + bw, y, cut, Math.PI, Math.PI / 2, true);
+        ctx.lineTo(x + bw, y + bh - cut);
+        ctx.arc(x + bw, y + bh, cut, -Math.PI / 2, Math.PI, true);
+        ctx.lineTo(x + cut, y + bh);
+        ctx.arc(x, y + bh, cut, 0, -Math.PI / 2, true);
+        ctx.lineTo(x, y + cut);
+        ctx.arc(x, y, cut, Math.PI / 2, 0, true);
+        ctx.closePath();
+        ctx.fillStyle = "rgba(12, 13, 17, 0.78)";
+        ctx.fill();
+        ctx.lineWidth = 3.5;
+        ctx.strokeStyle = frameGrad;
+        ctx.stroke();
+
+        // Inner double-rule heritage hairline
+        ctx.strokeStyle = rgba(theme.metal, 0.42);
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(x + 10, y + 10, bw - 20, bh - 20);
+
+        ctx.font = `900 72px "Cinzel", serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = numGrad;
+        ctx.fillText(text, cx - 2, cy + 4);
+
+      } else if (dec === 1990) {
+        // '90s CHAMPIONSHIP DYNASTY PARALLELOGRAM + KINETIC ITALIC CONDENSED
+        const bw = 188, bh = 104, skew = 22;
+        const x = cx - bw / 2, y = cy - bh / 2;
+        ctx.beginPath();
+        ctx.moveTo(x + skew, y);
+        ctx.lineTo(x + bw + skew * 0.5, y);
+        ctx.lineTo(x + bw - skew, y + bh);
+        ctx.lineTo(x - skew * 0.5, y + bh);
+        ctx.closePath();
+        ctx.fillStyle = "rgba(11, 13, 17, 0.82)";
+        ctx.fill();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = frameGrad;
+        ctx.stroke();
+
+        // Signature '90s twin diagonal kinetic accent ticks
+        ctx.strokeStyle = isMVP ? "#F2A900" : theme.accent;
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(x - 16, y + bh - 12); ctx.lineTo(x + 8, y + 12);
+        ctx.moveTo(x + bw + 14, y + 12); ctx.lineTo(x + bw - 10, y + bh - 12);
+        ctx.stroke();
+
+        ctx.font = `italic 900 88px "Barlow Condensed", sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = numGrad;
+        ctx.fillText(text, cx - 4, cy + 4);
+
+      } else if (dec === 2000) {
+        // '00s CHROME-BEVEL OCTAGONAL JERSEY CREST WITH VERTICAL PINSTRIPES
+        const bw = 184, bh = 112, ch = 22;
+        const x = cx - bw / 2, y = cy - bh / 2;
+        ctx.beginPath();
+        ctx.moveTo(x + ch, y); ctx.lineTo(x + bw - ch, y);
+        ctx.lineTo(x + bw, y + ch); ctx.lineTo(x + bw, y + bh - ch);
+        ctx.lineTo(x + bw - ch, y + bh); ctx.lineTo(x + ch, y + bh);
+        ctx.lineTo(x, y + bh - ch); ctx.lineTo(x, y + ch);
+        ctx.closePath();
+        ctx.fillStyle = "rgba(12, 14, 19, 0.84)";
+        ctx.fill();
+        ctx.save();
+        ctx.clip();
+        ctx.strokeStyle = rgba(theme.metal, 0.14);
+        ctx.lineWidth = 2;
+        for (let px = x + 16; px < x + bw; px += 18) {
+          ctx.beginPath(); ctx.moveTo(px, y); ctx.lineTo(px, y + bh); ctx.stroke();
+        }
+        ctx.restore();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = frameGrad;
+        ctx.stroke();
+
+        ctx.font = `900 86px "Barlow Condensed", sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = numGrad;
+        ctx.fillText(text, cx - 2, cy + 4);
+
+      } else if (dec === 2010) {
+        // '10s SWISS ANALYTICS CARBON MONOLITH (JetBrains Mono + Precision L-Brackets)
+        const bw = 182, bh = 108;
+        const x = cx - bw / 2, y = cy - bh / 2;
+        ctx.fillStyle = "rgba(10, 12, 16, 0.80)";
+        ctx.fillRect(x, y, bw, bh);
+
+        // Top precision telemetry accent rule
+        ctx.fillStyle = isMVP ? "#F2A900" : theme.accent;
+        ctx.fillRect(x, y, bw, 6);
+
+        // Razor-sharp corner L-brackets
+        ctx.strokeStyle = frameGrad;
+        ctx.lineWidth = 3.5;
+        const bl = 24;
+        ctx.beginPath();
+        ctx.moveTo(x, y + bh - bl); ctx.lineTo(x, y + bh); ctx.lineTo(x + bl, y + bh);
+        ctx.moveTo(x + bw - bl, y + bh); ctx.lineTo(x + bw, y + bh); ctx.lineTo(x + bw, y + bh - bl);
+        ctx.stroke();
+
+        ctx.font = `800 66px "JetBrains Mono", monospace`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = numGrad;
+        ctx.fillText(text, cx - 2, cy + 6);
+
+      } else {
+        // '20s AVANT-GARDE ASYMMETRIC PRISM FACET CUT
+        const bw = 188, bh = 110, f = 30;
+        const x = cx - bw / 2, y = cy - bh / 2;
+        ctx.beginPath();
+        ctx.moveTo(x + f, y);
+        ctx.lineTo(x + bw, y);
+        ctx.lineTo(x + bw, y + bh - f);
+        ctx.lineTo(x + bw - f, y + bh);
+        ctx.lineTo(x, y + bh);
+        ctx.lineTo(x, y + f);
+        ctx.closePath();
+        ctx.fillStyle = "rgba(10, 12, 17, 0.84)";
+        ctx.fill();
+        ctx.save();
+        ctx.clip();
+        // Diagonal specular prism facet sheen
+        const pSheen = ctx.createLinearGradient(x, y, x + bw, y + bh);
+        pSheen.addColorStop(0, "rgba(255,255,255,0.16)");
+        pSheen.addColorStop(0.49, "rgba(255,255,255,0.03)");
+        pSheen.addColorStop(0.51, "rgba(255,255,255,0.0)");
+        pSheen.addColorStop(1, "rgba(255,255,255,0.08)");
+        ctx.fillStyle = pSheen;
+        ctx.fillRect(x, y, bw, bh);
+        ctx.strokeStyle = rgba("#FFFFFF", 0.16);
+        ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(x + bw, y); ctx.lineTo(x, y + bh); ctx.stroke();
+        ctx.restore();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = frameGrad;
+        ctx.stroke();
+
+        ctx.font = `900 88px "Barlow Condensed", sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = numGrad;
+        ctx.fillText(text, cx - 2, cy + 4);
+      }
+
+      ctx.restore();
+    }
+
+    // Draw Real Official Team Logo — ALWAYS FULL COLOR, crisp studio presence
+    function drawFullColorLogo(ctx, card, cx, cy, size, theme, frameGrad) {
+      const entry = LOGO_CACHE[card.team];
       const isMVP = card.isMvp;
       const isGS = card.tier === "GS";
 
       ctx.save();
-
-      // Subtle luxury backdrop ring & ambient glow behind logo
       const ringR = size * 0.62;
-      const glow = ctx.createRadialGradient(cx, cy, size * 0.06, cx, cy, ringR * 1.45);
+
+      // Ambient spotlight halo behind medallion
+      const glow = ctx.createRadialGradient(cx, cy, size * 0.05, cx, cy, ringR * 1.55);
       if (isGS || isMVP) {
-        glow.addColorStop(0, "rgba(242, 169, 0, 0.34)");
+        glow.addColorStop(0, "rgba(242, 169, 0, 0.36)");
+        glow.addColorStop(0.55, "rgba(242, 169, 0, 0.10)");
         glow.addColorStop(1, "rgba(242, 169, 0, 0)");
       } else {
         glow.addColorStop(0, rgba(theme.metal, 0.24));
@@ -876,27 +1061,27 @@
       }
       ctx.fillStyle = glow;
       ctx.beginPath();
-      ctx.arc(cx, cy, ringR * 1.45, 0, Math.PI * 2);
+      ctx.arc(cx, cy, ringR * 1.55, 0, Math.PI * 2);
       ctx.fill();
 
-      // Dark smoked-glass medallion backing so any logo (dark or bright) pops cleanly
+      // Smoked-crystal watch-case backing so full-color logos pop cleanly against any franchise background
       ctx.beginPath();
       ctx.arc(cx, cy, ringR, 0, Math.PI * 2);
       const medBg = ctx.createRadialGradient(cx, cy - ringR * 0.35, 8, cx, cy, ringR);
-      medBg.addColorStop(0, rgba("#FFFFFF", 0.14));
-      medBg.addColorStop(0.55, "rgba(10, 12, 16, 0.56)");
-      medBg.addColorStop(1, "rgba(6, 7, 10, 0.82)");
+      medBg.addColorStop(0, "rgba(255, 255, 255, 0.15)");
+      medBg.addColorStop(0.55, "rgba(12, 14, 19, 0.60)");
+      medBg.addColorStop(1, "rgba(7, 8, 12, 0.86)");
       ctx.fillStyle = medBg;
       ctx.fill();
-      ctx.lineWidth = 3.5;
+      ctx.lineWidth = isMVP || isGS ? 5 : 3.5;
       ctx.strokeStyle = frameGrad;
       ctx.stroke();
 
-      // Inner precision hairline ring
+      // Secondary precision inner bezel ring
       ctx.beginPath();
-      ctx.arc(cx, cy, ringR - 10, 0, Math.PI * 2);
+      ctx.arc(cx, cy, ringR - 11, 0, Math.PI * 2);
       ctx.lineWidth = 1.5;
-      ctx.strokeStyle = rgba(theme.metal, 0.32);
+      ctx.strokeStyle = isMVP || isGS ? "rgba(252, 226, 154, 0.45)" : rgba(theme.metal, 0.32);
       ctx.stroke();
 
       if (entry && entry.status === "ok" && entry.img) {
@@ -905,7 +1090,6 @@
         let dw = size * 0.94, dh = size * 0.94;
         if (aspect > 1) dh = dw / aspect;
         else dw = dh * aspect;
-        // Extra crisp fit for tall NBA Logoman shield
         if (card.team === "2TM") {
           dh = size * 0.96;
           dw = dh * aspect;
@@ -913,81 +1097,19 @@
         const dx = cx - dw / 2;
         const dy = cy - dh / 2;
 
-        // Clip inside smoked-glass medallion for luxury integration
         ctx.save();
         ctx.beginPath();
-        ctx.arc(cx, cy, ringR - 12, 0, Math.PI * 2);
+        ctx.arc(cx, cy, ringR - 13, 0, Math.PI * 2);
         ctx.clip();
 
-        if (logoFinish === "etched" && entry.corsClean) {
-          // True offscreen metallic foil embossing of the real team logo
-          const off = document.createElement("canvas");
-          off.width = Math.ceil(dw);
-          off.height = Math.ceil(dh);
-          const octx = off.getContext("2d");
-          octx.drawImage(img, 0, 0, off.width, off.height);
-          octx.globalCompositeOperation = "source-in";
-          const mGrad = octx.createLinearGradient(0, 0, off.width, off.height);
-          if (isGS || isMVP) {
-            mGrad.addColorStop(0, "#FFF6D1");
-            mGrad.addColorStop(0.45, "#F2A900");
-            mGrad.addColorStop(1, "#B87A08");
-          } else if (isEast) {
-            mGrad.addColorStop(0, "#FFFFFF");
-            mGrad.addColorStop(0.5, "#CBD5E1");
-            mGrad.addColorStop(1, "#7B8494");
-          } else {
-            mGrad.addColorStop(0, "#FFF3C4");
-            mGrad.addColorStop(0.5, "#E0B44E");
-            mGrad.addColorStop(1, "#9B6D16");
-          }
-          octx.fillStyle = mGrad;
-          octx.fillRect(0, 0, off.width, off.height);
-
-          ctx.shadowColor = "rgba(0,0,0,0.75)";
-          ctx.shadowBlur = 18;
-          ctx.shadowOffsetY = 6;
-          ctx.drawImage(off, dx, dy, dw, dh);
-        } else {
-          // Adaptive luxury stylization via Canvas filter + studio shadow
-          if (logoFinish === "etched") {
-            ctx.filter = isEast
-              ? "grayscale(1) contrast(1.35) brightness(1.18)"
-              : "grayscale(1) sepia(0.85) hue-rotate(8deg) saturate(1.8) contrast(1.25) brightness(1.08)";
-          } else if (logoFinish === "stylized") {
-            if (isGS || isMVP) {
-              ctx.filter = "contrast(1.16) saturate(0.95) sepia(0.14) brightness(1.05)";
-            } else if (card.tier === "SPEC") {
-              ctx.filter = "contrast(1.18) saturate(0.82) brightness(1.06)";
-            } else if (isEast) {
-              ctx.filter = "contrast(1.14) saturate(0.88) brightness(1.06)";
-            } else {
-              ctx.filter = "contrast(1.12) saturate(1.04) sepia(0.08) brightness(1.04)";
-            }
-          } else {
-            ctx.filter = "contrast(1.06)";
-          }
-
-          ctx.shadowColor = "rgba(0,0,0,0.72)";
-          ctx.shadowBlur = 22;
-          ctx.shadowOffsetY = 7;
-          ctx.drawImage(img, dx, dy, dw, dh);
-          ctx.filter = "none";
-          ctx.shadowColor = "transparent";
-        }
-
-        // Diagonal smoked-crystal foil gloss across the medallion
-        const gloss = ctx.createLinearGradient(cx - ringR, cy - ringR, cx + ringR, cy + ringR);
-        gloss.addColorStop(0.0, "rgba(255,255,255,0.20)");
-        gloss.addColorStop(0.42, "rgba(255,255,255,0.03)");
-        gloss.addColorStop(0.48, "rgba(255,255,255,0.0)");
-        gloss.addColorStop(1.0, "rgba(0,0,0,0.12)");
-        ctx.fillStyle = gloss;
-        ctx.fillRect(cx - ringR, cy - ringR, ringR * 2, ringR * 2);
-
+        // Pure full-color official logo (no color distortion filters!)
+        ctx.shadowColor = "rgba(0,0,0,0.68)";
+        ctx.shadowBlur = 20;
+        ctx.shadowOffsetY = 6;
+        ctx.drawImage(img, dx, dy, dw, dh);
+        ctx.shadowColor = "transparent";
         ctx.restore();
       } else {
-        // Ultra-clean engraved typographic seal while loading or if offline
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.font = `900 72px "Barlow Condensed", sans-serif`;
@@ -998,50 +1120,18 @@
       ctx.restore();
     }
 
-    // Draw Sculpted Crown (only for EAST MVP / WEST MVP)
-    function drawCrown(ctx, cx, cy, w, h, isGrandSlam) {
-      ctx.save();
-      ctx.translate(cx, cy);
-      const grad = ctx.createLinearGradient(-w / 2, -h / 2, w / 2, h / 2);
-      if (isGrandSlam) {
-        grad.addColorStop(0, "#FFF5CC");
-        grad.addColorStop(0.35, "#F2A900");
-        grad.addColorStop(0.65, "#E0F2FE");
-        grad.addColorStop(1, "#F2A900");
-      } else {
-        grad.addColorStop(0, "#FCE29A");
-        grad.addColorStop(0.5, "#F2A900");
-        grad.addColorStop(1, "#9E6B08");
-      }
-      ctx.fillStyle = grad;
-      ctx.strokeStyle = "#111214";
-      ctx.lineWidth = 2.5;
-      ctx.beginPath();
-      ctx.moveTo(-w * 0.46, h * 0.45);
-      ctx.lineTo(-w * 0.5, -h * 0.22);
-      ctx.lineTo(-w * 0.22, h * 0.08);
-      ctx.lineTo(0, -h * 0.5);
-      ctx.lineTo(w * 0.22, h * 0.08);
-      ctx.lineTo(w * 0.5, -h * 0.22);
-      ctx.lineTo(w * 0.46, h * 0.45);
-      ctx.closePath();
-      ctx.fill(); ctx.stroke();
-      ctx.fillRect(-w * 0.46, h * 0.45, w * 0.92, h * 0.14);
-      ctx.restore();
-    }
-
-    // Draw Single Mechanical Watch-Dial Split-Flap Cell + Calibrated Comparative Gauge Bar
+    // Draw Single Mechanical Watch-Dial Split-Flap Cell + Calibrated Scale Gauge (for PTS | G | PPG)
     function drawDialChamber(ctx, x, y, w, h, valueStr, labelStr, ratio, theme, isGoldDial) {
       ctx.save();
       const bezelGrad = ctx.createLinearGradient(x, y, x, y + h);
       if (isGoldDial) {
-        bezelGrad.addColorStop(0, "#FCE29A");
+        bezelGrad.addColorStop(0, "#FFF0BE");
         bezelGrad.addColorStop(0.5, "#C98D14");
-        bezelGrad.addColorStop(1, "#704B06");
+        bezelGrad.addColorStop(1, "#6E4804");
       } else {
-        bezelGrad.addColorStop(0, rgba(theme.metal, 0.92));
+        bezelGrad.addColorStop(0, rgba(theme.metal, 0.94));
         bezelGrad.addColorStop(0.5, rgba(theme.metal, 0.42));
-        bezelGrad.addColorStop(1, rgba(theme.metal, 0.80));
+        bezelGrad.addColorStop(1, rgba(theme.metal, 0.82));
       }
       drawRoundRect(ctx, x, y, w, h, 14);
       ctx.fillStyle = bezelGrad;
@@ -1052,15 +1142,15 @@
       drawRoundRect(ctx, ix, iy, iw, ih, 10);
       const faceGrad = ctx.createLinearGradient(ix, iy, ix, iy + ih);
       if (isGoldDial) {
-        faceGrad.addColorStop(0, "#1A1509");
-        faceGrad.addColorStop(0.49, "#0F0C05");
-        faceGrad.addColorStop(0.51, "#181308");
-        faceGrad.addColorStop(1, "#0B0904");
+        faceGrad.addColorStop(0, "#1D1709");
+        faceGrad.addColorStop(0.49, "#0F0C04");
+        faceGrad.addColorStop(0.51, "#181307");
+        faceGrad.addColorStop(1, "#0B0903");
       } else {
         faceGrad.addColorStop(0, "#181B22");
-        faceGrad.addColorStop(0.49, "#0E1014");
+        faceGrad.addColorStop(0.49, "#0D0F14");
         faceGrad.addColorStop(0.51, "#14171D");
-        faceGrad.addColorStop(1, "#0A0C0F");
+        faceGrad.addColorStop(1, "#090B0F");
       }
       ctx.fillStyle = faceGrad;
       ctx.fill();
@@ -1069,24 +1159,25 @@
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      const fontSize = h >= 210 ? 148 : (valueStr.length >= 6 ? 94 : (valueStr.length >= 5 ? 106 : 122));
-      ctx.font = `800 ${fontSize}px "Barlow Condensed", sans-serif`;
+      // Oversized prominent watch-dial value
+      const fontSize = valueStr.length >= 6 ? 112 : (valueStr.length >= 5 ? 124 : 142);
+      ctx.font = `900 ${fontSize}px "Barlow Condensed", sans-serif`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       const textGrad = ctx.createLinearGradient(ix, iy + 18, ix, iy + ih - 18);
       if (isGoldDial) {
-        textGrad.addColorStop(0, "#FFF6D6");
-        textGrad.addColorStop(0.55, "#F2A900");
-        textGrad.addColorStop(1, "#C98508");
+        textGrad.addColorStop(0, "#FFF9DE");
+        textGrad.addColorStop(0.55, "#F5B51C");
+        textGrad.addColorStop(1, "#C48106");
       } else {
         textGrad.addColorStop(0, "#FFFFFF");
-        textGrad.addColorStop(0.6, "#E8E3D5");
+        textGrad.addColorStop(0.6, "#ECEAE2");
         textGrad.addColorStop(1, "#B8B4A7");
       }
       ctx.fillStyle = textGrad;
       ctx.fillText(valueStr, x + w / 2, y + h / 2 + 4);
 
-      // Horizontal split-flap mechanical seam + side hinges
+      // Authentic horizontal split-flap mechanical seam + hinges
       const midY = y + h / 2;
       ctx.fillStyle = "rgba(0,0,0,0.62)";
       ctx.fillRect(ix + 2, midY - 2.5, iw - 4, 5);
@@ -1096,8 +1187,8 @@
       ctx.fillRect(ix + 4, midY - 12, 6, 24);
       ctx.fillRect(ix + iw - 10, midY - 12, 6, 24);
 
-      // Calibrated Global Comparative Gauge Bar beneath dial
-      const gy = y + h + 16;
+      // Calibrated Global Comparative Gauge Bar
+      const gy = y + h + 15;
       const gh = 14;
       ctx.fillStyle = "rgba(0,0,0,0.52)";
       ctx.fillRect(x + 4, gy, w - 8, gh);
@@ -1109,7 +1200,7 @@
       const fillGrad = ctx.createLinearGradient(x + 4, gy, x + w - 4, gy);
       if (isGoldDial) {
         fillGrad.addColorStop(0, "#B87A08");
-        fillGrad.addColorStop(1, "#FDE08D");
+        fillGrad.addColorStop(1, "#FFE394");
       } else {
         fillGrad.addColorStop(0, theme.accent);
         fillGrad.addColorStop(1, theme.metal);
@@ -1123,159 +1214,225 @@
         ctx.fillRect(tx - 1, gy, 2, gh);
       });
 
+      // Quiet, razor-crisp micro dial label
       if (labelStr) {
-        ctx.font = `700 26px "JetBrains Mono", monospace`;
-        ctx.fillStyle = isGoldDial ? "#F5CF76" : rgba("#E8E3D5", 0.88);
+        ctx.font = `700 23px "JetBrains Mono", monospace`;
+        ctx.fillStyle = isGoldDial ? "rgba(252, 226, 154, 0.85)" : rgba("#E8E3D5", 0.78);
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
-        ctx.fillText(labelStr, x + w / 2, gy + gh + 10);
+        ctx.fillText(labelStr, x + w / 2, gy + gh + 9);
       }
-
       ctx.restore();
     }
 
-    // Draw Bespoke Specialist Award Bullion Module (Supports Full-Width, Twin, Triad, and 2x2 Quad!)
-    function drawAwardModule(ctx, award, x, y, w, h, layoutMode) {
+    // =========================================================================
+    // BOX-FIRST BULLION AWARD CHAMBERS (Let the Box & Value Speak Louder Than Words!)
+    // Supports: 'hero' (1-award specialist), 'full' (1 secondary), 'twin' (2), 'triad' (3), 'quad' (2x2)
+    // =========================================================================
+    function drawBullionAwardBox(ctx, award, x, y, w, h, layoutMode) {
       const st = AWARD_STYLES[award.key];
       ctx.save();
 
-      // Background metallic chamber
-      const bg = ctx.createLinearGradient(x, y, x + w, y + h);
-      bg.addColorStop(0, st.bgStops[0]);
-      bg.addColorStop(0.5, st.bgStops[1]);
-      bg.addColorStop(1, st.bgStops[2]);
+      // 1. Sculpted Outer Metallic Bevel Frame (4-stop bullion gradient)
+      const bevelGrad = ctx.createLinearGradient(x, y, x + w, y + h);
+      bevelGrad.addColorStop(0.0, st.outerBevel[0]);
+      bevelGrad.addColorStop(0.35, st.outerBevel[1]);
+      bevelGrad.addColorStop(0.72, st.outerBevel[2]);
+      bevelGrad.addColorStop(1.0, st.outerBevel[3]);
 
-      const brd = ctx.createLinearGradient(x, y, x + w, y + h);
-      brd.addColorStop(0, st.borderStops[0]);
-      brd.addColorStop(0.5, st.borderStops[1]);
-      brd.addColorStop(1, st.borderStops[2]);
+      const frameW = layoutMode === "hero" ? 10 : (layoutMode === "quad" ? 6 : 8);
+      const rad = layoutMode === "hero" ? 16 : 12;
 
-      drawRoundRect(ctx, x, y, w, h, 10);
-      ctx.fillStyle = bg;
+      drawRoundRect(ctx, x, y, w, h, rad);
+      ctx.fillStyle = bevelGrad;
       ctx.fill();
-      ctx.lineWidth = 3.5;
-      ctx.strokeStyle = brd;
-      ctx.stroke();
 
-      // Signature subtle micro-pattern per award type inside clip
+      // 2. Recessed Alloy Interior Chamber
+      const ix = x + frameW, iy = y + frameW, iw = w - frameW * 2, ih = h - frameW * 2;
+      drawRoundRect(ctx, ix, iy, iw, ih, Math.max(4, rad - 4));
+      const bgGrad = ctx.createLinearGradient(ix, iy, ix, iy + ih);
+      bgGrad.addColorStop(0, st.bgStops[0]);
+      bgGrad.addColorStop(0.5, st.bgStops[1]);
+      bgGrad.addColorStop(1, st.bgStops[2]);
+      ctx.fillStyle = bgGrad;
+      ctx.fill();
+
+      // 3. Award-Signature Physical Micro-Architecture inside the Box (speaks louder than words!)
       ctx.save();
-      drawRoundRect(ctx, x + 2, y + 2, w - 4, h - 4, 8);
+      drawRoundRect(ctx, ix, iy, iw, ih, Math.max(4, rad - 4));
       ctx.clip();
-      if (award.key === "SH") {
-        // Subtle precision crosshair reticle watermark
-        ctx.strokeStyle = "rgba(147, 197, 253, 0.14)";
-        ctx.lineWidth = 2;
-        const rx = layoutMode === "full" ? x + w * 0.56 : x + w * 0.5;
-        const ry = y + h * 0.5;
-        ctx.beginPath(); ctx.arc(rx, ry, Math.min(w, h) * 0.34, 0, Math.PI * 2); ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(rx - 44, ry); ctx.lineTo(rx + 44, ry);
-        ctx.moveTo(rx, ry - 44); ctx.lineTo(rx, ry + 44);
-        ctx.stroke();
-      } else if (award.key === "DE") {
-        // Sniper gold diagonal precision gleam
-        ctx.strokeStyle = "rgba(242, 169, 0, 0.14)";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(x + 18, y + 18); ctx.lineTo(x + 48, y + 18);
-        ctx.moveTo(x + 18, y + 18); ctx.lineTo(x + 18, y + 48);
-        ctx.moveTo(x + w - 18, y + h - 18); ctx.lineTo(x + w - 48, y + h - 18);
-        ctx.moveTo(x + w - 18, y + h - 18); ctx.lineTo(x + w - 18, y + h - 48);
-        ctx.stroke();
-      } else if (award.key === "BB") {
-        // Warm hammered bronze diagonal highlight
-        const sheen = ctx.createLinearGradient(x, y, x + w, y + h);
-        sheen.addColorStop(0, "rgba(255,215,165,0.12)");
-        sheen.addColorStop(0.5, "rgba(255,215,165,0)");
-        sheen.addColorStop(1, "rgba(255,215,165,0.08)");
-        ctx.fillStyle = sheen;
-        ctx.fillRect(x, y, w, h);
+
+      if (award.key === "BB") {
+        // BRONZE BUCKET: Warm hammered copper ingot with radial sheen & forged corner rivets
+        const spot = ctx.createRadialGradient(ix + iw * 0.5, iy + ih * 0.35, 10, ix + iw * 0.5, iy + ih * 0.5, Math.max(iw, ih) * 0.72);
+        spot.addColorStop(0, "rgba(255, 185, 110, 0.24)");
+        spot.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.fillStyle = spot;
+        ctx.fillRect(ix, iy, iw, ih);
+
+        // Diagonal forged ingot bevel bands
+        ctx.strokeStyle = "rgba(255, 210, 155, 0.14)";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(ix + 12, iy + 12, iw - 24, ih - 24);
+        // Corner copper rivets
+        const rv = 22;
+        ctx.fillStyle = "#F0A860";
+        [[ix + rv, iy + rv], [ix + iw - rv, iy + rv], [ix + rv, iy + ih - rv], [ix + iw - rv, iy + ih - rv]].forEach(([rx, ry]) => {
+          ctx.beginPath(); ctx.arc(rx, ry, layoutMode === "quad" ? 4.5 : 6, 0, Math.PI * 2); ctx.fill();
+        });
+
       } else if (award.key === "SS") {
-        // Brushed sterling silver micro-sheen
-        const sheen = ctx.createLinearGradient(x, y, x + w, y);
-        sheen.addColorStop(0, "rgba(255,255,255,0.10)");
-        sheen.addColorStop(0.5, "rgba(255,255,255,0.02)");
-        sheen.addColorStop(1, "rgba(255,255,255,0.12)");
-        ctx.fillStyle = sheen;
-        ctx.fillRect(x, y, w, h);
+        // SILVER SCORER: Cold brushed sterling silver bar with horizontal brushed grain & notched metallic trim
+        ctx.strokeStyle = "rgba(241, 245, 249, 0.055)";
+        ctx.lineWidth = 2;
+        for (let sy = iy; sy < iy + ih; sy += 6) {
+          ctx.beginPath(); ctx.moveTo(ix, sy); ctx.lineTo(ix + iw, sy); ctx.stroke();
+        }
+        // Mirror specular slash
+        const slash = ctx.createLinearGradient(ix, iy, ix + iw, iy + ih);
+        slash.addColorStop(0.0, "rgba(255,255,255,0.14)");
+        slash.addColorStop(0.42, "rgba(255,255,255,0.02)");
+        slash.addColorStop(0.52, "rgba(255,255,255,0.12)");
+        slash.addColorStop(1.0, "rgba(255,255,255,0.02)");
+        ctx.fillStyle = slash;
+        ctx.fillRect(ix, iy, iw, ih);
+        // Precision inset platinum frame
+        ctx.strokeStyle = "rgba(226, 232, 240, 0.28)";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(ix + 12, iy + 12, iw - 24, ih - 24);
+
+      } else if (award.key === "SH") {
+        // SHARP SHOOTER: Sapphire-Titanium Optical Rangefinder Chamber with concentric reticle & precision ticks
+        const rcx = ix + iw / 2, rcy = iy + ih * 0.52;
+        const rr = Math.min(iw, ih) * 0.36;
+        ctx.strokeStyle = "rgba(147, 197, 253, 0.16)";
+        ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.arc(rcx, rcy, rr, 0, Math.PI * 2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(rcx, rcy, rr * 0.58, 0, Math.PI * 2); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(ix + 16, rcy); ctx.lineTo(rcx - rr * 0.35, rcy);
+        ctx.moveTo(rcx + rr * 0.35, rcy); ctx.lineTo(ix + iw - 16, rcy);
+        ctx.moveTo(rcx, iy + 16); ctx.lineTo(rcx, rcy - rr * 0.35);
+        ctx.moveTo(rcx, rcy + rr * 0.35); ctx.lineTo(rcx, iy + ih - 16);
+        ctx.stroke();
+
+        // Optical vernier tick marks along top edge
+        ctx.strokeStyle = "rgba(186, 230, 253, 0.28)";
+        ctx.lineWidth = 2;
+        const step = layoutMode === "quad" ? 28 : 36;
+        for (let tx = ix + step; tx < ix + iw - 16; tx += step) {
+          ctx.beginPath(); ctx.moveTo(tx, iy); ctx.lineTo(tx, iy + 10); ctx.stroke();
+        }
+
+      } else if (award.key === "DE") {
+        // DEAD EYE: Obsidian & 24K Liquid-Gold Sniper Vault with illuminated gold sight brackets
+        const glow = ctx.createRadialGradient(ix + iw / 2, iy + ih * 0.5, 12, ix + iw / 2, iy + ih * 0.5, Math.max(iw, ih) * 0.65);
+        glow.addColorStop(0, "rgba(242, 169, 0, 0.22)");
+        glow.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.fillStyle = glow;
+        ctx.fillRect(ix, iy, iw, ih);
+
+        // Luminous 24K Gold Corner Target Sight Brackets
+        const pad = 16, arm = layoutMode === "quad" ? 28 : 44;
+        ctx.strokeStyle = "#F2A900";
+        ctx.lineWidth = layoutMode === "quad" ? 3 : 4;
+        ctx.beginPath();
+        ctx.moveTo(ix + pad, iy + pad + arm); ctx.lineTo(ix + pad, iy + pad); ctx.lineTo(ix + pad + arm, iy + pad);
+        ctx.moveTo(ix + iw - pad - arm, iy + pad); ctx.lineTo(ix + iw - pad, iy + pad); ctx.lineTo(ix + iw - pad, iy + pad + arm);
+        ctx.moveTo(ix + pad, iy + ih - pad - arm); ctx.lineTo(ix + pad, iy + ih - pad); ctx.lineTo(ix + pad + arm, iy + ih - pad);
+        ctx.moveTo(ix + iw - pad - arm, iy + ih - pad); ctx.lineTo(ix + iw - pad, iy + ih - pad); ctx.lineTo(ix + iw - pad, iy + ih - pad - arm);
+        ctx.stroke();
       }
       ctx.restore();
 
-      const valGrad = ctx.createLinearGradient(x, y, x, y + h);
+      // 4. Typography & Value Hierarchy — MASSIVE VALUE, QUIET MICRO-ENGRAVED NAMEPLATE
+      const valGrad = ctx.createLinearGradient(ix, iy + ih * 0.2, ix, iy + ih * 0.85);
       valGrad.addColorStop(0, st.valStops[0]);
       valGrad.addColorStop(0.55, st.valStops[1]);
       valGrad.addColorStop(1, st.valStops[2]);
 
-      const titleStr = award.subRank ? `${award.label} ${award.subRank}` : award.label;
+      const titleStr = award.subRank ? `${award.label}  ${award.subRank}` : award.label;
 
-      if (layoutMode === "full") {
-        // FULL-WIDTH HORIZONTAL SIGNATURE PLAQUE (1 secondary award)
-        // Left: Monumental Award Name | Right: Oversized Value + Calibrated Bar
-        ctx.textAlign = "left";
-        ctx.textBaseline = "middle";
-        ctx.font = `900 72px "Barlow Condensed", sans-serif`;
-        ctx.fillStyle = st.labelColor;
-        ctx.fillText(titleStr, x + 44, y + h * 0.44);
-
-        // Calibrated horizontal gauge under title
-        const gx = x + 44, gy = y + h - 34, gw = w * 0.50, gh = 12;
-        ctx.fillStyle = "rgba(0,0,0,0.48)";
-        ctx.fillRect(gx, gy, gw, gh);
-        const fg = ctx.createLinearGradient(gx, gy, gx + gw, gy);
-        fg.addColorStop(0, st.barStart);
-        fg.addColorStop(1, st.barEnd);
-        ctx.fillStyle = fg;
-        ctx.fillRect(gx + 2, gy + 2, (gw - 4) * Math.max(0.06, Math.min(1, award.ratio)), gh - 4);
-
-        // Right recessed value readout
-        ctx.textAlign = "right";
-        ctx.textBaseline = "middle";
-        ctx.font = `900 104px "Barlow Condensed", sans-serif`;
-        ctx.fillStyle = valGrad;
-        ctx.fillText(award.val, x + w - 44, y + h * 0.52);
-      } else if (layoutMode === "quad") {
-        // COMPACT 2x2 GRAND SLAM HORIZONTAL CHAMBER
-        ctx.textAlign = "left";
-        ctx.textBaseline = "middle";
-        ctx.font = `800 36px "Barlow Condensed", sans-serif`;
-        ctx.fillStyle = st.labelColor;
-        ctx.fillText(titleStr, x + 26, y + h * 0.38);
-
-        const gx = x + 26, gy = y + h - 26, gw = w * 0.48, gh = 8;
-        ctx.fillStyle = "rgba(0,0,0,0.48)";
-        ctx.fillRect(gx, gy, gw, gh);
-        const fg = ctx.createLinearGradient(gx, gy, gx + gw, gy);
-        fg.addColorStop(0, st.barStart); fg.addColorStop(1, st.barEnd);
-        ctx.fillStyle = fg;
-        ctx.fillRect(gx + 1, gy + 1, (gw - 2) * Math.max(0.06, Math.min(1, award.ratio)), gh - 2);
-
-        ctx.textAlign = "right";
-        ctx.textBaseline = "middle";
-        ctx.font = `900 68px "Barlow Condensed", sans-serif`;
-        ctx.fillStyle = valGrad;
-        ctx.fillText(award.val, x + w - 26, y + h * 0.52);
+      // Determine calibrated font sizes per layout mode (Value is ALWAYS 3x–6x larger than title!)
+      let titleSize, valSize, titleY, valY, barH, barPadX, barY;
+      if (layoutMode === "hero") {
+        titleSize = 32;
+        valSize = 276;
+        titleY = iy + 64;
+        valY = iy + ih * 0.52;
+        barH = 20;
+        barPadX = 68;
+        barY = iy + ih - 62;
+      } else if (layoutMode === "full") {
+        titleSize = 26;
+        valSize = 186;
+        titleY = iy + 44;
+        valY = iy + ih * 0.54;
+        barH = 16;
+        barPadX = 64;
+        barY = iy + ih - 44;
+      } else if (layoutMode === "twin") {
+        titleSize = 24;
+        valSize = h > 500 ? 172 : 142;
+        titleY = iy + (h > 500 ? 58 : 44);
+        valY = iy + ih * 0.53;
+        barH = 14;
+        barPadX = 42;
+        barY = iy + ih - 44;
+      } else if (layoutMode === "triad") {
+        titleSize = 20;
+        valSize = 114;
+        titleY = iy + 42;
+        valY = iy + ih * 0.53;
+        barH = 12;
+        barPadX = 28;
+        barY = iy + ih - 40;
       } else {
-        // TWIN (2-col) OR TRIAD (3-col) VERTICAL CHAMBER
-        const isTriad = layoutMode === "triad";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.font = `800 ${isTriad ? 38 : 48}px "Barlow Condensed", sans-serif`;
-        ctx.fillStyle = st.labelColor;
-        ctx.fillText(titleStr, x + w / 2, y + h * 0.25);
-
-        ctx.font = `900 ${isTriad ? 76 : 92}px "Barlow Condensed", sans-serif`;
-        ctx.fillStyle = valGrad;
-        ctx.fillText(award.val, x + w / 2, y + h * 0.62);
-
-        // Calibrated bottom bar
-        const gx = x + 24, gy = y + h - 24, gw = w - 48, gh = 10;
-        ctx.fillStyle = "rgba(0,0,0,0.5)";
-        ctx.fillRect(gx, gy, gw, gh);
-        const fg = ctx.createLinearGradient(gx, gy, gx + gw, gy);
-        fg.addColorStop(0, st.barStart); fg.addColorStop(1, st.barEnd);
-        ctx.fillStyle = fg;
-        ctx.fillRect(gx + 1.5, gy + 1.5, (gw - 3) * Math.max(0.06, Math.min(1, award.ratio)), gh - 3);
+        // 'quad' (2x2 Grand Slam Vault — 574 x 204 px)
+        titleSize = 19;
+        valSize = 114;
+        titleY = iy + 30;
+        valY = iy + ih * 0.56;
+        barH = 10;
+        barPadX = 32;
+        barY = iy + ih - 26;
       }
+
+      // Quiet, crisp micro-engraved award nameplate (tracked uppercase JetBrains Mono)
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = `700 ${titleSize}px "JetBrains Mono", monospace`;
+      ctx.fillStyle = st.labelColor;
+      ctx.fillText(titleStr, ix + iw / 2, titleY);
+
+      // Monumental Sculpted Award Value with deep cast shadow
+      ctx.font = `900 ${valSize}px "Barlow Condensed", sans-serif`;
+      ctx.fillStyle = "rgba(0,0,0,0.72)";
+      ctx.fillText(award.val, ix + iw / 2 + 5, valY + 6);
+      ctx.fillStyle = valGrad;
+      ctx.fillText(award.val, ix + iw / 2, valY);
+
+      // Calibrated Global Comparative Scale Bar inside the bottom of the box
+      const bx = ix + barPadX;
+      const bw = iw - barPadX * 2;
+      ctx.fillStyle = "rgba(0,0,0,0.56)";
+      ctx.fillRect(bx, barY, bw, barH);
+      ctx.strokeStyle = rgba(st.outerBevel[0], 0.32);
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(bx, barY, bw, barH);
+
+      const fillW = Math.max(0.05, Math.min(1, award.ratio)) * (bw - 4);
+      const fg = ctx.createLinearGradient(bx, barY, bx + bw, barY);
+      fg.addColorStop(0, st.barStart);
+      fg.addColorStop(1, st.barEnd);
+      ctx.fillStyle = fg;
+      ctx.fillRect(bx + 2, barY + 2, fillW, barH - 4);
+
+      // Quarter calibration ticks
+      ctx.fillStyle = "rgba(8, 10, 14, 0.72)";
+      [0.25, 0.5, 0.75].forEach(t => {
+        ctx.fillRect(bx + bw * t - 1, barY, 2, barH);
+      });
 
       ctx.restore();
     }
@@ -1317,7 +1474,7 @@
       }
       ctx.restore();
 
-      // Primary Metallic Foil Frame Gradient
+      // Primary Metallic Foil Frame Gradient (Elevated 24K Bullion for MVP, Prismatic for 5-Award Sweep)
       const frameGrad = ctx.createLinearGradient(0, 0, W, H);
       if (isGS) {
         frameGrad.addColorStop(0.0, "#FFF7D6");
@@ -1326,11 +1483,17 @@
         frameGrad.addColorStop(0.68, "#F2A900");
         frameGrad.addColorStop(0.88, "#C7922E");
         frameGrad.addColorStop(1.0, "#FFF4CC");
+      } else if (isMVP) {
+        // Haute-horlogerie 24K Gold Bullion Frame for MVP seasons
+        frameGrad.addColorStop(0.0, "#FFF3C4");
+        frameGrad.addColorStop(0.30, "#E5A310");
+        frameGrad.addColorStop(0.62, "#FFEBA8");
+        frameGrad.addColorStop(1.0, "#9E6A06");
       } else if (isEast) {
-        frameGrad.addColorStop(0.0, isMVP ? "#FCE4A6" : "#E5E8EE");
-        frameGrad.addColorStop(0.35, isMVP ? "#D49B1A" : "#8F97A5");
-        frameGrad.addColorStop(0.68, isMVP ? "#FFF0C2" : "#DCE1E8");
-        frameGrad.addColorStop(1.0, isMVP ? "#9C6D0B" : "#6D7482");
+        frameGrad.addColorStop(0.0, "#E5E8EE");
+        frameGrad.addColorStop(0.35, "#8F97A5");
+        frameGrad.addColorStop(0.68, "#DCE1E8");
+        frameGrad.addColorStop(1.0, "#6D7482");
       } else {
         frameGrad.addColorStop(0.0, "#F6DC96");
         frameGrad.addColorStop(0.35, "#BA8822");
@@ -1339,13 +1502,13 @@
       }
 
       ctx.strokeStyle = frameGrad;
-      ctx.lineWidth = 10;
+      ctx.lineWidth = isMVP || isGS ? 12 : 10;
       ctx.strokeRect(38, 38, W - 76, H - 76);
-      ctx.lineWidth = 3;
+      ctx.lineWidth = isMVP || isGS ? 4 : 3;
       ctx.strokeRect(56, 56, W - 112, H - 112);
 
       // =====================================================================
-      // LAYER 2: INNER ARENA-SPOTLIGHT FRANCHISE FIELD + SUBTLE REAL LOGO WATERMARK
+      // LAYER 2: INNER ARENA-SPOTLIGHT FRANCHISE FIELD + SUBTLE LOGO WATERMARK
       // =====================================================================
       const fx = 76, fy = 76, fw = W - 152, fh = H - 152;
       ctx.save();
@@ -1355,26 +1518,25 @@
 
       const fieldBase = ctx.createLinearGradient(fx, fy, fx, fy + fh);
       fieldBase.addColorStop(0, theme.dark);
-      fieldBase.addColorStop(0.36, theme.primary);
-      fieldBase.addColorStop(0.76, theme.dark);
+      fieldBase.addColorStop(0.34, theme.primary);
+      fieldBase.addColorStop(0.75, theme.dark);
       fieldBase.addColorStop(1, "#090A0D");
       ctx.fillStyle = fieldBase;
       ctx.fillRect(fx, fy, fw, fh);
 
       // Overhead Arena Radial Spotlight Cone
-      const spot = ctx.createRadialGradient(W / 2, fy + 360, 40, W / 2, fy + 500, 920);
-      spot.addColorStop(0, rgba(isMVP || isGS ? "#FFE9A8" : "#FFFFFF", isGS ? 0.30 : 0.22));
+      const spot = ctx.createRadialGradient(W / 2, fy + 280, 40, W / 2, fy + 440, 940);
+      spot.addColorStop(0, rgba(isMVP || isGS ? "#FFE9A8" : "#FFFFFF", isGS ? 0.30 : (isMVP ? 0.25 : 0.20)));
       spot.addColorStop(0.45, rgba(theme.primary, 0.14));
       spot.addColorStop(1, "rgba(0,0,0,0.48)");
       ctx.fillStyle = spot;
       ctx.fillRect(fx, fy, fw, fh);
 
-      // Oversized Ghost Watermark of Real Team Logo (luxury Panini National Treasures depth)
+      // Oversized Ghost Watermark of Official Team Logo
       if (logoEntry && logoEntry.status === "ok" && logoEntry.img) {
         ctx.save();
-        ctx.globalAlpha = 0.065;
-        ctx.filter = "grayscale(1) contrast(1.4)";
-        const wmSize = 1120;
+        ctx.globalAlpha = 0.06;
+        const wmSize = 1140;
         const asp = logoEntry.img.naturalWidth / logoEntry.img.naturalHeight;
         const ww = asp > 1 ? wmSize : wmSize * asp;
         const wh = asp > 1 ? wmSize / asp : wmSize;
@@ -1382,7 +1544,7 @@
         ctx.restore();
       }
 
-      // Decade-Specific Era Micro-Motif ('80s / '90s / '00s / '10s / '20s)
+      // Decade-Specific Era Background Micro-Motif
       ctx.save();
       if (card.decade === 1980) {
         ctx.strokeStyle = rgba(theme.metal, 0.08);
@@ -1399,8 +1561,8 @@
         for (let a = 0; a < 24; a++) {
           const ang = (a * Math.PI) / 12;
           ctx.beginPath();
-          ctx.moveTo(W / 2, fy + 420);
-          ctx.lineTo(W / 2 + Math.cos(ang) * 1400, fy + 420 + Math.sin(ang) * 1400);
+          ctx.moveTo(W / 2, fy + 340);
+          ctx.lineTo(W / 2 + Math.cos(ang) * 1400, fy + 340 + Math.sin(ang) * 1400);
           ctx.stroke();
         }
       } else if (card.decade === 2000) {
@@ -1446,9 +1608,9 @@
           [fx + fw - 54, fy + fh - 24, -1, -1]
         ].forEach(([cx, cy, dx, dy]) => {
           ctx.beginPath();
-          ctx.moveTo(cx, cy + dy * 72);
+          ctx.moveTo(cx, cy + dy * 64);
           ctx.lineTo(cx, cy);
-          ctx.lineTo(cx + dx * 88, cy);
+          ctx.lineTo(cx + dx * 82, cy);
           ctx.stroke();
         });
       } else {
@@ -1465,10 +1627,38 @@
         const drawTri = (x1, y1, x2, y2, x3, y3) => {
           ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.lineTo(x3, y3); ctx.closePath(); ctx.stroke();
         };
-        drawTri(fx + 28, fy + 64, fx + 112, fy + 64, fx + 28, fy + 148);
-        drawTri(fx + fw - 28, fy + 64, fx + fw - 112, fy + 64, fx + fw - 28, fy + 148);
-        drawTri(fx + 28, fy + fh - 64, fx + 112, fy + fh - 64, fx + 28, fy + fh - 148);
-        drawTri(fx + fw - 28, fy + fh - 64, fx + fw - 112, fy + fh - 64, fx + fw - 28, fy + fh - 148);
+        drawTri(fx + 28, fy + 64, fx + 106, fy + 64, fx + 28, fy + 142);
+        drawTri(fx + fw - 28, fy + 64, fx + fw - 106, fy + 64, fx + fw - 28, fy + 142);
+        drawTri(fx + 28, fy + fh - 64, fx + 106, fy + fh - 64, fx + 28, fy + fh - 142);
+        drawTri(fx + fw - 28, fy + fh - 64, fx + fw - 106, fy + fh - 64, fx + fw - 28, fy + fh - 142);
+      }
+
+      // ELEGANT MVP EXPRESSION (Zero Crowns!):
+      // Precision 24K Gold Meridian Axis + Four Compass-Star Corner Jewel Inlays
+      if (isMVP || isGS) {
+        ctx.save();
+        // Top vertical gold meridian hairline dropping into the logo bezel apex
+        const merGrad = ctx.createLinearGradient(W / 2, fy, W / 2, fy + 80);
+        merGrad.addColorStop(0, "#FCE29A");
+        merGrad.addColorStop(1, "rgba(242, 169, 0, 0.25)");
+        ctx.strokeStyle = merGrad;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(W / 2, fy);
+        ctx.lineTo(W / 2, fy + 62);
+        ctx.stroke();
+
+        // Delicate 4-point compass diamond star at apex of meridian
+        drawCompassStar(ctx, W / 2, fy + 58, 22, 6, frameGrad);
+
+        // Four subtle 24K compass stars inlaid cleanly inside the lower/upper frame geometry
+        const sxOff = isEast ? 84 : 74;
+        const syTop = isEast ? fy + 52 : fy + 88;
+        const syBot = isEast ? fy + fh - 52 : fy + fh - 88;
+        [[fx + sxOff, syBot], [fx + fw - sxOff, syBot]].forEach(([sx, sy]) => {
+          drawCompassStar(ctx, sx, sy, 16, 4.5, frameGrad);
+        });
+        ctx.restore();
       }
 
       // Vignette depth
@@ -1480,16 +1670,17 @@
       ctx.restore(); // End inner clip
 
       ctx.strokeStyle = frameGrad;
-      ctx.lineWidth = 5;
+      ctx.lineWidth = isMVP || isGS ? 6 : 5;
       ctx.strokeRect(fx, fy, fw, fh);
 
       // =====================================================================
-      // LAYER 3: TOP HEADER — SEASON ('XX) + PANTHEON-ONLY TOP-RIGHT MEDALLION
-      // (Non-Pantheon players leave top-right corner completely blank!)
+      // LAYER 3: TOP-LEFT DECADE SEASON STAMP + TOP-RIGHT PANTHEON MEDALLION
       // =====================================================================
+      drawDecadeSeasonBadge(ctx, card, theme, frameGrad);
+
       if (card.pantheon) {
-        const medX = isEast ? W - 190 : W - 184;
-        const medY = 186;
+        const medX = isEast ? W - 196 : W - 188;
+        const medY = 194;
         const medR = 62;
         const isOT = card.pantheon.q === "OT";
         ctx.save();
@@ -1517,42 +1708,12 @@
         ctx.restore();
       }
 
-      // Monumental Season Designation ('04, '05, '26, etc.) — NEVER hyphenated
-      ctx.save();
-      const seasonY = isMVP || isGS ? 216 : 192;
-      if (isMVP || isGS) {
-        drawCrown(ctx, W / 2, 134, 136, 62, isGS);
-      }
-      ctx.strokeStyle = rgba(theme.metal, 0.44);
-      ctx.lineWidth = 2.5;
-      ctx.beginPath();
-      ctx.moveTo(W / 2 - 220, seasonY); ctx.lineTo(W / 2 - 114, seasonY);
-      ctx.moveTo(W / 2 + 114, seasonY); ctx.lineTo(W / 2 + 220, seasonY);
-      ctx.stroke();
-
-      ctx.font = `800 112px "Barlow Condensed", sans-serif`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      const sGrad = ctx.createLinearGradient(W / 2, seasonY - 46, W / 2, seasonY + 46);
-      if (isMVP || isGS) {
-        sGrad.addColorStop(0, "#FFF6D1");
-        sGrad.addColorStop(0.55, "#F2A900");
-        sGrad.addColorStop(1, "#C4810A");
-      } else {
-        sGrad.addColorStop(0, "#FFFFFF");
-        sGrad.addColorStop(1, "#D5CFC0");
-      }
-      ctx.fillStyle = sGrad;
-      ctx.fillText(`\u2019${card.yy}`, W / 2, seasonY + 4);
-      ctx.restore();
-
       // =====================================================================
-      // LAYER 4: STYLIZED REAL TEAM LOGO MEDALLION
+      // LAYER 4: FULL-COLOR OFFICIAL TEAM LOGO (TOP CENTER)
       // =====================================================================
-      const hasManySec = card.secAwards.length === 4;
-      const logoY = hasManySec ? 388 : 408;
-      const logoSize = hasManySec ? 198 : 228;
-      drawStylizedRealLogo(ctx, card, W / 2, logoY, logoSize, theme, frameGrad, studio.logoFinish);
+      const logoY = 282;
+      const logoSize = 236;
+      drawFullColorLogo(ctx, card, W / 2, logoY, logoSize, theme, frameGrad);
 
       // =====================================================================
       // LAYER 5: EMBOSSED MONUMENTAL PLAYER TYPOGRAPHY
@@ -1562,21 +1723,21 @@
       let lastLine = parts.slice(1).join(" ");
       if (!lastLine) { firstLine = ""; lastLine = parts[0]; }
 
-      const nameFirstY = hasManySec ? 592 : 626;
-      const nameLastY = hasManySec ? 732 : 772;
+      const nameFirstY = 492;
+      const nameLastY = 624;
 
       ctx.save();
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      const fSize = firstLine.length > 10 ? 92 : 108;
+      const fSize = firstLine.length > 10 ? 90 : 104;
       ctx.font = `700 ${fSize}px "Barlow Condensed", sans-serif`;
       ctx.fillStyle = "rgba(0,0,0,0.68)";
       ctx.fillText(firstLine.toUpperCase(), W / 2 + 4, nameFirstY + 5);
       ctx.fillStyle = rgba("#FAF9F6", 0.94);
       ctx.fillText(firstLine.toUpperCase(), W / 2, nameFirstY);
 
-      let lSize = hasManySec ? 168 : 184;
+      let lSize = 180;
       if (lastLine.length >= 15) lSize = 112;
       else if (lastLine.length >= 12) lSize = 132;
       else if (lastLine.length >= 9) lSize = 154;
@@ -1605,89 +1766,31 @@
       ctx.restore();
 
       // =====================================================================
-      // LAYER 6: PROMINENT AWARDS & VALUES MONUMENT STAGE
-      // Adaptive per card architecture:
-      //   - Specialist Single (e.g. '26 Kon Knueppel): Giant Award Banner + Giant Hero Value Dial
-      //   - Specialist Dual (e.g. '85 Worthy): Twin Equal Hero Award Chambers
-      //   - Top-6 Conference (MVP / All-East / All-West):
-      //       Bold Primary Honor Plate + Locked (PTS | G | PPG) Watch Dials
-      //       + Adaptive Secondary Award Vault (0, 1 full, 2 twin, 3 triad, 4 quad)
+      // LAYER 6: BOX-FIRST AWARDS & PROMINENT VALUES VAULT (Y = 736 .. 1620)
       // =====================================================================
-      const stageX = 164;
-      const stageW = W - 328;
+      const stageX = 162;
+      const stageW = W - 324;
 
       if (isSpec) {
         // --- SPECIALIST-ONLY ARCHITECTURE (120 CARDS: e.g. '26 KON KNUEPPEL, '26 OG ANUNOBY) ---
         if (card.secAwards.length === 1) {
-          const aw = card.secAwards[0];
-          const st = AWARD_STYLES[aw.key];
-          const banY = 918, banH = 166;
-
-          // Sculpted Primary Award Banner (Pure name — e.g. SHARP SHOOTER #5, DEAD EYE, SILVER SCORER)
-          const banGrad = ctx.createLinearGradient(stageX, banY, stageX + stageW, banY + banH);
-          banGrad.addColorStop(0, st.bgStops[0]);
-          banGrad.addColorStop(0.5, st.bgStops[1]);
-          banGrad.addColorStop(1, st.bgStops[2]);
-          const brdGrad = ctx.createLinearGradient(stageX, banY, stageX + stageW, banY + banH);
-          brdGrad.addColorStop(0, st.borderStops[0]);
-          brdGrad.addColorStop(0.5, st.borderStops[1]);
-          brdGrad.addColorStop(1, st.borderStops[2]);
-
-          ctx.save();
-          ctx.beginPath();
-          ctx.moveTo(stageX - 22, banY + 24);
-          ctx.lineTo(stageX, banY);
-          ctx.lineTo(stageX + stageW, banY);
-          ctx.lineTo(stageX + stageW + 22, banY + 24);
-          ctx.lineTo(stageX + stageW + 22, banY + banH - 24);
-          ctx.lineTo(stageX + stageW, banY + banH);
-          ctx.lineTo(stageX, banY + banH);
-          ctx.lineTo(stageX - 22, banY + banH - 24);
-          ctx.closePath();
-          ctx.fillStyle = banGrad;
-          ctx.fill();
-          ctx.lineWidth = 4.5;
-          ctx.strokeStyle = brdGrad;
-          ctx.stroke();
-
-          ctx.strokeStyle = rgba(st.borderStops[0], 0.25);
-          ctx.lineWidth = 1.5;
-          ctx.strokeRect(stageX + 12, banY + 12, stageW - 24, banH - 24);
-
-          const fullTitle = aw.subRank ? `${aw.label}  ${aw.subRank}` : aw.label;
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.font = `900 94px "Barlow Condensed", sans-serif`;
-          ctx.fillStyle = st.labelColor;
-          ctx.fillText(fullTitle, W / 2, banY + banH / 2 + 4);
-          ctx.restore();
-
-          // Monumental Single Hero Split-Flap Value Dial (e.g. +141.4, +66.8, 506)
-          const heroW = 760;
-          const heroH = 270;
-          const heroX = (W - heroW) / 2;
-          const heroY = 1146;
-          drawDialChamber(ctx, heroX, heroY, heroW, heroH, aw.val, "", aw.ratio, theme, aw.key === "DE");
-
+          // Single Monumental Alloy Box — the box's material & colossal value speak louder than words!
+          drawBullionAwardBox(ctx, card.secAwards[0], stageX, 782, stageW, 740, "hero");
         } else {
-          // DUAL SPECIALIST ARCHITECTURE (5 cards: e.g. '85 Worthy SH + DE, '87 Worthy SS + DE)
-          const gap = 36;
+          // Dual Specialist Vault (e.g. '85 Worthy SH+DE, '87 Worthy SS+DE)
+          const gap = 32;
           const cw = (stageW - gap) / 2;
-          const cy = 968;
-          const ch = 468;
           card.secAwards.forEach((aw, i) => {
-            drawAwardModule(ctx, aw, stageX + i * (cw + gap), cy, cw, ch, "twin");
+            drawBullionAwardBox(ctx, aw, stageX + i * (cw + gap), 782, cw, 740, "twin");
           });
         }
-
       } else {
-        // --- TOP-6 CONFERENCE ARCHITECTURE (516 CARDS: EAST/WEST MVP & ALL-EAST/WEST) ---
+        // --- TOP-6 CONFERENCE ARCHITECTURE (516 CARDS) ---
         const numSec = card.secAwards.length;
 
-        // 1. Primary Honor Bar (EAST MVP, WEST MVP, ALL-EAST, ALL-WEST) — Clean, unadorned!
-        const pBanY = hasManySec ? 842 : (numSec === 0 ? 900 : 882);
-        const pBanH = numSec === 0 ? 136 : 112;
-
+        // 1. Sleek Architectural Primary Honor Plate (EAST MVP / WEST MVP / ALL-EAST / ALL-WEST)
+        const pBanY = 736;
+        const pBanH = 88;
         ctx.save();
         const pGrad = ctx.createLinearGradient(stageX, pBanY, stageX + stageW, pBanY + pBanH);
         let pTextColor = "#FAF9F6";
@@ -1715,37 +1818,35 @@
         }
 
         ctx.beginPath();
-        ctx.moveTo(stageX - 20, pBanY + 18);
+        ctx.moveTo(stageX - 18, pBanY + 14);
         ctx.lineTo(stageX, pBanY);
         ctx.lineTo(stageX + stageW, pBanY);
-        ctx.lineTo(stageX + stageW + 20, pBanY + 18);
-        ctx.lineTo(stageX + stageW + 20, pBanY + pBanH - 18);
+        ctx.lineTo(stageX + stageW + 18, pBanY + 14);
+        ctx.lineTo(stageX + stageW + 18, pBanY + pBanH - 14);
         ctx.lineTo(stageX + stageW, pBanY + pBanH);
         ctx.lineTo(stageX, pBanY + pBanH);
-        ctx.lineTo(stageX - 20, pBanY + pBanH - 18);
+        ctx.lineTo(stageX - 18, pBanY + pBanH - 14);
         ctx.closePath();
         ctx.fillStyle = pGrad;
         ctx.fill();
-        ctx.lineWidth = 4;
+        ctx.lineWidth = 3.5;
         ctx.strokeStyle = frameGrad;
         ctx.stroke();
 
-        ctx.strokeStyle = rgba(pTextColor, 0.22);
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(stageX + 10, pBanY + 10, stageW - 20, pBanH - 20);
-
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.font = `900 ${numSec === 0 ? 86 : 74}px "Barlow Condensed", sans-serif`;
+        ctx.font = `900 58px "Barlow Condensed", sans-serif`;
         ctx.fillStyle = pTextColor;
-        ctx.fillText(card.primaryLabel, W / 2, pBanY + pBanH / 2 + 4);
+        const primaryDisp = isMVP || isGS ? `\u25C6   ${card.primaryLabel}   \u25C6` : card.primaryLabel;
+        ctx.fillText(primaryDisp, W / 2, pBanY + pBanH / 2 + 3);
         ctx.restore();
 
-        // 2. Locked Watch-Dial Split-Flap Trio (PTS | G | PPG) — Always aligned for side-by-side comparison!
-        const dialY = hasManySec ? 988 : (numSec === 0 ? 1110 : 1030);
-        const dialH = hasManySec ? 176 : (numSec === 0 ? 216 : 192);
+        // 2. LOCKED WATCH-DIAL SPLIT-FLAP TRIO (PTS | G | PPG)
+        // Identical Y=856, H=224 across ALL 516 Top-6 cards for razor-sharp side-by-side comparison!
+        const dialY = 856;
+        const dialH = 224;
         const dialGap = 32;
-        const w1 = 444, w2 = 282, w3 = 346;
+        const w1 = 448, w2 = 278, w3 = 350;
         const dialStartX = (W - (w1 + w2 + w3 + dialGap * 2)) / 2;
         const goldDial = isMVP || isGS;
 
@@ -1753,56 +1854,52 @@
         drawDialChamber(ctx, dialStartX + w1 + dialGap, dialY, w2, dialH, String(card.g), "G", card.g / SCALES.g, theme, goldDial);
         drawDialChamber(ctx, dialStartX + w1 + dialGap + w2 + dialGap, dialY, w3, dialH, card.ppg.toFixed(1), "PPG", card.ppg / SCALES.ppg, theme, goldDial);
 
-        // 3. Adaptive Secondary Award Vault Zone (0, 1, 2, 3, or 4 Stacked Specialist Awards)
+        // 3. ADAPTIVE SECONDARY AWARD BULLION VAULT (Y = 1178 .. 1612)
         if (numSec === 0) {
-          // Pure All-East / All-West / MVP — Sculptural Architectural Divider Ornament
+          // Pure All-East / All-West / MVP — Sculptural Architectural Horizon Divider
           ctx.save();
-          const oy = 1496;
+          const oy = 1404;
           ctx.strokeStyle = rgba(theme.metal, 0.36);
           ctx.lineWidth = 2.5;
           ctx.beginPath();
           ctx.moveTo(290, oy); ctx.lineTo(W / 2 - 48, oy);
           ctx.moveTo(W / 2 + 48, oy); ctx.lineTo(W - 290, oy);
           ctx.stroke();
-          ctx.fillStyle = isMVP ? "#F2A900" : theme.metal;
-          ctx.beginPath();
-          ctx.moveTo(W / 2, oy - 18); ctx.lineTo(W / 2 + 18, oy); ctx.lineTo(W / 2, oy + 18); ctx.lineTo(W / 2 - 18, oy);
-          ctx.closePath(); ctx.fill();
+          drawCompassStar(ctx, W / 2, oy, 22, 7, isMVP ? "#F2A900" : theme.metal);
           ctx.restore();
         } else if (numSec === 1) {
-          // Single Additional Award -> Full-Width Signature Alloy Plaque (e.g. '04 McGrady BRONZE BUCKET 1,878)
-          drawAwardModule(ctx, card.secAwards[0], stageX, 1344, stageW, 198, "full");
+          // 1 Extra Award -> Full-Width Signature Bullion Ingot (e.g. '04 McGrady Bronze Bucket 1878)
+          drawBullionAwardBox(ctx, card.secAwards[0], stageX, 1212, stageW, 356, "full");
         } else if (numSec === 2) {
-          // Two Additional Awards -> Balanced Twin Alloy Chambers
+          // 2 Extra Awards -> Balanced Twin Contrasting Alloy Chambers
           const g = 28;
           const cw = (stageW - g) / 2;
           card.secAwards.forEach((aw, i) => {
-            drawAwardModule(ctx, aw, stageX + i * (cw + g), 1334, cw, 224, "twin");
+            drawBullionAwardBox(ctx, aw, stageX + i * (cw + g), 1200, cw, 384, "twin");
           });
         } else if (numSec === 3) {
-          // Three Additional Awards -> Precision Triad Vault
+          // 3 Extra Awards -> Precision Triad Alloy Vault (e.g. '94 Hakeem)
           const g = 22;
           const cw = (stageW - g * 2) / 3;
           card.secAwards.forEach((aw, i) => {
-            drawAwardModule(ctx, aw, stageX + i * (cw + g), 1334, cw, 224, "triad");
+            drawBullionAwardBox(ctx, aw, stageX + i * (cw + g), 1200, cw, 384, "triad");
           });
         } else if (numSec === 4) {
-          // Four Additional Awards (5-Award Grand Slam!) -> 2x2 Bullion Quad Grid
-          const gx = 24, gy = 20;
+          // 4 Extra Awards (5-Award Sweep — '90 Jordan, '13 LeBron, '12 Durant) -> 2x2 Bullion Quad Vault
+          const gx = 24, gy = 22;
           const cw = (stageW - gx) / 2;
-          const ch = 152;
-          const topY = 1262;
+          const ch = 206;
+          const topY = 1178;
           card.secAwards.forEach((aw, i) => {
             const col = i % 2;
             const row = Math.floor(i / 2);
-            drawAwardModule(ctx, aw, stageX + col * (cw + gx), topY + row * (ch + gy), cw, ch, "quad");
+            drawBullionAwardBox(ctx, aw, stageX + col * (cw + gx), topY + row * (ch + gy), cw, ch, "quad");
           });
         }
       }
 
       // =====================================================================
       // LAYER 7: FRANCHISE NAME & ENGRAVED RANDOMIZED SCARCITY SERIAL PLAQUE
-      // Format: 04E : 02 : BB : XX // 82  (Zero extra colophon clutter!)
       // =====================================================================
       ctx.save();
       ctx.textAlign = "center";
@@ -1851,12 +1948,11 @@
     }
 
     // =========================================================================
-    // 4. INTERACTIVE STUDIO STATE, FILTERING, LOGO FINISH, 3D TILT & EXPORTS
+    // 4. INTERACTIVE STUDIO STATE, FILTERING, 3D TILT & PNG EXPORTS
     // =========================================================================
     const studio = {
       mode: "dual",
       activeSlot: "A",
-      logoFinish: "stylized", // 'stylized' | 'etched' | 'color'
       slab: true,
       tilt: true,
       cardA: null,
@@ -1981,25 +2077,24 @@
       document.getElementById("modeSingleBtn").classList.toggle("active", mode === "single");
       const bCont = document.getElementById("cardBContainer");
       const aCont = document.getElementById("cardAContainer");
+      const cmpBtn = document.getElementById("exportCompareBtn");
+      const sglBtn = document.getElementById("exportSingleBtn");
+
       if (mode === "single") {
         bCont.classList.add("hidden");
         aCont.classList.remove("max-w-[445px]");
         aCont.classList.add("max-w-[520px]");
+        cmpBtn.classList.add("hidden");
+        sglBtn.className = "ctrl-btn !bg-[#111111] !text-[#F2A900] hover:!bg-[#F2A900] hover:!text-[#111111]";
         setActiveSlot("A");
       } else {
         bCont.classList.remove("hidden");
         aCont.classList.remove("max-w-[520px]");
         aCont.classList.add("max-w-[445px]");
+        cmpBtn.classList.remove("hidden");
+        sglBtn.className = "ctrl-btn";
       }
       renderDeltaTelemetry();
-    }
-
-    function setLogoFinish(finish) {
-      studio.logoFinish = finish;
-      document.getElementById("logoStylizedBtn").classList.toggle("active", finish === "stylized");
-      document.getElementById("logoEtchedBtn").classList.toggle("active", finish === "etched");
-      document.getElementById("logoColorBtn").classList.toggle("active", finish === "color");
-      renderCanvases();
     }
 
     function toggleSlab() {
@@ -2100,7 +2195,7 @@
           </div>
           <div class="border border-[#252830] p-3 bg-[#0E1014]">
             <div class="text-[#8E939E] text-[9.5px] uppercase">VALUES</div>
-            <div class="text-white font-bold mt-1">${a.pts !== null ? `${a.pts.toLocaleString()} PTS · ${a.g} G · ${a.ppg.toFixed(1)} PPG` : a.secAwards.map(x => `${x.label}: ${x.val}`).join(" · ")}</div>
+            <div class="text-white font-bold mt-1">${a.pts !== null ? `${a.pts} PTS · ${a.g} G · ${a.ppg.toFixed(1)} PPG` : a.secAwards.map(x => `${x.label}: ${x.val}`).join(" · ")}</div>
           </div>
           <div class="border border-[#252830] p-3 bg-[#0E1014]">
             <div class="text-[#8E939E] text-[9.5px] uppercase">SERIAL${a.pantheon ? ` · PANTHEON ${a.pantheon.min}` : ""}</div>
@@ -2111,7 +2206,7 @@
       }
 
       const ptsDiff = (a.pts !== null && b.pts !== null)
-        ? `${a.pts - b.pts >= 0 ? "+" : ""}${(a.pts - b.pts).toLocaleString()} PTS`
+        ? `${a.pts - b.pts >= 0 ? "+" : ""}${a.pts - b.pts} PTS`
         : "—";
       const ppgDiff = (a.ppg !== null && b.ppg !== null)
         ? `${a.ppg - b.ppg >= 0 ? "+" : ""}${(a.ppg - b.ppg).toFixed(1)} PPG`
@@ -2124,7 +2219,7 @@
         <div class="border border-[#252830] p-3 bg-[#0E1014]">
           <div class="text-[#F2A900] text-[9.5px] font-bold uppercase">SLOT A // &rsquo;${a.yy} ${a.name} (${a.team})</div>
           <div class="text-white font-bold mt-1">${cardAwardsSummary(a)}</div>
-          <div class="text-[#8E939E] text-[9.5px] mt-0.5">${a.pts !== null ? `${a.pts.toLocaleString()} PTS · ${a.g}G · ${a.ppg.toFixed(1)} PPG` : ""}</div>
+          <div class="text-[#8E939E] text-[9.5px] mt-0.5">${a.pts !== null ? `${a.pts} PTS · ${a.g}G · ${a.ppg.toFixed(1)} PPG` : ""}</div>
         </div>
         <div class="border border-[#252830] p-3 bg-[#14171D] text-center flex flex-col justify-center">
           <div class="text-[#8E939E] text-[9.5px] uppercase">DELTA (A &minus; B)</div>
@@ -2133,7 +2228,7 @@
         <div class="border border-[#252830] p-3 bg-[#0E1014] md:text-right">
           <div class="text-[#60A5FA] text-[9.5px] font-bold uppercase">SLOT B // &rsquo;${b.yy} ${b.name} (${b.team})</div>
           <div class="text-white font-bold mt-1">${cardAwardsSummary(b)}</div>
-          <div class="text-[#8E939E] text-[9.5px] mt-0.5">${b.pts !== null ? `${b.pts.toLocaleString()} PTS · ${b.g}G · ${b.ppg.toFixed(1)} PPG` : ""}</div>
+          <div class="text-[#8E939E] text-[9.5px] mt-0.5">${b.pts !== null ? `${b.pts} PTS · ${b.g}G · ${b.ppg.toFixed(1)} PPG` : ""}</div>
         </div>
       `;
     }
@@ -2163,12 +2258,11 @@
         a.href = url;
         a.click();
       } catch (err) {
-        // Fallback if opened via strict local file:// CORS on a historical logo
-        window.print();
+        alert("PNG export blocked by browser local-file CORS on an external logo image. Serve this folder over localhost or a static host for direct PNG export.");
       }
     }
 
-    function exportCurrentPNG() {
+    function exportComparisonPNG() {
       if (studio.mode === "single") {
         downloadSingleCard("A");
         return;
@@ -2190,7 +2284,7 @@
         a.href = dip.toDataURL("image/png");
         a.click();
       } catch (err) {
-        window.print();
+        alert("Comparison PNG export blocked by browser local-file CORS on an external logo image. Serve this folder over localhost or a static host for direct PNG export.");
       }
     }
 
@@ -2240,7 +2334,6 @@
         studio.cardB = findCard("2004-05", "Tracy McGrady");
       }
 
-      // Use passed inventory serial if deep-linked from Card Index, otherwise randomize (1–82)
       const cA = parseInt(params.get("copyA") || params.get("copy"), 10);
       const cB = parseInt(params.get("copyB"), 10);
       studio.copyA = (cA >= 1 && cA <= 82) ? cA : randomSerialCopy();
