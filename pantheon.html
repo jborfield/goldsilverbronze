@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THE EXTRA PERIOD PANTHEON &#9670; WHERE BUCKETS REIGN // '84–'26 CALENDAR MATRIX</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Shared Swiss Archival Tokens (matching posters.html) */
+      --bg-paper: #F4F3EF;
+      --bg-poster: #FAF9F6;
+      --ink: #111111;
+      --ink-secondary: #555552;
+      --ink-muted: #8C8B85;
+      --east-cobalt: #1D4ED8;
+      --west-vermilion: #D92B2B;
+      --grid-subtle: #D8D6CE;
+
+      /* Mechanical Arena Scoreboard Tokens */
+      --chassis: #111214;
+      --chassis-elev: #16181C;
+      --chassis-rule: #25282E;
+      --chassis-decade: rgba(232, 227, 213, 0.14);
+      --tile-gap: #1B1E23;
+      --tile-gap-border: #262A31;
+      --tile-ac: #2A2F37;
+      --tile-ac-border: #3A404B;
+      --tile-ac-text: #E8E3D5;
+      --tile-mvp: #F2A900;
+      --tile-mvp-text: #111214;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-radius: 0px !important;
+    }
+
+    body {
+      background-color: var(--bg-paper);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body.frame-mode {
+      background-color: #0B0C0E;
+    }
+
+    body.frame-mode .chrome-hide {
+      display: none !important;
+    }
+
+    body.frame-mode #boardOuterWrap {
+      padding: 20px;
+      max-width: 1920px;
+    }
+
+    body.frame-mode #scoreboardFrame {
+      border-color: #2A2D33;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.65);
+    }
+
+    .font-mono-tabular {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #16181C;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #474D57;
+    }
+
+    /* Control Buttons (Matching posters.html) */
+    .ctrl-btn {
+      border: 1px solid var(--ink);
+      background: var(--bg-poster);
+      color: var(--ink);
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 8px;
+      cursor: pointer;
+      transition: all 0.1s ease;
+    }
+    .ctrl-btn:hover {
+      background: #E5E3DC;
+    }
+    .ctrl-btn.active {
+      background: var(--ink);
+      color: var(--bg-poster);
+    }
+
+    /* Mechanical Arena Scoreboard Grid */
+    .board-table {
+      border-collapse: collapse;
+      width: 100%;
+      table-layout: fixed;
+      background-color: var(--chassis);
+      color: #E8E3D5;
+    }
+
+    .board-table th,
+    .board-table td {
+      padding: 0;
+      vertical-align: middle;
+    }
+
+    .col-player {
+      width: 176px;
+      min-width: 176px;
+    }
+    .col-year {
+      width: 28px;
+      min-width: 26px;
+    }
+    .col-tally {
+      width: 34px;
+      min-width: 34px;
+    }
+
+    /* Sticky Left & Right Columns for Smaller Viewports */
+    .sticky-left {
+      position: sticky;
+      left: 0;
+      z-index: 10;
+      background-color: var(--chassis);
+    }
+    .sticky-right-mvp {
+      position: sticky;
+      right: 34px;
+      z-index: 10;
+      background-color: var(--chassis);
+    }
+    .sticky-right-ac {
+      position: sticky;
+      right: 0;
+      z-index: 10;
+      background-color: var(--chassis);
+    }
+
+    /* Decade Guidelines ('90, '00, '10, '20) */
+    .decade-edge {
+      border-left: 1px solid var(--chassis-decade) !important;
+    }
+
+    /* Year Rulers */
+    .ruler-row th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 600;
+      color: #7D828C;
+      text-align: center;
+      padding: 6px 0;
+      background-color: #14161A;
+      border-bottom: 1px solid #2A2E36;
+      letter-spacing: -0.02em;
+      transition: color 0.08s ease, background-color 0.08s ease;
+    }
+    .ruler-bottom th {
+      border-top: 1px solid #2A2E36;
+      border-bottom: none;
+    }
+    .ruler-row th.col-hover {
+      color: #F2A900 !important;
+      background-color: #1F2229 !important;
+    }
+    .ruler-row th.tally-hdr-mvp {
+      color: #F2A900;
+      font-weight: 700;
+      border-left: 1px solid #2A2E36;
+    }
+    .ruler-row th.tally-hdr-ac {
+      color: #9CA1AC;
+      font-weight: 700;
+    }
+
+    /* Quarter Header Rows */
+    .quarter-row td {
+      background-color: #181B20;
+      border-top: 1px solid #2D323B;
+      border-bottom: 1px solid #2D323B;
+      padding: 4px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9BA0AA;
+    }
+    .quarter-row.is-ot td {
+      color: #F2A900;
+      background-color: #1B1A16;
+      border-top: 1px solid #574110;
+      border-bottom: 1px solid #574110;
+    }
+
+    /* Player Rows */
+    .player-row {
+      border-bottom: 1px solid #1A1D22;
+      transition: background-color 0.08s ease;
+    }
+    .player-row:hover {
+      background-color: #181B21;
+    }
+    .player-row:hover .sticky-left,
+    .player-row:hover .sticky-right-mvp,
+    .player-row:hover .sticky-right-ac {
+      background-color: #181B21;
+    }
+    .player-row.row-selected {
+      background-color: #21242B !important;
+    }
+    .player-row.row-selected .sticky-left,
+    .player-row.row-selected .sticky-right-mvp,
+    .player-row.row-selected .sticky-right-ac {
+      background-color: #21242B !important;
+    }
+    .player-row.row-dimmed {
+      opacity: 0.2;
+    }
+
+    /* Player Name Cell */
+    .player-cell {
+      padding: 2px 8px 2px 10px !important;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border-right: 1px solid #242830;
+    }
+    .minute-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #6B707B;
+      margin-right: 7px;
+      display: inline-block;
+      width: 18px;
+    }
+    .is-ot-row .minute-code {
+      color: #F2A900;
+    }
+    .player-name-txt {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #E8E3D5;
+      letter-spacing: -0.01em;
+    }
+    .player-row:hover .player-name-txt {
+      color: #FFFFFF;
+    }
+
+    /* Four-State Mechanical Split-Flap Tiles */
+    .cell-wrap {
+      padding: 2px 1.5px !important;
+      height: 22px;
+      text-align: center;
+      position: relative;
+    }
+
+    /* State 1: Out of Span */
+    .dot-oos {
+      width: 2px;
+      height: 2px;
+      background-color: #262A32;
+      margin: 0 auto;
+    }
+
+    /* Split-Flap Tile Base */
+    .flap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 17px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      position: relative;
+      user-select: none;
+      text-decoration: none;
+    }
+    /* Mechanical Split-Flap Center Seam */
+    .flap::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      pointer-events: none;
+    }
+
+    /* State 2: Gap Year */
+    .flap-gap {
+      background-color: var(--tile-gap);
+      border: 1px solid var(--tile-gap-border);
+    }
+    .flap-gap::after {
+      background-color: rgba(0, 0, 0, 0.45);
+    }
+
+    /* State 3: All-Conference */
+    .flap-ac {
+      background-color: var(--tile-ac);
+      border: 1px solid var(--tile-ac-border);
+      color: var(--tile-ac-text);
+      cursor: pointer;
+      transition: border-color 0.08s ease, background-color 0.08s ease;
+    }
+    .flap-ac::after {
+      background-color: rgba(17, 18, 20, 0.35);
+    }
+    .flap-ac:hover {
+      background-color: #3C434F;
+      border-color: #E8E3D5;
+      color: #FFFFFF;
+      z-index: 4;
+    }
+
+    /* State 4: Conference MVP */
+    .flap-mvp {
+      background-color: var(--tile-mvp);
+      border: 1px solid #FFBF2E;
+      color: var(--tile-mvp-text);
+      font-weight: 800;
+      cursor: pointer;
+      transition: filter 0.08s ease;
+    }
+    .flap-mvp::after {
+      background-color: rgba(17, 18, 20, 0.18);
+    }
+    .flap-mvp:hover {
+      filter: brightness(1.12);
+      outline: 1px solid #FFFFFF;
+      z-index: 4;
+    }
+
+    /* Highlighted Franchise Match */
+    .flap-team-hit {
+      outline: 1.5px solid #FFFFFF !important;
+      z-index: 5;
+    }
+
+    /* Tally Columns (MVP then AC) */
+    .tally-cell {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-align: center;
+      padding: 0 2px !important;
+    }
+    .tally-mvp {
+      border-left: 1px solid #2A2E36;
+      color: #F2A900;
+      font-weight: 700;
+    }
+    .tally-mvp.is-zero {
+      color: #464B55;
+      font-weight: 500;
+    }
+    .tally-ac {
+      color: #C7C3B7;
+      font-weight: 600;
+    }
+    .tally-ac.is-zero {
+      color: #464B55;
+      font-weight: 500;
+    }
+
+    /* Print Styling for Minimalist Framed Export */
+    @media print {
+      @page {
+        size: landscape;
+        margin: 0.35in;
+      }
+      body {
+        background-color: #111214 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .chrome-hide, #siteNav, footer {
+        display: none !important;
+      }
+      #boardOuterWrap {
+        padding: 0 !important;
+        max-width: none !important;
+      }
+      #scoreboardFrame {
+        border: 1px solid #2A2D33 !important;
+      }
+      .board-scroll {
+        overflow: visible !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-[#F2A900] selection:text-[#111214]">
+
+  <!-- =======================================================================
+     BEGIN SITE NAVIGATION // WHERE BUCKETS REIGN ARCHIVE
+     Drop directly after <body> on any page in the archive.
+     ======================================================================= -->
+<nav id="siteNav" aria-label="Primary Archive Navigation" class="bg-[#111214] text-[#FAF9F6] border-b-2 border-[#111111] print:hidden">
+  <div class="max-w-[1840px] mx-auto flex items-stretch justify-between border-x border-[#2A2D33]">
+    <!-- Brand Mark -->
+    <a href="index.html" class="flex items-center gap-2.5 px-3.5 sm:px-4 py-2 border-r border-[#2A2D33] hover:bg-[#181A1F] transition-colors shrink-0">
+      <span class="text-[#F2A900] text-xs leading-none" aria-hidden="true">&#9670;</span>
+      <span class="font-black text-xs sm:text-[13px] tracking-[0.06em] uppercase text-[#FAF9F6]">WHERE BUCKETS REIGN</span>
+      <span class="hidden xl:inline-block font-mono-tabular text-[9.5px] tracking-[0.12em] uppercase text-[#8C8B85] border-l border-[#2A2D33] pl-2.5">
+        NBA SCORING ARCHIVE &rsquo;84&ndash;&rsquo;26
+      </span>
+    </a>
+
+    <!-- Desktop Exhibit Links -->
+    <div class="hidden md:flex items-stretch flex-1">
+      <a href="index.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">00</span>
+        <span>OVERVIEW</span>
+      </a>
+      <a href="posters.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">01</span>
+        <span>SEASON POSTERS</span>
+      </a>
+      <a href="pantheon.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap bg-[#1C1F24] text-[#FAF9F6] border-b-2 border-b-[#F2A900]">
+        <span class="text-[#F2A900] text-[9.5px]">02</span>
+        <span>EXTRA PERIOD PANTHEON</span>
+      </a>
+      <!-- FUTURE EXHIBIT SLOT: Duplicate the <a> block above as 03, 04, etc. -->
+    </div>
+
+    <!-- Right Archive Status & Mobile Toggle -->
+    <div class="flex items-center">
+      <div class="hidden lg:flex items-center gap-3 px-4 font-mono-tabular text-[9.5px] uppercase tracking-[0.1em] text-[#8C8B85]">
+        <span>43 SEASONS</span>
+        <span class="text-[#2A2D33]">|</span>
+        <span>53 SCORERS</span>
+      </div>
+      <button type="button" onclick="document.getElementById('mobileSiteNav').classList.toggle('hidden')"
+              aria-label="Toggle Navigation Menu"
+              class="md:hidden font-mono-tabular text-[10px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-l border-[#2A2D33] text-[#FAF9F6] hover:bg-[#1C1F24]">
+        MENU &#9776;
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Drawer -->
+  <div id="mobileSiteNav" class="hidden md:hidden border-t border-[#2A2D33] bg-[#16181C]">
+    <a href="index.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">
+      00 // OVERVIEW
+    </a>
+    <a href="posters.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">
+      01 // SEASON POSTERS (1983&ndash;84 TO 2025&ndash;26)
+    </a>
+    <a href="pantheon.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] text-[#F2A900] bg-[#1C1F24]">
+      02 // THE EXTRA PERIOD PANTHEON
+    </a>
+  </div>
+</nav>
+<!-- END SITE NAVIGATION -->
+
+  <!-- COMPACT SWISS EXHIBITION CONTROLS BAR (COMPLEMENTARY TO POSTERS.HTML) -->
+  <header class="chrome-hide sticky top-0 z-30 bg-[#F4F3EF] border-b-2 border-[#111111]">
+    <div class="max-w-[1840px] mx-auto grid grid-cols-1 lg:grid-cols-12 border-x border-[#111111]">
+
+      <!-- Search Input (Cols 1-4) -->
+      <div class="lg:col-span-4 p-2.5 sm:px-3.5 border-b lg:border-b-0 lg:border-r border-[#111111] flex items-center gap-2">
+        <input
+          id="pantheonSearch"
+          type="text"
+          placeholder="SEARCH PLAYER OR TEAM (E.G. JORDAN, BOS, LAL)..."
+          oninput="handleSearch(this.value)"
+          class="w-full border border-[#111111] bg-[#FAF9F6] px-2.5 py-1 text-[11px] font-mono-tabular uppercase placeholder:text-[#8C8B85] focus:outline-none focus:bg-[#FEF08A]"
+        />
+        <button id="clearSearchBtn" onclick="clearFilters()" class="hidden ctrl-btn !bg-[#111111] !text-white shrink-0">CLEAR &times;</button>
+      </div>
+
+      <!-- Quarter Filter (Cols 5-8) -->
+      <div class="lg:col-span-5 p-2.5 sm:px-3.5 border-b lg:border-b-0 lg:border-r border-[#111111] flex items-center justify-between gap-2 bg-[#FAF9F6]">
+        <span class="font-mono-tabular text-[9.5px] font-bold uppercase tracking-[0.1em] text-[#555552] shrink-0">PERIOD FILTER:</span>
+        <div class="flex flex-wrap">
+          <button id="qBtnALL" class="ctrl-btn active" onclick="setQuarterFilter('ALL')">ALL (53)</button>
+          <button id="qBtn1Q" class="ctrl-btn border-l-0" onclick="setQuarterFilter('1Q')">1Q</button>
+          <button id="qBtn2Q" class="ctrl-btn border-l-0" onclick="setQuarterFilter('2Q')">2Q</button>
+          <button id="qBtn3Q" class="ctrl-btn border-l-0" onclick="setQuarterFilter('3Q')">3Q</button>
+          <button id="qBtn4Q" class="ctrl-btn border-l-0" onclick="setQuarterFilter('4Q')">4Q</button>
+          <button id="qBtnOT" class="ctrl-btn border-l-0" onclick="setQuarterFilter('OT')">OT</button>
+        </div>
+      </div>
+
+      <!-- Display & Frame Controls (Cols 9-12) -->
+      <div class="lg:col-span-3 p-2.5 sm:px-3.5 flex items-center justify-between lg:justify-end gap-2">
+        <button id="frameModeBtn" onclick="toggleFrameMode()" class="ctrl-btn">FRAME MODE</button>
+        <button onclick="window.print()" class="ctrl-btn">PRINT / PDF</button>
+        <a href="posters.html" class="ctrl-btn !bg-[#111111] !text-[#FAF9F6] hover:!bg-[#D92B2B] hover:!border-[#D92B2B]">SEASON POSTERS &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Live Hover Telemetry & Selected Player Dossier Rail -->
+    <div class="max-w-[1840px] mx-auto border-x border-t border-[#111111] bg-[#ECEAE2] px-3.5 py-1.5 flex flex-wrap items-center justify-between gap-2 font-mono-tabular text-[10px]">
+      <div id="telemetryReadout" class="text-[#555552] font-bold truncate">
+        HOVER ANY TILE TO INSPECT SEASON &middot; CLICK ANY TILE TO OPEN THAT SEASON POSTER &middot; CLICK ANY PLAYER FOR CAREER DOSSIER
+      </div>
+      <div id="dossierActions" class="hidden items-center gap-2 shrink-0">
+        <a id="dossierPosterLink" href="posters.html" class="px-2 py-0.5 bg-[#111111] text-[#FAF9F6] font-bold hover:bg-[#1D4ED8]">OPEN IN SEASON POSTERS &rarr;</a>
+        <button onclick="clearSelectedPlayer()" class="px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] text-[#111111] font-bold hover:bg-[#111111] hover:text-white">CLOSE &times;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Floating Exit Frame Mode Button (Visible only in Frame Mode) -->
+  <button id="exitFrameBtn" onclick="toggleFrameMode()"
+          class="hidden fixed top-4 right-4 z-50 font-mono-tabular text-[10px] font-bold uppercase tracking-[0.1em] px-3 py-1.5 bg-[#181B20] text-[#E8E3D5] border border-[#3A404B] hover:border-[#F2A900] hover:text-[#F2A900] print:hidden">
+    EXIT FRAME MODE &times;
+  </button>
+
+  <!-- MAIN MECHANICAL ARENA SCOREBOARD GALLERY CANVAS -->
+  <main id="boardOuterWrap" class="flex-1 w-full max-w-[1840px] mx-auto px-3 sm:px-5 py-5 sm:py-6 flex flex-col justify-center">
+
+    <!-- MINIMALIST FRAMED SCOREBOARD CHASSIS -->
+    <section id="scoreboardFrame" class="bg-[#111214] border-2 border-[#111111] p-4 sm:p-6 md:p-7">
+
+      <!-- Scoreboard Masthead (Single-line Title + Single-line Subtitle & Two-Item Legend) -->
+      <div class="pb-3.5 mb-3 border-b border-[#2A2E36]">
+        <div class="flex items-center justify-between gap-4">
+          <h1 class="text-base sm:text-xl md:text-2xl font-black uppercase tracking-[0.06em] text-[#FAF9F6] leading-none">
+            THE EXTRA PERIOD PANTHEON <span class="text-[#F2A900] mx-1.5">&#9670;</span> WHERE BUCKETS REIGN
+          </h1>
+        </div>
+        <div class="mt-2 flex flex-wrap items-center justify-between gap-3">
+          <p class="font-mono-tabular text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8E939E]">
+            &rsquo;84&ndash;&rsquo;26 APEX SCORER CALENDAR MATRIX
+          </p>
+          <div class="flex items-center gap-4 font-mono-tabular text-[9.5px] sm:text-[10px] font-bold uppercase tracking-[0.1em]">
+            <span class="flex items-center gap-1.5 text-[#F2A900]">
+              <span class="inline-block w-3.5 h-2.5 bg-[#F2A900] border border-[#FFBF2E]"></span>
+              CONFERENCE MVP
+            </span>
+            <span class="flex items-center gap-1.5 text-[#E8E3D5]">
+              <span class="inline-block w-3.5 h-2.5 bg-[#2A2F37] border border-[#3A404B]"></span>
+              ALL-CONFERENCE
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Matrix Viewport (Full width on desktop, smooth scroll with sticky names/tallies on narrower screens) -->
+      <div class="board-scroll overflow-x-auto border border-[#25282E]">
+        <table class="board-table" id="scoreboardTable">
+          <colgroup id="boardColgroup"></colgroup>
+          <thead id="boardHead"></thead>
+          <tbody id="boardBody"></tbody>
+          <tfoot id="boardFoot"></tfoot>
+        </table>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ARCHIVAL COLOPHON FOOTER (MATCHING POSTERS.HTML) -->
+  <footer class="chrome-hide border-t-2 border-[#111111] bg-[#FAF9F6] mt-6">
+    <div class="max-w-[1840px] mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono-tabular text-[#555552]">
+      <div>
+        <strong class="text-[#111111]">WHERE BUCKETS REIGN // THE EXTRA PERIOD PANTHEON (&rsquo;84&ndash;&rsquo;26)</strong><br/>
+        53 elite modern NBA scorers mapped onto 48 regulation minutes plus a 5-minute overtime across 43 consecutive seasons.
+      </div>
+      <div class="sm:text-right">
+        TALLY CONVENTION: <strong class="text-[#111111]">MVP</strong> = CONFERENCE MVP (#1) &middot; <strong class="text-[#111111]">AC</strong> = ALL-CONFERENCE (#2&ndash;#6, EXCLUDING MVPs)<br/>
+        <a href="index.html" class="underline hover:text-[#111111]">OVERVIEW</a> &middot;
+        <a href="posters.html" class="underline hover:text-[#111111]">43 SEASON POSTERS</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const YEARS = Array.from({ length: 43 }, (_, i) => 1984 + i);
+    const DECADE_YEARS = new Set([1990, 2000, 2010, 2020]);
+    const PANTHEON_DATA = [{"min": ":01", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "Dwight Howard", "start": 2008, "end": 2011, "mvp": 0, "ac": 4, "seasons": {"2008": ["ORL", 0], "2009": ["ORL", 0], "2010": ["ORL", 0], "2011": ["ORL", 0]}}, {"min": ":02", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "Mitch Richmond", "start": 1994, "end": 1997, "mvp": 0, "ac": 4, "seasons": {"1994": ["SAC", 0], "1995": ["SAC", 0], "1996": ["SAC", 0], "1997": ["SAC", 0]}}, {"min": ":03", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "Terry Cummings", "start": 1985, "end": 1989, "mvp": 0, "ac": 4, "seasons": {"1985": ["MIL", 0], "1986": ["MIL", 0], "1988": ["MIL", 0], "1989": ["SAS", 0]}}, {"min": ":04", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "Trae Young", "start": 2020, "end": 2023, "mvp": 0, "ac": 4, "seasons": {"2020": ["ATL", 0], "2021": ["ATL", 0], "2022": ["ATL", 0], "2023": ["ATL", 0]}}, {"min": ":05", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "Jaylen Brown", "start": 2022, "end": 2026, "mvp": 0, "ac": 4, "seasons": {"2022": ["BOS", 0], "2023": ["BOS", 0], "2024": ["BOS", 0], "2026": ["BOS", 0]}}, {"min": ":06", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "Anthony Davis", "start": 2017, "end": 2023, "mvp": 0, "ac": 4, "seasons": {"2017": ["NOP", 0], "2018": ["NOP", 0], "2020": ["LAL", 0], "2023": ["LAL", 0]}}, {"min": ":07", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "Anthony Edwards", "start": 2023, "end": 2026, "mvp": 0, "ac": 4, "seasons": {"2023": ["MIN", 0], "2024": ["MIN", 0], "2025": ["MIN", 0], "2026": ["MIN", 0]}}, {"min": ":08", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "Glen Rice", "start": 1992, "end": 1998, "mvp": 0, "ac": 5, "seasons": {"1992": ["MIA", 0], "1994": ["MIA", 0], "1995": ["MIA", 0], "1997": ["CHA", 0], "1998": ["CHA", 0]}}, {"min": ":09", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "Bradley Beal", "start": 2017, "end": 2021, "mvp": 0, "ac": 5, "seasons": {"2017": ["WAS", 0], "2018": ["WAS", 0], "2019": ["WAS", 0], "2020": ["WAS", 0], "2021": ["WAS", 0]}}, {"min": ":10", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "Paul George", "start": 2013, "end": 2021, "mvp": 0, "ac": 5, "seasons": {"2013": ["IND", 0], "2014": ["IND", 0], "2016": ["IND", 0], "2019": ["OKC", 0], "2021": ["LAC", 0]}}, {"min": ":11", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "Kevin McHale", "start": 1985, "end": 1989, "mvp": 0, "ac": 5, "seasons": {"1985": ["BOS", 0], "1986": ["BOS", 0], "1987": ["BOS", 0], "1988": ["BOS", 0], "1989": ["BOS", 0]}}, {"min": ":12", "q": "1Q", "qLabel": "FIRST QUARTER", "name": "DeMar DeRozan", "start": 2014, "end": 2022, "mvp": 0, "ac": 5, "seasons": {"2014": ["TOR", 0], "2016": ["TOR", 0], "2017": ["TOR", 0], "2018": ["TOR", 0], "2022": ["CHI", 0]}}, {"min": ":13", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "Vince Carter", "start": 2000, "end": 2007, "mvp": 0, "ac": 5, "seasons": {"2000": ["TOR", 0], "2001": ["TOR", 0], "2005": ["TOT", 0], "2006": ["NJN", 0], "2007": ["NJN", 0]}}, {"min": ":14", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "Gary Payton", "start": 1996, "end": 2002, "mvp": 0, "ac": 6, "seasons": {"1996": ["SEA", 0], "1997": ["SEA", 0], "1998": ["SEA", 0], "1999": ["SEA", 0], "2000": ["SEA", 0], "2002": ["SEA", 0]}}, {"min": ":15", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "Scottie Pippen", "start": 1992, "end": 1997, "mvp": 0, "ac": 6, "seasons": {"1992": ["CHI", 0], "1993": ["CHI", 0], "1994": ["CHI", 0], "1995": ["CHI", 0], "1996": ["CHI", 0], "1997": ["CHI", 0]}}, {"min": ":16", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "Tracy McGrady", "start": 2001, "end": 2007, "mvp": 0, "ac": 6, "seasons": {"2001": ["ORL", 0], "2002": ["ORL", 0], "2003": ["ORL", 0], "2004": ["ORL", 0], "2005": ["HOU", 0], "2007": ["HOU", 0]}}, {"min": ":17", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "Clyde Drexler", "start": 1988, "end": 1995, "mvp": 0, "ac": 6, "seasons": {"1988": ["POR", 0], "1989": ["POR", 0], "1990": ["POR", 0], "1991": ["POR", 0], "1992": ["POR", 0], "1995": ["TOT", 0]}}, {"min": ":18", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "David Robinson", "start": 1990, "end": 1996, "mvp": 0, "ac": 6, "seasons": {"1990": ["SAS", 0], "1991": ["SAS", 0], "1993": ["SAS", 0], "1994": ["SAS", 0], "1995": ["SAS", 0], "1996": ["SAS", 0]}}, {"min": ":19", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "Reggie Miller", "start": 1990, "end": 2000, "mvp": 0, "ac": 7, "seasons": {"1990": ["IND", 0], "1991": ["IND", 0], "1994": ["IND", 0], "1995": ["IND", 0], "1998": ["IND", 0], "1999": ["IND", 0], "2000": ["IND", 0]}}, {"min": ":20", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "Tim Duncan", "start": 1998, "end": 2007, "mvp": 0, "ac": 7, "seasons": {"1998": ["SAS", 0], "1999": ["SAS", 0], "2001": ["SAS", 0], "2002": ["SAS", 0], "2003": ["SAS", 0], "2005": ["SAS", 0], "2007": ["SAS", 0]}}, {"min": ":21", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "Dwyane Wade", "start": 2005, "end": 2013, "mvp": 0, "ac": 7, "seasons": {"2005": ["MIA", 0], "2006": ["MIA", 0], "2009": ["MIA", 0], "2010": ["MIA", 0], "2011": ["MIA", 0], "2012": ["MIA", 0], "2013": ["MIA", 0]}}, {"min": ":22", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "Carmelo Anthony", "start": 2006, "end": 2014, "mvp": 0, "ac": 8, "seasons": {"2006": ["DEN", 0], "2007": ["DEN", 0], "2008": ["DEN", 0], "2009": ["DEN", 0], "2010": ["DEN", 0], "2012": ["NYK", 0], "2013": ["NYK", 0], "2014": ["NYK", 0]}}, {"min": ":23", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "Damian Lillard", "start": 2014, "end": 2021, "mvp": 0, "ac": 8, "seasons": {"2014": ["POR", 0], "2015": ["POR", 0], "2016": ["POR", 0], "2017": ["POR", 0], "2018": ["POR", 0], "2019": ["POR", 0], "2020": ["POR", 0], "2021": ["POR", 0]}}, {"min": ":24", "q": "2Q", "qLabel": "SECOND QUARTER", "name": "Dirk Nowitzki", "start": 2001, "end": 2012, "mvp": 0, "ac": 12, "seasons": {"2001": ["DAL", 0], "2002": ["DAL", 0], "2003": ["DAL", 0], "2004": ["DAL", 0], "2005": ["DAL", 0], "2006": ["DAL", 0], "2007": ["DAL", 0], "2008": ["DAL", 0], "2009": ["DAL", 0], "2010": ["DAL", 0], "2011": ["DAL", 0], "2012": ["DAL", 0]}}, {"min": ":25", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Isaiah Thomas", "start": 2016, "end": 2017, "mvp": 1, "ac": 1, "seasons": {"2016": ["BOS", 0], "2017": ["BOS", 1]}}, {"min": ":26", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Devin Booker", "start": 2021, "end": 2025, "mvp": 1, "ac": 2, "seasons": {"2021": ["PHX", 1], "2022": ["PHX", 0], "2025": ["PHX", 0]}}, {"min": ":27", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Dale Ellis", "start": 1987, "end": 1989, "mvp": 1, "ac": 2, "seasons": {"1987": ["SEA", 0], "1988": ["SEA", 0], "1989": ["SEA", 1]}}, {"min": ":28", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Adrian Dantley", "start": 1984, "end": 1987, "mvp": 1, "ac": 2, "seasons": {"1984": ["UTA", 1], "1986": ["UTA", 0], "1987": ["DET", 0]}}, {"min": ":29", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Amar'e Stoudemire", "start": 2005, "end": 2011, "mvp": 1, "ac": 3, "seasons": {"2005": ["PHX", 1], "2008": ["PHX", 0], "2010": ["PHX", 0], "2011": ["NYK", 0]}}, {"min": ":30", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Kevin Garnett", "start": 2000, "end": 2012, "mvp": 1, "ac": 4, "seasons": {"2000": ["MIN", 0], "2003": ["MIN", 0], "2004": ["MIN", 1], "2008": ["BOS", 0], "2012": ["BOS", 0]}}, {"min": ":31", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Charles Barkley", "start": 1986, "end": 1993, "mvp": 1, "ac": 5, "seasons": {"1986": ["PHI", 0], "1988": ["PHI", 0], "1989": ["PHI", 0], "1990": ["PHI", 0], "1991": ["PHI", 0], "1993": ["PHX", 1]}}, {"min": ":32", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Nikola Jokić", "start": 2020, "end": 2025, "mvp": 1, "ac": 5, "seasons": {"2020": ["DEN", 0], "2021": ["DEN", 0], "2022": ["DEN", 0], "2023": ["DEN", 1], "2024": ["DEN", 0], "2025": ["DEN", 0]}}, {"min": ":33", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Russell Westbrook", "start": 2011, "end": 2018, "mvp": 1, "ac": 6, "seasons": {"2011": ["OKC", 0], "2012": ["OKC", 0], "2013": ["OKC", 0], "2015": ["OKC", 0], "2016": ["OKC", 0], "2017": ["OKC", 1], "2018": ["OKC", 0]}}, {"min": ":34", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Dominique Wilkins", "start": 1985, "end": 1993, "mvp": 1, "ac": 7, "seasons": {"1985": ["ATL", 0], "1986": ["ATL", 1], "1987": ["ATL", 0], "1988": ["ATL", 0], "1989": ["ATL", 0], "1990": ["ATL", 0], "1991": ["ATL", 0], "1993": ["ATL", 0]}}, {"min": ":35", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Patrick Ewing", "start": 1989, "end": 1997, "mvp": 1, "ac": 8, "seasons": {"1989": ["NYK", 0], "1990": ["NYK", 0], "1991": ["NYK", 0], "1992": ["NYK", 0], "1993": ["NYK", 0], "1994": ["NYK", 1], "1995": ["NYK", 0], "1996": ["NYK", 0], "1997": ["NYK", 0]}}, {"min": ":36", "q": "3Q", "qLabel": "THIRD QUARTER", "name": "Stephen Curry", "start": 2013, "end": 2023, "mvp": 1, "ac": 8, "seasons": {"2013": ["GSW", 0], "2014": ["GSW", 0], "2015": ["GSW", 0], "2016": ["GSW", 1], "2017": ["GSW", 0], "2019": ["GSW", 0], "2021": ["GSW", 0], "2022": ["GSW", 0], "2023": ["GSW", 0]}}, {"min": ":37", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "Shai Gilgeous-Alexander", "start": 2023, "end": 2026, "mvp": 2, "ac": 2, "seasons": {"2023": ["OKC", 0], "2024": ["OKC", 0], "2025": ["OKC", 1], "2026": ["OKC", 1]}}, {"min": ":38", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "Luka Dončić", "start": 2020, "end": 2026, "mvp": 2, "ac": 4, "seasons": {"2020": ["DAL", 0], "2021": ["DAL", 0], "2022": ["DAL", 1], "2023": ["DAL", 0], "2024": ["DAL", 1], "2026": ["LAL", 0]}}, {"min": ":39", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "Jayson Tatum", "start": 2020, "end": 2025, "mvp": 2, "ac": 4, "seasons": {"2020": ["BOS", 0], "2021": ["BOS", 0], "2022": ["BOS", 1], "2023": ["BOS", 1], "2024": ["BOS", 0], "2025": ["BOS", 0]}}, {"min": ":40", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "Larry Bird", "start": 1984, "end": 1990, "mvp": 2, "ac": 4, "seasons": {"1984": ["BOS", 1], "1985": ["BOS", 1], "1986": ["BOS", 0], "1987": ["BOS", 0], "1988": ["BOS", 0], "1990": ["BOS", 0]}}, {"min": ":41", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "Hakeem Olajuwon", "start": 1986, "end": 1997, "mvp": 2, "ac": 5, "seasons": {"1986": ["HOU", 0], "1990": ["HOU", 0], "1993": ["HOU", 0], "1994": ["HOU", 1], "1995": ["HOU", 1], "1996": ["HOU", 0], "1997": ["HOU", 0]}}, {"min": ":42", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "Paul Pierce", "start": 2001, "end": 2012, "mvp": 2, "ac": 7, "seasons": {"2001": ["BOS", 0], "2002": ["BOS", 1], "2003": ["BOS", 0], "2004": ["BOS", 1], "2005": ["BOS", 0], "2008": ["BOS", 0], "2009": ["BOS", 0], "2010": ["BOS", 0], "2012": ["BOS", 0]}}, {"min": ":43", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "Jalen Brunson", "start": 2024, "end": 2026, "mvp": 3, "ac": 0, "seasons": {"2024": ["NYK", 1], "2025": ["NYK", 1], "2026": ["NYK", 1]}}, {"min": ":44", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "Alex English", "start": 1984, "end": 1989, "mvp": 3, "ac": 3, "seasons": {"1984": ["DEN", 0], "1985": ["DEN", 1], "1986": ["DEN", 1], "1987": ["DEN", 1], "1988": ["DEN", 0], "1989": ["DEN", 0]}}, {"min": ":45", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "Giannis Antetokounmpo", "start": 2018, "end": 2025, "mvp": 3, "ac": 4, "seasons": {"2018": ["MIL", 0], "2019": ["MIL", 1], "2020": ["MIL", 1], "2021": ["MIL", 1], "2022": ["MIL", 0], "2024": ["MIL", 0], "2025": ["MIL", 0]}}, {"min": ":46", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "James Harden", "start": 2013, "end": 2025, "mvp": 4, "ac": 5, "seasons": {"2013": ["HOU", 0], "2014": ["HOU", 0], "2015": ["HOU", 1], "2016": ["HOU", 0], "2017": ["HOU", 0], "2018": ["HOU", 1], "2019": ["HOU", 1], "2020": ["HOU", 1], "2025": ["LAC", 0]}}, {"min": ":47", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "Shaquille O’Neal", "start": 1993, "end": 2004, "mvp": 4, "ac": 7, "seasons": {"1993": ["ORL", 0], "1994": ["ORL", 0], "1995": ["ORL", 1], "1996": ["ORL", 0], "1998": ["LAL", 0], "1999": ["LAL", 1], "2000": ["LAL", 1], "2001": ["LAL", 1], "2002": ["LAL", 0], "2003": ["LAL", 0], "2004": ["LAL", 0]}}, {"min": ":48", "q": "4Q", "qLabel": "FOURTH QUARTER", "name": "Kevin Durant", "start": 2009, "end": 2026, "mvp": 4, "ac": 7, "seasons": {"2009": ["OKC", 0], "2010": ["OKC", 0], "2011": ["OKC", 1], "2012": ["OKC", 1], "2013": ["OKC", 1], "2014": ["OKC", 1], "2016": ["OKC", 0], "2018": ["GSW", 0], "2019": ["GSW", 0], "2024": ["PHX", 0], "2026": ["HOU", 0]}}, {"min": ":49", "q": "OT", "qLabel": "OVERTIME", "name": "Allen Iverson", "start": 1998, "end": 2008, "mvp": 5, "ac": 4, "seasons": {"1998": ["PHI", 0], "1999": ["PHI", 1], "2000": ["PHI", 1], "2001": ["PHI", 1], "2002": ["PHI", 0], "2003": ["PHI", 1], "2005": ["PHI", 1], "2006": ["PHI", 0], "2008": ["DEN", 0]}}, {"min": ":50", "q": "OT", "qLabel": "OVERTIME", "name": "Kobe Bryant", "start": 1999, "end": 2013, "mvp": 7, "ac": 7, "seasons": {"1999": ["LAL", 0], "2000": ["LAL", 0], "2001": ["LAL", 0], "2002": ["LAL", 1], "2003": ["LAL", 1], "2004": ["LAL", 0], "2006": ["LAL", 1], "2007": ["LAL", 1], "2008": ["LAL", 1], "2009": ["LAL", 1], "2010": ["LAL", 1], "2011": ["LAL", 0], "2012": ["LAL", 0], "2013": ["LAL", 0]}}, {"min": ":51", "q": "OT", "qLabel": "OVERTIME", "name": "Karl Malone", "start": 1988, "end": 2002, "mvp": 7, "ac": 7, "seasons": {"1988": ["UTA", 1], "1989": ["UTA", 0], "1990": ["UTA", 1], "1991": ["UTA", 1], "1992": ["UTA", 1], "1993": ["UTA", 0], "1994": ["UTA", 0], "1995": ["UTA", 0], "1996": ["UTA", 1], "1997": ["UTA", 1], "1998": ["UTA", 1], "1999": ["UTA", 0], "2000": ["UTA", 0], "2002": ["UTA", 0]}}, {"min": ":52", "q": "OT", "qLabel": "OVERTIME", "name": "Michael Jordan", "start": 1985, "end": 1998, "mvp": 10, "ac": 1, "seasons": {"1985": ["CHI", 0], "1987": ["CHI", 1], "1988": ["CHI", 1], "1989": ["CHI", 1], "1990": ["CHI", 1], "1991": ["CHI", 1], "1992": ["CHI", 1], "1993": ["CHI", 1], "1996": ["CHI", 1], "1997": ["CHI", 1], "1998": ["CHI", 1]}}, {"min": ":53", "q": "OT", "qLabel": "OVERTIME", "name": "LeBron James", "start": 2005, "end": 2020, "mvp": 12, "ac": 3, "seasons": {"2005": ["CLE", 0], "2006": ["CLE", 1], "2007": ["CLE", 1], "2008": ["CLE", 1], "2009": ["CLE", 1], "2010": ["CLE", 1], "2011": ["MIA", 1], "2012": ["MIA", 1], "2013": ["MIA", 1], "2014": ["MIA", 1], "2015": ["CLE", 1], "2016": ["CLE", 1], "2017": ["CLE", 0], "2018": ["CLE", 1], "2020": ["LAL", 0]}}];
+
+    const state = {
+      quarter: "ALL",
+      search: "",
+      selectedPlayer: null,
+      frameMode: false
+    };
+
+    function normalizeStr(s) {
+      return (s || "").replace(/’/g, "'").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+    }
+
+    function yearToSeasonParam(yr) {
+      const prev = yr - 1;
+      return `${prev}-${String(yr).slice(2)}`;
+    }
+
+    function shortYear(yr) {
+      return "'" + String(yr).slice(2);
+    }
+
+    function buildTableSkeleton() {
+      const cg = document.getElementById("boardColgroup");
+      cg.innerHTML =
+        `<col class="col-player">` +
+        YEARS.map(() => `<col class="col-year">`).join("") +
+        `<col class="col-tally"><col class="col-tally">`;
+
+      const makeRuler = (isBottom) => {
+        const rowCls = isBottom ? "ruler-row ruler-bottom" : "ruler-row";
+        const cells = YEARS.map(yr => {
+          const decCls = DECADE_YEARS.has(yr) ? " decade-edge" : "";
+          return `<th data-yr="${yr}" class="${decCls}" title="Season ${yearToSeasonParam(yr)}">${shortYear(yr)}</th>`;
+        }).join("");
+
+        return `
+          <tr class="${rowCls}">
+            <th class="sticky-left !text-left !pl-2.5 !text-[#6B707B] border-r border-[#242830]">MIN / SCORER</th>
+            ${cells}
+            <th class="sticky-right-mvp tally-hdr-mvp">MVP</th>
+            <th class="sticky-right-ac tally-hdr-ac">AC</th>
+          </tr>
+        `;
+      };
+
+      document.getElementById("boardHead").innerHTML = makeRuler(false);
+      document.getElementById("boardFoot").innerHTML = makeRuler(true);
+    }
+
+    function playerMatchesSearch(p, qNorm) {
+      if (!qNorm) return true;
+      if (normalizeStr(p.name).includes(qNorm)) return true;
+      return Object.values(p.seasons).some(([tm]) => normalizeStr(tm) === qNorm);
+    }
+
+    function renderBoard() {
+      const tbody = document.getElementById("boardBody");
+      const qNorm = normalizeStr(state.search);
+      const isTeamCodeQuery = qNorm.length === 3 && /^[a-z]{3}$/.test(qNorm);
+
+      let html = "";
+      let lastQuarter = null;
+
+      const visiblePlayers = PANTHEON_DATA.filter(p => state.quarter === "ALL" || p.q === state.quarter);
+
+      visiblePlayers.forEach(p => {
+        if (p.q !== lastQuarter) {
+          lastQuarter = p.q;
+          const otCls = p.q === "OT" ? " is-ot" : "";
+          html += `
+            <tr class="quarter-row${otCls}">
+              <td colspan="${YEARS.length + 3}">${p.qLabel}</td>
+            </tr>
+          `;
+        }
+
+        const matched = playerMatchesSearch(p, qNorm);
+        const isSelected = state.selectedPlayer === p.name;
+        const dimCls = (qNorm && !matched) || (state.selectedPlayer && !isSelected) ? " row-dimmed" : "";
+        const selCls = isSelected ? " row-selected" : "";
+        const otRowCls = p.q === "OT" ? " is-ot-row" : "";
+
+        const cellsHTML = YEARS.map(yr => {
+          const decCls = DECADE_YEARS.has(yr) ? " decade-edge" : "";
+          const entry = p.seasons[String(yr)];
+
+          if (entry) {
+            const [tm, isMvp] = entry;
+            const flapCls = isMvp ? "flap flap-mvp" : "flap flap-ac";
+            const hitCls = (isTeamCodeQuery && normalizeStr(tm) === qNorm) ? " flap-team-hit" : "";
+            const seasonParam = yearToSeasonParam(yr);
+            const safeName = p.name.replace(/'/g, "\'");
+            const roleLabel = isMvp ? "CONFERENCE MVP" : "ALL-CONFERENCE";
+            return `
+              <td class="cell-wrap${decCls}" data-yr="${yr}"
+                  onmouseenter="onCellEnter(${yr}, '${safeName}', '${tm}', '${roleLabel}', '${p.min}')"
+                  onmouseleave="onCellLeave(${yr})">
+                <a href="posters.html?season=${encodeURIComponent(seasonParam)}&player=${encodeURIComponent(p.name.replace(/\u2019/g, "'"))}"
+                   class="${flapCls}${hitCls}"
+                   title="${seasonParam} · ${p.name} (${tm}) · ${roleLabel} — Click to open season poster">
+                  ${tm}
+                </a>
+              </td>
+            `;
+          } else if (yr > p.start && yr < p.end) {
+            const safeName = p.name.replace(/'/g, "\'");
+            return `
+              <td class="cell-wrap${decCls}" data-yr="${yr}"
+                  onmouseenter="onCellEnter(${yr}, '${safeName}', '', 'IN-SPAN GAP', '${p.min}')"
+                  onmouseleave="onCellLeave(${yr})">
+                <div class="flap flap-gap" title="${yearToSeasonParam(yr)} · ${p.name} · Gap Year"></div>
+              </td>
+            `;
+          } else {
+            return `
+              <td class="cell-wrap${decCls}" data-yr="${yr}">
+                <div class="dot-oos"></div>
+              </td>
+            `;
+          }
+        }).join("");
+
+        const mvpDisp = p.mvp > 0 ? p.mvp : "&mdash;";
+        const acDisp = p.ac > 0 ? p.ac : "&mdash;";
+        const safeName = p.name.replace(/'/g, "\'");
+
+        html += `
+          <tr class="player-row${otRowCls}${selCls}${dimCls}" data-player="${p.name}">
+            <td class="player-cell sticky-left" onclick="togglePlayerSelect('${safeName}')" title="Click to inspect ${p.name}'s career dossier">
+              <span class="minute-code">${p.min}</span><span class="player-name-txt">${p.name}</span>
+            </td>
+            ${cellsHTML}
+            <td class="tally-cell tally-mvp sticky-right-mvp ${p.mvp === 0 ? 'is-zero' : ''}">${mvpDisp}</td>
+            <td class="tally-cell tally-ac sticky-right-ac ${p.ac === 0 ? 'is-zero' : ''}">${acDisp}</td>
+          </tr>
+        `;
+      });
+
+      tbody.innerHTML = html;
+      updateClearButton();
+    }
+
+    function onCellEnter(yr, name, team, role, minute) {
+      document.querySelectorAll(`th[data-yr="${yr}"]`).forEach(el => el.classList.add("col-hover"));
+      if (state.selectedPlayer) return;
+      const readout = document.getElementById("telemetryReadout");
+      const seasonStr = yearToSeasonParam(yr).replace("-", "–");
+      if (team) {
+        readout.innerHTML = `<span class="text-[#111111]">${seasonStr} &middot; ${minute} ${name.toUpperCase()} (${team})</span> &middot; <span class="${role === 'CONFERENCE MVP' ? 'text-[#9A5B13]' : 'text-[#555552]'}">${role}</span> &middot; CLICK TILE TO OPEN ${seasonStr} POSTER &rarr;`;
+      } else {
+        readout.innerHTML = `<span class="text-[#111111]">${seasonStr} &middot; ${minute} ${name.toUpperCase()}</span> &middot; NON-QUALIFYING SEASON WITHIN CAREER SPAN`;
+      }
+    }
+
+    function onCellLeave(yr) {
+      document.querySelectorAll(`th[data-yr="${yr}"]`).forEach(el => el.classList.remove("col-hover"));
+      if (!state.selectedPlayer) {
+        document.getElementById("telemetryReadout").textContent =
+          "HOVER ANY TILE TO INSPECT SEASON · CLICK ANY TILE TO OPEN THAT SEASON POSTER · CLICK ANY PLAYER FOR CAREER DOSSIER";
+      }
+    }
+
+    function togglePlayerSelect(name) {
+      if (state.selectedPlayer === name) {
+        clearSelectedPlayer();
+        return;
+      }
+      state.selectedPlayer = name;
+      const p = PANTHEON_DATA.find(x => x.name === name);
+      if (p) {
+        const teams = [...new Set(Object.values(p.seasons).map(v => v[0]))].join(" / ");
+        const readout = document.getElementById("telemetryReadout");
+        readout.innerHTML = `<span class="text-[#111111]">${p.min} ${p.name.toUpperCase()} (${p.qLabel})</span> &middot; SPAN: &rsquo;${String(p.start).slice(2)}&ndash;&rsquo;${String(p.end).slice(2)} &middot; <span class="text-[#9A5B13]">${p.mvp}&times; CONF. MVP</span> &middot; ${p.ac}&times; ALL-CONF &middot; TEAMS: ${teams}`;
+        const actions = document.getElementById("dossierActions");
+        actions.classList.remove("hidden");
+        actions.classList.add("flex");
+        document.getElementById("dossierPosterLink").href = `posters.html?player=${encodeURIComponent(p.name.replace(/\u2019/g, "'"))}`;
+      }
+      renderBoard();
+    }
+
+    function clearSelectedPlayer() {
+      state.selectedPlayer = null;
+      const actions = document.getElementById("dossierActions");
+      actions.classList.add("hidden");
+      actions.classList.remove("flex");
+      document.getElementById("telemetryReadout").textContent =
+        "HOVER ANY TILE TO INSPECT SEASON · CLICK ANY TILE TO OPEN THAT SEASON POSTER · CLICK ANY PLAYER FOR CAREER DOSSIER";
+      renderBoard();
+    }
+
+    function setQuarterFilter(q) {
+      state.quarter = q;
+      ["ALL", "1Q", "2Q", "3Q", "4Q", "OT"].forEach(k => {
+        const btn = document.getElementById("qBtn" + k);
+        if (btn) btn.classList.toggle("active", k === q);
+      });
+      renderBoard();
+    }
+
+    function handleSearch(val) {
+      state.search = val.trim();
+      renderBoard();
+    }
+
+    function clearFilters() {
+      state.search = "";
+      state.quarter = "ALL";
+      document.getElementById("pantheonSearch").value = "";
+      clearSelectedPlayer();
+      setQuarterFilter("ALL");
+    }
+
+    function updateClearButton() {
+      const btn = document.getElementById("clearSearchBtn");
+      const active = state.search || state.quarter !== "ALL" || state.selectedPlayer;
+      btn.classList.toggle("hidden", !active);
+    }
+
+    function toggleFrameMode() {
+      state.frameMode = !state.frameMode;
+      document.body.classList.toggle("frame-mode", state.frameMode);
+      document.getElementById("exitFrameBtn").classList.toggle("hidden", !state.frameMode);
+      document.getElementById("frameModeBtn").classList.toggle("active", state.frameMode);
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (state.frameMode) toggleFrameMode();
+        else if (state.selectedPlayer) clearSelectedPlayer();
+      }
+    });
+
+    window.onload = function () {
+      buildTableSkeleton();
+      const params = new URLSearchParams(window.location.search);
+      const qParam = params.get("quarter");
+      const pParam = params.get("player");
+      if (qParam && ["1Q", "2Q", "3Q", "4Q", "OT"].includes(qParam.toUpperCase())) {
+        setQuarterFilter(qParam.toUpperCase());
+      }
+      if (pParam) {
+        const exact = PANTHEON_DATA.find(x => normalizeStr(x.name) === normalizeStr(pParam));
+        if (exact) {
+          togglePlayerSelect(exact.name);
+        } else {
+          document.getElementById("pantheonSearch").value = pParam;
+          state.search = pParam;
+          renderBoard();
+        }
+      } else {
+        renderBoard();
+      }
+    };
+  </script>
+</body>
+</html>

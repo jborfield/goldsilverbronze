@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EXHIBIT TEMPLATE // WHERE BUCKETS REIGN ARCHIVE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* =====================================================================
+       SHARED DESIGN SYSTEM TOKENS — WHERE BUCKETS REIGN ARCHIVE
+       Keep these variables identical across every page in the site.
+       ===================================================================== */
+    :root {
+      --bg-paper: #F4F3EF;
+      --bg-poster: #FAF9F6;
+      --ink: #111111;
+      --ink-secondary: #555552;
+      --ink-muted: #8C8B85;
+      --east-cobalt: #1D4ED8;
+      --west-vermilion: #D92B2B;
+      --amber: #F2A900;
+      --board-chassis: #111214;
+      --grid-subtle: #D8D6CE;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-radius: 0px !important;
+    }
+
+    body {
+      background-color: var(--bg-paper);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-mono-tabular {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Automatic Active-Link Highlighting for Shared Nav */
+    .site-nav-link.is-active {
+      background-color: #1C1F24;
+      color: #FAF9F6 !important;
+      border-bottom-color: #F2A900 !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- =======================================================================
+       BEGIN SITE NAVIGATION TEMPLATE (DROP DIRECTLY AFTER <body>)
+       Auto-detects active link via current filename.
+       To add Exhibit 03, copy one <a> tag in both desktop & mobile containers.
+       ======================================================================= -->
+  <nav id="siteNav" aria-label="Primary Archive Navigation" class="bg-[#111214] text-[#FAF9F6] border-b-2 border-[#111111] print:hidden">
+    <div class="max-w-[1840px] mx-auto flex items-stretch justify-between border-x border-[#2A2D33]">
+      <!-- Brand Mark -->
+      <a href="index.html" class="flex items-center gap-2.5 px-3.5 sm:px-4 py-2 border-r border-[#2A2D33] hover:bg-[#181A1F] transition-colors shrink-0">
+        <span class="text-[#F2A900] text-xs leading-none" aria-hidden="true">&#9670;</span>
+        <span class="font-black text-xs sm:text-[13px] tracking-[0.06em] uppercase text-[#FAF9F6]">WHERE BUCKETS REIGN</span>
+        <span class="hidden xl:inline-block font-mono-tabular text-[9.5px] tracking-[0.12em] uppercase text-[#8C8B85] border-l border-[#2A2D33] pl-2.5">
+          NBA SCORING ARCHIVE &rsquo;84&ndash;&rsquo;26
+        </span>
+      </a>
+
+      <!-- Desktop Exhibit Links -->
+      <div class="hidden md:flex items-stretch flex-1">
+        <a href="index.html" data-nav="index.html"
+           class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] border-b-2 border-b-transparent text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] flex items-center gap-2 transition-colors whitespace-nowrap">
+          <span class="text-[#F2A900] text-[9.5px]">00</span>
+          <span>OVERVIEW</span>
+        </a>
+        <a href="posters.html" data-nav="posters.html"
+           class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] border-b-2 border-b-transparent text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] flex items-center gap-2 transition-colors whitespace-nowrap">
+          <span class="text-[#F2A900] text-[9.5px]">01</span>
+          <span>SEASON POSTERS</span>
+        </a>
+        <a href="pantheon.html" data-nav="pantheon.html"
+           class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] border-b-2 border-b-transparent text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] flex items-center gap-2 transition-colors whitespace-nowrap">
+          <span class="text-[#F2A900] text-[9.5px]">02</span>
+          <span>EXTRA PERIOD PANTHEON</span>
+        </a>
+        <!--
+        <a href="exhibit-03.html" data-nav="exhibit-03.html"
+           class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] border-b-2 border-b-transparent text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] flex items-center gap-2 transition-colors whitespace-nowrap">
+          <span class="text-[#F2A900] text-[9.5px]">03</span>
+          <span>FUTURE EXHIBIT</span>
+        </a>
+        -->
+      </div>
+
+      <!-- Right Archive Status & Mobile Toggle -->
+      <div class="flex items-center">
+        <div class="hidden lg:flex items-center gap-3 px-4 font-mono-tabular text-[9.5px] uppercase tracking-[0.1em] text-[#8C8B85]">
+          <span>43 SEASONS</span>
+          <span class="text-[#2A2D33]">|</span>
+          <span>53 SCORERS</span>
+        </div>
+        <button type="button" onclick="document.getElementById('mobileSiteNav').classList.toggle('hidden')"
+                aria-label="Toggle Navigation Menu"
+                class="md:hidden font-mono-tabular text-[10px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-l border-[#2A2D33] text-[#FAF9F6] hover:bg-[#1C1F24]">
+          MENU &#9776;
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Drawer -->
+    <div id="mobileSiteNav" class="hidden md:hidden border-t border-[#2A2D33] bg-[#16181C]">
+      <a href="index.html" data-nav="index.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">
+        00 // OVERVIEW
+      </a>
+      <a href="posters.html" data-nav="posters.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">
+        01 // SEASON POSTERS
+      </a>
+      <a href="pantheon.html" data-nav="pantheon.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] text-[#E8E3D5]">
+        02 // EXTRA PERIOD PANTHEON
+      </a>
+    </div>
+  </nav>
+  <!-- END SITE NAVIGATION TEMPLATE -->
+
+  <!-- STARTER PAGE HEADER / SUB-TOOLBAR SLOT -->
+  <header class="bg-[#F4F3EF] border-b-2 border-[#111111]">
+    <div class="max-w-[1840px] mx-auto px-4 sm:px-6 py-4 border-x border-[#111111] flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <span class="font-mono-tabular text-[10px] font-bold uppercase tracking-[0.14em] text-[#555552]">
+          EXHIBIT 0X // SWISS GRID TEMPLATE SHELL
+        </span>
+        <h1 class="text-2xl font-black uppercase tracking-[-0.03em] leading-none mt-1">
+          New Archive Exhibit Title
+        </h1>
+      </div>
+      <div class="font-mono-tabular text-[10px] uppercase text-[#555552]">
+        DUPLICATE THIS FILE TO CREATE EXHIBIT 03, 04, ETC.
+      </div>
+    </div>
+  </header>
+
+  <!-- STARTER CONTENT CANVAS -->
+  <main class="flex-1 max-w-[1840px] w-full mx-auto px-4 sm:px-6 py-8">
+    <div class="border-2 border-[#111111] bg-[#FAF9F6] p-6 space-y-4">
+      <div class="font-mono-tabular text-xs font-bold uppercase tracking-[0.1em] text-[#111111]">
+        NAVIGATION &amp; CROSS-LINKING SPECIFICATION
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono-tabular text-[11px] text-[#555552]">
+        <div class="border border-[#111111] p-4 bg-[#F4F3EF]">
+          <strong class="text-[#111111] block mb-1">1. FILE STRUCTURE</strong>
+          Keep <code class="text-[#111111]">index.html</code>, <code class="text-[#111111]">posters.html</code>, <code class="text-[#111111]">pantheon.html</code>, and future exhibits in the same directory so relative links work both locally and when hosted.
+        </div>
+        <div class="border border-[#111111] p-4 bg-[#F4F3EF]">
+          <strong class="text-[#111111] block mb-1">2. URL DEEP-LINKING</strong>
+          Link directly into <code class="text-[#111111]">posters.html?season=1995-96</code>, <code class="text-[#111111]">posters.html?player=Michael%20Jordan</code>, <code class="text-[#111111]">posters.html?decade=1990s</code>, or <code class="text-[#111111]">pantheon.html?quarter=OT</code>.
+        </div>
+        <div class="border border-[#111111] p-4 bg-[#F4F3EF]">
+          <strong class="text-[#111111] block mb-1">3. AUTO-ACTIVE SCRIPT</strong>
+          The small inline script below automatically highlights the current file&rsquo;s nav tab with the stadium amber bottom rule.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- SHARED COLOPHON FOOTER -->
+  <footer class="border-t-2 border-[#111111] bg-[#FAF9F6] mt-8">
+    <div class="max-w-[1840px] mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono-tabular text-[#555552]">
+      <div>
+        <strong class="text-[#111111]">WHERE BUCKETS REIGN // MODERN NBA SCORING ARCHIVE (&rsquo;84&ndash;&rsquo;26)</strong>
+      </div>
+      <div class="flex gap-3">
+        <a href="index.html" class="underline hover:text-[#111111]">00 OVERVIEW</a>
+        <a href="posters.html" class="underline hover:text-[#111111]">01 POSTERS</a>
+        <a href="pantheon.html" class="underline hover:text-[#111111]">02 PANTHEON</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AUTO-ACTIVE NAV HELPER -->
+  <script>
+    (function () {
+      const file = window.location.pathname.split("/").pop() || "index.html";
+      document.querySelectorAll('#siteNav [data-nav]').forEach(el => {
+        if (el.getAttribute("data-nav") === file) {
+          el.classList.add("is-active");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

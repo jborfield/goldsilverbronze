@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ALL-NBA SCORING &amp; EFFICIENCY // 1983–84 TO 2025–26 SWISS SEASON POSTERS</title>
+  <title>WHERE BUCKETS REIGN // MODERN NBA SCORING ARCHIVE (1983–84 TO 2025–26)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,17 +17,13 @@
       --ink-muted: #8C8B85;
       --east-cobalt: #1D4ED8;
       --west-vermilion: #D92B2B;
-      --bronze: #9A5B13;
-      --silver: #475569;
-      --gold: #B45309;
+      --amber: #F2A900;
       --grid-subtle: #D8D6CE;
     }
-
     * {
       box-sizing: border-box;
       border-radius: 0px !important;
     }
-
     body {
       background-color: var(--bg-paper);
       color: var(--ink);
@@ -35,878 +31,474 @@
       margin: 0;
       padding: 0;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
     }
-
     .font-mono-tabular {
       font-family: 'JetBrains Mono', 'Courier New', monospace;
       font-variant-numeric: tabular-nums;
     }
-
-    /* Custom Swiss Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-paper);
-      border-left: 1px solid var(--ink);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--ink);
-    }
-
-    /* Poster Structural Framing */
-    .swiss-poster {
-      background-color: var(--bg-poster);
-      border: 2px solid var(--ink);
-      transition: transform 0.12s ease;
-    }
-
-    /* Interactive Rows & Cells */
-    .interactive-entity {
-      cursor: pointer;
-      transition: background-color 0.08s ease;
-    }
-    .interactive-entity:hover {
-      background-color: #ECEAE2;
-    }
-    .spotlight-match {
-      background-color: #FEF08A !important;
-      outline: 1.5px solid var(--ink);
-      position: relative;
-      z-index: 5;
-    }
-    .spotlight-match-dark {
-      background-color: #FACC15 !important;
-      color: #111111 !important;
-    }
-    .spotlight-match-dark * {
-      color: #111111 !important;
-      border-color: #111111 !important;
-    }
-
-    /* Micro Award Badges */
     .micro-badge {
       font-family: 'JetBrains Mono', monospace;
       font-size: 8.5px;
       font-weight: 800;
-      padding: 0px 3.5px;
-      line-height: 1.35;
+      padding: 0px 4px;
+      line-height: 1.4;
       letter-spacing: 0.03em;
       display: inline-block;
       border: 1px solid var(--ink);
       text-transform: uppercase;
     }
-    .badge-bb {
-      background-color: #FEF3C7;
-      color: #9A5B13;
-      border-color: #9A5B13;
+    .exhibit-card {
+      transition: transform 0.12s ease;
     }
-    .badge-ss {
-      background-color: #E2E8F0;
-      color: #334155;
-      border-color: #475569;
-    }
-    .badge-sh {
-      background-color: #F4F3EF;
-      color: #111111;
-      border-color: #111111;
-    }
-    .badge-de {
-      background-color: #111111;
-      color: #FAF9F6;
-      border-color: #111111;
-    }
-
-    /* Control Buttons */
-    .ctrl-btn {
-      border: 1px solid var(--ink);
-      background: var(--bg-poster);
-      color: var(--ink);
-      font-size: 10.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 4px 8px;
-      cursor: pointer;
-      transition: all 0.1s ease;
-    }
-    .ctrl-btn:hover {
-      background: #E5E3DC;
-    }
-    .ctrl-btn.active {
-      background: var(--ink);
-      color: var(--bg-poster);
-    }
-
-    /* Season Scrubber Pills */
-    .year-pill {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      font-weight: 600;
-      padding: 3px 5.5px;
-      border-right: 1px solid var(--ink);
-      border-bottom: 1px solid var(--ink);
-      background: var(--bg-poster);
-      color: var(--ink-secondary);
-      cursor: pointer;
-      text-align: center;
-      user-select: none;
-    }
-    .year-pill:hover {
-      background: var(--ink);
-      color: var(--bg-poster);
-    }
-    .year-pill.active-year {
-      background: var(--west-vermilion);
-      color: #FFFFFF;
-      font-weight: 700;
-    }
-    .year-pill.has-spotlight {
-      background: #FEF08A;
-      color: #111111;
-      font-weight: 800;
+    .exhibit-card:hover {
+      transform: translateY(-2px);
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-[#D92B2B] selection:text-white">
 
-  <!-- STICKY SWISS EXHIBITION HEADER & ARCHIVAL CONTROLS -->
-  <header class="sticky top-0 z-40 bg-[#F4F3EF] border-b-2 border-[#111111]">
-    <div class="max-w-[1840px] mx-auto grid grid-cols-1 lg:grid-cols-12 border-x border-[#111111]">
+  <!-- =======================================================================
+     BEGIN SITE NAVIGATION // WHERE BUCKETS REIGN ARCHIVE
+     Drop directly after <body> on any page in the archive.
+     ======================================================================= -->
+<nav id="siteNav" aria-label="Primary Archive Navigation" class="bg-[#111214] text-[#FAF9F6] border-b-2 border-[#111111] print:hidden">
+  <div class="max-w-[1840px] mx-auto flex items-stretch justify-between border-x border-[#2A2D33]">
+    <!-- Brand Mark -->
+    <a href="index.html" class="flex items-center gap-2.5 px-3.5 sm:px-4 py-2 border-r border-[#2A2D33] hover:bg-[#181A1F] transition-colors shrink-0">
+      <span class="text-[#F2A900] text-xs leading-none" aria-hidden="true">&#9670;</span>
+      <span class="font-black text-xs sm:text-[13px] tracking-[0.06em] uppercase text-[#FAF9F6]">WHERE BUCKETS REIGN</span>
+      <span class="hidden xl:inline-block font-mono-tabular text-[9.5px] tracking-[0.12em] uppercase text-[#8C8B85] border-l border-[#2A2D33] pl-2.5">
+        NBA SCORING ARCHIVE &rsquo;84&ndash;&rsquo;26
+      </span>
+    </a>
 
-      <!-- Masthead Identity (Cols 1-4) -->
-      <div class="lg:col-span-4 p-3 sm:p-4 border-b lg:border-b-0 lg:border-r border-[#111111] flex flex-col justify-between">
-        <div class="flex items-center justify-between gap-2">
-          <span class="font-mono-tabular text-[10px] uppercase tracking-[0.14em] text-[#555552] font-bold">
-            KATALOG 1983–84 TO 2025–26 // SWISS GRID ARCHIVE
-          </span>
-          <span class="font-mono-tabular text-[10px] uppercase tracking-[0.08em] bg-[#111111] text-[#FAF9F6] px-1.5 py-0.5 font-bold">
-            43 SEASON POSTERS
-          </span>
-        </div>
-        <h1 class="text-xl sm:text-2xl font-black tracking-[-0.035em] uppercase leading-none mt-1.5">
-          All-NBA Scoring &amp; Net Margin Posters
-        </h1>
-        <p class="text-[11px] text-[#555552] mt-1 font-medium leading-tight">
-          Rightful Conference MVPs, All-East &amp; All-West Teams (Ranks 2–6), Bronze Buckets, Silver Scorers, Sharp Shooters &amp; Dead Eye.
-        </p>
-      </div>
-
-      <!-- Taxonomy & Honors Legend (Cols 5-8) -->
-      <div class="lg:col-span-5 p-3 sm:p-4 border-b lg:border-b-0 lg:border-r border-[#111111] bg-[#FAF9F6] flex flex-col justify-between">
-        <div class="flex items-center justify-between mb-1.5">
-          <span class="text-[10px] font-mono-tabular uppercase tracking-[0.1em] text-[#555552] font-bold">
-            HONORS SPECIFICATION &amp; TAXONOMY
-          </span>
-          <div class="flex items-center gap-3 text-[10px] font-mono-tabular font-bold">
-            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-[#1D4ED8] inline-block border border-[#111111]"></span> EAST</span>
-            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-[#D92B2B] inline-block border border-[#111111]"></span> WEST</span>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-3 gap-y-1.5 text-[10.5px] leading-snug">
-          <div>
-            <span class="font-black text-[#111111] uppercase">CONF. MVP (#1):</span>
-            <span class="text-[#555552] block text-[10px]">Leader in Total Points (Reg + Playoff)</span>
-          </div>
-          <div>
-            <span class="font-black text-[#111111] uppercase">ALL-EAST / WEST:</span>
-            <span class="text-[#555552] block text-[10px]">Ranks #2–#6 in Total Points</span>
-          </div>
-          <div>
-            <span class="micro-badge badge-bb">BB</span> <span class="font-bold text-[#9A5B13]">BRONZE BUCKET:</span>
-            <span class="text-[#555552] block text-[10px]">Conf. Reg. Season Pts Leader</span>
-          </div>
-          <div>
-            <span class="micro-badge badge-ss">SS</span> <span class="font-bold text-[#475569]">SILVER SCORER:</span>
-            <span class="text-[#555552] block text-[10px]">Conf. Playoff Pts Leader</span>
-          </div>
-          <div>
-            <span class="micro-badge badge-sh">SH</span> <span class="font-bold text-[#111111]">SHARP SHOOTERS:</span>
-            <span class="text-[#555552] block text-[10px]">Top 5 Reg. Scoring Net Margin</span>
-          </div>
-          <div>
-            <span class="micro-badge badge-de">DE</span> <span class="font-bold text-[#111111]">DEAD EYE:</span>
-            <span class="text-[#555552] block text-[10px]">#1 Playoff Scoring Net Margin</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Interactive Poster Controls & Search (Cols 9-12) -->
-      <div class="lg:col-span-3 p-3 sm:p-4 flex flex-col justify-between gap-2">
-        <!-- Search Input -->
-        <div class="flex items-center gap-1.5">
-          <div class="relative flex-1">
-            <input
-              id="searchInput"
-              type="text"
-              placeholder="SEARCH PLAYER OR TEAM (E.G. JORDAN, BOS)..."
-              oninput="handleSearchInput(this.value)"
-              class="w-full border border-[#111111] bg-[#FAF9F6] px-2.5 py-1 text-[11px] font-mono-tabular uppercase placeholder:text-[#8C8B85] focus:outline-none focus:bg-[#FEF08A]"
-            />
-          </div>
-          <button onclick="clearSpotlight()" id="clearSearchBtn" class="hidden ctrl-btn !bg-[#111111] !text-white">CLEAR ×</button>
-        </div>
-
-        <!-- Decade Filter -->
-        <div class="flex items-center justify-between gap-1">
-          <span class="text-[9.5px] font-mono-tabular uppercase tracking-[0.08em] text-[#555552] font-bold shrink-0">DECADE:</span>
-          <div class="flex flex-wrap justify-end">
-            <button id="decAll" class="ctrl-btn active !px-1.5" onclick="setDecadeFilter('all')">ALL</button>
-            <button id="dec80s" class="ctrl-btn border-l-0 !px-1.5" onclick="setDecadeFilter('1980s')">'80s</button>
-            <button id="dec90s" class="ctrl-btn border-l-0 !px-1.5" onclick="setDecadeFilter('1990s')">'90s</button>
-            <button id="dec00s" class="ctrl-btn border-l-0 !px-1.5" onclick="setDecadeFilter('2000s')">'00s</button>
-            <button id="dec10s" class="ctrl-btn border-l-0 !px-1.5" onclick="setDecadeFilter('2010s')">'10s</button>
-            <button id="dec20s" class="ctrl-btn border-l-0 !px-1.5" onclick="setDecadeFilter('2020s')">'20s</button>
-          </div>
-        </div>
-
-        <!-- Poster Grid Density -->
-        <div class="flex items-center justify-between gap-1">
-          <span class="text-[9.5px] font-mono-tabular uppercase tracking-[0.08em] text-[#555552] font-bold shrink-0">POSTER GRID:</span>
-          <div class="flex">
-            <button id="grid2Btn" class="ctrl-btn active" onclick="setGridCols(2)">2-Col Exhibition</button>
-            <button id="grid1Btn" class="ctrl-btn border-l-0" onclick="setGridCols(1)">1-Col Jumbo</button>
-            <button id="grid3Btn" class="ctrl-btn border-l-0 hidden xl:inline-block" onclick="setGridCols(3)">3-Col Folio</button>
-          </div>
-        </div>
-      </div>
+    <!-- Desktop Exhibit Links -->
+    <div class="hidden md:flex items-stretch flex-1">
+      <a href="index.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap bg-[#1C1F24] text-[#FAF9F6] border-b-2 border-b-[#F2A900]">
+        <span class="text-[#F2A900] text-[9.5px]">00</span>
+        <span>OVERVIEW</span>
+      </a>
+      <a href="posters.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">01</span>
+        <span>SEASON POSTERS</span>
+      </a>
+      <a href="pantheon.html" class="site-nav-link font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-r border-[#2A2D33] flex items-center gap-2 transition-colors whitespace-nowrap text-[#A6A8AE] hover:text-[#FAF9F6] hover:bg-[#181A1F] border-b-2 border-b-transparent">
+        <span class="text-[#F2A900] text-[9.5px]">02</span>
+        <span>EXTRA PERIOD PANTHEON</span>
+      </a>
+      <!-- FUTURE EXHIBIT SLOT: Duplicate the <a> block above as 03, 04, etc. -->
     </div>
 
-    <!-- Season Scrubber Strip ('84 to '26) -->
-    <div class="max-w-[1840px] mx-auto border-x border-t border-[#111111] bg-[#FAF9F6] flex flex-col md:flex-row items-stretch">
-      <div class="flex items-center px-3 py-1 border-b md:border-b-0 md:border-r border-[#111111] bg-[#111111] text-[#FAF9F6] shrink-0 justify-between md:justify-start gap-2.5">
-        <span class="font-mono-tabular text-[10px] font-bold tracking-[0.12em] uppercase">SEASON INDEX</span>
-        <button id="showAllSeasonsBtn" onclick="selectSingleSeason(null)" class="text-[9.5px] font-mono-tabular uppercase px-1.5 py-0.5 bg-[#D92B2B] text-white font-bold hover:opacity-90">
-          ALL 43
-        </button>
+    <!-- Right Archive Status & Mobile Toggle -->
+    <div class="flex items-center">
+      <div class="hidden lg:flex items-center gap-3 px-4 font-mono-tabular text-[9.5px] uppercase tracking-[0.1em] text-[#8C8B85]">
+        <span>43 SEASONS</span>
+        <span class="text-[#2A2D33]">|</span>
+        <span>53 SCORERS</span>
       </div>
-      <div id="seasonScrubber" class="flex flex-wrap flex-1"></div>
+      <button type="button" onclick="document.getElementById('mobileSiteNav').classList.toggle('hidden')"
+              aria-label="Toggle Navigation Menu"
+              class="md:hidden font-mono-tabular text-[10px] font-bold uppercase tracking-[0.1em] px-3.5 py-2.5 border-l border-[#2A2D33] text-[#FAF9F6] hover:bg-[#1C1F24]">
+        MENU &#9776;
+      </button>
     </div>
+  </div>
 
-    <!-- Quick Legend Spotlight Pills & Active Career Tally Banner -->
-    <div class="max-w-[1840px] mx-auto border-x border-t border-[#111111] bg-[#ECEAE2] px-3 py-1.5 flex flex-wrap items-center justify-between gap-2">
+  <!-- Mobile Dropdown Drawer -->
+  <div id="mobileSiteNav" class="hidden md:hidden border-t border-[#2A2D33] bg-[#16181C]">
+    <a href="index.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#F2A900] bg-[#1C1F24]">
+      00 // OVERVIEW
+    </a>
+    <a href="posters.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] border-b border-[#2A2D33] text-[#E8E3D5]">
+      01 // SEASON POSTERS (1983&ndash;84 TO 2025&ndash;26)
+    </a>
+    <a href="pantheon.html" class="block px-4 py-2.5 font-mono-tabular text-[11px] font-bold uppercase tracking-[0.1em] text-[#E8E3D5]">
+      02 // THE EXTRA PERIOD PANTHEON
+    </a>
+  </div>
+</nav>
+<!-- END SITE NAVIGATION -->
+
+  <main class="flex-1 max-w-[1840px] w-full mx-auto px-3 sm:px-6 py-6 sm:py-8 space-y-8">
+
+    <!-- HERO ARCHITECTURAL MASTHEAD -->
+    <section class="border-2 border-[#111111] bg-[#FAF9F6] grid grid-cols-1 lg:grid-cols-12">
+      <!-- Editorial Thesis (Cols 1-8) -->
+      <div class="lg:col-span-8 p-6 sm:p-8 lg:p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-[#111111] flex flex-col justify-between">
+        <div>
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <span class="font-mono-tabular text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#555552]">
+              KATALOG 1983&ndash;84 TO 2025&ndash;26 // SWISS GRID EXHIBITION
+            </span>
+            <span class="font-mono-tabular text-[10px] font-bold uppercase tracking-[0.1em] px-2 py-0.5 bg-[#111111] text-[#FAF9F6]">
+              VOLUME I &middot; MODERN ERA
+            </span>
+          </div>
+          <h1 class="text-4xl sm:text-5xl xl:text-6xl font-black uppercase tracking-[-0.04em] leading-[0.95] text-[#111111]">
+            WHERE BUCKETS REIGN
+          </h1>
+          <p class="mt-4 text-sm sm:text-base text-[#333330] max-w-2xl leading-relaxed font-medium">
+            A 43-season empirical record of modern NBA scoring supremacy. Every campaign from 1983&ndash;84 through 2025&ndash;26 is audited by combined regular-season and postseason volume, scoring net margin efficiency, and career-defining conference dominance&mdash;distilled into 43 Swiss-grid season posters and a 53-minute mechanical arena scoreboard.
+          </p>
+        </div>
+
+        <div class="mt-6 pt-5 border-t border-[#D8D6CE] flex flex-wrap items-center gap-3">
+          <a href="posters.html"
+             class="inline-flex items-center gap-2 px-4 py-2.5 bg-[#111111] text-[#FAF9F6] font-mono-tabular text-xs font-bold uppercase tracking-[0.08em] hover:bg-[#1D4ED8] transition-colors">
+            01 // ENTER SEASON POSTERS &rarr;
+          </a>
+          <a href="pantheon.html"
+             class="inline-flex items-center gap-2 px-4 py-2.5 bg-[#F2A900] text-[#111214] border border-[#111111] font-mono-tabular text-xs font-extrabold uppercase tracking-[0.08em] hover:bg-[#111214] hover:text-[#F2A900] transition-colors">
+            02 // OPEN EXTRA PERIOD PANTHEON &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Archival Telemetry Matrix (Cols 9-12) -->
+      <div class="lg:col-span-4 grid grid-cols-2 divide-x divide-y divide-[#111111] bg-[#F4F3EF]">
+        <div class="p-5 flex flex-col justify-between">
+          <span class="font-mono-tabular text-[9.5px] font-bold uppercase tracking-[0.12em] text-[#555552]">ARCHIVED SPAN</span>
+          <div class="my-2">
+            <div class="text-3xl sm:text-4xl font-black font-mono-tabular tracking-[-0.04em] text-[#111111]">43</div>
+            <div class="font-mono-tabular text-[10px] font-bold text-[#555552] uppercase">CONSECUTIVE SEASONS</div>
+          </div>
+          <span class="font-mono-tabular text-[9.5px] text-[#8C8B85]">1983&ndash;84 &rarr; 2025&ndash;26</span>
+        </div>
+
+        <div class="p-5 flex flex-col justify-between">
+          <span class="font-mono-tabular text-[9.5px] font-bold uppercase tracking-[0.12em] text-[#555552]">GAME CLOCK ROSTER</span>
+          <div class="my-2">
+            <div class="text-3xl sm:text-4xl font-black font-mono-tabular tracking-[-0.04em] text-[#111111]">53</div>
+            <div class="font-mono-tabular text-[10px] font-bold text-[#555552] uppercase">PANTHEON SCORERS</div>
+          </div>
+          <span class="font-mono-tabular text-[9.5px] text-[#8C8B85]">48 REG MIN + 5 MIN OT</span>
+        </div>
+
+        <div class="p-5 flex flex-col justify-between">
+          <span class="font-mono-tabular text-[9.5px] font-bold uppercase tracking-[0.12em] text-[#1D4ED8]">COMBINED PTS APEX</span>
+          <div class="my-2">
+            <div class="text-2xl sm:text-3xl font-black font-mono-tabular tracking-[-0.04em] text-[#111111]">3,340</div>
+            <div class="font-mono-tabular text-[10px] font-bold text-[#111111] uppercase">MICHAEL JORDAN</div>
+          </div>
+          <a href="posters.html?season=1989-90&player=Michael%20Jordan" class="font-mono-tabular text-[9.5px] text-[#1D4ED8] font-bold hover:underline">
+            1989&ndash;90 CHI (98G) &rarr;
+          </a>
+        </div>
+
+        <div class="p-5 flex flex-col justify-between">
+          <span class="font-mono-tabular text-[9.5px] font-bold uppercase tracking-[0.12em] text-[#D92B2B]">NET MARGIN APEX</span>
+          <div class="my-2">
+            <div class="text-2xl sm:text-3xl font-black font-mono-tabular tracking-[-0.04em] text-[#111111]">+432.0</div>
+            <div class="font-mono-tabular text-[10px] font-bold text-[#111111] uppercase">STEPHEN CURRY</div>
+          </div>
+          <a href="posters.html?season=2015-16&player=Stephen%20Curry" class="font-mono-tabular text-[9.5px] text-[#D92B2B] font-bold hover:underline">
+            2015&ndash;16 GSW (SH #1) &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRIMARY EXHIBITS (50/50 COMPLEMENTARY SPLIT) -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <!-- EXHIBIT 01: ALL-NBA SEASON POSTERS (LIGHT ARCHIVAL PAPER) -->
+      <article class="exhibit-card border-2 border-[#111111] bg-[#FAF9F6] flex flex-col justify-between">
+        <div>
+          <div class="px-5 py-3 bg-[#F4F3EF] border-b-2 border-[#111111] flex items-center justify-between">
+            <span class="font-mono-tabular text-[10.5px] font-extrabold uppercase tracking-[0.14em] text-[#111111]">
+              EXHIBIT 01 // 43-EDITION FOLIO
+            </span>
+            <div class="flex items-center gap-2 font-mono-tabular text-[9.5px] font-bold">
+              <span class="px-1.5 py-0.5 bg-[#1D4ED8] text-white">EAST</span>
+              <span class="px-1.5 py-0.5 bg-[#D92B2B] text-white">WEST</span>
+            </div>
+          </div>
+
+          <div class="p-5 sm:p-6">
+            <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-[-0.03em] leading-none text-[#111111]">
+              All-NBA Season Posters
+            </h2>
+            <p class="mt-2.5 text-xs sm:text-sm text-[#555552] leading-relaxed">
+              Every individual season rendered as a self-contained Swiss typographic broadsheet: Eastern &amp; Western Conference MVPs (#1 combined points), Rightful All-Conference Teams (ranks 2&ndash;6), Bronze Buckets, Silver Scorers, Sharp Shooters, and Dead Eye postseason efficiency leaders.
+            </p>
+
+            <div class="mt-5 border border-[#111111] bg-[#F4F3EF]">
+              <div class="px-3 py-1.5 bg-[#ECEAE2] border-b border-[#111111] font-mono-tabular text-[9.5px] font-extrabold uppercase tracking-[0.1em] flex justify-between">
+                <span>6-HONOR POSTER TAXONOMY</span>
+                <span class="text-[#555552]">1983&ndash;84 TO 2025&ndash;26</span>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-3 divide-x divide-y divide-[#D8D6CE] text-[10.5px]">
+                <div class="p-2.5 bg-[#FAF9F6]">
+                  <div class="font-black uppercase text-[#111111]">CONF. MVP</div>
+                  <div class="text-[9.5px] text-[#555552]">#1 Reg + PO Points</div>
+                </div>
+                <div class="p-2.5 bg-[#FAF9F6]">
+                  <div class="font-black uppercase text-[#111111]">ALL-CONF (2&ndash;6)</div>
+                  <div class="text-[9.5px] text-[#555552]">Next 5 Combined Scorers</div>
+                </div>
+                <div class="p-2.5 bg-[#FAF9F6]">
+                  <div><span class="micro-badge bg-[#FEF3C7] text-[#9A5B13] border-[#9A5B13]">BB</span> <strong class="text-[#9A5B13]">BRONZE</strong></div>
+                  <div class="text-[9.5px] text-[#555552]">Conf. Reg. Season #1</div>
+                </div>
+                <div class="p-2.5 bg-[#FAF9F6]">
+                  <div><span class="micro-badge bg-[#E2E8F0] text-[#334155] border-[#475569]">SS</span> <strong class="text-[#475569]">SILVER</strong></div>
+                  <div class="text-[9.5px] text-[#555552]">Conf. Playoff Pts #1</div>
+                </div>
+                <div class="p-2.5 bg-[#FAF9F6]">
+                  <div><span class="micro-badge bg-[#F4F3EF] text-[#111111]">SH</span> <strong>SHARP TOP 5</strong></div>
+                  <div class="text-[9.5px] text-[#555552]">Reg. Scoring Net Margin</div>
+                </div>
+                <div class="p-2.5 bg-[#111111] text-[#FAF9F6]">
+                  <div class="font-mono-tabular font-extrabold text-[#FACC15]">DE &middot; DEAD EYE</div>
+                  <div class="text-[9.5px] text-[#D8D6CE]">#1 Playoff Net Margin</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 flex flex-wrap items-center gap-1.5 font-mono-tabular text-[10px]">
+              <span class="font-bold uppercase text-[#555552] mr-1">JUMP BY DECADE:</span>
+              <a href="posters.html?decade=1980s" class="px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] font-bold hover:bg-[#111111] hover:text-white">&rsquo;80s</a>
+              <a href="posters.html?decade=1990s" class="px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] font-bold hover:bg-[#111111] hover:text-white">&rsquo;90s</a>
+              <a href="posters.html?decade=2000s" class="px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] font-bold hover:bg-[#111111] hover:text-white">&rsquo;00s</a>
+              <a href="posters.html?decade=2010s" class="px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] font-bold hover:bg-[#111111] hover:text-white">&rsquo;10s</a>
+              <a href="posters.html?decade=2020s" class="px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] font-bold hover:bg-[#111111] hover:text-white">&rsquo;20s</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="posters.html"
+           class="block px-5 py-3.5 bg-[#111111] text-[#FAF9F6] font-mono-tabular text-xs font-extrabold uppercase tracking-[0.1em] flex items-center justify-between hover:bg-[#1D4ED8] transition-colors">
+          <span>OPEN 43 SEASON POSTERS GALLERY</span>
+          <span>&rarr;</span>
+        </a>
+      </article>
+
+      <!-- EXHIBIT 02: THE EXTRA PERIOD PANTHEON (DARK MECHANICAL ARENA SCOREBOARD) -->
+      <article class="exhibit-card border-2 border-[#111111] bg-[#111214] text-[#FAF9F6] flex flex-col justify-between">
+        <div>
+          <div class="px-5 py-3 bg-[#16181C] border-b border-[#2A2D33] flex items-center justify-between">
+            <span class="font-mono-tabular text-[10.5px] font-extrabold uppercase tracking-[0.14em] text-[#F2A900]">
+              EXHIBIT 02 // 53-MINUTE SCOREBOARD
+            </span>
+            <div class="flex items-center gap-3 font-mono-tabular text-[9.5px] font-bold">
+              <span class="flex items-center gap-1 text-[#F2A900]"><span class="w-2.5 h-2 bg-[#F2A900] inline-block"></span> MVP</span>
+              <span class="flex items-center gap-1 text-[#E8E3D5]"><span class="w-2.5 h-2 bg-[#2A2F37] border border-[#3A404B] inline-block"></span> AC</span>
+            </div>
+          </div>
+
+          <div class="p-5 sm:p-6">
+            <h2 class="text-2xl sm:text-3xl font-black uppercase tracking-[-0.02em] leading-none text-[#FAF9F6]">
+              The Extra Period Pantheon
+            </h2>
+            <p class="mt-2.5 text-xs sm:text-sm text-[#A6A8AE] leading-relaxed">
+              The 53 elite scorers of modern NBA history plotted on an absolute &rsquo;84&ndash;&rsquo;26 mechanical split-flap matrix. Each minute of a 48-minute regulation game plus 5-minute overtime represents one scorer, ascending from four-time All-Conference finishers to the five-player Overtime pantheon.
+            </p>
+
+            <div class="mt-5 border border-[#2A2E36] bg-[#14161A]">
+              <div class="px-2.5 py-1.5 bg-[#1B1A16] border-b border-[#574110] font-mono-tabular text-[9.5px] font-bold uppercase tracking-[0.14em] text-[#F2A900] flex items-center justify-between">
+                <span>OVERTIME SPECIMEN (&rsquo;84&ndash;&rsquo;26)</span>
+                <span class="text-[#9BA0AA]">MVP / AC</span>
+              </div>
+              <div class="py-0.5">
+                
+      <a href="pantheon.html?player=Allen%20Iverson"
+         class="grid grid-cols-12 items-center gap-2 py-1.5 border-b border-[#22252C] last:border-b-0 hover:bg-[#191C22] px-2 transition-colors">
+        <div class="col-span-4 font-mono-tabular text-[10.5px] text-[#E8E3D5] truncate">
+          <span class="text-[#F2A900] mr-1.5">:49</span><span class="font-bold">Allen Iverson</span>
+        </div>
+        <div class="col-span-6 flex items-center gap-[1px]">
+          <span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#1B1E23;" class="h-3 flex-1 block border border-[#262A31]"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#1B1E23;" class="h-3 flex-1 block border border-[#262A31]"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span>
+        </div>
+        <div class="col-span-2 font-mono-tabular text-[10px] text-right">
+          <span class="text-[#F2A900] font-bold">5</span>
+          <span class="text-[#4B505A] mx-0.5">/</span>
+          <span class="text-[#A6A8AE]">4</span>
+        </div>
+      </a>
+    
+      <a href="pantheon.html?player=Kobe%20Bryant"
+         class="grid grid-cols-12 items-center gap-2 py-1.5 border-b border-[#22252C] last:border-b-0 hover:bg-[#191C22] px-2 transition-colors">
+        <div class="col-span-4 font-mono-tabular text-[10.5px] text-[#E8E3D5] truncate">
+          <span class="text-[#F2A900] mr-1.5">:50</span><span class="font-bold">Kobe Bryant</span>
+        </div>
+        <div class="col-span-6 flex items-center gap-[1px]">
+          <span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#1B1E23;" class="h-3 flex-1 block border border-[#262A31]"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span>
+        </div>
+        <div class="col-span-2 font-mono-tabular text-[10px] text-right">
+          <span class="text-[#F2A900] font-bold">7</span>
+          <span class="text-[#4B505A] mx-0.5">/</span>
+          <span class="text-[#A6A8AE]">7</span>
+        </div>
+      </a>
+    
+      <a href="pantheon.html?player=Karl%20Malone"
+         class="grid grid-cols-12 items-center gap-2 py-1.5 border-b border-[#22252C] last:border-b-0 hover:bg-[#191C22] px-2 transition-colors">
+        <div class="col-span-4 font-mono-tabular text-[10.5px] text-[#E8E3D5] truncate">
+          <span class="text-[#F2A900] mr-1.5">:51</span><span class="font-bold">Karl Malone</span>
+        </div>
+        <div class="col-span-6 flex items-center gap-[1px]">
+          <span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#1B1E23;" class="h-3 flex-1 block border border-[#262A31]"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span>
+        </div>
+        <div class="col-span-2 font-mono-tabular text-[10px] text-right">
+          <span class="text-[#F2A900] font-bold">7</span>
+          <span class="text-[#4B505A] mx-0.5">/</span>
+          <span class="text-[#A6A8AE]">7</span>
+        </div>
+      </a>
+    
+      <a href="pantheon.html?player=Michael%20Jordan"
+         class="grid grid-cols-12 items-center gap-2 py-1.5 border-b border-[#22252C] last:border-b-0 hover:bg-[#191C22] px-2 transition-colors">
+        <div class="col-span-4 font-mono-tabular text-[10.5px] text-[#E8E3D5] truncate">
+          <span class="text-[#F2A900] mr-1.5">:52</span><span class="font-bold">Michael Jordan</span>
+        </div>
+        <div class="col-span-6 flex items-center gap-[1px]">
+          <span class="h-3 flex-1 block bg-transparent"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#1B1E23;" class="h-3 flex-1 block border border-[#262A31]"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#1B1E23;" class="h-3 flex-1 block border border-[#262A31]"></span><span style="background:#1B1E23;" class="h-3 flex-1 block border border-[#262A31]"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span>
+        </div>
+        <div class="col-span-2 font-mono-tabular text-[10px] text-right">
+          <span class="text-[#F2A900] font-bold">10</span>
+          <span class="text-[#4B505A] mx-0.5">/</span>
+          <span class="text-[#A6A8AE]">1</span>
+        </div>
+      </a>
+    
+      <a href="pantheon.html?player=LeBron%20James"
+         class="grid grid-cols-12 items-center gap-2 py-1.5 border-b border-[#22252C] last:border-b-0 hover:bg-[#191C22] px-2 transition-colors">
+        <div class="col-span-4 font-mono-tabular text-[10.5px] text-[#E8E3D5] truncate">
+          <span class="text-[#F2A900] mr-1.5">:53</span><span class="font-bold">LeBron James</span>
+        </div>
+        <div class="col-span-6 flex items-center gap-[1px]">
+          <span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span style="background:#F2A900;" class="h-3 flex-1 block"></span><span style="background:#1B1E23;" class="h-3 flex-1 block border border-[#262A31]"></span><span style="background:#3B424D;" class="h-3 flex-1 block"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span><span class="h-3 flex-1 block bg-transparent"></span>
+        </div>
+        <div class="col-span-2 font-mono-tabular text-[10px] text-right">
+          <span class="text-[#F2A900] font-bold">12</span>
+          <span class="text-[#4B505A] mx-0.5">/</span>
+          <span class="text-[#A6A8AE]">3</span>
+        </div>
+      </a>
+    
+              </div>
+            </div>
+
+            <div class="mt-4 flex flex-wrap items-center gap-1.5 font-mono-tabular text-[10px]">
+              <span class="font-bold uppercase text-[#8E939E] mr-1">JUMP BY PERIOD:</span>
+              <a href="pantheon.html?quarter=1Q" class="px-2 py-0.5 border border-[#3A404B] bg-[#1B1E23] text-[#E8E3D5] font-bold hover:border-[#F2A900] hover:text-[#F2A900]">1Q</a>
+              <a href="pantheon.html?quarter=2Q" class="px-2 py-0.5 border border-[#3A404B] bg-[#1B1E23] text-[#E8E3D5] font-bold hover:border-[#F2A900] hover:text-[#F2A900]">2Q</a>
+              <a href="pantheon.html?quarter=3Q" class="px-2 py-0.5 border border-[#3A404B] bg-[#1B1E23] text-[#E8E3D5] font-bold hover:border-[#F2A900] hover:text-[#F2A900]">3Q</a>
+              <a href="pantheon.html?quarter=4Q" class="px-2 py-0.5 border border-[#3A404B] bg-[#1B1E23] text-[#E8E3D5] font-bold hover:border-[#F2A900] hover:text-[#F2A900]">4Q</a>
+              <a href="pantheon.html?quarter=OT" class="px-2 py-0.5 border border-[#F2A900] bg-[#F2A900] text-[#111214] font-extrabold hover:bg-[#FAF9F6] hover:border-[#FAF9F6]">OT</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="pantheon.html"
+           class="block px-5 py-3.5 bg-[#F2A900] text-[#111214] font-mono-tabular text-xs font-extrabold uppercase tracking-[0.1em] flex items-center justify-between hover:bg-[#FAF9F6] transition-colors">
+          <span>OPEN 53-MINUTE CALENDAR MATRIX</span>
+          <span>&rarr;</span>
+        </a>
+      </article>
+    </section>
+
+    <!-- THE 53-MINUTE GAME ARCHITECTURE LEDGER -->
+    <section class="border-2 border-[#111111] bg-[#FAF9F6]">
+      <div class="px-4 py-2 bg-[#111111] text-[#FAF9F6] flex flex-wrap items-center justify-between gap-2 font-mono-tabular text-[10px] font-bold uppercase tracking-[0.14em]">
+        <span>GAME-CLOCK HIERARCHY // HOW THE 53 SCORERS MAP TO AN NBA GAME</span>
+        <span class="text-[#F2A900]">48 REGULATION MINUTES + 5-MINUTE OVERTIME</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x divide-[#111111]">
+        <a href="pantheon.html?quarter=1Q" class="p-4 hover:bg-[#ECEAE2] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono-tabular text-[10px] font-bold text-[#555552]">
+              <span>FIRST QUARTER</span><span>:01&ndash;:12</span>
+            </div>
+            <div class="text-lg font-black uppercase mt-1 text-[#111111]">12 Scorers</div>
+            <p class="text-[11px] text-[#555552] mt-1 leading-snug">4&ndash;5 All-Conference seasons. Anchored by Dwight Howard, Kevin McHale, Trae Young, and Anthony Edwards.</p>
+          </div>
+          <div class="mt-3 font-mono-tabular text-[10px] font-bold text-[#111111]">VIEW 1Q &rarr;</div>
+        </a>
+
+        <a href="pantheon.html?quarter=2Q" class="p-4 hover:bg-[#ECEAE2] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono-tabular text-[10px] font-bold text-[#555552]">
+              <span>SECOND QUARTER</span><span>:13&ndash;:24</span>
+            </div>
+            <div class="text-lg font-black uppercase mt-1 text-[#111111]">12 Scorers</div>
+            <p class="text-[11px] text-[#555552] mt-1 leading-snug">6+ All-Conference seasons (plus Vince Carter with 5), culminating in Dirk Nowitzki&rsquo;s 12 straight.</p>
+          </div>
+          <div class="mt-3 font-mono-tabular text-[10px] font-bold text-[#111111]">VIEW 2Q &rarr;</div>
+        </a>
+
+        <a href="pantheon.html?quarter=3Q" class="p-4 hover:bg-[#ECEAE2] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono-tabular text-[10px] font-bold text-[#555552]">
+              <span>THIRD QUARTER</span><span>:25&ndash;:36</span>
+            </div>
+            <div class="text-lg font-black uppercase mt-1 text-[#111111]">12 Scorers</div>
+            <p class="text-[11px] text-[#555552] mt-1 leading-snug">Single Conference MVP seasons&mdash;from Isaiah Thomas (&rsquo;17) and Nikola Joki&#263; (&rsquo;23) to Stephen Curry (&rsquo;16).</p>
+          </div>
+          <div class="mt-3 font-mono-tabular text-[10px] font-bold text-[#111111]">VIEW 3Q &rarr;</div>
+        </a>
+
+        <a href="pantheon.html?quarter=4Q" class="p-4 hover:bg-[#ECEAE2] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono-tabular text-[10px] font-bold text-[#555552]">
+              <span>FOURTH QUARTER</span><span>:37&ndash;:48</span>
+            </div>
+            <div class="text-lg font-black uppercase mt-1 text-[#111111]">12 Scorers</div>
+            <p class="text-[11px] text-[#555552] mt-1 leading-snug">2, 3, and 4 Conference MVPs&mdash;including Bird, Hakeem, Giannis, Harden, Shaq, and Kevin Durant.</p>
+          </div>
+          <div class="mt-3 font-mono-tabular text-[10px] font-bold text-[#111111]">VIEW 4Q &rarr;</div>
+        </a>
+
+        <a href="pantheon.html?quarter=OT" class="p-4 bg-[#111214] text-[#FAF9F6] hover:bg-[#1A1C21] transition-colors flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between font-mono-tabular text-[10px] font-bold text-[#F2A900]">
+              <span>OVERTIME</span><span>:49&ndash;:53</span>
+            </div>
+            <div class="text-lg font-black uppercase mt-1 text-[#FAF9F6]">5 Scorers</div>
+            <p class="text-[11px] text-[#A6A8AE] mt-1 leading-snug">5+ Conference MVP seasons: Allen Iverson (5), Kobe Bryant (7), Karl Malone (7), Michael Jordan (10), LeBron James (12).</p>
+          </div>
+          <div class="mt-3 font-mono-tabular text-[10px] font-bold text-[#F2A900]">VIEW OT &rarr;</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- QUICK PLAYER DOSSIER SPOTLIGHT STRIP -->
+    <section class="border border-[#111111] bg-[#ECEAE2] px-4 py-3 flex flex-wrap items-center justify-between gap-2">
       <div class="flex flex-wrap items-center gap-1.5">
-        <span class="font-mono-tabular text-[9.5px] font-extrabold uppercase tracking-[0.08em] text-[#555552] mr-1">ARCHIVAL SPOTLIGHT:</span>
-        <button onclick="setSpotlight('Michael Jordan')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">M. JORDAN</button>
-        <button onclick="setSpotlight('LeBron James')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">L. JAMES</button>
-        <button onclick="setSpotlight('Kobe Bryant')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">K. BRYANT</button>
-        <button onclick="setSpotlight('Karl Malone')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">K. MALONE</button>
-        <button onclick="setSpotlight('Kevin Durant')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">K. DURANT</button>
-        <button onclick="setSpotlight('Stephen Curry')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">S. CURRY</button>
-        <button onclick="setSpotlight('Shaquille O\'Neal')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">S. O'NEAL</button>
-        <button onclick="setSpotlight('Larry Bird')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">L. BIRD</button>
-        <button onclick="setSpotlight('Allen Iverson')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">A. IVERSON</button>
-        <button onclick="setSpotlight('James Harden')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">J. HARDEN</button>
-        <button onclick="setSpotlight('Dirk Nowitzki')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">D. NOWITZKI</button>
-        <button onclick="setSpotlight('Nikola Jokić')" class="text-[10px] font-mono-tabular font-bold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">N. JOKIĆ</button>
+        <span class="font-mono-tabular text-[10px] font-extrabold uppercase tracking-[0.1em] text-[#555552] mr-1">
+          DIRECT DOSSIER SPOTLIGHTS:
+        </span>
+        <a href="posters.html?player=Michael%20Jordan" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">M. JORDAN</a>
+        <a href="posters.html?player=LeBron%20James" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">L. JAMES</a>
+        <a href="posters.html?player=Kobe%20Bryant" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">K. BRYANT</a>
+        <a href="posters.html?player=Karl%20Malone" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">K. MALONE</a>
+        <a href="posters.html?player=Allen%20Iverson" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">A. IVERSON</a>
+        <a href="posters.html?player=Kevin%20Durant" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">K. DURANT</a>
+        <a href="posters.html?player=Shaquille%20O%27Neal" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">S. O&rsquo;NEAL</a>
+        <a href="posters.html?player=James%20Harden" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">J. HARDEN</a>
+        <a href="posters.html?player=Stephen%20Curry" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">S. CURRY</a>
+        <a href="posters.html?player=Nikola%20Joki%C4%87" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">N. JOKI&#262;</a>
+        <a href="posters.html?player=Luka%20Don%C4%8Di%C4%87" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">L. DON&#268;I&#262;</a>
+        <a href="posters.html?player=Shai%20Gilgeous-Alexander" class="font-mono-tabular text-[10px] font-bold px-2 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#FEF08A]">S. GILGEOUS-ALEXANDER</a>
       </div>
+    </section>
 
-      <!-- Dynamic Spotlight Summary Strip -->
-      <div id="spotlightSummaryBanner" class="hidden items-center flex-wrap gap-2 bg-[#FEF08A] border border-[#111111] px-2.5 py-0.5">
-        <span id="spotlightSummaryText" class="font-mono-tabular text-[10.5px] font-extrabold text-[#111111]"></span>
-        <button onclick="clearSpotlight()" class="text-[9.5px] font-mono-tabular uppercase bg-[#111111] text-white px-1.5 py-0.5 font-bold">RESET ×</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- MAIN EXHIBITION POSTER GALLERY -->
-  <main class="flex-1 max-w-[1840px] w-full mx-auto px-3 sm:px-6 py-6 sm:py-8">
-    <div class="flex flex-wrap items-center justify-between gap-2 mb-5 pb-2 border-b border-[#111111] text-[11px] font-mono-tabular text-[#555552]">
-      <div id="exhibitionStatusText">
-        EXHIBITION VIEW: <strong class="text-[#111111]">43 ALL-NBA SEASON POSTERS (1983–84 TO 2025–26)</strong>
-      </div>
-      <div>
-        CLICK ANY PLAYER OR FRANCHISE CODE ON A POSTER TO SPOTLIGHT THEIR ENTIRE ARCHIVAL DOSSIER
-      </div>
-    </div>
-
-    <!-- Posters Grid Container -->
-    <div id="postersGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"></div>
   </main>
 
   <!-- ARCHIVAL COLOPHON FOOTER -->
-  <footer class="border-t-2 border-[#111111] bg-[#FAF9F6] mt-12">
-    <div class="max-w-[1840px] mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono-tabular text-[#555552]">
+  <footer class="border-t-2 border-[#111111] bg-[#FAF9F6] mt-8">
+    <div class="max-w-[1840px] mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono-tabular text-[#555552]">
       <div>
-        <strong class="text-[#111111]">SWISS GRID ARCHIVE // ALL-NBA SCORING &amp; NET MARGIN POSTERS (1983–84 TO 2025–26)</strong><br/>
-        Complete 43-season typographic catalog of Conference MVPs, Rightful All-East &amp; All-West Teams (2–6), Bronze Buckets, Silver Scorers, Sharp Shooters &amp; Dead Eye.
+        <strong class="text-[#111111]">WHERE BUCKETS REIGN // MODERN NBA SCORING ARCHIVE (1983&ndash;84 TO 2025&ndash;26)</strong><br/>
+        Swiss-grid typographic catalog &amp; 53-minute mechanical arena scoreboard.
       </div>
-      <div class="text-right">
-        ALL-TIME SINGLE-SEASON COMBINED POINTS PEAK: <span class="text-[#1D4ED8] font-bold">3,340 PTS (1989–90 MICHAEL JORDAN)</span><br/>
-        ALL-TIME REGULAR SEASON NET MARGIN PEAK: <span class="text-[#D92B2B] font-bold">+432.0 (2015–16 STEPHEN CURRY)</span>
+      <div class="sm:text-right">
+        <a href="posters.html" class="underline hover:text-[#111111]">01 SEASON POSTERS</a> &middot;
+        <a href="pantheon.html" class="underline hover:text-[#111111]">02 EXTRA PERIOD PANTHEON</a> &middot;
+        <a href="nav-template.html" class="underline hover:text-[#111111]">NAV TEMPLATE</a>
       </div>
     </div>
   </footer>
 
-  <!-- COMPLETE 43-SEASON DATASET (1983-84 TO 2025-26) & SWISS POSTER ENGINE -->
-  <script>
-    const SEASONS_DATA = [
-      {"s": "1983-84", "em": ["Larry Bird", "BOS", 2540, 102], "wm": ["Adrian Dantley", "UTA", 2772, 90], "ae": [["Bernard King", "NYK", 2444, 89], ["Sidney Moncrief", "MIL", 1959, 95], ["Robert Parish", "BOS", 1862, 103], ["Marques Johnson", "MIL", 1859, 90], ["Isiah Thomas", "DET", 1855, 87]], "aw": [["Mark Aguirre", "DAL", 2550, 89], ["Kiki VanDeWeghe", "DEN", 2422, 83], ["Alex English", "DEN", 2312, 87], ["Kareem Abdul-Jabbar", "LAL", 2219, 101], ["Rolando Blackman", "DAL", 2054, 91]], "ebb": ["Bernard King", "NYK", 2027], "wbb": ["Adrian Dantley", "UTA", 2418], "ess": ["Larry Bird", "BOS", 632], "wss": ["Kareem Abdul-Jabbar", "LAL", 502], "sh": [["Adrian Dantley", "UTA", "W", 264.8], ["Kiki VanDeWeghe", "DEN", "W", 261.8], ["Bernard King", "NYK", "E", 213.3], ["Kareem Abdul-Jabbar", "LAL", "W", 182.3], ["Calvin Natt", "POR", "W", 163.7]], "de": ["Larry Bird", "BOS", "E", 60.3]},
-      {"s": "1984-85", "em": ["Larry Bird", "BOS", 2815, 100], "wm": ["Alex English", "DEN", 2685, 95], "ae": [["Michael Jordan", "CHI", 2430, 86], ["Dominique Wilkins", "ATL", 2217, 81], ["Moses Malone", "PHI", 2203, 92], ["Terry Cummings", "MIL", 2081, 87], ["Kevin McHale", "BOS", 2030, 100]], "aw": [["Purvis Short", "GSW", 2186, 78], ["Mark Aguirre", "DAL", 2171, 84], ["Kareem Abdul-Jabbar", "LAL", 2151, 98], ["Calvin Natt", "DEN", 2151, 93], ["Darrell Griffith", "UTA", 1939, 88]], "ebb": ["Michael Jordan", "CHI", 2313], "wbb": ["Alex English", "DEN", 2262], "ess": ["Larry Bird", "BOS", 520], "wss": ["Alex English", "DEN", 423], "sh": [["Kareem Abdul-Jabbar", "LAL", "W", 228.9], ["Larry Bird", "BOS", "E", 209.1], ["Artis Gilmore", "SAS", "W", 202.6], ["James Worthy", "LAL", "W", 160.0], ["Magic Johnson", "LAL", "W", 159.9]], "de": ["James Worthy", "LAL", "W", 55.1]},
-      {"s": "1985-86", "em": ["Dominique Wilkins", "ATL", 2623, 87], "wm": ["Alex English", "DEN", 2687, 91], "ae": [["Larry Bird", "BOS", 2581, 100], ["Terry Cummings", "MIL", 1930, 96], ["Jeff Malone", "WAS", 1905, 85], ["Charles Barkley", "PHI", 1903, 92], ["Kevin McHale", "BOS", 1896, 86]], "aw": [["Adrian Dantley", "UTA", 2267, 76], ["Kareem Abdul-Jabbar", "LAL", 2208, 93], ["Hakeem Olajuwon", "HOU", 2134, 88], ["Kiki VanDeWeghe", "POR", 2074, 83], ["Rolando Blackman", "DAL", 1970, 92]], "ebb": ["Dominique Wilkins", "ATL", 2366], "wbb": ["Alex English", "DEN", 2414], "ess": ["Larry Bird", "BOS", 466], "wss": ["Hakeem Olajuwon", "HOU", 537], "sh": [["Adrian Dantley", "UTA", "W", 228.3], ["Kareem Abdul-Jabbar", "LAL", "W", 189.8], ["James Worthy", "LAL", "W", 189.4], ["Kiki VanDeWeghe", "POR", "W", 189.3], ["Larry Bird", "BOS", "E", 180.9]], "de": ["Larry Bird", "BOS", "E", 56.8]},
-      {"s": "1986-87", "em": ["Michael Jordan", "CHI", 3148, 85], "wm": ["Alex English", "DEN", 2401, 85], "ae": [["Larry Bird", "BOS", 2698, 97], ["Dominique Wilkins", "ATL", 2535, 88], ["Kevin McHale", "BOS", 2452, 98], ["Adrian Dantley", "DET", 2050, 96], ["Isiah Thomas", "DET", 2032, 96]], "aw": [["Dale Ellis", "SEA", 2394, 96], ["Magic Johnson", "LAL", 2301, 98], ["Tom Chambers", "SEA", 2231, 96], ["Kiki VanDeWeghe", "POR", 2221, 83], ["Xavier McDaniel", "SEA", 2174, 96]], "ebb": ["Michael Jordan", "CHI", 3041], "wbb": ["Alex English", "DEN", 2345], "ess": ["Larry Bird", "BOS", 622], "wss": ["James Worthy", "LAL", 425], "sh": [["Kevin McHale", "BOS", "E", 336.7], ["Larry Bird", "BOS", "E", 279.0], ["Charles Barkley", "PHI", "E", 223.4], ["Kiki VanDeWeghe", "POR", "W", 211.8], ["Dale Ellis", "SEA", "W", 196.6]], "de": ["James Worthy", "LAL", "W", 54.0]},
-      {"s": "1987-88", "em": ["Michael Jordan", "CHI", 3231, 92], "wm": ["Karl Malone", "UTA", 2595, 93], "ae": [["Dominique Wilkins", "ATL", 2771, 90], ["Larry Bird", "BOS", 2692, 93], ["Charles Barkley", "PHI", 2264, 80], ["Isiah Thomas", "DET", 2081, 104], ["Kevin McHale", "BOS", 1878, 81]], "aw": [["Mark Aguirre", "DAL", 2299, 94], ["Clyde Drexler", "POR", 2273, 85], ["Alex English", "DEN", 2267, 91], ["Byron Scott", "LAL", 2224, 105], ["Dale Ellis", "SEA", 2042, 80]], "ebb": ["Michael Jordan", "CHI", 2868], "wbb": ["Karl Malone", "UTA", 2268], "ess": ["Isiah Thomas", "DET", 504], "wss": ["James Worthy", "LAL", 506], "sh": [["Larry Bird", "BOS", "E", 297.0], ["Charles Barkley", "PHI", "E", 283.3], ["Michael Jordan", "CHI", "E", 252.9], ["Kevin McHale", "BOS", "E", 220.7], ["Byron Scott", "LAL", "W", 195.7]], "de": ["Kevin McHale", "BOS", "E", 68.7]},
-      {"s": "1988-89", "em": ["Michael Jordan", "CHI", 3224, 98], "wm": ["Dale Ellis", "SEA", 2436, 90], "ae": [["Dominique Wilkins", "ATL", 2235, 85], ["Charles Barkley", "PHI", 2118, 82], ["Patrick Ewing", "NYK", 1994, 89], ["Terry Cummings", "MIL", 1893, 85], ["Kevin McHale", "BOS", 1815, 81]], "aw": [["Karl Malone", "UTA", 2418, 83], ["Chris Mullin", "GSW", 2411, 90], ["Tom Chambers", "PHX", 2397, 93], ["Alex English", "DEN", 2253, 85], ["Clyde Drexler", "POR", 2206, 81]], "ebb": ["Michael Jordan", "CHI", 2633], "wbb": ["Karl Malone", "UTA", 2326], "ess": ["Michael Jordan", "CHI", 591], "wss": ["James Worthy", "LAL", 372], "sh": [["Michael Jordan", "CHI", "E", 266.2], ["Charles Barkley", "PHI", "E", 241.9], ["Dale Ellis", "SEA", "W", 227.0], ["Mark Price", "CLE", "E", 206.7], ["Patrick Ewing", "NYK", "E", 187.1]], "de": ["James Worthy", "LAL", "W", 46.2]},
-      {"s": "1989-90", "em": ["Michael Jordan", "CHI", 3340, 98], "wm": ["Karl Malone", "UTA", 2666, 87], "ae": [["Patrick Ewing", "NYK", 2641, 92], ["Charles Barkley", "PHI", 2236, 89], ["Dominique Wilkins", "ATL", 2138, 80], ["Reggie Miller", "IND", 2078, 85], ["Larry Bird", "BOS", 1942, 80]], "aw": [["Tom Chambers", "PHX", 2556, 97], ["David Robinson", "SAS", 2236, 92], ["Clyde Drexler", "POR", 2152, 94], ["Hakeem Olajuwon", "HOU", 2069, 86], ["Terry Cummings", "SAS", 2067, 91]], "ebb": ["Michael Jordan", "CHI", 2753], "wbb": ["Karl Malone", "UTA", 2540], "ess": ["Michael Jordan", "CHI", 587], "wss": ["Clyde Drexler", "POR", 449], "sh": [["Michael Jordan", "CHI", "E", 297.8], ["Chris Mullin", "GSW", "W", 276.5], ["Reggie Miller", "IND", "E", 274.6], ["Charles Barkley", "PHI", "E", 270.3], ["Karl Malone", "UTA", "W", 253.8]], "de": ["Michael Jordan", "CHI", "E", 48.5]},
-      {"s": "1990-91", "em": ["Michael Jordan", "CHI", 3109, 99], "wm": ["Karl Malone", "UTA", 2649, 91], "ae": [["Dominique Wilkins", "ATL", 2205, 86], ["Patrick Ewing", "NYK", 2204, 84], ["Charles Barkley", "PHI", 2048, 75], ["Reggie Miller", "IND", 1963, 87], ["Joe Dumars", "DET", 1938, 95]], "aw": [["Chris Mullin", "GSW", 2297, 90], ["David Robinson", "SAS", 2204, 86], ["Clyde Drexler", "POR", 2114, 98], ["Tim Hardaway", "GSW", 2108, 91], ["James Worthy", "LAL", 2049, 96]], "ebb": ["Michael Jordan", "CHI", 2580], "wbb": ["Karl Malone", "UTA", 2382], "ess": ["Michael Jordan", "CHI", 529], "wss": ["Magic Johnson", "LAL", 414], "sh": [["Michael Jordan", "CHI", "E", 275.2], ["Reggie Miller", "IND", "E", 265.0], ["Chris Mullin", "GSW", "W", 251.2], ["Charles Barkley", "PHI", "E", 209.1], ["Terry Porter", "POR", "W", 205.2]], "de": ["Michael Jordan", "CHI", "E", 43.2]},
-      {"s": "1991-92", "em": ["Michael Jordan", "CHI", 3163, 102], "wm": ["Karl Malone", "UTA", 2737, 97], "ae": [["Patrick Ewing", "NYK", 2242, 94], ["Scottie Pippen", "CHI", 2148, 104], ["Reggie Lewis", "BOS", 1983, 92], ["Brad Daugherty", "CLE", 1932, 90], ["Glen Rice", "MIA", 1822, 82]], "aw": [["Clyde Drexler", "POR", 2456, 97], ["Chris Mullin", "GSW", 2145, 85], ["Tim Hardaway", "GSW", 1991, 85], ["Jeff Malone", "UTA", 1970, 97], ["Terry Porter", "POR", 1935, 103]], "ebb": ["Michael Jordan", "CHI", 2404], "wbb": ["Karl Malone", "UTA", 2272], "ess": ["Michael Jordan", "CHI", 759], "wss": ["Clyde Drexler", "POR", 553], "sh": [["Chris Mullin", "GSW", "W", 211.8], ["Reggie Miller", "IND", "E", 207.2], ["Dražen Petrović", "NJN", "E", 189.0], ["Michael Jordan", "CHI", "E", 186.9], ["Jeff Hornacek", "PHX", "W", 183.6]], "de": ["Terry Porter", "POR", "W", 58.2]},
-      {"s": "1992-93", "em": ["Michael Jordan", "CHI", 3207, 97], "wm": ["Charles Barkley", "PHX", 2582, 100], "ae": [["Patrick Ewing", "NYK", 2341, 96], ["Dominique Wilkins", "ATL", 2211, 74], ["Larry Johnson", "CHA", 1988, 91], ["Shaquille O'Neal", "ORL", 1893, 81], ["Scottie Pippen", "CHI", 1891, 100]], "aw": [["Hakeem Olajuwon", "HOU", 2448, 94], ["Karl Malone", "UTA", 2337, 87], ["David Robinson", "SAS", 2147, 92], ["Danny Manning", "LAC", 1891, 84], ["Dan Majerle", "PHX", 1758, 106]], "ebb": ["Michael Jordan", "CHI", 2541], "wbb": ["Karl Malone", "UTA", 2217], "ess": ["Michael Jordan", "CHI", 666], "wss": ["Charles Barkley", "PHX", 638], "sh": [["Reggie Miller", "IND", "E", 190.9], ["Dražen Petrović", "NJN", "E", 176.8], ["Karl Malone", "UTA", "W", 174.9], ["Brad Daugherty", "CLE", "E", 169.8], ["Kenny Smith", "HOU", "W", 163.3]], "de": ["B.J. Armstrong", "CHI", "E", 34.9]},
-      {"s": "1993-94", "em": ["Patrick Ewing", "NYK", 2486, 104], "wm": ["Hakeem Olajuwon", "HOU", 2848, 103], "ae": [["Shaquille O'Neal", "ORL", 2439, 84], ["Reggie Miller", "IND", 1945, 95], ["Scottie Pippen", "CHI", 1815, 82], ["Glen Rice", "MIA", 1773, 86], ["Kevin Willis", "ATL", 1665, 91]], "aw": [["Karl Malone", "UTA", 2497, 98], ["David Robinson", "SAS", 2463, 84], ["Mitch Richmond", "SAC", 1823, 78], ["Latrell Sprewell", "GSW", 1788, 85], ["Clifford Robinson", "POR", 1712, 86]], "ebb": ["Shaquille O'Neal", "ORL", 2377], "wbb": ["David Robinson", "SAS", 2383], "ess": ["Patrick Ewing", "NYK", 547], "wss": ["Hakeem Olajuwon", "HOU", 664], "sh": [["Reggie Miller", "IND", "E", 231.8], ["Shaquille O'Neal", "ORL", "E", 216.2], ["Hakeem Olajuwon", "HOU", "W", 149.1], ["Dale Ellis", "SAS", "W", 146.2], ["John Stockton", "UTA", "W", 144.5]], "de": ["Hakeem Olajuwon", "HOU", "W", 73.7]},
-      {"s": "1994-95", "em": ["Shaquille O'Neal", "ORL", 2854, 100], "wm": ["Hakeem Olajuwon", "HOU", 2730, 94], "ae": [["Patrick Ewing", "NYK", 2095, 90], ["Anfernee Hardaway", "ORL", 2025, 98], ["Reggie Miller", "IND", 2022, 98], ["Scottie Pippen", "CHI", 1870, 89], ["Glen Rice", "MIA", 1831, 82]], "aw": [["David Robinson", "SAS", 2618, 96], ["Karl Malone", "UTA", 2338, 87], ["Clyde Drexler", "2TM", 2103, 98], ["Jamal Mashburn", "DAL", 1926, 80], ["Mitch Richmond", "SAC", 1867, 82]], "ebb": ["Shaquille O'Neal", "ORL", 2315], "wbb": ["David Robinson", "SAS", 2238], "ess": ["Shaquille O'Neal", "ORL", 539], "wss": ["Hakeem Olajuwon", "HOU", 725], "sh": [["Dana Barros", "PHI", "E", 217.0], ["Detlef Schrempf", "SEA", "W", 191.6], ["John Stockton", "UTA", "W", 182.0], ["Jeff Hornacek", "UTA", "W", 158.6], ["Reggie Miller", "IND", "E", 156.2]], "de": ["Hakeem Olajuwon", "HOU", "W", 44.6]},
-      {"s": "1995-96", "em": ["Michael Jordan", "CHI", 3043, 100], "wm": ["Karl Malone", "UTA", 2583, 100], "ae": [["Anfernee Hardaway", "ORL", 2060, 94], ["Patrick Ewing", "NYK", 1883, 84], ["Scottie Pippen", "CHI", 1801, 95], ["Juwan Howard", "WAS", 1789, 81], ["Shaquille O'Neal", "ORL", 1744, 66]], "aw": [["David Robinson", "SAS", 2287, 92], ["Hakeem Olajuwon", "HOU", 2115, 80], ["Gary Payton", "SEA", 1997, 102], ["Shawn Kemp", "SEA", 1968, 99], ["Mitch Richmond", "SAC", 1956, 85]], "ebb": ["Michael Jordan", "CHI", 2491], "wbb": ["Karl Malone", "UTA", 2106], "ess": ["Michael Jordan", "CHI", 552], "wss": ["Karl Malone", "UTA", 477], "sh": [["John Stockton", "UTA", "W", 176.1], ["Michael Jordan", "CHI", "E", 173.0], ["Cedric Ceballos", "LAL", "W", 160.3], ["Reggie Miller", "IND", "E", 148.2], ["Jeff Hornacek", "UTA", "W", 148.1]], "de": ["Shawn Kemp", "SEA", "W", 55.9]},
-      {"s": "1996-97", "em": ["Michael Jordan", "CHI", 3021, 101], "wm": ["Karl Malone", "UTA", 2768, 102], "ae": [["Glen Rice", "CHA", 2198, 82], ["Scottie Pippen", "CHI", 2021, 101], ["Tim Hardaway", "MIA", 1962, 98], ["Patrick Ewing", "NYK", 1954, 87], ["Grant Hill", "DET", 1828, 85]], "aw": [["Hakeem Olajuwon", "HOU", 2180, 94], ["Mitch Richmond", "SAC", 2095, 81], ["Gary Payton", "SEA", 2070, 94], ["Latrell Sprewell", "GSW", 1938, 80], ["Shawn Kemp", "SEA", 1775, 93]], "ebb": ["Michael Jordan", "CHI", 2431], "wbb": ["Karl Malone", "UTA", 2249], "ess": ["Michael Jordan", "CHI", 590], "wss": ["Karl Malone", "UTA", 519], "sh": [["Karl Malone", "UTA", "W", 230.0], ["Glen Rice", "CHA", "E", 214.9], ["Chris Mullin", "GSW", "W", 201.2], ["John Stockton", "UTA", "W", 192.8], ["Michael Jordan", "CHI", "E", 153.9]], "de": ["Hakeem Olajuwon", "HOU", "W", 55.8]},
-      {"s": "1997-98", "em": ["Michael Jordan", "CHI", 3037, 103], "wm": ["Karl Malone", "UTA", 2716, 101], "ae": [["Glen Rice", "CHA", 2031, 91], ["Reggie Miller", "IND", 1897, 97], ["Antoine Walker", "BOS", 1840, 82], ["Allen Iverson", "PHI", 1758, 80], ["Allan Houston", "NYK", 1720, 92]], "aw": [["Shaquille O'Neal", "LAL", 2095, 73], ["Tim Duncan", "SAS", 1917, 91], ["Shareef Abdur-Rahim", "VAN", 1829, 82], ["Gary Payton", "SEA", 1811, 92], ["Michael Finley", "DAL", 1763, 82]], "ebb": ["Michael Jordan", "CHI", 2357], "wbb": ["Karl Malone", "UTA", 2190], "ess": ["Michael Jordan", "CHI", 680], "wss": ["Karl Malone", "UTA", 526], "sh": [["Reggie Miller", "IND", "E", 200.0], ["Karl Malone", "UTA", "W", 197.6], ["Tim Duncan", "SAS", "W", 165.1], ["Dale Ellis", "SEA", "W", 144.3], ["Eddie Jones", "LAL", "W", 142.6]], "de": ["Shaquille O'Neal", "LAL", "W", 36.7]},
-      {"s": "1998-99", "em": ["Allen Iverson", "PHI", 1512, 56], "wm": ["Shaquille O'Neal", "LAL", 1502, 57], "ae": [["Reggie Miller", "IND", 1183, 63], ["Allan Houston", "NYK", 1183, 70], ["Grant Hill", "DET", 1150, 55], ["Alonzo Mourning", "MIA", 1032, 51], ["Latrell Sprewell", "NYK", 1013, 57]], "aw": [["Tim Duncan", "SAS", 1479, 67], ["Karl Malone", "UTA", 1404, 60], ["Kobe Bryant", "LAL", 1154, 58], ["Shareef Abdur-Rahim", "VAN", 1152, 50], ["Gary Payton", "SEA", 1084, 50]], "ebb": ["Allen Iverson", "PHI", 1284], "wbb": ["Shaquille O'Neal", "LAL", 1289], "ess": ["Latrell Sprewell", "NYK", 407], "wss": ["Tim Duncan", "SAS", 395], "sh": [["Shaquille O'Neal", "LAL", "W", 117.5], ["Reggie Miller", "IND", "E", 98.4], ["Karl Malone", "UTA", "W", 85.9], ["Chris Mullin", "IND", "E", 84.7], ["Hakeem Olajuwon", "HOU", "W", 83.0]], "de": ["Tim Duncan", "SAS", "W", 35.2]},
-      {"s": "1999-00", "em": ["Allen Iverson", "PHI", 2251, 80], "wm": ["Shaquille O'Neal", "LAL", 3051, 102], "ae": [["Vince Carter", "TOR", 2165, 85], ["Jerry Stackhouse", "DET", 2013, 85], ["Reggie Miller", "IND", 1997, 103], ["Jalen Rose", "IND", 1936, 103], ["Alonzo Mourning", "MIA", 1934, 89]], "aw": [["Karl Malone", "UTA", 2367, 92], ["Gary Payton", "SEA", 2111, 87], ["Chris Webber", "SAC", 1956, 80], ["Kobe Bryant", "LAL", 1950, 88], ["Kevin Garnett", "MIN", 1932, 85]], "ebb": ["Vince Carter", "TOR", 2107], "wbb": ["Shaquille O'Neal", "LAL", 2344], "ess": ["Reggie Miller", "IND", 527], "wss": ["Shaquille O'Neal", "LAL", 707], "sh": [["Alonzo Mourning", "MIA", "E", 172.8], ["Shaquille O'Neal", "LAL", "W", 167.4], ["Karl Malone", "UTA", "W", 158.2], ["Allan Houston", "NYK", "E", 143.8], ["Reggie Miller", "IND", "E", 141.3]], "de": ["Reggie Miller", "IND", "E", 60.0]},
-      {"s": "2000-01", "em": ["Allen Iverson", "PHI", 2930, 93], "wm": ["Shaquille O'Neal", "LAL", 2612, 90], "ae": [["Vince Carter", "TOR", 2397, 87], ["Jerry Stackhouse", "DET", 2380, 80], ["Ray Allen", "MIL", 2258, 100], ["Tracy McGrady", "ORL", 2200, 81], ["Paul Pierce", "BOS", 2071, 82]], "aw": [["Kobe Bryant", "LAL", 2409, 84], ["Tim Duncan", "SAS", 2137, 95], ["Chris Webber", "SAC", 2084, 78], ["Antawn Jamison", "GSW", 2044, 82], ["Dirk Nowitzki", "DAL", 2018, 92]], "ebb": ["Jerry Stackhouse", "DET", 2380], "wbb": ["Shaquille O'Neal", "LAL", 2125], "ess": ["Allen Iverson", "PHI", 723], "wss": ["Shaquille O'Neal", "LAL", 487], "sh": [["Ray Allen", "MIL", "E", 240.3], ["Dirk Nowitzki", "DAL", "W", 177.1], ["Peja Stojaković", "SAC", "W", 148.8], ["Steve Nash", "DAL", "W", 138.0], ["Rashard Lewis", "SEA", "W", 133.8]], "de": ["Ray Allen", "MIL", "E", 70.6]},
-      {"s": "2001-02", "em": ["Paul Pierce", "BOS", 2538, 98], "wm": ["Kobe Bryant", "LAL", 2525, 99], "ae": [["Antoine Walker", "BOS", 2148, 97], ["Tracy McGrady", "ORL", 2071, 80], ["Allen Iverson", "PHI", 2033, 65], ["Jerry Stackhouse", "DET", 1805, 86], ["Jalen Rose", "2TM", 1696, 83]], "aw": [["Shaquille O'Neal", "LAL", 2363, 86], ["Tim Duncan", "SAS", 2337, 91], ["Dirk Nowitzki", "DAL", 2006, 84], ["Gary Payton", "SEA", 1926, 87], ["Karl Malone", "UTA", 1868, 84]], "ebb": ["Paul Pierce", "BOS", 2144], "wbb": ["Tim Duncan", "SAS", 2089], "ess": ["Paul Pierce", "BOS", 394], "wss": ["Shaquille O'Neal", "LAL", 541], "sh": [["Brent Barry", "SEA", "W", 202.2], ["Steve Nash", "DAL", "W", 188.4], ["Wally Szczerbiak", "MIN", "W", 185.1], ["Ray Allen", "MIL", "E", 181.3], ["Dirk Nowitzki", "DAL", "W", 174.7]], "de": ["Shaquille O'Neal", "LAL", "W", 36.4]},
-      {"s": "2002-03", "em": ["Allen Iverson", "PHI", 2642, 94], "wm": ["Kobe Bryant", "LAL", 2846, 94], "ae": [["Tracy McGrady", "ORL", 2629, 82], ["Paul Pierce", "BOS", 2319, 89], ["Richard Hamilton", "DET", 1995, 99], ["Jason Kidd", "NJN", 1897, 100], ["Jamal Mashburn", "NOH", 1871, 86]], "aw": [["Tim Duncan", "SAS", 2477, 105], ["Dirk Nowitzki", "DAL", 2441, 97], ["Shaquille O'Neal", "LAL", 2165, 79], ["Kevin Garnett", "MIN", 2045, 88], ["Stephon Marbury", "PHX", 1938, 87]], "ebb": ["Tracy McGrady", "ORL", 2407], "wbb": ["Kobe Bryant", "LAL", 2461], "ess": ["Jason Kidd", "NJN", 402], "wss": ["Tim Duncan", "SAS", 593], "sh": [["Peja Stojaković", "SAC", "W", 173.1], ["Shaquille O'Neal", "LAL", "W", 170.1], ["Dirk Nowitzki", "DAL", "W", 169.5], ["Matt Harpring", "UTA", "W", 155.1], ["Michael Redd", "MIL", "E", 151.1]], "de": ["Dirk Nowitzki", "DAL", "W", 48.1]},
-      {"s": "2003-04", "em": ["Paul Pierce", "BOS", 1919, 84], "wm": ["Kevin Garnett", "MIN", 2425, 100], "ae": [["Tracy McGrady", "ORL", 1878, 67], ["Jermaine O'Neal", "IND", 1873, 94], ["Richard Hamilton", "DET", 1869, 101], ["Michael Redd", "MIL", 1866, 87], ["Richard Jefferson", "NJN", 1733, 93]], "aw": [["Peja Stojakovic", "SAC", 2174, 93], ["Kobe Bryant", "LAL", 2096, 87], ["Shaquille O'Neal", "LAL", 1912, 89], ["Sam Cassell", "MIN", 1868, 97], ["Dirk Nowitzki", "DAL", 1813, 82]], "ebb": ["Tracy McGrady", "ORL", 1878], "wbb": ["Kevin Garnett", "MIN", 1987], "ess": ["Richard Hamilton", "DET", 494], "wss": ["Kobe Bryant", "LAL", 539], "sh": [["Peja Stojakovic", "SAC", "W", 302.1], ["Sam Cassell", "MIN", "W", 163.0], ["Yao Ming", "HOU", "W", 152.4], ["Kevin Garnett", "MIN", "W", 150.0], ["Antawn Jamison", "DAL", "W", 146.1]], "de": ["Sam Cassell", "MIN", "W", 36.0]},
-      {"s": "2004-05", "em": ["Allen Iverson", "PHI", 2458, 80], "wm": ["Amar'e Stoudemire", "PHX", 2529, 95], "ae": [["Gilbert Arenas", "WAS", 2274, 90], ["Dwyane Wade", "MIA", 2238, 91], ["LeBron James", "CLE", 2175, 80], ["Vince Carter", "2TM", 1993, 81], ["Paul Pierce", "BOS", 1929, 89]], "aw": [["Dirk Nowitzki", "DAL", 2340, 91], ["Tracy McGrady", "HOU", 2218, 85], ["Ray Allen", "SEA", 2158, 89], ["Tim Duncan", "SAS", 1884, 89], ["Shawn Marion", "PHX", 1833, 96]], "ebb": ["Allen Iverson", "PHI", 2302], "wbb": ["Amar'e Stoudemire", "PHX", 2080], "ess": ["Richard Hamilton", "DET", 501], "wss": ["Tim Duncan", "SAS", 542], "sh": [["Amar'e Stoudemire", "PHX", "W", 221.2], ["Yao Ming", "HOU", "W", 172.7], ["Steve Nash", "PHX", "W", 151.4], ["Mike Miller", "MEM", "W", 147.1], ["Damon Jones", "MIA", "E", 140.7]], "de": ["Manu Ginóbili", "SAS", "W", 57.8]},
-      {"s": "2005-06", "em": ["LeBron James", "CLE", 2878, 92], "wm": ["Kobe Bryant", "LAL", 3027, 87], "ae": [["Dwyane Wade", "MIA", 2694, 98], ["Gilbert Arenas", "WAS", 2550, 86], ["Allen Iverson", "PHI", 2377, 72], ["Vince Carter", "NJN", 2237, 90], ["Michael Redd", "MIL", 2164, 85]], "aw": [["Dirk Nowitzki", "DAL", 2771, 104], ["Elton Brand", "LAC", 2258, 91], ["Carmelo Anthony", "DEN", 2227, 85], ["Shawn Marion", "PHX", 2176, 101], ["Ray Allen", "SEA", 1955, 78]], "ebb": ["LeBron James", "CLE", 2478], "wbb": ["Kobe Bryant", "LAL", 2832], "ess": ["Dwyane Wade", "MIA", 654], "wss": ["Dirk Nowitzki", "DAL", 620], "sh": [["Steve Nash", "PHX", "W", 231.1], ["Shawn Marion", "PHX", "W", 207.8], ["Dirk Nowitzki", "DAL", "W", 178.1], ["Ray Allen", "SEA", "W", 176.3], ["Elton Brand", "LAC", "W", 157.6]], "de": ["Steve Nash", "PHX", "W", 46.5]},
-      {"s": "2006-07", "em": ["LeBron James", "CLE", 2633, 98], "wm": ["Kobe Bryant", "LAL", 2594, 82], "ae": [["Vince Carter", "NJN", 2338, 94], ["Gilbert Arenas", "WAS", 2105, 74], ["Ben Gordon", "CHI", 1957, 92], ["Richard Hamilton", "DET", 1786, 91], ["Luol Deng", "CHI", 1762, 92]], "aw": [["Tim Duncan", "SAS", 2043, 100], ["Dirk Nowitzki", "DAL", 2034, 84], ["Carmelo Anthony", "DEN", 2015, 70], ["Carlos Boozer", "UTA", 1949, 91], ["Amar'e Stoudemire", "PHX", 1924, 92]], "ebb": ["LeBron James", "CLE", 2132], "wbb": ["Kobe Bryant", "LAL", 2430], "ess": ["LeBron James", "CLE", 501], "wss": ["Tim Duncan", "SAS", 444], "sh": [["Steve Nash", "PHX", "W", 248.6], ["Amar'e Stoudemire", "PHX", "W", 207.3], ["Dirk Nowitzki", "DAL", "W", 182.7], ["Shawn Marion", "PHX", "W", 151.4], ["Carlos Boozer", "UTA", "W", 149.9]], "de": ["Carlos Boozer", "UTA", "W", 39.0]},
-      {"s": "2007-08", "em": ["LeBron James", "CLE", 2616, 88], "wm": ["Kobe Bryant", "LAL", 2956, 103], "ae": [["Paul Pierce", "BOS", 2081, 106], ["Joe Johnson", "ATL", 1919, 89], ["Dwight Howard", "ORL", 1884, 92], ["Kevin Garnett", "BOS", 1867, 97], ["Richard Jefferson", "NJN", 1857, 82]], "aw": [["Allen Iverson", "DEN", 2262, 86], ["Amar'e Stoudemire", "PHX", 2105, 84], ["Carmelo Anthony", "DEN", 2068, 81], ["Chris Paul", "NOH", 1973, 92], ["Dirk Nowitzki", "DAL", 1951, 82]], "ebb": ["LeBron James", "CLE", 2250], "wbb": ["Kobe Bryant", "LAL", 2323], "ess": ["Kevin Garnett", "BOS", 530], "wss": ["Kobe Bryant", "LAL", 633], "sh": [["Amar'e Stoudemire", "PHX", "W", 291.3], ["Steve Nash", "PHX", "W", 209.7], ["Carlos Boozer", "UTA", "W", 155.7], ["Mike Miller", "MEM", "W", 146.8], ["Mike Dunleavy", "IND", "E", 133.4]], "de": ["Kobe Bryant", "LAL", "W", 38.1]},
-      {"s": "2008-09", "em": ["LeBron James", "CLE", 2798, 95], "wm": ["Kobe Bryant", "LAL", 2896, 105], "ae": [["Dwyane Wade", "MIA", 2590, 86], ["Dwight Howard", "ORL", 2091, 102], ["Paul Pierce", "BOS", 1952, 95], ["Ben Gordon", "CHI", 1869, 89], ["Joe Johnson", "ATL", 1868, 90]], "aw": [["Dirk Nowitzki", "DAL", 2362, 91], ["Pau Gasol", "LAL", 1948, 104], ["Carmelo Anthony", "DEN", 1939, 82], ["Brandon Roy", "POR", 1925, 84], ["Kevin Durant", "OKC", 1871, 74]], "ebb": ["Dwyane Wade", "MIA", 2386], "wbb": ["Kobe Bryant", "LAL", 2201], "ess": ["LeBron James", "CLE", 494], "wss": ["Kobe Bryant", "LAL", 695], "sh": [["Pau Gasol", "LAL", "W", 175.4], ["Yao Ming", "HOU", "W", 173.4], ["Ray Allen", "BOS", "E", 169.5], ["Nenê", "DEN", "W", 150.9], ["Steve Nash", "PHX", "W", 140.2]], "de": ["Pau Gasol", "LAL", "W", 46.9]},
-      {"s": "2009-10", "em": ["LeBron James", "CLE", 2578, 87], "wm": ["Kobe Bryant", "LAL", 2641, 96], "ae": [["Dwyane Wade", "MIA", 2211, 82], ["Joe Johnson", "ATL", 1816, 87], ["Dwight Howard", "ORL", 1757, 96], ["Derrick Rose", "CHI", 1753, 83], ["Paul Pierce", "BOS", 1747, 95]], "aw": [["Kevin Durant", "OKC", 2622, 88], ["Amar'e Stoudemire", "PHX", 2251, 98], ["Dirk Nowitzki", "DAL", 2187, 87], ["Carmelo Anthony", "DEN", 2127, 75], ["Carlos Boozer", "UTA", 1716, 88]], "ebb": ["LeBron James", "CLE", 2258], "wbb": ["Kevin Durant", "OKC", 2472], "ess": ["Paul Pierce", "BOS", 451], "wss": ["Kobe Bryant", "LAL", 671], "sh": [["Amar'e Stoudemire", "PHX", "W", 172.1], ["Steve Nash", "PHX", "W", 169.3], ["Kevin Durant", "OKC", "W", 164.5], ["David Lee", "NYK", "E", 151.0], ["Carlos Boozer", "UTA", "W", 147.1]], "de": ["Jason Richardson", "PHX", "W", 47.9]},
-      {"s": "2010-11", "em": ["LeBron James", "MIA", 2608, 100], "wm": ["Kevin Durant", "OKC", 2648, 95], "ae": [["Derrick Rose", "CHI", 2460, 97], ["Dwyane Wade", "MIA", 2456, 97], ["Amar'e Stoudemire", "NYK", 2029, 82], ["Dwight Howard", "ORL", 1946, 84], ["Chris Bosh", "MIA", 1828, 98]], "aw": [["Kobe Bryant", "LAL", 2306, 92], ["Dirk Nowitzki", "DAL", 2263, 94], ["Russell Westbrook", "OKC", 2198, 99], ["Monta Ellis", "GSW", 1929, 80], ["LaMarcus Aldridge", "POR", 1894, 87]], "ebb": ["LeBron James", "MIA", 2111], "wbb": ["Kevin Durant", "OKC", 2161], "ess": ["Dwyane Wade", "MIA", 515], "wss": ["Dirk Nowitzki", "DAL", 582], "sh": [["Dirk Nowitzki", "DAL", "W", 177.6], ["Ray Allen", "BOS", "E", 163.5], ["Nenê", "DEN", "W", 146.8], ["Paul Pierce", "BOS", "E", 144.2], ["Stephen Curry", "GSW", "W", 139.7]], "de": ["Dirk Nowitzki", "DAL", "W", 62.9]},
-      {"s": "2011-12", "em": ["LeBron James", "MIA", 2380, 85], "wm": ["Kevin Durant", "OKC", 2420, 86], "ae": [["Dwyane Wade", "MIA", 1607, 72], ["Paul Pierce", "BOS", 1558, 81], ["Carmelo Anthony", "NYK", 1384, 60], ["Danny Granger", "IND", 1346, 73], ["Kevin Garnett", "BOS", 1331, 80]], "aw": [["Russell Westbrook", "OKC", 2019, 86], ["Kobe Bryant", "LAL", 1976, 70], ["Blake Griffin", "LAC", 1578, 77], ["Dirk Nowitzki", "DAL", 1449, 66], ["Kevin Love", "MIN", 1432, 55]], "ebb": ["LeBron James", "MIA", 1683], "wbb": ["Kevin Durant", "OKC", 1850], "ess": ["LeBron James", "MIA", 697], "wss": ["Kevin Durant", "OKC", 570], "sh": [["Kevin Durant", "OKC", "W", 203.8], ["LeBron James", "MIA", "E", 176.2], ["James Harden", "OKC", "W", 139.2], ["Tyson Chandler", "NYK", "E", 123.4], ["Steve Nash", "PHX", "W", 122.5]], "de": ["Kevin Durant", "OKC", "W", 87.8]},
-      {"s": "2012-13", "em": ["LeBron James", "MIA", 2632, 99], "wm": ["Kevin Durant", "OKC", 2619, 92], "ae": [["Carmelo Anthony", "NYK", 2266, 79], ["Dwyane Wade", "MIA", 1812, 91], ["Paul George", "IND", 1742, 98], ["Monta Ellis", "MIL", 1634, 86], ["Deron Williams", "BKN", 1620, 85]], "aw": [["James Harden", "HOU", 2181, 84], ["Kobe Bryant", "LAL", 2133, 78], ["Stephen Curry", "GSW", 2067, 90], ["Russell Westbrook", "OKC", 1951, 84], ["Tony Parker", "SAS", 1773, 87]], "ebb": ["LeBron James", "MIA", 2036], "wbb": ["Kevin Durant", "OKC", 2280], "ess": ["LeBron James", "MIA", 596], "wss": ["Tony Parker", "SAS", 432], "sh": [["LeBron James", "MIA", "E", 296.9], ["Kevin Durant", "OKC", "W", 293.7], ["Stephen Curry", "GSW", "W", 159.4], ["Serge Ibaka", "OKC", "W", 153.4], ["Kyle Korver", "ATL", "E", 124.7]], "de": ["LeBron James", "MIA", "E", 46.2]},
-      {"s": "2013-14", "em": ["LeBron James", "MIA", 2637, 97], "wm": ["Kevin Durant", "OKC", 3156, 100], "ae": [["Paul George", "IND", 2166, 99], ["Carmelo Anthony", "NYK", 2112, 77], ["DeMar DeRozan", "TOR", 1958, 86], ["John Wall", "WAS", 1762, 93], ["Al Jefferson", "CHA", 1650, 76]], "aw": [["Blake Griffin", "LAC", 2236, 93], ["Stephen Curry", "GSW", 2034, 85], ["James Harden", "HOU", 2012, 79], ["Kevin Love", "MIN", 2010, 77], ["Damian Lillard", "POR", 1947, 93]], "ebb": ["Carmelo Anthony", "NYK", 2112], "wbb": ["Kevin Durant", "OKC", 2593], "ess": ["LeBron James", "MIA", 548], "wss": ["Kevin Durant", "OKC", 563], "sh": [["LeBron James", "MIA", "E", 294.4], ["Kevin Durant", "OKC", "W", 285.8], ["Stephen Curry", "GSW", "W", 196.1], ["Dirk Nowitzki", "DAL", "W", 173.9], ["Kyle Korver", "ATL", "E", 143.8]], "de": ["LeBron James", "MIA", "E", 83.5]},
-      {"s": "2014-15", "em": ["LeBron James", "CLE", 2344, 89], "wm": ["James Harden", "HOU", 2679, 98], "ae": [["Kyrie Irving", "CLE", 1875, 88], ["Pau Gasol", "CHI", 1590, 88], ["Jimmy Butler III", "CHI", 1576, 77], ["John Wall", "WAS", 1509, 86], ["Paul Millsap", "ATL", 1461, 89]], "aw": [["Stephen Curry", "GSW", 2494, 101], ["Klay Thompson", "GSW", 2059, 98], ["Russell Westbrook", "OKC", 1886, 67], ["Chris Paul", "LAC", 1829, 94], ["Damian Lillard", "POR", 1828, 87]], "ebb": ["LeBron James", "CLE", 1743], "wbb": ["James Harden", "HOU", 2217], "ess": ["LeBron James", "CLE", 601], "wss": ["Stephen Curry", "GSW", 594], "sh": [["Stephen Curry", "GSW", "W", 294.7], ["Kyle Korver", "ATL", "E", 204.6], ["JJ Redick", "LAC", "W", 178.2], ["Klay Thompson", "GSW", "W", 172.4], ["Chris Paul", "LAC", "W", 160.3]], "de": ["Stephen Curry", "GSW", "W", 74.4]},
-      {"s": "2015-16", "em": ["LeBron James", "CLE", 2472, 97], "wm": ["Stephen Curry", "GSW", 2827, 97], "ae": [["DeMar DeRozan", "TOR", 2248, 98], ["Paul George", "IND", 2065, 88], ["Kyle Lowry", "TOR", 2016, 97], ["Isaiah Thomas", "BOS", 1968, 88], ["Kemba Walker", "CHA", 1848, 88]], "aw": [["Kevin Durant", "OKC", 2540, 90], ["James Harden", "HOU", 2509, 87], ["Klay Thompson", "GSW", 2353, 104], ["Russell Westbrook", "OKC", 2346, 98], ["Damian Lillard", "POR", 2170, 86]], "ebb": ["LeBron James", "CLE", 1920], "wbb": ["James Harden", "HOU", 2376], "ess": ["LeBron James", "CLE", 552], "wss": ["Klay Thompson", "GSW", 582], "sh": [["Stephen Curry", "GSW", "W", 432.0], ["Kevin Durant", "OKC", "W", 257.3], ["Klay Thompson", "GSW", "W", 190.6], ["Kawhi Leonard", "SAS", "W", 176.3], ["JJ Redick", "LAC", "W", 172.9]], "de": ["Klay Thompson", "GSW", "W", 52.6]},
-      {"s": "2016-17", "em": ["Isaiah Thomas", "BOS", 2548, 91], "wm": ["Russell Westbrook", "OKC", 2745, 86], "ae": [["LeBron James", "CLE", 2545, 92], ["Kyrie Irving", "CLE", 2282, 90], ["DeMar DeRozan", "TOR", 2244, 84], ["John Wall", "WAS", 2158, 91], ["Bradley Beal", "WAS", 2102, 90]], "aw": [["James Harden", "HOU", 2669, 92], ["Stephen Curry", "GSW", 2476, 96], ["Kawhi Leonard", "SAS", 2220, 86], ["Damian Lillard", "POR", 2135, 79], ["Anthony Davis", "NOP", 2099, 75]], "ebb": ["Isaiah Thomas", "BOS", 2199], "wbb": ["Russell Westbrook", "OKC", 2558], "ess": ["LeBron James", "CLE", 591], "wss": ["Stephen Curry", "GSW", 477], "sh": [["Karl-Anthony Towns", "MIN", "W", 222.8], ["Stephen Curry", "GSW", "W", 214.1], ["Kevin Durant", "GSW", "W", 205.1], ["Nikola Jokić", "DEN", "W", 176.4], ["Isaiah Thomas", "BOS", "E", 172.0]], "de": ["Kevin Durant", "GSW", "W", 68.0]},
-      {"s": "2017-18", "em": ["LeBron James", "CLE", 2999, 104], "wm": ["James Harden", "HOU", 2677, 89], "ae": [["Giannis Antetokounmpo", "MIL", 2194, 82], ["DeMar DeRozan", "TOR", 2067, 90], ["Bradley Beal", "WAS", 1996, 88], ["Victor Oladipo", "IND", 1894, 82], ["Khris Middleton", "MIL", 1825, 89]], "aw": [["Kevin Durant", "GSW", 2400, 89], ["Anthony Davis", "NOP", 2381, 84], ["Russell Westbrook", "OKC", 2204, 86], ["Damian Lillard", "POR", 2036, 77], ["Donovan Mitchell", "UTA", 1884, 90]], "ebb": ["LeBron James", "CLE", 2251], "wbb": ["James Harden", "HOU", 2191], "ess": ["LeBron James", "CLE", 748], "wss": ["Kevin Durant", "GSW", 608], "sh": [["Karl-Anthony Towns", "MIN", "W", 220.2], ["Kevin Durant", "GSW", "W", 208.3], ["LeBron James", "CLE", "E", 205.3], ["Stephen Curry", "GSW", "W", 199.9], ["Anthony Davis", "NOP", "W", 149.4]], "de": ["LeBron James", "CLE", "E", 58.8]},
-      {"s": "2018-19", "em": ["Giannis Antetokounmpo", "MIL", 2377, 87], "wm": ["James Harden", "HOU", 3166, 89], "ae": [["Kawhi Leonard", "TOR", 2328, 84], ["Kemba Walker", "CHA", 2102, 82], ["Bradley Beal", "WAS", 2099, 82], ["Joel Embiid", "PHI", 1983, 75], ["Blake Griffin", "DET", 1890, 77]], "aw": [["Stephen Curry", "GSW", 2501, 91], ["Damian Lillard", "POR", 2497, 96], ["Kevin Durant", "GSW", 2414, 90], ["Paul George", "OKC", 2302, 82], ["Klay Thompson", "GSW", 2115, 99]], "ebb": ["Kemba Walker", "CHA", 2102], "wbb": ["James Harden", "HOU", 2818], "ess": ["Kawhi Leonard", "TOR", 732], "wss": ["Stephen Curry", "GSW", 620], "sh": [["Stephen Curry", "GSW", "W", 247.1], ["Kevin Durant", "GSW", "W", 191.4], ["Giannis Antetokounmpo", "MIL", "E", 166.7], ["Karl-Anthony Towns", "MIN", "W", 159.8], ["Clint Capela", "HOU", "W", 152.8]], "de": ["Kawhi Leonard", "TOR", "E", 60.0]},
-      {"s": "2019-20", "em": ["Giannis Antetokounmpo", "MIL", 2097, 72], "wm": ["James Harden", "HOU", 2690, 80], "ae": [["Jayson Tatum", "BOS", 1984, 83], ["Trae Young", "ATL", 1778, 60], ["Bradley Beal", "WAS", 1741, 57], ["Jimmy Butler III", "MIA", 1624, 79], ["Pascal Siakam", "TOR", 1558, 71]], "aw": [["LeBron James", "LAL", 2278, 88], ["Anthony Davis", "LAL", 2200, 83], ["Damian Lillard", "POR", 2075, 70], ["Luka Dončić", "DAL", 1945, 67], ["Nikola Jokić", "DEN", 1920, 92]], "ebb": ["Giannis Antetokounmpo", "MIL", 1857], "wbb": ["James Harden", "HOU", 2335], "ess": ["Jimmy Butler III", "MIA", 467], "wss": ["Anthony Davis", "LAL", 582], "sh": [["Duncan Robinson", "MIA", "E", 191.5], ["Damian Lillard", "POR", "W", 146.2], ["John Collins", "ATL", "E", 131.1], ["Rudy Gobert", "UTA", "W", 130.7], ["Khris Middleton", "MIL", "E", 119.8]], "de": ["Anthony Davis", "LAL", "W", 59.7]},
-      {"s": "2020-21", "em": ["Giannis Antetokounmpo", "MIL", 2351, 82], "wm": ["Devin Booker", "PHX", 2313, 89], "ae": [["Trae Young", "ATL", 2055, 79], ["Bradley Beal", "WAS", 2028, 65], ["Khris Middleton", "MIL", 1927, 91], ["Jayson Tatum", "BOS", 1845, 69], ["Julius Randle", "NYK", 1802, 76]], "aw": [["Nikola Jokić", "DEN", 2196, 82], ["Damian Lillard", "POR", 2134, 73], ["Luka Dončić", "DAL", 2080, 73], ["Stephen Curry", "GSW", 2015, 63], ["Paul George", "LAC", 1770, 73]], "ebb": ["Bradley Beal", "WAS", 1878], "wbb": ["Stephen Curry", "GSW", 2015], "ess": ["Giannis Antetokounmpo", "MIL", 634], "wss": ["Devin Booker", "PHX", 601], "sh": [["Stephen Curry", "GSW", "W", 227.7], ["Nikola Jokić", "DEN", "W", 211.0], ["Michael Porter Jr.", "DEN", "W", 176.0], ["Joe Harris", "BRK", "E", 157.3], ["Zach LaVine", "CHI", "E", 149.1]], "de": ["Deandre Ayton", "PHX", "W", 58.7]},
-      {"s": "2021-22", "em": ["Jayson Tatum", "BOS", 2661, 100], "wm": ["Luka Dončić", "DAL", 2322, 80], "ae": [["Giannis Antetokounmpo", "MIL", 2382, 79], ["Joel Embiid", "PHI", 2315, 78], ["Trae Young", "ATL", 2232, 81], ["DeMar DeRozan", "CHI", 2222, 81], ["Jaylen Brown", "BOS", 2113, 90]], "aw": [["Stephen Curry", "GSW", 2232, 86], ["Nikola Jokić", "DEN", 2159, 79], ["Devin Booker", "PHX", 2055, 78], ["Karl-Anthony Towns", "MIN", 1949, 80], ["Donovan Mitchell", "UTA", 1886, 73]], "ebb": ["Trae Young", "ATL", 2155], "wbb": ["Nikola Jokić", "DEN", 2004], "ess": ["Jayson Tatum", "BOS", 615], "wss": ["Stephen Curry", "GSW", 602], "sh": [["Nikola Jokić", "DEN", "W", 244.9], ["Karl-Anthony Towns", "MIN", "W", 163.3], ["Rudy Gobert", "UTA", "W", 145.3], ["Deandre Ayton", "PHX", "W", 144.0], ["Jarrett Allen", "CLE", "E", 142.5]], "de": ["Jordan Poole", "GSW", "W", 47.9]},
-      {"s": "2022-23", "em": ["Jayson Tatum", "BOS", 2768, 94], "wm": ["Nikola Jokić", "DEN", 2290, 89], "ae": [["Joel Embiid", "PHI", 2396, 75], ["Jaylen Brown", "BOS", 2237, 87], ["Julius Randle", "NYK", 2102, 87], ["Trae Young", "ATL", 2089, 79], ["Jimmy Butler III", "MIA", 2058, 86]], "aw": [["Luka Dončić", "DAL", 2138, 66], ["Shai Gilgeous-Alexander", "OKC", 2135, 68], ["Anthony Edwards", "MIN", 2104, 84], ["Stephen Curry", "GSW", 2044, 69], ["De'Aaron Fox", "SAC", 2018, 80]], "ebb": ["Jayson Tatum", "BOS", 2225], "wbb": ["Luka Dončić", "DAL", 2138], "ess": ["Jimmy Butler III", "MIA", 592], "wss": ["Nikola Jokić", "DEN", 600], "sh": [["Nikola Jokić", "DEN", "W", 247.1], ["Stephen Curry", "GSW", "W", 194.6], ["Kevin Durant", "2TM", "W", 163.0], ["Domantas Sabonis", "SAC", "W", 140.5], ["Lauri Markkanen", "UTA", "W", 130.5]], "de": ["Devin Booker", "PHX", "W", 61.9]},
-      {"s": "2023-24", "em": ["Jalen Brunson", "NYK", 2633, 90], "wm": ["Luka Dončić", "DAL", 3005, 92], "ae": [["Jayson Tatum", "BOS", 2462, 93], ["Giannis Antetokounmpo", "MIL", 2222, 73], ["Pascal Siakam", "2TM", 2104, 97], ["Jaylen Brown", "BOS", 2064, 89], ["Tyrese Maxey", "PHI", 1995, 76]], "aw": [["Shai Gilgeous-Alexander", "OKC", 2556, 85], ["Anthony Edwards", "MIN", 2490, 95], ["Nikola Jokić", "DEN", 2429, 91], ["Kevin Durant", "PHX", 2139, 79], ["Anthony Davis", "LAL", 2015, 81]], "ebb": ["Giannis Antetokounmpo", "MIL", 2222], "wbb": ["Luka Dončić", "DAL", 2370], "ess": ["Jayson Tatum", "BOS", 475], "wss": ["Luka Dončić", "DAL", 635], "sh": [["Nikola Jokić", "DEN", "W", 206.0], ["Grayson Allen", "PHX", "W", 159.7], ["Daniel Gafford", "2TM", "W", 153.6], ["Kevin Durant", "PHX", "W", 139.0], ["Obi Toppin", "IND", "E", 135.9]], "de": ["Andrew Nembhard", "IND", "E", 39.0]},
-      {"s": "2024-25", "em": ["Jalen Brunson", "NYK", 2220, 83], "wm": ["Shai Gilgeous-Alexander", "OKC", 3172, 99], "ae": [["Giannis Antetokounmpo", "MIL", 2201, 72], ["Jayson Tatum", "BOS", 2157, 80], ["Karl-Anthony Towns", "NYK", 2145, 90], ["Pascal Siakam", "IND", 2050, 101], ["Cade Cunningham", "DET", 1980, 76]], "aw": [["Anthony Edwards", "MIN", 2557, 94], ["Nikola Jokić", "DEN", 2438, 84], ["Jalen Williams", "OKC", 1982, 92], ["James Harden", "LAC", 1933, 86], ["Devin Booker", "PHX", 1923, 75]], "ebb": ["Giannis Antetokounmpo", "MIL", 2036], "wbb": ["Shai Gilgeous-Alexander", "OKC", 2484], "ess": ["Jalen Brunson", "NYK", 530], "wss": ["Shai Gilgeous-Alexander", "OKC", 688], "sh": [["Nikola Jokić", "DEN", "W", 235.7], ["Jarrett Allen", "CLE", "E", 189.4], ["Zach LaVine", "2TM", "W", 173.9], ["Shai Gilgeous-Alexander", "OKC", "W", 161.4], ["Christian Braun", "DEN", "W", 158.2]], "de": ["Aaron Nesmith", "IND", "E", 38.9]},
-      {"s": "2025-26", "em": ["Jalen Brunson", "NYK", 2466, 93], "wm": ["Shai Gilgeous-Alexander", "OKC", 2531, 83], "ae": [["Donovan Mitchell", "CLE", 2420, 88], ["Tyrese Maxey", "PHI", 2241, 81], ["Jaylen Brown", "BOS", 2218, 78], ["Cade Cunningham", "DET", 1925, 78], ["Karl-Anthony Towns", "NYK", 1806, 94]], "aw": [["Luka Dončić", "LAL", 2143, 64], ["Victor Wembanyama", "SAS", 2124, 86], ["Kevin Durant", "HOU", 2049, 79], ["Jamal Murray", "DEN", 2047, 81], ["Anthony Edwards", "MIN", 1973, 71]], "ebb": ["Jaylen Brown", "BOS", 2038], "wbb": ["Luka Dončić", "LAL", 2143], "ess": ["Jalen Brunson", "NYK", 539], "wss": ["Victor Wembanyama", "SAS", 524], "sh": [["Shai Gilgeous-Alexander", "OKC", "W", 189.0], ["Nikola Jokić", "DEN", "W", 183.8], ["Kevin Durant", "HOU", "W", 155.6], ["Jalen Duren", "DET", "E", 145.1], ["Kon Knueppel", "CHA", "E", 141.4]], "de": ["OG Anunoby", "NYK", "E", 66.8]}
-    ];
-
-    const MAX_PTS_SCALE = 3400;     // Global scale ceiling for total points (3,340 Jordan peak)
-    const MAX_SHARP_SCALE = 440;    // Global scale ceiling for Sharp Shooter net margin (432.0 Curry peak)
-
-    // Normalize diacritics (e.g. Peja Stojaković vs Peja Stojakovic) for consistent spotlight matching
-    function normalizeStr(str) {
-      return (str || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
-    }
-
-    // Application State
-    let state = {
-      decade: "all",
-      gridCols: 2,
-      selectedSeason: null,
-      spotlightQuery: ""
-    };
-
-    // Check if a player or team matches active spotlight query
-    function isEntityMatched(playerName, teamCode) {
-      if (!state.spotlightQuery) return false;
-      const q = normalizeStr(state.spotlightQuery);
-      if (!q) return false;
-      return normalizeStr(playerName).includes(q) || normalizeStr(teamCode) === q;
-    }
-
-    // Check if an entire season poster contains any match for the spotlight
-    function seasonHasSpotlightMatch(seasonObj) {
-      if (!state.spotlightQuery) return false;
-      const checkPair = (p, t) => isEntityMatched(p, t);
-      if (checkPair(seasonObj.em[0], seasonObj.em[1])) return true;
-      if (checkPair(seasonObj.wm[0], seasonObj.wm[1])) return true;
-      if (seasonObj.ae.some(r => checkPair(r[0], r[1]))) return true;
-      if (seasonObj.aw.some(r => checkPair(r[0], r[1]))) return true;
-      if (checkPair(seasonObj.ebb[0], seasonObj.ebb[1])) return true;
-      if (checkPair(seasonObj.wbb[0], seasonObj.wbb[1])) return true;
-      if (checkPair(seasonObj.ess[0], seasonObj.ess[1])) return true;
-      if (checkPair(seasonObj.wss[0], seasonObj.wss[1])) return true;
-      if (seasonObj.sh.some(r => checkPair(r[0], r[1]))) return true;
-      if (checkPair(seasonObj.de[0], seasonObj.de[1])) return true;
-      return false;
-    }
-
-    // Compute inline specialist honor badges for a player within a given season
-    function getPlayerSeasonBadges(seasonObj, playerName) {
-      const pNorm = normalizeStr(playerName);
-      const badges = [];
-
-      if (normalizeStr(seasonObj.ebb[0]) === pNorm || normalizeStr(seasonObj.wbb[0]) === pNorm) {
-        badges.push(`<span class="micro-badge badge-bb" title="Bronze Bucket (Conference Regular Season Points Leader)">BB</span>`);
-      }
-      if (normalizeStr(seasonObj.ess[0]) === pNorm || normalizeStr(seasonObj.wss[0]) === pNorm) {
-        badges.push(`<span class="micro-badge badge-ss" title="Silver Scorer (Conference Playoff Points Leader)">SS</span>`);
-      }
-      const shIdx = seasonObj.sh.findIndex(item => normalizeStr(item[0]) === pNorm);
-      if (shIdx !== -1) {
-        badges.push(`<span class="micro-badge badge-sh" title="Sharp Shooter #${shIdx + 1} (Regular Season Scoring Net Margin)">SH#${shIdx + 1}</span>`);
-      }
-      if (normalizeStr(seasonObj.de[0]) === pNorm) {
-        badges.push(`<span class="micro-badge badge-de" title="Dead Eye (Overall Playoff Scoring Net Margin Leader)">DE</span>`);
-      }
-      return badges.join(" ");
-    }
-
-    // Compute Career Dossier Tally when a spotlight query is active
-    function updateSpotlightSummaryBanner() {
-      const banner = document.getElementById("spotlightSummaryBanner");
-      const textEl = document.getElementById("spotlightSummaryText");
-      const clearBtn = document.getElementById("clearSearchBtn");
-
-      if (!state.spotlightQuery) {
-        banner.classList.add("hidden");
-        banner.classList.remove("flex");
-        clearBtn.classList.add("hidden");
-        return;
-      }
-
-      clearBtn.classList.remove("hidden");
-      let mvpCount = 0;
-      let allConfCount = 0;
-      let bbCount = 0;
-      let ssCount = 0;
-      let shCount = 0;
-      let deCount = 0;
-      let matchedSeasons = 0;
-
-      SEASONS_DATA.forEach(s => {
-        let seasonHit = false;
-        if (isEntityMatched(s.em[0], s.em[1])) { mvpCount++; seasonHit = true; }
-        if (isEntityMatched(s.wm[0], s.wm[1])) { mvpCount++; seasonHit = true; }
-        s.ae.forEach(r => { if (isEntityMatched(r[0], r[1])) { allConfCount++; seasonHit = true; } });
-        s.aw.forEach(r => { if (isEntityMatched(r[0], r[1])) { allConfCount++; seasonHit = true; } });
-        if (isEntityMatched(s.ebb[0], s.ebb[1])) { bbCount++; seasonHit = true; }
-        if (isEntityMatched(s.wbb[0], s.wbb[1])) { bbCount++; seasonHit = true; }
-        if (isEntityMatched(s.ess[0], s.ess[1])) { ssCount++; seasonHit = true; }
-        if (isEntityMatched(s.wss[0], s.wss[1])) { ssCount++; seasonHit = true; }
-        s.sh.forEach(r => { if (isEntityMatched(r[0], r[1])) { shCount++; seasonHit = true; } });
-        if (isEntityMatched(s.de[0], s.de[1])) { deCount++; seasonHit = true; }
-        if (seasonHit) matchedSeasons++;
-      });
-
-      banner.classList.remove("hidden");
-      banner.classList.add("flex");
-      textEl.innerHTML = `DOSSIER [${state.spotlightQuery.toUpperCase()}] IN ${matchedSeasons} SEASONS: ${mvpCount}× MVP · ${allConfCount}× ALL-CONF (2–6) · ${bbCount}× BRONZE BUCKET · ${ssCount}× SILVER SCORER · ${shCount}× SHARP SHOOTER · ${deCount}× DEAD EYE`;
-    }
-
-    // Build Season Scrubber Pills
-    function renderSeasonScrubber() {
-      const container = document.getElementById("seasonScrubber");
-      container.innerHTML = SEASONS_DATA.map(sObj => {
-        const shortYr = `'${sObj.s.slice(5)}`;
-        const isSelected = state.selectedSeason === sObj.s;
-        const hasMatch = seasonHasSpotlightMatch(sObj);
-        let pillClass = "year-pill";
-        if (isSelected) pillClass += " active-year";
-        else if (hasMatch) pillClass += " has-spotlight";
-
-        return `<div class="${pillClass}" onclick="selectSingleSeason('${sObj.s}')" title="Season ${sObj.s} // East MVP: ${sObj.em[0]} | West MVP: ${sObj.wm[0]}">${shortYr}</div>`;
-      }).join("");
-
-      const showAllBtn = document.getElementById("showAllSeasonsBtn");
-      if (state.selectedSeason === null) {
-        showAllBtn.className = "text-[9.5px] font-mono-tabular uppercase px-1.5 py-0.5 bg-[#D92B2B] text-white font-bold";
-      } else {
-        showAllBtn.className = "text-[9.5px] font-mono-tabular uppercase px-1.5 py-0.5 bg-[#FAF9F6] text-[#111111] font-bold hover:bg-[#D92B2B] hover:text-white";
-      }
-    }
-
-    // Render One Conference Column (East or West) inside a Season Poster
-    function renderConferenceColumn(seasonObj, confKey) {
-      const isEast = confKey === "E";
-      const confTitle = isEast ? "EASTERN CONFERENCE" : "WESTERN CONFERENCE";
-      const confShort = isEast ? "EAST" : "WEST";
-      const headerBg = isEast ? "bg-[#1D4ED8]" : "bg-[#D92B2B]";
-      const barColor = isEast ? "bg-[#1D4ED8]" : "bg-[#D92B2B]";
-      const accentText = isEast ? "text-[#1D4ED8]" : "text-[#D92B2B]";
-
-      const mvp = isEast ? seasonObj.em : seasonObj.wm; // [name, team, pts, games]
-      const roster = isEast ? seasonObj.ae : seasonObj.aw; // 5 players ranked 2..6
-      const bb = isEast ? seasonObj.ebb : seasonObj.wbb; // [name, team, reg_pts]
-      const ss = isEast ? seasonObj.ess : seasonObj.wss; // [name, team, po_pts]
-
-      const mvpPpg = (mvp[2] / mvp[3]).toFixed(1);
-      const mvpBarPct = Math.min(100, (mvp[2] / MAX_PTS_SCALE) * 100).toFixed(1);
-      const mvpMatched = isEntityMatched(mvp[0], mvp[1]);
-      const mvpBadges = getPlayerSeasonBadges(seasonObj, mvp[0]);
-
-      // Build All-Conference (Ranks 2-6) Rows
-      const rosterRowsHTML = roster.map((r, idx) => {
-        const rankNum = `0${idx + 2}`;
-        const [pName, pTeam, pPts, pGames] = r;
-        const pct = Math.min(100, (pPts / MAX_PTS_SCALE) * 100).toFixed(1);
-        const matched = isEntityMatched(pName, pTeam);
-        const inlineBadges = getPlayerSeasonBadges(seasonObj, pName);
-
-        return `
-          <div onclick="setSpotlight('${pName.replace(/'/g, "\\'")}')"
-               class="interactive-entity grid grid-cols-12 items-center px-2.5 py-1.5 text-[11px] border-b border-[#D8D6CE] last:border-b-0 ${matched ? 'spotlight-match' : ''}">
-            <div class="col-span-7 flex items-center gap-1.5 min-w-0 pr-1">
-              <span class="font-mono-tabular text-[10px] font-bold text-[#8C8B85] shrink-0">${rankNum}</span>
-              <span class="font-bold text-[#111111] truncate tracking-[-0.015em]">${pName}</span>
-              <span onclick="event.stopPropagation(); setSpotlight('${pTeam}')" class="font-mono-tabular text-[9.5px] font-bold px-1 bg-[#ECEAE2] border border-[#111111] text-[#111111] shrink-0 hover:bg-[#111111] hover:text-white">${pTeam}</span>
-              ${inlineBadges ? `<span class="shrink-0 flex items-center gap-0.5">${inlineBadges}</span>` : ''}
-            </div>
-            <div class="col-span-2 relative h-[10px] bg-[#ECEAE2] border border-[#111111] overflow-hidden">
-              <div class="h-full ${barColor}" style="width: ${pct}%;"></div>
-            </div>
-            <div class="col-span-3 flex items-baseline justify-end gap-1.5 font-mono-tabular pl-1 text-right">
-              <span class="text-[9.5px] text-[#555552]">${pGames}G</span>
-              <span class="text-[11px] font-extrabold text-[#111111] w-[42px]">${pPts.toLocaleString()}</span>
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      const bbMatched = isEntityMatched(bb[0], bb[1]);
-      const ssMatched = isEntityMatched(ss[0], ss[1]);
-
-      return `
-        <div class="flex flex-col h-full justify-between">
-          <div>
-            <!-- Conference Header Bar -->
-            <div class="${headerBg} text-white px-3 py-1.5 flex items-center justify-between border-b border-[#111111]">
-              <span class="text-xs font-black tracking-[0.12em] uppercase">${confTitle}</span>
-              <span class="font-mono-tabular text-[10px] font-bold uppercase tracking-wider opacity-95">TOTAL PTS (REG + PO)</span>
-            </div>
-
-            <!-- Conference MVP Showcase (#1 Total Points) -->
-            <div onclick="setSpotlight('${mvp[0].replace(/'/g, "\\'")}')"
-                 class="interactive-entity p-3 border-b-2 border-[#111111] bg-[#F4F3EF] ${mvpMatched ? 'spotlight-match' : ''}">
-              <div class="flex items-center justify-between gap-2 mb-1">
-                <div class="flex items-center gap-1.5">
-                  <span class="font-mono-tabular text-[9.5px] font-black uppercase px-1.5 py-0.5 bg-[#111111] text-[#FAF9F6]">
-                    ${confShort} MVP · #1 TOTAL PTS
-                  </span>
-                  ${mvpBadges}
-                </div>
-                <span onclick="event.stopPropagation(); setSpotlight('${mvp[1]}')"
-                      class="font-mono-tabular text-[10px] font-extrabold px-1.5 py-0.5 border border-[#111111] bg-[#FAF9F6] hover:bg-[#111111] hover:text-white">
-                  ${mvp[1]}
-                </span>
-              </div>
-
-              <div class="flex items-baseline justify-between gap-2 mt-1">
-                <div class="text-lg sm:text-xl font-black uppercase tracking-[-0.03em] text-[#111111] truncate">
-                  ${mvp[0]}
-                </div>
-                <div class="font-mono-tabular text-right shrink-0">
-                  <span class="text-lg sm:text-xl font-black ${accentText}">${mvp[2].toLocaleString()}</span>
-                  <span class="text-[10px] font-bold text-[#555552]">PTS</span>
-                </div>
-              </div>
-
-              <!-- Proportional Total Points Bar & Games/PPG Meta -->
-              <div class="mt-2 flex items-center gap-2">
-                <div class="flex-1 h-[10px] bg-[#FAF9F6] border border-[#111111] relative overflow-hidden">
-                  <div class="h-full ${barColor}" style="width: ${mvpBarPct}%;"></div>
-                </div>
-                <span class="font-mono-tabular text-[10px] font-bold text-[#555552] shrink-0">
-                  ${mvp[3]}G · ${mvpPpg} PPG
-                </span>
-              </div>
-            </div>
-
-            <!-- Rightful All-Conference Team Subheader (Ranks 2-6) -->
-            <div class="bg-[#ECEAE2] px-2.5 py-1 border-b border-[#111111] flex items-center justify-between font-mono-tabular text-[9.5px] font-extrabold uppercase tracking-[0.08em] text-[#111111]">
-              <span>RIGHTFUL ALL-${confShort} TEAM (RANKS 02–06)</span>
-              <span class="text-[#555552]">G / TOTAL PTS</span>
-            </div>
-
-            <!-- 5-Player All-Conference Table -->
-            <div>
-              ${rosterRowsHTML}
-            </div>
-          </div>
-
-          <!-- Conference Specialist Honors: Bronze Bucket & Silver Scorer -->
-          <div class="grid grid-cols-2 divide-x divide-[#111111] border-t-2 border-[#111111] bg-[#FAF9F6]">
-            <!-- Bronze Bucket (Reg Season Leader) -->
-            <div onclick="setSpotlight('${bb[0].replace(/'/g, "\\'")}')"
-                 class="interactive-entity p-2.5 flex flex-col justify-between ${bbMatched ? 'spotlight-match' : ''}">
-              <div class="flex items-center justify-between gap-1">
-                <span class="font-mono-tabular text-[9px] font-extrabold uppercase tracking-[0.06em] text-[#9A5B13]">
-                  BRONZE BUCKET
-                </span>
-                <span class="micro-badge badge-bb">REG #1</span>
-              </div>
-              <div class="text-xs font-black uppercase text-[#111111] truncate mt-1">
-                ${bb[0]}
-              </div>
-              <div class="flex items-baseline justify-between font-mono-tabular mt-0.5">
-                <span onclick="event.stopPropagation(); setSpotlight('${bb[1]}')" class="text-[9.5px] font-bold text-[#555552] hover:underline">${bb[1]}</span>
-                <span class="text-xs font-black text-[#9A5B13]">${bb[2].toLocaleString()} <span class="text-[9px] font-semibold">PTS</span></span>
-              </div>
-            </div>
-
-            <!-- Silver Scorer (Playoff Leader) -->
-            <div onclick="setSpotlight('${ss[0].replace(/'/g, "\\'")}')"
-                 class="interactive-entity p-2.5 flex flex-col justify-between ${ssMatched ? 'spotlight-match' : ''}">
-              <div class="flex items-center justify-between gap-1">
-                <span class="font-mono-tabular text-[9px] font-extrabold uppercase tracking-[0.06em] text-[#475569]">
-                  SILVER SCORER
-                </span>
-                <span class="micro-badge badge-ss">PO #1</span>
-              </div>
-              <div class="text-xs font-black uppercase text-[#111111] truncate mt-1">
-                ${ss[0]}
-              </div>
-              <div class="flex items-baseline justify-between font-mono-tabular mt-0.5">
-                <span onclick="event.stopPropagation(); setSpotlight('${ss[1]}')" class="text-[9.5px] font-bold text-[#555552] hover:underline">${ss[1]}</span>
-                <span class="text-xs font-black text-[#334155]">${ss[2].toLocaleString()} <span class="text-[9px] font-semibold">PTS</span></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    // Build Complete Swiss Season Poster HTML
-    function buildSeasonPosterHTML(seasonObj, indexZero) {
-      const editionNum = String(indexZero + 1).padStart(2, "0");
-      const displaySeason = seasonObj.s.replace("-", "–");
-
-      // Determine overall scoring leader between East MVP & West MVP
-      const overallLeader = seasonObj.em[2] >= seasonObj.wm[2]
-        ? { name: seasonObj.em[0], team: seasonObj.em[1], pts: seasonObj.em[2], conf: "EAST" }
-        : { name: seasonObj.wm[0], team: seasonObj.wm[1], pts: seasonObj.wm[2], conf: "WEST" };
-
-      // Build Sharp Shooters (Top 5 Regular Season Scoring Net Margin)
-      const sharpRowsHTML = seasonObj.sh.map((shItem, idx) => {
-        const [shName, shTeam, shConf, shVal] = shItem;
-        const pct = Math.min(100, (shVal / MAX_SHARP_SCALE) * 100).toFixed(1);
-        const matched = isEntityMatched(shName, shTeam);
-        const confDotColor = shConf === "E" ? "bg-[#1D4ED8]" : "bg-[#D92B2B]";
-
-        return `
-          <div onclick="setSpotlight('${shName.replace(/'/g, "\\'")}')"
-               class="interactive-entity grid grid-cols-12 items-center px-2.5 py-1 text-[10.5px] border-b border-[#D8D6CE] last:border-b-0 ${matched ? 'spotlight-match' : ''}">
-            <div class="col-span-6 flex items-center gap-1.5 min-w-0 pr-1">
-              <span class="font-mono-tabular text-[9.5px] font-extrabold text-[#555552] w-4">#${idx + 1}</span>
-              <span class="w-2 h-2 ${confDotColor} inline-block shrink-0 border border-[#111111]" title="${shConf === 'E' ? 'Eastern' : 'Western'} Conference"></span>
-              <span class="font-bold text-[#111111] truncate">${shName}</span>
-              <span onclick="event.stopPropagation(); setSpotlight('${shTeam}')" class="font-mono-tabular text-[9px] font-bold px-1 bg-[#ECEAE2] border border-[#111111] shrink-0">${shTeam}</span>
-            </div>
-            <div class="col-span-4 h-[8px] bg-[#ECEAE2] border border-[#111111] relative overflow-hidden">
-              <div class="h-full bg-[#111111]" style="width: ${pct}%;"></div>
-            </div>
-            <div class="col-span-2 font-mono-tabular text-right font-extrabold text-[#111111]">
-              +${shVal.toFixed(1)}
-            </div>
-          </div>
-        `;
-      }).join("");
-
-      // Dead Eye (Overall Playoff Scoring Net Margin Leader)
-      const [deName, deTeam, deConf, deVal] = seasonObj.de;
-      const deMatched = isEntityMatched(deName, deTeam);
-      const deConfLabel = deConf === "E" ? "EAST" : "WEST";
-      const deConfBadgeBg = deConf === "E" ? "bg-[#1D4ED8]" : "bg-[#D92B2B]";
-
-      return `
-        <article id="poster-${seasonObj.s}" class="swiss-poster flex flex-col">
-          <!-- SWISS POSTER TOP ARCHITECTURAL HEADER -->
-          <div class="grid grid-cols-12 border-b-2 border-[#111111] bg-[#FAF9F6]">
-            <!-- Giant Season Specimen (Cols 1-5) -->
-            <div class="col-span-5 sm:col-span-4 p-3 border-r border-[#111111] bg-[#F4F3EF] flex flex-col justify-between">
-              <div class="flex items-center justify-between font-mono-tabular text-[9px] uppercase tracking-[0.1em] text-[#555552] font-bold">
-                <span>ALL-NBA ARCHIVE</span>
-                <span>ED. ${editionNum}/43</span>
-              </div>
-              <div class="text-2xl sm:text-3xl xl:text-4xl font-black tracking-[-0.04em] leading-none text-[#111111] my-1 font-mono-tabular">
-                ${displaySeason}
-              </div>
-              <div class="font-mono-tabular text-[9px] font-bold uppercase tracking-[0.06em] text-[#555552]">
-                12 ALL-CONF · 6 HONORS
-              </div>
-            </div>
-
-            <!-- Overall Scoring Crown Summary (Cols 6-12) -->
-            <div class="col-span-7 sm:col-span-8 p-3 flex flex-col justify-between bg-[#FAF9F6]">
-              <div class="flex items-center justify-between gap-2">
-                <span class="font-mono-tabular text-[9.5px] uppercase tracking-[0.08em] text-[#555552] font-bold">
-                  LEAGUE COMBINED SCORING APEX (REG + PLAYOFFS)
-                </span>
-                <span class="font-mono-tabular text-[9.5px] font-extrabold px-1.5 py-0.5 bg-[#111111] text-white">
-                  ${overallLeader.conf} #1
-                </span>
-              </div>
-
-              <div class="flex items-baseline justify-between gap-2 my-1">
-                <div onclick="setSpotlight('${overallLeader.name.replace(/'/g, "\\'")}')"
-                     class="text-base sm:text-lg font-black uppercase tracking-[-0.025em] text-[#111111] truncate cursor-pointer hover:underline">
-                  ${overallLeader.name} <span class="font-mono-tabular text-xs font-bold text-[#555552]">(${overallLeader.team})</span>
-                </div>
-                <div class="font-mono-tabular text-sm sm:text-base font-black text-[#111111] shrink-0">
-                  ${overallLeader.pts.toLocaleString()} PTS
-                </div>
-              </div>
-
-              <div class="flex items-center justify-between font-mono-tabular text-[9.5px] text-[#555552] border-t border-[#D8D6CE] pt-1">
-                <span>SHARP #1: <strong class="text-[#111111]">${seasonObj.sh[0][0]} (+${seasonObj.sh[0][3].toFixed(1)})</strong></span>
-                <span>DEAD EYE: <strong class="text-[#111111]">${deName} (+${deVal.toFixed(1)})</strong></span>
-              </div>
-            </div>
-          </div>
-
-          <!-- CONFERENCE SPLIT BODY: EAST | WEST -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[#111111] flex-1">
-            <div>${renderConferenceColumn(seasonObj, "E")}</div>
-            <div>${renderConferenceColumn(seasonObj, "W")}</div>
-          </div>
-
-          <!-- POSTER EFFICIENCY FOOTER: SHARP SHOOTERS (TOP 5 REG NET MARGIN) & DEAD EYE (PLAYOFF NET MARGIN LEADER) -->
-          <div class="grid grid-cols-1 sm:grid-cols-12 border-t-2 border-[#111111]">
-            <!-- Sharp Shooters Top 5 (Cols 1-8) -->
-            <div class="sm:col-span-8 border-b sm:border-b-0 sm:border-r border-[#111111] bg-[#FAF9F6] flex flex-col justify-between">
-              <div class="bg-[#ECEAE2] px-2.5 py-1 border-b border-[#111111] flex items-center justify-between">
-                <div class="flex items-center gap-1.5">
-                  <span class="micro-badge badge-sh">SH</span>
-                  <span class="font-mono-tabular text-[9.5px] font-extrabold uppercase tracking-[0.08em] text-[#111111]">
-                    SHARP SHOOTERS · TOP 5 REG. SEASON SCORING NET MARGIN
-                  </span>
-                </div>
-                <span class="font-mono-tabular text-[9px] font-bold text-[#555552]">NET MARGIN</span>
-              </div>
-              <div class="divide-y divide-[#D8D6CE]">
-                ${sharpRowsHTML}
-              </div>
-            </div>
-
-            <!-- Dead Eye Playoff Leader (Cols 9-12) -->
-            <div onclick="setSpotlight('${deName.replace(/'/g, "\\'")}')"
-                 class="sm:col-span-4 bg-[#111111] text-[#FAF9F6] p-3 flex flex-col justify-between cursor-pointer hover:bg-[#222222] transition-colors ${deMatched ? 'spotlight-match-dark' : ''}">
-              <div>
-                <div class="flex items-center justify-between gap-1 mb-2">
-                  <span class="font-mono-tabular text-[9.5px] font-black uppercase tracking-[0.12em] text-[#FACC15]">
-                    DEAD EYE LEADER
-                  </span>
-                  <span class="font-mono-tabular text-[9px] font-bold px-1.5 py-0.5 ${deConfBadgeBg} text-white">
-                    ${deConfLabel}
-                  </span>
-                </div>
-                <div class="text-[9.5px] font-mono-tabular uppercase tracking-[0.06em] text-[#D8D6CE] mb-1">
-                  #1 PLAYOFF SCORING NET MARGIN
-                </div>
-                <div class="text-base sm:text-lg font-black uppercase tracking-[-0.02em] leading-tight text-white">
-                  ${deName}
-                </div>
-                <div class="font-mono-tabular text-xs font-bold text-[#D8D6CE] mt-0.5">
-                  FRANCHISE: <span class="text-white underline">${deTeam}</span>
-                </div>
-              </div>
-
-              <div class="mt-3 pt-2 border-t border-[#333333] flex items-baseline justify-between font-mono-tabular">
-                <span class="text-[9px] uppercase tracking-wider text-[#D8D6CE]">POSTSEASON NET</span>
-                <span class="text-xl font-black text-[#FACC15]">+${deVal.toFixed(1)}</span>
-              </div>
-            </div>
-          </div>
-        </article>
-      `;
-    }
-
-    // Render Posters Gallery
-    function renderPostersGallery() {
-      const grid = document.getElementById("postersGrid");
-
-      if (state.gridCols === 1 || state.selectedSeason !== null) {
-        grid.className = "grid grid-cols-1 max-w-[1140px] mx-auto gap-10 items-start";
-      } else if (state.gridCols === 3) {
-        grid.className = "grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 items-start";
-      } else {
-        grid.className = "grid grid-cols-1 lg:grid-cols-2 gap-8 items-start";
-      }
-
-      // Filter by selected season or decade
-      let filtered = SEASONS_DATA.map((sObj, idx) => ({ sObj, idx }));
-
-      if (state.selectedSeason !== null) {
-        filtered = filtered.filter(item => item.sObj.s === state.selectedSeason);
-      } else if (state.decade !== "all") {
-        filtered = filtered.filter(item => {
-          const startYr = parseInt(item.sObj.s.slice(0, 4), 10);
-          if (state.decade === "1980s") return startYr >= 1983 && startYr <= 1989;
-          if (state.decade === "1990s") return startYr >= 1990 && startYr <= 1999;
-          if (state.decade === "2000s") return startYr >= 2000 && startYr <= 2009;
-          if (state.decade === "2010s") return startYr >= 2010 && startYr <= 2019;
-          if (state.decade === "2020s") return startYr >= 2020 && startYr <= 2029;
-          return true;
-        });
-      }
-
-      // Update status text
-      const statusEl = document.getElementById("exhibitionStatusText");
-      if (state.selectedSeason !== null) {
-        statusEl.innerHTML = `SINGLE POSTER SPECIMEN: <strong class="text-[#111111]">${state.selectedSeason} ALL-NBA SEASON POSTER</strong>`;
-      } else {
-        statusEl.innerHTML = `EXHIBITION VIEW: <strong class="text-[#111111]">${filtered.length} ALL-NBA SEASON POSTERS (${filtered[0].sObj.s} TO ${filtered[filtered.length - 1].sObj.s})</strong>`;
-      }
-
-      grid.innerHTML = filtered.map(item => buildSeasonPosterHTML(item.sObj, item.idx)).join("");
-      renderSeasonScrubber();
-      updateSpotlightSummaryBanner();
-    }
-
-    // Interactive Control Handlers
-    function setDecadeFilter(decade) {
-      state.decade = decade;
-      state.selectedSeason = null;
-      ["All", "80s", "90s", "00s", "10s", "20s"].forEach(k => {
-        const mapKey = k === "All" ? "all" : `19${k}`.replace("1900s", "2000s").replace("1910s", "2010s").replace("1920s", "2020s");
-        const btn = document.getElementById(`dec${k}`);
-        if (btn) btn.classList.toggle("active", mapKey === decade);
-      });
-      renderPostersGallery();
-    }
-
-    function setGridCols(cols) {
-      state.gridCols = cols;
-      if (state.selectedSeason !== null) state.selectedSeason = null;
-      document.getElementById("grid1Btn").classList.toggle("active", cols === 1);
-      document.getElementById("grid2Btn").classList.toggle("active", cols === 2);
-      document.getElementById("grid3Btn").classList.toggle("active", cols === 3);
-      renderPostersGallery();
-    }
-
-    function selectSingleSeason(seasonStr) {
-      if (state.selectedSeason === seasonStr) {
-        state.selectedSeason = null;
-      } else {
-        state.selectedSeason = seasonStr;
-      }
-      renderPostersGallery();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function setSpotlight(query) {
-      const searchInput = document.getElementById("searchInput");
-      if (normalizeStr(state.spotlightQuery) === normalizeStr(query)) {
-        clearSpotlight();
-        return;
-      }
-      state.spotlightQuery = query;
-      searchInput.value = query;
-      renderPostersGallery();
-    }
-
-    function handleSearchInput(val) {
-      state.spotlightQuery = val.trim();
-      renderPostersGallery();
-    }
-
-    function clearSpotlight() {
-      state.spotlightQuery = "";
-      document.getElementById("searchInput").value = "";
-      renderPostersGallery();
-    }
-
-    window.onload = function () {
-      renderPostersGallery();
-    };
-  </script>
 </body>
 </html>
